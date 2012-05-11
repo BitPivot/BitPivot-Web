@@ -1,0 +1,119 @@
+// Basic Colors
+@purple: #a600a6;
+@lightGrey: #f1f1f1;
+@darkGrey: #c0c0c0;
+
+// Other Settings
+@pageTextColor: #777;
+@bannerTextColor: #000;
+@navbarTextColor: #fff;
+@fontFace: Helvetica, Arial, sans-serif;
+@font: normal 10pt @fontFace;
+
+
+
+// Page Header
+header {
+	height: 40px;
+	margin: 20px 0px 20px 0px;
+	padding: 0px 20px 0px 0px;
+	font: @font;
+	.gradient(@lightGrey);
+	.rounded;
+
+	img {
+		padding: 2px;
+	}
+
+	span {
+		float: right;
+		line-height: 40px;
+		vertical-align: middle;
+		color: @pageTextColor;
+		.inset;
+	}
+}
+
+
+
+// Page Banner
+#banner {
+	margin: 20px 0px 20px 0px;
+	color: @bannerTextColor;
+	font-smooth: always;
+	.smooth(@bannerTextColor);
+
+	table {
+		border-collapse: collapse;
+
+		th {
+			text-align: left;
+			width: 70%;
+		}
+
+		td {
+			width: 30%;
+		}
+	}
+
+	hgroup {
+		margin: 0px 0px 0px 10px;
+
+		h1 {
+			font: bold 42pt @fontFace;
+		}
+
+		h2 {
+			font: normal 22pt @fontFace;
+		}
+
+		#rotator {
+			font-weight: bold;
+			font-style: oblique;
+		}
+	}
+}
+
+
+
+// Navbar
+nav {
+	height: 40px;
+	margin: 20px 0px 20px 0px;
+	padding: 0px 20px;
+	font: @font;
+	color: @navbarTextColor;
+	.gradient(@purple);
+	.rounded;
+
+	span {
+		line-height: 40px;
+		vertical-align: middle;
+	}
+}
+
+
+
+// Mixins
+.rounded(@radius: 5px) {
+	border-radius: @radius;
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+}
+
+.gradient(@color) {
+	@darkened: darken(@color, 15%);
+	background: darken(@color, 7%);
+	background: -webkit-gradient(linear, left top, left bottom, from(@color), to(@darkened));
+	background: -moz-linear-gradient(top, @color, @darkened);
+	background: -o-linear-gradient(@color, @darkened);
+	background: linear-gradient(@color, @darkened);
+}
+
+.inset {
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.smooth(@color: @bannerTextColor) {
+	text-shadow: 0 1px 0 hsla(hue(@color), saturation(@color), lightness(@color), 0.01);
+}

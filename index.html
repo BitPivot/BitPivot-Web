@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<title>BitPivot</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="description" content="Description"/>
+		<meta name="keywords" content="Keywords"/>
+		<meta name="author" content="Author"/>
+
+		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/bootstrap-responsive.min.css"/>
+		<link rel="stylesheet/less" href="css/layout.less"/>
+		<script src="js/less-1.3.0.min.js"></script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script>
+			// Word rotator
+			var words = ['faster.', 'smarter.', 'more agile.', 'stronger.'];
+			setInterval(function() {
+				$('#rotator').fadeOut(function(){
+					var currentWord = $('#rotator').html();
+					var nextIndex = words.indexOf(currentWord) + 1;
+					var nextIndex = (nextIndex < words.length) ? nextIndex : 0;
+					$('#rotator').html(words[nextIndex]);
+					$('#rotator').fadeIn();
+				});
+
+			}, 2000);
+		</script>
+	</head>
+
+	<body>
+
+		<div class="container">
+
+			<!-- Header Bar -->
+			<div class="row"><div class="span12">
+				<header>
+					<a class="brand" href="/"><img src="img/headerLogo.png" alt="BitPivot"/></a>
+					<span>
+						This text effect is subtle as fuck.
+					</span>
+				</header>
+			</div></div>
+
+
+
+			<!-- Banner -->
+			<section id="banner">
+				<div class="row"><div class="span12">
+					<table><tr>
+						<td><img src="img/bannerHi.png" alt="Hi"/></td>
+						<th>
+							<hgroup>
+								<h1>We are BitPivot.</h1>
+								<h2>We build custom software and implement data solutions to make your business <span id="rotator">faster.</span></h2>
+							</hgroup>
+						</th>
+					</tr></table>
+				</div></div>
+			</section>
+
+
+
+			<!-- Navbar -->
+			<div class="row"><div class="span12">
+				<nav>
+					<span>Navbar Stuff Goes Here</span>
+				</nav>
+			</div></div>
+
+		</div>
+
+	</body>
+
+</html>
