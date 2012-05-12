@@ -38,9 +38,8 @@ header {
 
 // Page Banner
 #banner {
-	margin: 50px 0px 80px 0px;
+	margin: 50px 0px 160px 0px;
 	color: @bannerTextColor;
-	font-smooth: always;
 	.smooth(@bannerTextColor);
 
 	#logo {
@@ -55,17 +54,21 @@ header {
 			left: 0px;
 			display: none;
 
-			&.main {
-				top: 50px;
+			&.logo {
 				z-index: 100;
 			}
 
+			&.hi {
+				top: 50px;
+				z-index: 90;
+			}
+
 			&.dark {
-				z-index: 99;
+				z-index: 80;
 			}
 
 			&.light {
-				z-index: 98;
+				z-index: 70;
 			}
 
 			&.shadow {
@@ -115,17 +118,152 @@ header {
 
 // Navbar
 nav {
+	position: absolute;
+	top: 420px;
 	height: 40px;
-	margin: 20px 0px 20px 0px;
-	padding: 0px 20px;
+	margin: 0px;
+	padding: 0px 10px;
 	font: @font;
 	color: @navbarTextColor;
 	.gradient(@purple);
 	.rounded;
 
+	&.sticky {
+		position: fixed;
+		margin: 0px;
+		top: 10px;
+		z-index: 200;
+	}
+
 	span {
 		line-height: 40px;
 		vertical-align: middle;
+	}
+
+	ul {
+		list-style: none;
+		padding: 0px;
+		margin: 0px;
+
+		li {
+			padding: 0px;
+			margin: 0px;
+			display: inline;
+			line-height: 40px;
+			vertical-align: middle;
+
+			a {
+				display: inline-block;
+				height: 40px;
+				padding: 0px 20px;
+				color: @navbarTextColor;
+				text-decoration: none;
+
+				&:hover, &:active {
+					color: @navbarTextColor;
+					text-decoration: none;
+					.gradient(lighten(@purple, 10%));
+				}
+			}
+
+			&.active a {
+				.gradient(darken(@purple, 10%));
+			}
+		}
+	}
+}
+
+
+
+// Content
+#content {
+	font: @font;
+	color: @pageTextColor;
+
+	h1 {
+		margin: 0px 0px 10px 0px;
+		color: darken(@pageTextColor, 50%);
+		.smooth;
+	}
+
+	p {
+		margin: 0px 0px 10px 0px;
+		text-align: justify;
+	}
+
+	.frame {
+		background: @lightGrey;
+		margin: 20px 0px;
+		padding: 20px;
+		.rounded;
+
+		h1 {
+			.smooth;
+		}
+	}
+
+	blockquote {
+		background: @lightGrey;
+		margin: 10px 0px 10px 0px;
+		padding: 10px;
+		font-style: oblique;
+		.rounded;
+
+		p {
+			margin: 0px;
+
+			&:before {
+				content: '\201C';
+			}
+
+			&:after {
+				content: '\201D';
+			}
+		}
+
+		span {
+			display: block;
+			margin: 10px 0px 0px 0px;
+			text-align: right;
+			font-style: normal;
+		}
+	}
+}
+
+
+
+// Footer
+footer {
+	border-top: 1px solid @darkGrey;
+	margin: 20px 0px;
+	padding: 20px 0px 0px 0px;
+	font: @font;
+	color: @pageTextColor;
+
+	ul {
+		list-style: none;
+		margin:: 0px;
+		padding: 0px;
+		text-align: center;
+
+		li {
+			display: inline;
+			margin: 0px 20px;
+			padding: 0px;
+		}
+	}
+}
+
+
+
+// Misc
+a {
+	color: @purple;
+	text-decoration: underline;
+
+	&:hover, &:active {
+		color: lighten(@purple, 5%);
+		text-decoration: none;
 	}
 }
 
@@ -152,5 +290,6 @@ nav {
 }
 
 .smooth(@color: @bannerTextColor) {
+	font-smooth: always;
 	text-shadow: 0 1px 0 hsla(hue(@color), saturation(@color), lightness(@color), 0.01);
 }

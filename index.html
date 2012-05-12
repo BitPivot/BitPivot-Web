@@ -25,9 +25,9 @@
 		<script>
 			// Initial logo animation
 			function animateBanner() {
-				$('#logo .main').css('opacity', 0);
-				$('#logo .main').show();
-				$('#logo .main').animate({
+				$('#logo .hi').css('opacity', 0);
+				$('#logo .hi').show();
+				$('#logo .hi').animate({
 					top: '-=50',
 					opacity: 1,
 				}, 1500, 'easeInOutQuad', function() {
@@ -65,7 +65,39 @@
 			window.onload = function() {
 				// Logo animations
 				animateBanner();
+				resizeNavbar();
+
+				$(window).scroll(stickyRelocate);
+				stickyRelocate();
 			};
+
+			window.onresize = function() {
+				resizeNavbar();
+			}
+
+			// Resize navbar
+			function resizeNavbar() {
+				$('nav').width($('header').width());
+				$('nav').offset({left: $('header').offset().left});
+			}
+
+			// Sticky navbar
+			function stickyRelocate() {
+				// Relocate nav
+				var windowTop = $(window).scrollTop();
+				var divTop = $('#sticky-anchor').offset().top;
+				var stickyPadding = 90;
+				if ((windowTop + stickyPadding) > divTop) {
+					// Stick
+					$('nav').addClass('sticky');
+				}
+				else {
+					// Unstick
+					$('nav').removeClass('sticky');
+				}
+
+				$('nav').offset({left: $('header').offset().left});
+			}
 		</script>
 	</head>
 
@@ -89,9 +121,10 @@
 			<section id="banner">
 				<div class="row"><div class="span12">
 					<table><tr>
-						<td>
+						<td class="hidden-phone">
 							<div id="logo">
-								<img class="main" src="img/bannerLogoMain.png" alt="Hi"/>
+								<img class="hi" src="img/bannerLogoHi.png" alt="Hi"/>
+								<img class="logo" src="img/bannerLogo.png" alt=""/>
 								<img class="dark" src="img/bannerLogoDark.png" alt=""/>
 								<img class="light" src="img/bannerLogoLight.png" alt=""/>
 								<img class="shadow" src="img/bannerLogoShadow.png" alt=""/>
@@ -111,11 +144,69 @@
 
 
 			<!-- Navbar -->
-			<div class="row"><div class="span12">
-				<nav>
-					<span>Navbar Stuff Goes Here</span>
-				</nav>
-			</div></div>
+			<div id="sticky-anchor"></div>
+			<nav>
+				<ul>
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</nav>
+
+
+
+			<!-- Page Content -->
+			<section id="content">
+				<div class="row">
+
+					<div class="span4">
+						<h1>Like, text and stuff.</h1>
+						<p>Curabitur libero risus, ultricies vitae elementum eu, <a href="#">interdum ut justo</a>. Nullam sodales justo ac lectus consectetur gravida. Quisque quis diam nec lorem ultricies vehicula sed at purus. Nunc eget dolor urna. Vestibulum semper blandit dolor, eget adipiscing nisl molestie ut. Duis ipsum nulla, rutrum eget accumsan eget, rutrum sed augue.</p>
+						<p>Morbi nulla est, eleifend vel adipiscing eu, iaculis eu odio. Etiam fermentum dui vitae nisi semper in pretium sapien bibendum.</p>
+						<p>Curabitur libero risus, ultricies vitae elementum eu, interdum ut justo.</p>
+					</div>
+
+					<div class="span4">
+						<h1>More text here, fuck.</h1>
+						<p>In pulvinar felis et risus eleifend rhoncus sodales velit aliquet. Pellentesque consectetur, odio et semper dapibus, lorem nunc dapibus quam, eu feugiat massa elit a dolor.</p>
+
+						<blockquote><p>These guys totally rule. Like you don't even understand just how much they rule.</p><span>Dude That Totally Likes Us</span></blockquote>
+
+						<p> Integer lobortis, leo quis pulvinar bibendum, turpis ligula rutrum massa, sit amet interdum lorem tortor eget odio. Integer elit ante, cursus ut lobortis quis, mollis <a href="#">fringilla massa</a>. Nulla pulvinar rutrum mi, tincidunt dignissim nulla blandit rutrum. Phasellus semper congue imperdiet.</p>
+					</div>
+
+					<div class="span4">
+						<h1>What?  Huh?  Also fuck.</h1>
+						<p>Nulla facilisi. Aliquam interdum porta posuere. Pellentesque hendrerit <a href="#">nibh quis lacus</a> aliquet eget rutrum nulla egestas. Maecenas sagittis consectetur porttitor. Pellentesque tortor turpis, condimentum quis tempor vitae, scelerisque ut sapien. Aliquam eu nulla non neque convallis accumsan. Duis eu felis ipsum.</p>
+						<p>Nam quis tortor ac metus gravida pretium. Morbi vehicula arcu molestie arcu egestas mollis. Curabitur tincidunt, ipsum et porttitor consectetur, mauris lacus tincidunt orci, eget blandit magna ligula eu magna. Nunc et arcu id velit condimentum lobortis.</p>
+					</div>
+
+				</div>
+
+				<div class="row"><div class="span12">
+					<div class="frame">
+						<h1>This is totally a frame and shit.</h1>
+						<p>In pulvinar felis et risus eleifend rhoncus sodales velit aliquet. Pellentesque consectetur, odio et semper dapibus, lorem nunc dapibus quam, eu feugiat massa elit a dolor. Nunc imperdiet mauris in felis dapibus quis rutrum neque malesuada. Integer lobortis, leo quis pulvinar bibendum, turpis ligula rutrum massa, sit amet interdum lorem tortor eget odio. Integer elit ante, cursus ut lobortis quis, mollis fringilla massa. Nulla pulvinar rutrum mi, tincidunt dignissim nulla blandit rutrum. Phasellus semper congue imperdiet.</p>
+						<p>Curabitur libero risus, ultricies vitae elementum eu, interdum ut justo. Nullam sodales justo ac lectus consectetur gravida. Quisque quis diam nec lorem ultricies <a href="#">vehicula sed at</a> purus. Nunc eget dolor urna. Vestibulum semper blandit dolor, eget adipiscing nisl molestie ut. Duis ipsum nulla, rutrum eget accumsan eget, rutrum sed augue.</p>
+						<p>Morbi nulla est, eleifend vel adipiscing eu, iaculis eu odio. Etiam fermentum dui vitae nisi semper in pretium sapien bibendum.</p>
+						<br/>
+
+						<h1>Look at all the shit in this frame.</h1>
+						<p>Nulla facilisi. Aliquam interdum porta posuere. Pellentesque hendrerit nibh quis lacus aliquet eget rutrum nulla egestas. Maecenas sagittis consectetur porttitor. Pellentesque <a href="#">tortor</a> turpis, <a href="#">condimentum quis tempor</a> vitae, scelerisque ut sapien. Aliquam eu nulla non neque convallis accumsan. Duis eu felis ipsum. Nam quis tortor ac metus gravida pretium. Morbi vehicula arcu molestie arcu egestas mollis. Curabitur tincidunt, ipsum et porttitor consectetur, mauris lacus tincidunt orci, eget blandit magna ligula eu magna. Nunc et arcu id velit condimentum lobortis.</p>
+						<p>In pulvinar felis et risus eleifend rhoncus sodales velit aliquet. Pellentesque consectetur, odio et semper dapibus, lorem nunc dapibus quam, eu feugiat massa elit a dolor. Nunc imperdiet mauris in felis dapibus quis rutrum neque malesuada. Integer lobortis, leo quis pulvinar bibendum, turpis ligula rutrum massa, sit amet interdum lorem tortor eget odio. Integer elit ante, cursus ut lobortis quis, mollis fringilla massa. Nulla pulvinar rutrum mi, tincidunt dignissim nulla blandit rutrum. Phasellus semper congue imperdiet.</p>
+					</div>
+				</div>
+			</section>
+
+
+
+			<!-- Page Footer -->
+			<footer>
+				<ul>
+					<li>Content Copyright &copy; 2012 BitPivot, LLC</li>
+					<li>All Rights Reserved</li>
+				</ul>
+			</footer>
 
 		</div>
 
