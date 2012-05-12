@@ -1,14 +1,14 @@
 /* Fallback to non-animated logo */
+#banner #logo {
+	margin: 0px\9!important;
+}
+
 #logo .fallback {
 	display: inline\9!important;
 }
 
 #logo .hi, #logo .dark, #logo .light, #logo .shadow {
 	display: none\9!important;
-}
-
-#banner hgroup {
-	display: inline\9!important;
 }
 
 
