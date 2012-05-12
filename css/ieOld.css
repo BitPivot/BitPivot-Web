@@ -1,0 +1,19 @@
+/* Fallback to non-animated logo */
+#logo .fallback {
+	display: inline\9!important;
+}
+
+#logo .hi, #logo .dark, #logo .light, #logo .shadow {
+	display: none\9!important;
+}
+
+#banner hgroup {
+	display: inline\9!important;
+}
+
+
+
+/* Fallback for loader overlay */
+#overlay {
+	display: none !important;
+}

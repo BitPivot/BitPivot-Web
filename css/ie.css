@@ -1,11 +1,9 @@
-#logo .fallback {
-	display: inline !important;
+/* Gradient fallbacks */
+header {
+	background: url('../img/gradientLightGrey.png') repeat-x 0px 0px !important;
 }
 
-#logo .hi, #logo .dark, #logo .light, #logo .shadow {
-	display: none !important;
-}
-
-#banner hgroup {
-	display: inline !important;
+nav {
+	background: url('../img/gradientPurple.png') repeat-x 0px 0px !important;
+	border: 1px solid;
 }

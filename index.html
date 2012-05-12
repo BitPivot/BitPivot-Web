@@ -5,14 +5,15 @@
 		<title>BitPivot</title>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta name="description" content="Description"/>
-		<meta name="keywords" content="Keywords"/>
-		<meta name="author" content="Author"/>
+		<meta name="description" content="BitPivot"/>
+		<meta name="keywords" content="Software Developer, Software Consultant, Database Integration, Web Development, Application Development"/>
+		<meta name="author" content="Matthew McMillion"/>
 
 		<!--[if lt IE 9]>
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-			<link rel="stylesheet" href="css/ie.css"/>
+			<link rel="stylesheet" href="css/ieOld.css"/>
 		<![endif]-->
+		<!--[if IE]><link rel="stylesheet" href="css/ie.css"/><![endif]-->
 
 		<link rel="stylesheet" href="css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="css/bootstrap-responsive.min.css"/>
@@ -31,6 +32,8 @@
 					top: '-=50',
 					opacity: 1,
 				}, 1500, 'easeInOutQuad', function() {
+					$('#overlay').fadeOut(1500);
+
 					$('#logo .dark').show();
 					$('#logo .dark').rotate({
 						angle: 0,
@@ -65,43 +68,13 @@
 			window.onload = function() {
 				// Logo animations
 				animateBanner();
-				resizeNavbar();
-
-				$(window).scroll(stickyRelocate);
-				stickyRelocate();
 			};
-
-			window.onresize = function() {
-				resizeNavbar();
-			}
-
-			// Resize navbar
-			function resizeNavbar() {
-				$('nav').width($('header').width());
-				$('nav').offset({left: $('header').offset().left});
-			}
-
-			// Sticky navbar
-			function stickyRelocate() {
-				// Relocate nav
-				var windowTop = $(window).scrollTop();
-				var divTop = $('#sticky-anchor').offset().top;
-				var stickyPadding = 90;
-				if ((windowTop + stickyPadding) > divTop) {
-					// Stick
-					$('nav').addClass('sticky');
-				}
-				else {
-					// Unstick
-					$('nav').removeClass('sticky');
-				}
-
-				$('nav').offset({left: $('header').offset().left});
-			}
 		</script>
 	</head>
 
 	<body>
+
+		<div id="overlay" class="hidden-phone"></div>
 
 		<div class="container">
 
@@ -124,7 +97,6 @@
 						<td class="hidden-phone">
 							<div id="logo">
 								<img class="hi" src="img/bannerLogoHi.png" alt="Hi"/>
-								<img class="logo" src="img/bannerLogo.png" alt=""/>
 								<img class="dark" src="img/bannerLogoDark.png" alt=""/>
 								<img class="light" src="img/bannerLogoLight.png" alt=""/>
 								<img class="shadow" src="img/bannerLogoShadow.png" alt=""/>
@@ -134,7 +106,7 @@
 						<th>
 							<hgroup>
 								<h1>We are BitPivot.</h1>
-								<h2>We build custom software and implement data solutions to make your business <span id="rotator">faster.</span></h2>
+								<h2>We build custom software and implement data solutions to make your business <span class="visible-phone">better.</span><span class="hidden-phone" id="rotator">faster.</span></h2>
 							</hgroup>
 						</th>
 					</tr></table>
@@ -144,14 +116,15 @@
 
 
 			<!-- Navbar -->
-			<div id="sticky-anchor"></div>
-			<nav>
-				<ul>
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-			</nav>
+			<div class="row"><div class="span12">
+				<nav>
+					<ul>
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Contact</a></li>
+					</ul>
+				</nav>
+			</div></div>
 
 
 
@@ -160,10 +133,11 @@
 				<div class="row">
 
 					<div class="span4">
-						<h1>Like, text and stuff.</h1>
+						<h1>Huh?  What?  Also fuck.</h1>
 						<p>Curabitur libero risus, ultricies vitae elementum eu, <a href="#">interdum ut justo</a>. Nullam sodales justo ac lectus consectetur gravida. Quisque quis diam nec lorem ultricies vehicula sed at purus. Nunc eget dolor urna. Vestibulum semper blandit dolor, eget adipiscing nisl molestie ut. Duis ipsum nulla, rutrum eget accumsan eget, rutrum sed augue.</p>
 						<p>Morbi nulla est, eleifend vel adipiscing eu, iaculis eu odio. Etiam fermentum dui vitae nisi semper in pretium sapien bibendum.</p>
 						<p>Curabitur libero risus, ultricies vitae elementum eu, interdum ut justo.</p>
+						<p>In pulvinar felis et risus eleifend rhoncus sodales velit aliquet. Pellentesque consectetur, odio et semper dapibus, lorem nunc dapibus quam, eu feugiat massa elit a dolor. Nunc imperdiet mauris in felis dapibus quis rutrum neque malesuada. Integer lobortis, leo quis pulvinar bibendum, turpis ligula rutrum massa.</p>
 					</div>
 
 					<div class="span4">
@@ -173,12 +147,19 @@
 						<blockquote><p>These guys totally rule. Like you don't even understand just how much they rule.</p><span>Dude That Totally Likes Us</span></blockquote>
 
 						<p> Integer lobortis, leo quis pulvinar bibendum, turpis ligula rutrum massa, sit amet interdum lorem tortor eget odio. Integer elit ante, cursus ut lobortis quis, mollis <a href="#">fringilla massa</a>. Nulla pulvinar rutrum mi, tincidunt dignissim nulla blandit rutrum. Phasellus semper congue imperdiet.</p>
+						<p>Nulla facilisi. Aliquam interdum porta posuere. Pellentesque hendrerit nibh quis lacus aliquet eget rutrum nulla egestas. Curabitur tincidunt, ipsum et porttitor consectetur, mauris lacus tincidunt orci, eget blandit magna ligula eu magna. Nunc et arcu id velit condimentum lobortis.</p>
 					</div>
 
 					<div class="span4">
-						<h1>What?  Huh?  Also fuck.</h1>
-						<p>Nulla facilisi. Aliquam interdum porta posuere. Pellentesque hendrerit <a href="#">nibh quis lacus</a> aliquet eget rutrum nulla egestas. Maecenas sagittis consectetur porttitor. Pellentesque tortor turpis, condimentum quis tempor vitae, scelerisque ut sapien. Aliquam eu nulla non neque convallis accumsan. Duis eu felis ipsum.</p>
-						<p>Nam quis tortor ac metus gravida pretium. Morbi vehicula arcu molestie arcu egestas mollis. Curabitur tincidunt, ipsum et porttitor consectetur, mauris lacus tincidunt orci, eget blandit magna ligula eu magna. Nunc et arcu id velit condimentum lobortis.</p>
+						<div class="thumb">
+							<img src="img/thumbnailCode01.png" alt="Code"/>
+							<span>See how BitPivot helps clients achieve more.</span>
+						</div>
+
+						<div class="thumb">
+							<img src="img/thumbnailCode02.png" alt="Code"/>
+							<span>Also, check out how badass we are.</span>
+						</div>
 					</div>
 
 				</div>
