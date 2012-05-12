@@ -9,7 +9,10 @@
 		<meta name="keywords" content="Keywords"/>
 		<meta name="author" content="Author"/>
 
-		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		<!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			<link rel="stylesheet" href="css/ie.css"/>
+		<![endif]-->
 
 		<link rel="stylesheet" href="css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="css/bootstrap-responsive.min.css"/>
@@ -17,19 +20,52 @@
 		<script src="js/less-1.3.0.min.js"></script>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="js/jquery-rotate.2.2.min.js"></script>
+		<script src="js/jquery.easing.1.3.js"></script>
 		<script>
-			// Word rotator
-			var words = ['faster.', 'smarter.', 'more agile.', 'stronger.'];
-			setInterval(function() {
-				$('#rotator').fadeOut(function(){
-					var currentWord = $('#rotator').html();
-					var nextIndex = words.indexOf(currentWord) + 1;
-					var nextIndex = (nextIndex < words.length) ? nextIndex : 0;
-					$('#rotator').html(words[nextIndex]);
-					$('#rotator').fadeIn();
+			// Initial logo animation
+			function animateBanner() {
+				$('#logo .main').css('opacity', 0);
+				$('#logo .main').show();
+				$('#logo .main').animate({
+					top: '-=50',
+					opacity: 1,
+				}, 1500, 'easeInOutQuad', function() {
+					$('#logo .dark').show();
+					$('#logo .dark').rotate({
+						angle: 0,
+						animateTo: -11.5,
+					});
+
+					$('#logo .light').show();
+					$('#logo .light').rotate({
+						angle: 0,
+						animateTo: -22,
+					});
+
+					$('#banner hgroup').fadeIn(1500, function() {
+						// Word rotator
+						var words = ['faster.', 'smarter.', 'more agile.', 'stronger.', 'better.', 'more powerful.'];
+						setInterval(function() {
+							$('#rotator').fadeOut(function(){
+								var currentWord = $('#rotator').html();
+								var nextIndex = words.indexOf(currentWord) + 1;
+								var nextIndex = (nextIndex < words.length) ? nextIndex : 0;
+								$('#rotator').html(words[nextIndex]);
+								$('#rotator').fadeIn();
+							});
+
+						}, 2000);
+					});
 				});
 
-			}, 2000);
+				$('#logo .shadow').fadeIn(1500);
+			}
+
+			window.onload = function() {
+				// Logo animations
+				animateBanner();
+			};
 		</script>
 	</head>
 
@@ -53,7 +89,15 @@
 			<section id="banner">
 				<div class="row"><div class="span12">
 					<table><tr>
-						<td><img src="img/bannerHi.png" alt="Hi"/></td>
+						<td>
+							<div id="logo">
+								<img class="main" src="img/bannerLogoMain.png" alt="Hi"/>
+								<img class="dark" src="img/bannerLogoDark.png" alt=""/>
+								<img class="light" src="img/bannerLogoLight.png" alt=""/>
+								<img class="shadow" src="img/bannerLogoShadow.png" alt=""/>
+								<img class="fallback" src="img/bannerLogoFallback.png" alt="Hi"/>
+							</div>
+						</td>
 						<th>
 							<hgroup>
 								<h1>We are BitPivot.</h1>

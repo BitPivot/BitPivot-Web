@@ -1,0 +1,11 @@
+#logo .fallback {
+	display: inline !important;
+}
+
+#logo .main, #logo .dark, #logo .light, #logo .shadow {
+	display: none !important;
+}
+
+#banner hgroup {
+	display: inline !important;
+}
