@@ -126,6 +126,24 @@
 						<li><a href="#">About</a></li>
 						<li><a href="#">Contact</a></li>
 					</ul>
+
+					<div class="search">
+						<input type="text" id="search" value="Search"/>
+						<input type="submit" id="submit" value="Search"/>
+						<script>
+							$('#search').focus(function() {
+								if ($(this).val() == 'Search') {
+									$(this).val('');
+								}
+							});
+
+							$('#search').blur(function() {
+								if ($(this).val() == '') {
+									$(this).val('Search');
+								}
+							});
+						</script>
+					</div>
 				</nav>
 			</div></div>
 
@@ -152,7 +170,10 @@
 							<h1>More text here, fuck.</h1>
 							<p>In pulvinar felis et risus eleifend rhoncus sodales velit aliquet. Pellentesque consectetur, odio et semper dapibus, lorem nunc dapibus quam, eu feugiat massa elit a dolor.</p>
 
-							<blockquote><p>These guys totally rule. Like you don't even understand just how much they rule.</p><span>Dude That Totally Likes Us</span></blockquote>
+							<blockquote>
+								<p>These guys totally rule. Like you don't even understand just how much they rule.</p>
+								<span>Dude That Totally Likes Us</span>
+							</blockquote>
 
 							<p> Integer lobortis, leo quis pulvinar bibendum, turpis ligula rutrum massa, sit amet interdum lorem tortor eget odio. Integer elit ante, cursus ut lobortis quis, mollis <a href="#">fringilla massa</a>. Nulla pulvinar rutrum mi, tincidunt dignissim nulla blandit rutrum. Phasellus semper congue imperdiet.</p>
 							<p>Nulla facilisi. Aliquam interdum porta posuere. Pellentesque hendrerit nibh quis lacus aliquet eget rutrum nulla egestas. Curabitur tincidunt, ipsum et porttitor consectetur, mauris lacus tincidunt orci, eget blandit magna ligula eu magna. Nunc et arcu id velit condimentum lobortis.</p>

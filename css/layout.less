@@ -23,6 +23,19 @@
 
 
 
+// Browser warning
+#warning {
+	width: 600px;
+	margin: 20px auto;
+	padding: 10px;
+	background: #a00;
+	color: #fff;
+	border: 3px solid #c00;
+	text-align: center;
+}
+
+
+
 // Page Header
 header {
 	height: 40px;
@@ -137,21 +150,16 @@ nav {
 	.gradient(@purple);
 	.rounded;
 
-	span {
-		line-height: 40px;
-		vertical-align: middle;
-	}
-
 	ul {
 		list-style: none;
 		padding: 0px;
 		margin: 0px;
+		display: inline;
 
 		li {
 			padding: 0px;
 			margin: 0px;
 			display: inline;
-			line-height: 40px;
 			vertical-align: middle;
 
 			a {
@@ -159,7 +167,9 @@ nav {
 				height: 40px;
 				padding: 0px 20px;
 				color: @navbarTextColor;
+				font: normal 12pt @fontFace;
 				text-decoration: none;
+				line-height: 40px;
 
 				&:hover, &:active {
 					color: @navbarTextColor;
@@ -170,6 +180,52 @@ nav {
 
 			&.active a {
 				.gradient(darken(@purple, 10%));
+			}
+		}
+	}
+
+	.search {
+		float: right;
+		display: inline-block;
+		line-height: 40px;
+		vertical-align: middle;
+
+		input[type=text] {
+			margin: -5px 10px 0px 0px;
+			padding: 2px 4px;
+			height: 20px;
+			color: @pageTextColor;
+			text-align: left;
+			.rounded;
+			.insetControl(@purple);
+
+			&:focus {
+				outline: none;
+				color: darken(@pageTextColor, 50%);
+				.glow;
+			}
+		}
+
+		input[type=submit] {
+			margin: -5px 0px 0px 0px;
+			padding: 4px 10px 4px 10px;
+			height: 28px;
+			color: darken(@pageTextColor, 15%);
+			text-align: center;
+			vertical-align: middle;
+			.rounded;
+			.outsetControl(@lightGrey);
+			.gradient(@lightGrey);
+
+			&:hover {
+				.outsetControl(lighten(@lightGrey, 5%));
+				.gradient(lighten(@lightGrey, 5%));
+			}
+
+			&:active {
+				.insetControl(darken(@lightGrey, 5%));
+				.gradient(darken(@lightGrey, 5%));
+				padding: 5px 9px 3px 11px;
 			}
 		}
 	}
@@ -324,10 +380,32 @@ a {
 }
 
 .inset {
-	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.7);
+	text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.insetControl(@backgroundColor) {
+	border: 2px solid;
+	border-top-color: mix(@backgroundColor, #000, 66%);
+	border-right-color: mix(@backgroundColor, #fff, 66%);
+	border-bottom-color: mix(@backgroundColor, #fff, 66%);
+	border-left-color: mix(@backgroundColor, #000, 66%);
+}
+
+.outsetControl(@backgroundColor) {
+	border: 2px solid;
+	border-top-color: mix(@backgroundColor, #fff, 66%);
+	border-right-color: mix(@backgroundColor, #000, 66%);
+	border-bottom-color: mix(@backgroundColor, #000, 66%);
+	border-left-color: mix(@backgroundColor, #fff, 66%);
 }
 
 .smooth(@color: @bannerTextColor) {
 	font-smooth: always;
 	text-shadow: 0 1px 0 hsla(hue(@color), saturation(@color), lightness(@color), 0.01);
+}
+
+.glow(@color: #fff) {
+	-moz-box-shadow: 0px 0px 20px @color;
+	-webkit-box-shadow: 0px 0px 20px @color;
+	box-shadow: 0px 0px 20px @color;
 }
