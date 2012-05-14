@@ -33,10 +33,7 @@
 
 	<body>
 
-		<!-- Loader Overlay -->
 		<div id="overlay" class="hidden-phone"></div>
-
-
 
 		<div class="container">
 
