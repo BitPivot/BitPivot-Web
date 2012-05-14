@@ -1,0 +1,194 @@
+// Page Header
+header {
+	height: 40px;
+	margin: 20px 0px;
+	padding: 0px 20px 0px 0px;
+	font: @font;
+	.gradient(@lightGrey);
+	.rounded;
+
+	img {
+		padding: 6px;
+	}
+
+	span {
+		float: right;
+		line-height: 40px;
+		vertical-align: middle;
+		color: @pageTextColor;
+		font-weight: bold;
+		.inset;
+	}
+}
+
+
+
+// Page Banner
+#banner {
+
+	.content {
+		height: 330px;
+
+		// Banner logo
+		#logo {
+			margin: 40px auto;
+			height: 210px;
+			width: 210px;
+			position: relative;
+
+			img {
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				display: none;
+
+				&.hi {
+					top: 50px;
+					z-index: 90;
+				}
+
+				&.dark {
+					z-index: 80;
+				}
+
+				&.light {
+					z-index: 70;
+				}
+
+				&.shadow {
+					margin: 260px 0px 0px 0px;
+					z-index: 100;
+				}
+
+				&.fallback {
+					display: none;
+					min-width: 300px;
+					min-height: 326px;
+				}
+			}
+		}
+
+		// Banner text
+		hgroup {
+			margin: 60px 0px 0px 20px;
+			color: @bannerTextColor;
+			.smooth(@bannerTextColor);
+
+			h1 {
+				font: bold 42pt @fontFace;
+			}
+
+			h2 {
+				font: normal 22pt @fontFace;
+			}
+
+			span {
+				font-weight: bold;
+				font-style: oblique;
+			}
+		}
+	}
+
+	// Fallback for phone view
+	.visible-phone .content {
+		height: auto;
+
+		hgroup {
+			margin: 0px;
+		}
+	}
+
+}
+
+
+
+// Navbar
+nav {
+	height: 40px;
+	margin: 20px 0px;
+	padding: 0px 20px;
+	font: @font;
+	color: @navbarTextColor;
+	.gradient(@purple);
+	.rounded;
+
+	ul {
+		list-style: none;
+		padding: 0px;
+		margin: 0px;
+		display: inline;
+
+		li {
+			padding: 0px;
+			margin: 0px;
+			display: inline;
+			vertical-align: middle;
+
+			a {
+				display: inline-block;
+				height: 40px;
+				padding: 0px 20px;
+				color: @navbarTextColor;
+				font: normal 12pt @fontFace;
+				text-decoration: none;
+				line-height: 40px;
+
+				&:hover, &:active {
+					color: @navbarTextColor;
+					text-decoration: none;
+					.gradient(lighten(@purple, 10%));
+				}
+			}
+
+			&.active a {
+				.gradient(darken(@purple, 10%));
+			}
+		}
+	}
+
+	.search {
+		float: right;
+		display: inline-block;
+		line-height: 40px;
+		vertical-align: middle;
+
+		input[type=text] {
+			margin: -5px 10px 0px 0px;
+			padding: 2px 4px;
+			height: 20px;
+			color: @pageTextColor;
+			text-align: left;
+			.rounded;
+			.insetControl(@purple);
+
+			&:focus {
+				outline: none;
+				color: darken(@pageTextColor, 50%);
+				.glow;
+			}
+		}
+
+		input[type=submit] {
+			margin: -5px 0px 0px 0px;
+			padding: 4px 10px 4px 10px;
+			height: 28px;
+			color: darken(@pageTextColor, 15%);
+			text-align: center;
+			vertical-align: middle;
+			.rounded;
+			.outsetControl(@lightGrey);
+			.gradient(@lightGrey);
+
+			&:hover {
+				.outsetControl(lighten(@lightGrey, 5%));
+				.gradient(lighten(@lightGrey, 5%));
+			}
+
+			&:active {
+				.insetControl(darken(@lightGrey, 5%));
+				.gradient(darken(@lightGrey, 5%));
+				padding: 5px 9px 3px 11px;
+			}
+		}
+	}
+}

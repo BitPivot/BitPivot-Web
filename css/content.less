@@ -1,0 +1,90 @@
+// Content
+.content {
+	font: @font;
+	color: @pageTextColor;
+
+	h1 {
+		margin: 0px 0px 10px 0px;
+		color: darken(@pageTextColor, 50%);
+		.smooth;
+	}
+
+	p {
+		margin: 0px 0px 10px 0px;
+		text-align: justify;
+
+		&:last-child {
+			margin: 0px;
+		}
+	}
+
+	ul {
+		list-style-type: square;
+	}
+
+	.frame {
+		background: @lightGrey;
+		margin: 20px 0px;
+		padding: 20px;
+		.rounded;
+
+		h1 {
+			margin: 40px 0px 10px 0px;
+			.smooth;
+
+			&:first-child {
+				margin: 0px 0px 10px 0px;
+			}
+		}
+	}
+
+	blockquote {
+		background: @lightGrey;
+		margin: 10px 0px 10px 0px;
+		padding: 10px;
+		text-indent: 0px;
+		font-style: oblique;
+		quotes: "\201C" "\201D";
+		border: none;
+		.rounded;
+
+		p {
+			margin: 0px;
+			padding: 0px;
+
+			&:before {
+				content: open-quote;
+				font-weight: bold;
+			}
+
+			&:after {
+				content: close-quote;
+				font-weight: bold;
+			}
+		}
+
+		span {
+			display: block;
+			margin: 10px 0px 0px 0px;
+			text-align: right;
+			font-style: normal;
+		}
+	}
+
+	figure {
+		background: @lightGrey;
+		padding: 5px;
+		margin: 0px auto 20px auto;
+		max-width: 360px;
+		.rounded;
+
+		img {
+			.rounded(3px);
+		}
+
+		figcaption {
+			text-align: right;
+			padding: 6px 0px 0px 0px;
+		}
+	}
+}
