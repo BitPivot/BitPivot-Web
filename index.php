@@ -17,7 +17,6 @@
 
 		<script>localStorage.clear()</script>
 		<link rel="icon" type="image/x-icon" href="favicon.ico"/>
-		<link rel="stylesheet" href="css/bootstrap.min.css"/>
 		<link rel="stylesheet/less" href="css/page.less"/>
 		<script src="js/less-1.3.0.min.js"></script>
 		<noscript>
@@ -28,7 +27,7 @@
 		<script src="js/analytics.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script src="js/jquery-rotate.2.2.min.js"></script>
-		<script src="js/jquery.easing.1.3.js"></script>
+		<script src="js/jquery.easing.1.3.min.js"></script>
 		<script src="js/animateBanner.js"></script>
 	</head>
 
@@ -263,10 +262,42 @@
 
 						<div class="span8">
 							Stuff
+
+							<form class="form-horizontal">
+								<fieldset>
+									<legend>This is a form</legend>
+									<div class="control-group">
+										<label class="control-label" for="input01">Text Input</label>
+										<div class="controls">
+											<input type="text" id="input01"/>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label" for="select01">Dropdown</label>
+										<div class="controls">
+											<select id="select01">
+												<option>Something</option>
+												<option>Something Else</option>
+												<option>Stuff</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label" for="text02">Information</label>
+										<div class="controls">
+											<textarea class="input-xlarge" id="text02" rows="5"></textarea>
+										</div>
+									</div>
+								</fieldset>
+							</form>
 						</div>
 
 						<div class="span4">
 							Contact us for stuff.
+							<input type="button" class="btn btn-primary" value="Primary"/>
+							<input type="button" class="btn" value="Button"/>
 						</div>
 
 					</div>
