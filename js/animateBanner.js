@@ -1,5 +1,5 @@
 function animateBanner() {
-	//if ($(window).width() < 767) { // Check for phone / tablet
+	if ($(window).width() > 767) { // Check for phone / tablet
 		$('#logo .hi').css('opacity', 0);
 		$('#logo .hi').show();
 		$('#logo .hi').animate({
@@ -28,18 +28,18 @@ function animateBanner() {
 					var nextIndex = (nextIndex < words.length) ? nextIndex : 0;
 					$('#rotator').html(words[nextIndex]);
 					$('#rotator').fadeIn();
-					console.log('Changed');
 				});
 
 			}, 2000);
 		});
 
 		$('#logo .shadow').fadeIn(1500);
-	//}
+	}
 }
 
 
 
 window.onload = function() {
+	if (window.location.hash == "#noload") $('#overlay').hide(); // DEVELOPMENT
 	animateBanner();
 };

@@ -1,0 +1,38 @@
+.background.white {
+	background: #fff;
+}
+
+.background.grey {
+	background: @lightGrey;
+	border-top: 1px solid darken(@lightGrey, 10%);
+	border-bottom: 1px solid darken(@lightGrey, 10%);
+
+	blockquote {
+		background: darken(@lightGrey, 5%);
+	}
+
+	figure {
+		background: darken(@lightGrey, 5%);
+	}
+}
+
+.background.darkgrey {
+	background: @darkGrey;
+	border-top: 1px solid darken(@darkGrey, 10%);
+	border-bottom: 1px solid darken(@darkGrey, 10%);
+}
+
+.background.purple {
+	.gradient(@purple);
+	border-top: 1px solid darken(@purple, 10%);
+}
+
+
+
+// Handle background padding on phones / tablets
+@media screen and (max-width: 767px) {
+	.background {
+		margin: 0px -20px;
+		padding: 0px 20px;
+	}
+}
