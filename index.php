@@ -260,44 +260,13 @@
 
 					<div class="row">
 
-						<div class="span8">
-							Stuff
-
-							<form class="form-horizontal">
-								<fieldset>
-									<legend>This is a form</legend>
-									<div class="control-group">
-										<label class="control-label" for="input01">Text Input</label>
-										<div class="controls">
-											<input type="text" id="input01"/>
-										</div>
-									</div>
-
-									<div class="control-group">
-										<label class="control-label" for="select01">Dropdown</label>
-										<div class="controls">
-											<select id="select01">
-												<option>Something</option>
-												<option>Something Else</option>
-												<option>Stuff</option>
-											</select>
-										</div>
-									</div>
-
-									<div class="control-group">
-										<label class="control-label" for="text02">Information</label>
-										<div class="controls">
-											<textarea class="input-xlarge" id="text02" rows="5"></textarea>
-										</div>
-									</div>
-								</fieldset>
-							</form>
-						</div>
-
+						<!-- Request Information -->
 						<div class="span4">
-							Contact us for stuff.
-							<input type="button" class="btn btn-primary" value="Primary"/>
-							<input type="button" class="btn" value="Button"/>
+							<div class="frame">
+								<h2>Contacting Us</h2>
+								<p>Phasellus velit odio, vehicula quis mollis ac, consequat vel lectus. Nam nunc ipsum, hendrerit ut sollicitudin nec, pretium et erat. Sed tempor lacus at velit pretium mattis. Nam nunc odio, mattis ac tristique quis, volutpat nec leo. Sed dignissim eros nec magna accumsan interdum. Nulla aliquam nulla ac nunc eleifend vitae laoreet nisi consectetur. Sed id arcu venenatis enim pulvinar eleifend vitae vel ipsum. Vivamus erat augue, cursus vel blandit quis, condimentum a libero.</p>
+								<p>Proin enim orci, rhoncus quis egestas fringilla, vehicula id mi. Donec sed tempus sapien. Nam dignissim, orci ac tincidunt viverra, velit tortor aliquam libero, at tristique nibh elit vel neque.</p>
+							</div>
 						</div>
 
 					</div>
