@@ -13,11 +13,11 @@
 		public $projectInfo = '';
 		public $found = '';
 
-		public $className = 'warning';
-		public $classEmail = 'warning';
-		public $classEmailConfirm = 'warning';
+		public $className = 'required';
+		public $classEmail = 'required';
+		public $classEmailConfirm = 'required';
 		public $classNumber = '';
-		public $classCompany = 'warning';
+		public $classCompany = 'required';
 		public $classIndustry = '';
 		public $classTimeframe = '';
 		public $classBudget = '';
@@ -25,10 +25,10 @@
 		public $classProjectInfo = '';
 		public $classFound = '';
 
-		public $errorName = '';
-		public $errorEmail = '';
-		public $errorEmailConfirm = '';
-		public $errorCompany = '';
+		public $errorName = 'Required';
+		public $errorEmail = 'Required';
+		public $errorEmailConfirm = 'Required';
+		public $errorCompany = 'Required';
 
 		public $isValid = false;
 

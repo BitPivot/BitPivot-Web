@@ -1,6 +1,6 @@
 <?php
 
-	require_once('cfg/all.php');
+	require_once('cfg/cfg.php');
 
 
 
@@ -22,20 +22,29 @@
 
 	// Check request type
 	if (isset($_GET['type'])) {
-		switch ($_GET['type']) {
-			case 'sync':
-				$form->validate();
-				if ($form->isValid) {
-					sendRequest($form);
-				}
-				else {
-					render($smarty, $form); // Render with errors
-				}
-				break;
+		// Validate form
+		$form->validate();
+		if (!$form->isValid) {
+			render($smarty, $form);
+		}
+		else {
+			switch ($_GET['type']) {
+				case 'sync':
+					if (sendRequest($form)) {
+						sendResponse($form);
+						$smarty->display('requestSuccess.tpl');
+					}
+					else $smarty->display('requestFailed.tpl');
+					break;
 
-			case 'async':
-				echo "async";
-				break;
+				case 'async':
+					if (sendRequest($form)) {
+						sendResponse($form);
+						echo 'OK';
+					}
+					else echo 'ERROR';
+					break;
+			}
 		}
 	}
 	else {
@@ -91,8 +100,34 @@
 
 
 
+	// Sends the proposal request
 	function sendRequest($form) {
-		var_dump($form);
+		$subject = 'New Proposal Request';
+		$message  = 'New Proposal Request:';
+
+		return sendMail('request@bitpivot.com', $subject, $message);
+	}
+
+	// Sends a response to the user
+	function sendResponse($form) {
+		$subject = 'Thank you for you inquiry into BitPivot!';
+		$message  = "Dear {$form->name}\r\n";
+
+		return sendMail($form->email, $subject, $message);
+	}
+
+	// Sends a single email
+	function sendMail($to, $subject, $message) {
+		$headers = '';
+		if ($to == 'request@bitpivot.com') $headers .= 'To: BitPivot Request <request@bitpivot.com>' . "\r\n";
+		else $headers .= "To: {$to}\r\n";
+
+		$headers .= 'From: BitPivot Mailer <mailer@bitpivot.com>' ."\r\n";
+		$headers .= 'Reply-To: mailer@bitpivot.com' . "\r\n";
+		$headers .= 'X-Mailer: BitPivot Mailer';
+
+		if (mail($to, $subject, $message, $headers)) return true;
+		else return false;
 	}
 
 ?>

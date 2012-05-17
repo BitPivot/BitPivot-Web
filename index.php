@@ -15,14 +15,9 @@
 		<![endif]-->
 		<!--[if IE]><link rel="stylesheet" href="css/ie.css"/><![endif]-->
 
-		<script>localStorage.clear()</script>
 		<link rel="icon" type="image/x-icon" href="favicon.ico"/>
-		<link rel="stylesheet/less" href="css/page.less"/>
-		<script src="js/less-1.3.0.min.js"></script>
-		<noscript>
-			<link rel="stylesheet" href="css/page.css"/>
-			<link rel="stylesheet" href="css/noscript.css"/>
-		</noscript>
+		<link rel="stylesheet" href="css/page.css"/>
+		<noscript><link rel="stylesheet" href="css/noscript.css"/></noscript>
 
 		<script src="js/analytics.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>

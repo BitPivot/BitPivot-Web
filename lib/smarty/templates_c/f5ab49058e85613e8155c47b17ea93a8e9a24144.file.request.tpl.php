@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-05-16 23:51:57
+<?php /* Smarty version Smarty-3.1.7, created on 2012-05-17 21:14:43
          compiled from "tpl\request.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:119524fb2d9c57a6080-10683754%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f5ab49058e85613e8155c47b17ea93a8e9a24144' => 
     array (
       0 => 'tpl\\request.tpl',
-      1 => 1337205113,
+      1 => 1337282041,
       2 => 'file',
     ),
   ),
@@ -62,20 +62,26 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 		<![endif]-->
 		<!--[if IE]><link rel="stylesheet" href="css/ie.css"/><![endif]-->
 
-		<script>localStorage.clear()</script>
 		<link rel="icon" type="image/x-icon" href="favicon.ico"/>
-		<link rel="stylesheet/less" href="css/page.less"/>
-		<script src="js/less-1.3.0.min.js"></script>
-		<noscript>
-			<link rel="stylesheet" href="css/page.css"/>
-			<link rel="stylesheet" href="css/noscript.css"/>
-		</noscript>
+		<link rel="stylesheet" href="css/page.css"/>
+		<noscript><link rel="stylesheet" href="css/noscript.css"/></noscript>
 
 		<script src="js/analytics.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="js/jquery.scrollTo-1.4.2-min.js"></script>
+		<script src="js/bootstrap-modal.min.js"></script>
+		<script>
+			window.onload = function() {
+				$('#overlay').fadeOut(500);
+			};
+		</script>
 	</head>
 
 	<body>
+
+		<div id="overlay" class="hidden-phone"></div>
+
+
 
 		<div class="container">
 
@@ -83,10 +89,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 			<div class="row"><div class="span12">
 				<header>
 					<a class="brand" href="/"><img src="img/headerLogo.png" alt="BitPivot"/></a>
-					<span class="hidden-phone"><a href="http://twitter.com/BitPivot">Follow us on Twitter! <img src="img/iconTwitter.png"/></a></span>
-					<span class="visible-phone"><a href="http://twitter.com/BitPivot"><img src="img/iconTwitter.png"/></a></span>
+					<span class="hidden-phone"><a href="http://twitter.com/BitPivot">Follow us on Twitter! <img src="img/iconTwitter.png" alt=""/></a></span>
+					<span class="visible-phone"><a href="http://twitter.com/BitPivot"><img src="img/iconTwitter.png" alt="Follow us on Twitter"/></a></span>
 				</header>
 			</div></div>
+
+
 
 			<!-- Propsal Request Form -->
 			<div class="row"><div class="span12">
@@ -209,26 +217,148 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 					</div>
 
 					<script>
-						// Name
-						$('#name').change(function() {
-							if ($.trim($(this).val()) == '') {
-								$(this).parent().parent().removeClass('warning').removeClass('success').addClass('error');
-								$(this).siblings('.help-inline').html('Please enter an email address.');
+						function getError(control) {
+							try {
+								var value = $.trim($(control).val().toLowerCase());
+								switch (control) {
+									case '#name':
+										if (value == '') return 'Please enter your name.';
+										else return null;
+
+									case '#email':
+										if (value == '') return 'Please enter your email address.';
+										else return null;
+
+									case '#emailConfirm':
+										var email = $.trim($('#email').val().toLowerCase());
+										if (value == '') return 'Please confirm your email address.';
+										else if ((value != email)) return 'Email addresses do not match.';
+										else return null;
+
+									case '#company':
+										if (value == '') return 'Please enter your company name.';
+										else return null;
+								}
+							}
+							catch (ex) {
+								return null;
+							}
+						}
+
+						function validate(control) {
+							var error = getError(control);
+							if (error) {
+								$(control).parent().parent().removeClass('success').addClass('error');
+								$(control).siblings('.help-inline').html(error);
 							}
 							else {
-								$(this).parent().parent().removeClass('warning').removeClass('error').addClass('success');
-								$(this).siblings('.help-inline').html('');
+								$(control).parent().parent().removeClass('error').addClass('success');
+								$(control).siblings('.help-inline').html('');
 							}
-						});
+						}
 
-						// Email
-						$('#email').change(function() {
-							if ($.trim($(this).val()) == '') {
+						// Name
+						$('#name').change(function() { validate('#name'); });
+						$('#email').change(function() { validate('#email'); $('#emailConfirm').change() });
+						$('#emailConfirm').change(function() { validate('#emailConfirm'); });
+						$('#company').change(function() { validate('#company'); });
 
+						// Form handler
+						$('#request').submit(function() {
+							// Validate fields
+							var isValid = true;
+							var firstError = null
+							$(this).find('input[type=text], select, textarea').each(function() {
+								$(this).change();
+								var error = getError('#' + $(this).attr('id'));
+								if (error) {
+									isValid = false;
+									if (!firstError) firstError = $(this).attr('id');
+								}
+							})
+
+							// Do post
+							if (isValid) {
+								console.log('Valid');
+								$('#overlay').fadeIn(500);
+								$.ajax({
+									url: 'request?type=async',
+									async: false,
+									type: 'POST',
+									data: {
+										name: $('#name').val(),
+										email: $('#email').val(),
+										emailConfirm: $('#emailConfirm').val(),
+										number: $('#number').val(),
+										company: $('#company').val(),
+										industry: $('#industry').val(),
+										timeframe: $('#timeframe').val(),
+										budget: $('#budget').val(),
+										companyInfo: $('#companyInfo').val(),
+										projectInfo: $('#projectInfo').val(),
+										found: $('#found').val(),
+									},
+									error: function() {
+										$('#modalFailed').modal();
+									},
+									success: function(data) {
+										console.log(data);
+										if (data == 'OK') $('#modalSuccess').modal();
+										else $('#modalSuccess').modal();
+									}
+								});
 							}
+							else {
+								$.scrollTo('#' + firstError);
+							}
+
+							// Cancel postback request
+							return false;
 						});
 					</script>
 				</form>
+
+			</div></div>
+
+
+
+			<!-- Success Modal -->
+			<div class="modal fade" id="modalSuccess">
+				<div class="modal-header">
+					<h1>Success!</h1>
+				</div>
+				<div class="modal-body">
+					<p>Thank you for your interest in BitPivot.</p>
+					<p>We've received your proposal request, and someone will be in touch with you shortly.</p>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-primary" data-dismiss="modal" value="Close"/>
+					<script>
+						$('#modalSuccess').on('hidden', function() {
+							window.location.href = '/';
+						});
+					</script>
+				</div>
+			</div>
+
+			<!-- Failed Modal -->
+			<div class="modal fade" id="modalFailed">
+				<div class="modal-header">
+					<h1>Oops!</h1>
+				</div>
+				<div class="modal-body">
+					<p>Something went wrong.  We're terribly sorry about that.</p>
+					<p>If you'd like, you can email us directly at <a href="mailto:request@bitpivot.com">request@bitpivot.com</a>.
+				</div>
+				<div class="modal-footer">
+					input type="button" class="btn btn-primary" data-dismiss="modal" value="Close"/>
+					<script>
+						$('#modalFailed').on('hidden', function() {
+							window.location.href = '/';
+						});
+					</script>
+				</div>
+			</div>
 
 		</div>
 
