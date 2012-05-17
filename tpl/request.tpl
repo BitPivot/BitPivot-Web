@@ -107,7 +107,7 @@
 					<div class="control-group">
 						<label class="control-label" for="industry">Industry</label>
 						<div class="controls">
-							{html_options name=industry options=$industryOptions selected=$industrySelected}
+							{html_options name=industry id=industry options=$industryOptions selected=$industrySelected}
 						</div>
 					</div>
 
@@ -123,7 +123,7 @@
 					<div class="control-group">
 						<label class="control-label" for="budget">Project Budget</label>
 						<div class="controls">
-							{html_options name=budget options=$budgetOptions selected=$budgetSelected}
+							{html_options name=budget id=budget options=$budgetOptions selected=$budgetSelected}
 						</div>
 					</div>
 
@@ -143,7 +143,7 @@
 					<div class="control-group">
 						<label class="control-label" for="found">How did you find us?</label>
 						<div class="controls">
-							{html_options name=found options=$foundOptions selected=$foundSelected}
+							{html_options name=found id=found options=$foundOptions selected=$foundSelected}
 						</div>
 					</div>
 
@@ -215,7 +215,6 @@
 
 							// Do post
 							if (isValid) {
-								console.log('Valid');
 								$('#wait').fadeIn(500, function() {
 									$.ajax({
 										url: 'request?type=async',

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-05-17 19:26:13
+<?php /* Smarty version Smarty-3.1.7, created on 2012-05-17 21:40:33
          compiled from "tpl\requestFailed.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:8024fb50eb722c3b2-33341741%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cc0e617c209928f10ce99f6504c3048a799cb244' => 
     array (
       0 => 'tpl\\requestFailed.tpl',
-      1 => 1337275570,
+      1 => 1337280311,
       2 => 'file',
     ),
   ),
@@ -53,8 +53,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 			<div class="row"><div class="span12">
 				<header>
 					<a class="brand" href="/"><img src="img/headerLogo.png" alt="BitPivot"/></a>
-					<span class="hidden-phone"><a href="http://twitter.com/BitPivot">Follow us on Twitter! <img src="img/iconTwitter.png"/></a></span>
-					<span class="visible-phone"><a href="http://twitter.com/BitPivot"><img src="img/iconTwitter.png"/></a></span>
+					<span class="hidden-phone"><a href="http://twitter.com/BitPivot">Follow us on Twitter! <img src="img/iconTwitter.png" alt=""/></a></span>
+					<span class="visible-phone"><a href="http://twitter.com/BitPivot"><img src="img/iconTwitter.png" alt="Follow us on Twitter"/></a></span>
 				</header>
 			</div></div>
 

@@ -101,17 +101,38 @@
 
 
 	// Sends the proposal request
-	function sendRequest($form) {
-		$subject = 'New Proposal Request';
-		$message  = 'New Proposal Request:';
+	function sendRequest(&$form) {
+		$date = date('m/d/Y');
+		$subject = "New Proposal Request ({$date})";
+
+		$message  = "New Proposal Request ({$date}):\r\n";
+		$message .= "\r\n";
+		$message .= "From: {$form->name} ({$form->email}) at {$form->company}\r\n";
+		$message .= "\r\n";
+		if ($form->number) $message .= "Contact Number: {$form->number}\r\n";
+		if ($form->industry) $message .= "Company Industry: {$form->industry}\r\n";
+		if ($form->timeframe) $message .= "Project Timeframe: {$form->timeframe}\r\n";
+		if ($form->budget) $message .= "Project Budget: {$form->budget}\r\n";
+		$message .= "\r\n";
+		if ($form->companyInfo) $message .= "Company Info: {$form->companyInfo}\r\n";
+		if ($form->projectInfo) $message .= "Project Info: {$form->projectInfo}\r\n";
+		$message .= "\r\n";
+		if ($form->found) $message .= "How the Found BitPivot: {$form->found}\r\n";
 
 		return sendMail('request@bitpivot.com', $subject, $message);
 	}
 
 	// Sends a response to the user
-	function sendResponse($form) {
+	function sendResponse(&$form) {
 		$subject = 'Thank you for you inquiry into BitPivot!';
-		$message  = "Dear {$form->name}\r\n";
+		$message  = "Dear {$form->name},\r\n";
+		$message .= "\r\n";
+		$message .= "Thank you for showing your interest in BitPivot.  This message is to confirm that we've received your bid request.  You can expect a member of our team to contact you shortly.\r\n";
+		$message .= "\r\n";
+		$message .= "It is our primary focus to aid your company's web and software needs as best we can.  If you have any further questions, please contact info@bitpivot.com.\r\n";
+		$message .= "\r\n";
+		$message .= "Sincerely,\r\n";
+		$message .= "The BitPivot Team\r\n";
 
 		return sendMail($form->email, $subject, $message);
 	}

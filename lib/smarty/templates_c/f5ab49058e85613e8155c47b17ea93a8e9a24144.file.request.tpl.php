@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-05-17 21:26:02
+<?php /* Smarty version Smarty-3.1.7, created on 2012-05-17 21:48:57
          compiled from "tpl\request.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:119524fb2d9c57a6080-10683754%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f5ab49058e85613e8155c47b17ea93a8e9a24144' => 
     array (
       0 => 'tpl\\request.tpl',
-      1 => 1337282755,
+      1 => 1337284128,
       2 => 'file',
     ),
   ),
@@ -167,7 +167,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 					<div class="control-group">
 						<label class="control-label" for="industry">Industry</label>
 						<div class="controls">
-							<?php echo smarty_function_html_options(array('name'=>'industry','options'=>$_smarty_tpl->tpl_vars['industryOptions']->value,'selected'=>$_smarty_tpl->tpl_vars['industrySelected']->value),$_smarty_tpl);?>
+							<?php echo smarty_function_html_options(array('name'=>'industry','id'=>'industry','options'=>$_smarty_tpl->tpl_vars['industryOptions']->value,'selected'=>$_smarty_tpl->tpl_vars['industrySelected']->value),$_smarty_tpl);?>
 
 						</div>
 					</div>
@@ -185,7 +185,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 					<div class="control-group">
 						<label class="control-label" for="budget">Project Budget</label>
 						<div class="controls">
-							<?php echo smarty_function_html_options(array('name'=>'budget','options'=>$_smarty_tpl->tpl_vars['budgetOptions']->value,'selected'=>$_smarty_tpl->tpl_vars['budgetSelected']->value),$_smarty_tpl);?>
+							<?php echo smarty_function_html_options(array('name'=>'budget','id'=>'budget','options'=>$_smarty_tpl->tpl_vars['budgetOptions']->value,'selected'=>$_smarty_tpl->tpl_vars['budgetSelected']->value),$_smarty_tpl);?>
 
 						</div>
 					</div>
@@ -208,7 +208,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 					<div class="control-group">
 						<label class="control-label" for="found">How did you find us?</label>
 						<div class="controls">
-							<?php echo smarty_function_html_options(array('name'=>'found','options'=>$_smarty_tpl->tpl_vars['foundOptions']->value,'selected'=>$_smarty_tpl->tpl_vars['foundSelected']->value),$_smarty_tpl);?>
+							<?php echo smarty_function_html_options(array('name'=>'found','id'=>'found','options'=>$_smarty_tpl->tpl_vars['foundOptions']->value,'selected'=>$_smarty_tpl->tpl_vars['foundSelected']->value),$_smarty_tpl);?>
 
 						</div>
 					</div>
@@ -281,7 +281,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 							// Do post
 							if (isValid) {
-								console.log('Valid');
 								$('#wait').fadeIn(500, function() {
 									$.ajax({
 										url: 'request?type=async',
