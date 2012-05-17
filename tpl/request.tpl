@@ -25,6 +25,7 @@
 		<script src="js/bootstrap-modal.min.js"></script>
 		<script>
 			window.onload = function() {
+				$('#wait').hide();
 				$('#overlay').fadeOut(500);
 			};
 		</script>
@@ -33,6 +34,7 @@
 	<body>
 
 		<div id="overlay" class="hidden-phone"></div>
+		<div id="wait"></div>
 
 
 
@@ -214,32 +216,33 @@
 							// Do post
 							if (isValid) {
 								console.log('Valid');
-								$('#overlay').fadeIn(500);
-								$.ajax({
-									url: 'request?type=async',
-									async: false,
-									type: 'POST',
-									data: {
-										name: $('#name').val(),
-										email: $('#email').val(),
-										emailConfirm: $('#emailConfirm').val(),
-										number: $('#number').val(),
-										company: $('#company').val(),
-										industry: $('#industry').val(),
-										timeframe: $('#timeframe').val(),
-										budget: $('#budget').val(),
-										companyInfo: $('#companyInfo').val(),
-										projectInfo: $('#projectInfo').val(),
-										found: $('#found').val(),
-									},
-									error: function() {
-										$('#modalFailed').modal();
-									},
-									success: function(data) {
-										console.log(data);
-										if (data == 'OK') $('#modalSuccess').modal();
-										else $('#modalSuccess').modal();
-									}
+								$('#wait').fadeIn(500, function() {
+									$.ajax({
+										url: 'request?type=async',
+										async: false,
+										type: 'POST',
+										data: {
+											name: $('#name').val(),
+											email: $('#email').val(),
+											emailConfirm: $('#emailConfirm').val(),
+											number: $('#number').val(),
+											company: $('#company').val(),
+											industry: $('#industry').val(),
+											timeframe: $('#timeframe').val(),
+											budget: $('#budget').val(),
+											companyInfo: $('#companyInfo').val(),
+											projectInfo: $('#projectInfo').val(),
+											found: $('#found').val(),
+										},
+										error: function() {
+											$('#modalFailed').modal();
+										},
+										success: function(data) {
+											console.log(data);
+											if (data == 'OK') $('#modalSuccess').modal();
+											else $('#modalFailed').modal();
+										}
+									});
 								});
 							}
 							else {
@@ -261,7 +264,7 @@
 				<div class="modal-header">
 					<h1>Success!</h1>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body content">
 					<p>Thank you for your interest in BitPivot.</p>
 					<p>We've received your proposal request, and someone will be in touch with you shortly.</p>
 				</div>
@@ -280,12 +283,12 @@
 				<div class="modal-header">
 					<h1>Oops!</h1>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body content">
 					<p>Something went wrong.  We're terribly sorry about that.</p>
 					<p>If you'd like, you can email us directly at <a href="mailto:request@bitpivot.com">request@bitpivot.com</a>.
 				</div>
 				<div class="modal-footer">
-					input type="button" class="btn btn-primary" data-dismiss="modal" value="Close"/>
+					<input type="button" class="btn btn-primary" data-dismiss="modal" value="Close"/>
 					<script>
 						$('#modalFailed').on('hidden', function() {
 							window.location.href = '/';

@@ -45,6 +45,7 @@
 				$this->className = 'error';
 			}
 			else {
+				$this->errorName = '';
 				$this->className = 'success';
 			}
 
@@ -55,6 +56,7 @@
 				$this->classEmail = 'error';
 			}
 			else {
+				$this->errorEmail = '';
 				$this->classEmail = 'success';
 			}
 
@@ -70,6 +72,7 @@
 				$this->classEmailConfirm = 'error';
 			}
 			else {
+				$this->errorEmailConfirm = '';
 				$this->classEmailConfirm = 'success';
 			}
 
@@ -80,6 +83,7 @@
 				$this->classCompany = 'error';
 			}
 			else {
+				$this->errorCompany = '';
 				$this->classCompany = 'success';
 			}
 		}

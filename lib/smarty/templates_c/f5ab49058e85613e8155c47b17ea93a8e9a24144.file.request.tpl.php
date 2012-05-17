@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-05-17 21:14:43
+<?php /* Smarty version Smarty-3.1.7, created on 2012-05-17 21:26:02
          compiled from "tpl\request.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:119524fb2d9c57a6080-10683754%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f5ab49058e85613e8155c47b17ea93a8e9a24144' => 
     array (
       0 => 'tpl\\request.tpl',
-      1 => 1337282041,
+      1 => 1337282755,
       2 => 'file',
     ),
   ),
@@ -72,6 +72,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 		<script src="js/bootstrap-modal.min.js"></script>
 		<script>
 			window.onload = function() {
+				$('#wait').hide();
 				$('#overlay').fadeOut(500);
 			};
 		</script>
@@ -80,6 +81,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 	<body>
 
 		<div id="overlay" class="hidden-phone"></div>
+		<div id="wait"></div>
 
 
 
@@ -280,32 +282,33 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 							// Do post
 							if (isValid) {
 								console.log('Valid');
-								$('#overlay').fadeIn(500);
-								$.ajax({
-									url: 'request?type=async',
-									async: false,
-									type: 'POST',
-									data: {
-										name: $('#name').val(),
-										email: $('#email').val(),
-										emailConfirm: $('#emailConfirm').val(),
-										number: $('#number').val(),
-										company: $('#company').val(),
-										industry: $('#industry').val(),
-										timeframe: $('#timeframe').val(),
-										budget: $('#budget').val(),
-										companyInfo: $('#companyInfo').val(),
-										projectInfo: $('#projectInfo').val(),
-										found: $('#found').val(),
-									},
-									error: function() {
-										$('#modalFailed').modal();
-									},
-									success: function(data) {
-										console.log(data);
-										if (data == 'OK') $('#modalSuccess').modal();
-										else $('#modalSuccess').modal();
-									}
+								$('#wait').fadeIn(500, function() {
+									$.ajax({
+										url: 'request?type=async',
+										async: false,
+										type: 'POST',
+										data: {
+											name: $('#name').val(),
+											email: $('#email').val(),
+											emailConfirm: $('#emailConfirm').val(),
+											number: $('#number').val(),
+											company: $('#company').val(),
+											industry: $('#industry').val(),
+											timeframe: $('#timeframe').val(),
+											budget: $('#budget').val(),
+											companyInfo: $('#companyInfo').val(),
+											projectInfo: $('#projectInfo').val(),
+											found: $('#found').val(),
+										},
+										error: function() {
+											$('#modalFailed').modal();
+										},
+										success: function(data) {
+											console.log(data);
+											if (data == 'OK') $('#modalSuccess').modal();
+											else $('#modalFailed').modal();
+										}
+									});
 								});
 							}
 							else {
@@ -327,7 +330,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				<div class="modal-header">
 					<h1>Success!</h1>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body content">
 					<p>Thank you for your interest in BitPivot.</p>
 					<p>We've received your proposal request, and someone will be in touch with you shortly.</p>
 				</div>
@@ -346,12 +349,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				<div class="modal-header">
 					<h1>Oops!</h1>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body content">
 					<p>Something went wrong.  We're terribly sorry about that.</p>
 					<p>If you'd like, you can email us directly at <a href="mailto:request@bitpivot.com">request@bitpivot.com</a>.
 				</div>
 				<div class="modal-footer">
-					input type="button" class="btn btn-primary" data-dismiss="modal" value="Close"/>
+					<input type="button" class="btn btn-primary" data-dismiss="modal" value="Close"/>
 					<script>
 						$('#modalFailed').on('hidden', function() {
 							window.location.href = '/';
