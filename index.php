@@ -5,8 +5,9 @@
 		<title>BitPivot</title>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta name="description" content="BitPivot"/>
+		<meta name="description" content="BitPivot - We build custom software and implement data solutions to make your business faster."/>
 		<meta name="keywords" content="Software Developer, Software Consultant, Database Integration, Web Development, Application Development"/>
+		<meta property="og:image" content="http://bitpivot.com/media/preview.png"/>
 		<meta name="author" content="Matthew McMillion"/>
 
 		<!--[if lt IE 9]>
@@ -40,8 +41,10 @@
 				<div class="row"><div class="span12">
 					<header>
 						<a class="brand" href="/"><img src="img/headerLogo.png" alt="BitPivot"/></a>
-						<span class="hidden-phone"><a href="http://twitter.com/BitPivot">Follow us on Twitter! <img src="img/iconTwitter.png"/></a></span>
-						<span class="visible-phone"><a href="http://twitter.com/BitPivot"><img src="img/iconTwitter.png"/></a></span>
+						<span class="hidden-phone"><a href="http://www.twitter.com/BitPivot">Follow us on Twitter! <img src="img/iconTwitter.png"/></a></span>
+						<span class="visible-phone"><a href="http://www.twitter.com/BitPivot"><img src="img/iconTwitter.png"/></a></span>
+						<span class="hidden-phone"><a href="http://www.facebook.com/BitPivot">Like us on Facebook! <img src="img/iconFacebook.png"/></a></span>
+						<span class="visible-phone"><a href="http://www.facebook.com/BitPivot"><img src="img/iconFacebook.png"/></a></span>
 					</header>
 				</div></div>
 
