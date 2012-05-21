@@ -79,9 +79,9 @@
 				<div class="row"><div class="span12">
 					<nav>
 						<ul>
-							<li class="active"><a href="#">Home</a></li>
-							<li><a href="#">About</a></li>
-							<li><a href="#">Contact</a></li>
+							<li class="active"><a href="#WhatWeDo">What We Do</a></li>
+							<li><a href="#WhoWeAre">Who We Are</a></li>
+							<li><a href="#ContactingUs">Contacting Us</a></li>
 						</ul>
 					</nav>
 				</div></div>
@@ -91,6 +91,7 @@
 
 
 
+		<a id="WhatWeDo"></a>
 		<div class="background grey">
 			<div class="container">
 
@@ -100,42 +101,25 @@
 
 						<div class="span4">
 							<article>
-								<h2>Stuff goes here.</h2>
-								<p>Curabitur libero risus, ultricies vitae elementum eu, <a href="#">interdum ut justo</a>. Nullam sodales justo ac lectus consectetur gravida. Quisque quis diam nec lorem ultricies vehicula sed at purus. Nunc eget dolor urna. Vestibulum semper blandit dolor, eget adipiscing nisl molestie ut. Duis ipsum nulla, rutrum eget accumsan eget, rutrum sed augue.</p>
-
-								<figure>
-									<img src="img/thumbnailCode02.png" alt="Code"/>
-									<figcaption>Also, check out how awesome we are.</figcaption>
-								</figure>
+								<h2>Solid Application Development.</h2>
+								<p>With over thirty years of combined application development experience, BitPivot is no stranger to clean, fast, and reliable software development.  From custom-built desktop business applications to complete corporate infrastructure and business logic, custom intranet applications to software and data integration, BitPivot has you covered.</p>
+								<p>Whether your needs are large or small, BitPivot's aim is to help your company do more while working less.</p>
 							</article>
 						</div>
 
 						<div class="span4">
 							<article>
-								<h2>More text here.</h2>
-								<p>In pulvinar felis et risus eleifend rhoncus sodales velit aliquet. Pellentesque consectetur, odio et semper dapibus, lorem nunc dapibus quam, eu feugiat massa elit a dolor.</p>
-
-								<blockquote>
-									<p>These guys totally rule. Like you don't even understand just how much they rule.</p>
-									<span>Dude That Totally Likes Us</span>
-								</blockquote>
-
-								<p> Integer lobortis, leo quis pulvinar bibendum, turpis ligula rutrum massa, sit amet interdum lorem tortor eget odio. Integer elit ante, cursus ut lobortis quis, mollis <a href="#">fringilla massa</a>. Nulla pulvinar rutrum mi, tincidunt dignissim nulla blandit rutrum. Phasellus semper congue imperdiet.</p>
-								<p>Nulla facilisi. Aliquam interdum porta posuere. Pellentesque hendrerit nibh quis lacus aliquet eget rutrum nulla egestas. Curabitur tincidunt, ipsum et porttitor consectetur, mauris lacus tincidunt orci, eget blandit magna ligula eu magna. Nunc et arcu id velit condimentum lobortis.</p>
+								<h2>Cutting-Edge Web Development.</h2>
+								<p>The web has changed.  Users are more mobile than ever before, and smart phones and tablets are the new top predator in the data-consumption food chain.  Where does your business stand?</p>
+								<p>BitPivot utilizes standards-driven web development and responsive design to make your company look its best, no matter how your customers reach you.</p>
 							</article>
 						</div>
 
 						<div class="span4">
 							<article>
-								<h2>We do stuff and things.</h2>
-								<p>Pellentesque hendrerit nibh quis lacus aliquet eget rutrum nulla egestas. Curabitur tincidunt, ipsum et porttitor consectetur, mauris lacus tincidunt orci.</p>
-
-								<figure>
-									<img src="img/thumbnailCode01.png" alt="Code"/>
-									<figcaption>See how BitPivot helps clients achieve more.</figcaption>
-								</figure>
-
-								<p>In pulvinar felis et risus eleifend rhoncus sodales velit aliquet. Pellentesque consectetur, odio et semper dapibus, lorem nunc dapibus quam, eu feugiat massa elit a dolor.</p>
+								<h2>Superb Integration.</h2>
+								<p>While we love building our own creations, we recognize that you've already put countless hours and mountains of capital into your existing corporate infrastructure.  We can help you get more out of your legacy applications as well.</p>
+								<p>Whether you run your website out of your basement, or your organization spans multiple offices and data centers, BitPivot can help you make your software and data work better for you.</p>
 							</article>
 						</div>
 
@@ -148,6 +132,7 @@
 
 
 
+		<a id="WhoWeAre"></a>
 		<div class="background">
 			<div class="container">
 
@@ -173,9 +158,8 @@
 										<h1>Rob Hencke</h1>
 										<h2>Systems Design and Development</h2>
 										<p><a href="mailto:rob@bitpivot.com">rob@bitpivot.com</a></p>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac condimentum ipsum. Curabitur posuere dictum lectus, non faucibus ante adipiscing eu. Cras lorem purus, molestie vel scelerisque a, venenatis at nulla. Aliquam consequat libero sed orci hendrerit gravida. Quisque placerat suscipit diam id hendrerit. Integer laoreet vulputate erat in tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-										<p>Praesent ut ipsum in risus pellentesque gravida nec non nisl. Vivamus sodales est sed augue ullamcorper scelerisque. Praesent lacinia turpis vitae magna hendrerit non laoreet magna mollis. Fusce sollicitudin tincidunt adipiscing.</p>
-										<p>Quisque suscipit, urna nec lobortis egestas, nisi erat cursus turpis, eu auctor velit leo vel erat. Vivamus condimentum ornare sem. Quisque sed arcu vel mauris adipiscing placerat. Quisque porttitor consequat tortor id pulvinar. Donec quis leo tellus.</p>
+										<p>Rob possesses twelve years of progressive experience and specialization in software design and development as well as legacy system and back-end systems development.  He has experience in both aerospace and retail markets, and has developed more than 100 software programs used by internal and external customers, and delivered technology results in Windows, .NET, Linux, and Mac environments.</p>
+										<p><strong>Specialties:</strong> Software Prototyping &bull; Software Engineering and Architecture &bull; Database Development &bull; Systems Analysis</p>
 									</hgroup>
 								</article>
 							</div>
@@ -203,8 +187,9 @@
 										<h1>Matthew McMillion</h1>
 										<h2>Web and User Experience Development</h2>
 										<p><a href="mailto:matthew@bitpivot.com">matthew@bitpivot.com</a></p>
-										<p>Cras est dolor, pharetra eget mattis vel, ultrices sit amet tortor. Nam mattis imperdiet fringilla. Etiam et elit vitae ante accumsan semper. Ut accumsan interdum tortor quis condimentum. Vestibulum laoreet tortor in lectus euismod et condimentum mauris lobortis. Aliquam non metus non enim rutrum facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent sit amet pulvinar erat.</p>
-										<p>Fusce malesuada dignissim felis, dignissim viverra leo accumsan id. Morbi ut eros mi, eget vehicula leo. Aenean a diam tortor, sed rhoncus turpis. Aliquam est mi, lacinia in rhoncus nec, tempus ut est. Integer eu sodales velit. Phasellus est eros, ultrices vitae pulvinar a, varius vitae turpis.</p>
+										<p><a href="http://matthewmcmillion.com">http://matthewmcmillion.com</a></p>
+										<p>Matthew has over a decade of experience with web and application development, database design and development, and graphic design.  He has experience in developing large-scale web applications from the ground up, as well as integrating existing legacy applications into new environments.  In addition to development, he also specializes in graphic design, including web design, print design, and logo design and branding.</p>
+										<p><strong>Specialties:</strong> Web Design &bull; Web and Application Development &bull; User Experience Design &bull; Database Design and Development &bull; Data Integration</p>
 									</hgroup>
 								</article>
 							</div>
@@ -232,8 +217,8 @@
 										<h1>Sean Kennedy</h1>
 										<h2>Application Development and API Integration</h2>
 										<p><a href="mailto:sean@bitpivot.com">sean@bitpivot.com</a></p>
-										<p>Fusce malesuada dignissim felis, dignissim viverra leo accumsan id. Morbi ut eros mi, eget vehicula leo. Aenean a diam tortor, sed rhoncus turpis. Aliquam est mi, lacinia in rhoncus nec, tempus ut est. Integer eu sodales velit. Phasellus est eros, ultrices vitae pulvinar a, varius vitae turpis. Curabitur nisl mauris, viverra ornare laoreet at, laoreet sed arcu. Proin sed semper ante. Aenean venenatis feugiat leo malesuada pretium. Duis imperdiet erat id quam vehicula pretium. Nam iaculis erat ac elit gravida non tempor urna euismod. Mauris quis massa mauris, sit amet accumsan odio. Duis ultricies purus nec odio lobortis tempor.</p>
-										<p>Cras bibendum velit non mi consequat a gravida magna facilisis. Phasellus imperdiet, leo consequat convallis tempus, felis est tincidunt orci, vel adipiscing odio sem pretium tellus. Curabitur nulla diam, condimentum eget dignissim pulvinar, molestie ac tortor.</p>
+										<p>Sean possesses ten years of experience with a variety of programming and markup languages both in web and desktop contexts.  His primary proficiencies include application and interface design and development in a Windows environment using the .NET Framework.  His focus lies in class library development and third party API interfacing.</p>
+										<p><strong>Specialties:</strong> Library Development &bull; Plug-in Development &bull; API Development &bull; Process Automation &bull; Microsoft Office Automation</p>
 									</hgroup>
 								</article>
 							</div>
@@ -248,6 +233,7 @@
 
 
 
+		<a id="ContactingUs"></a>
 		<div class="background grey">
 			<div class="container">
 
@@ -256,12 +242,20 @@
 					<div class="row">
 
 						<!-- Request Information -->
-						<div class="span4">
-							<div class="frame">
-								<h2>Contacting Us</h2>
-								<p>Phasellus velit odio, vehicula quis mollis ac, consequat vel lectus. Nam nunc ipsum, hendrerit ut sollicitudin nec, pretium et erat. Sed tempor lacus at velit pretium mattis. Nam nunc odio, mattis ac tristique quis, volutpat nec leo. Sed dignissim eros nec magna accumsan interdum. Nulla aliquam nulla ac nunc eleifend vitae laoreet nisi consectetur. Sed id arcu venenatis enim pulvinar eleifend vitae vel ipsum. Vivamus erat augue, cursus vel blandit quis, condimentum a libero.</p>
-								<p>Proin enim orci, rhoncus quis egestas fringilla, vehicula id mi. Donec sed tempus sapien. Nam dignissim, orci ac tincidunt viverra, velit tortor aliquam libero, at tristique nibh elit vel neque.</p>
-							</div>
+						<div class="span8">
+							<h2>Contacting Us</h2>
+							<p>We're waiting to help you with your project.  Whether large or small, BitPivot's goal is to provide you with the best custom software and integration to help your business achieve its goals faster and with less work.  Call or email us now.</p>
+						</div>
+
+						<div class="span3 offset1">
+							<p>
+								<address>
+									P.O. Box 1077<br/>
+									Little Rock, AR 72202<br/>
+								</address>
+							</p>
+							<p><a href="mailto:info@bitpivot.com">info@bitpivot.com</a></p>
+							<p>501-291-3381</p>
 						</div>
 
 					</div>
