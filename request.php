@@ -117,7 +117,7 @@
 		if ($form->companyInfo) $message .= "Company Info: {$form->companyInfo}\r\n";
 		if ($form->projectInfo) $message .= "Project Info: {$form->projectInfo}\r\n";
 		$message .= "\r\n";
-		if ($form->found) $message .= "How the Found BitPivot: {$form->found}\r\n";
+		if ($form->found) $message .= "How they Found BitPivot: {$form->found}\r\n";
 
 		return sendMail('request@bitpivot.com', $subject, $message);
 	}
