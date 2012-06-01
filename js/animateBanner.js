@@ -20,7 +20,7 @@ function animateBanner() {
 				animateTo: -22,
 			});
 
-            var nextIndex = 0;
+			var nextIndex = 0;
 			var words = ['faster.', 'smarter.', 'more agile.', 'stronger.', 'better.', 'more powerful.'];
 			setInterval(function() {
 				$('#rotator').fadeOut(function() {
