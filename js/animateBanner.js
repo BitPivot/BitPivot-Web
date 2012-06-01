@@ -20,13 +20,11 @@ function animateBanner() {
 				animateTo: -22,
 			});
 
+            var nextIndex = 0;
 			var words = ['faster.', 'smarter.', 'more agile.', 'stronger.', 'better.', 'more powerful.'];
 			setInterval(function() {
-				$('#rotator').fadeOut(function(){
-					var currentWord = $('#rotator').html();
-					var nextIndex = words.indexOf(currentWord) + 1;
-					var nextIndex = (nextIndex < words.length) ? nextIndex : 0;
-					$('#rotator').html(words[nextIndex]);
+				$('#rotator').fadeOut(function() {
+					$('#rotator').html(words[++nextIndex % words.length]);
 					$('#rotator').fadeIn();
 				});
 
