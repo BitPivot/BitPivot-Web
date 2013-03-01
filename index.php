@@ -19,12 +19,7 @@
 		<link rel="icon" type="image/x-icon" href="favicon.ico"/>
 		<link rel="stylesheet" href="css/site.css"/>
 		<noscript><link rel="stylesheet" href="css/noscript.css"/></noscript>
-
-		<script src="js/analytics.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-		<script src="js/jquery-rotate.2.2.min.js"></script>
-		<script src="js/jquery.easing.1.3.min.js"></script>
-		<script src="js/animateBanner.js"></script>
+		<script type="text/javascript" src="js/site.min.js"></script>
 	</head>
 
 	<body>
