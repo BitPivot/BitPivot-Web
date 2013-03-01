@@ -989,8 +989,9 @@ header {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
 }
-header img {
-  padding: 6px;
+header img,
+header .sprite {
+  margin: 6px;
 }
 header span {
   float: right;
@@ -1245,4 +1246,16 @@ footer ul li {
   display: inline;
   margin: 0px 20px 0px 0px;
   padding: 0px;
+}
+.sprite {
+  position: relative;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+.sprite#bitpivot-header-logo {
+  width: 129px;
+  height: 28px;
+  background-size: 129px 28px;
+  background-image: url('../img/bitpivot-header-logo.png');
 }

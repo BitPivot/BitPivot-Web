@@ -1,12 +1,12 @@
 /* Gradient fallbacks */
 header {
-	background: url('../img/gradientLightGrey.png') repeat-x 0px 0px !important;
+	background: url('../img/gradient-light-grey.png') repeat-x 0px 0px !important;
 }
 
 nav {
-	background: url('../img/gradientPurple.png') repeat-x 0px 0px !important;
+	background: url('../img/gradient-purple.png') repeat-x 0px 0px !important;
 }
 
 .background.purple {
-	background: url('../img/gradientFooter.png') repeat-x 0px 0px !important;
+	background: url('../img/gradient-footer.png') repeat-x 0px 0px !important;
 }
