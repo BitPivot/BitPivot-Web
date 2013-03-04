@@ -10,7 +10,3 @@ Vagrant::Config.run do |config|
 		puppet.manifest_file  = "development.pp"
 	end
 end
-
-
-
-
