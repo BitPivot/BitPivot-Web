@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Bitrails::Application.load_tasks
+BitPivotWeb::Application.load_tasks
