@@ -15,4 +15,5 @@ group :development, :test do
   gem 'ruby-debug19'
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'capybara'
 end
