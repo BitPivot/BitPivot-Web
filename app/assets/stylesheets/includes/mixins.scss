@@ -1,0 +1,38 @@
+// Creates a simple CSS sprite
+@mixin sprite($image, $width, $height) {
+	display: block;
+	float: left;
+	width: $width;
+	height: $height;
+	background: $image top left no-repeat;
+	background-size: $width $height;
+}
+
+@mixin retina($image) {
+	background-image: url($image);
+}
+
+
+
+// Gradients
+@mixin gradient-vertical($start, $end, $fallback) {
+	// Fallback
+	background: mix($start, $end) $fallback left top repeat-x;
+
+	// CSS Gradient support
+	.gradient & {
+		background: -webkit-gradient(linear, 0 0, 0 100%, from($start), to($end));
+		background: -webkit-linear-gradient($start, $end);
+		background: -moz-linear-gradient($start, $end);
+		background: -o-linear-gradient($start, $end);
+		background: linear-gradient($start, $end);
+	}
+}
+
+@mixin gradient-horizontal($start, $end) {
+	background: mix($start, $end);
+	background: -webkit-gradient(linear, left top, right top, from($start), to($end));
+	background: -moz-linear-gradient(left, $start, $end);
+	background: -o-linear-gradient(left, $start, $end);
+	background: linear-gradient(to right, $start, $end);
+}

@@ -1,0 +1,10 @@
+// Retina / Hi-DPI iamge replacements
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (min-resolution: 2dppx) {
+
+	#header-logo { @include retina(image-url('header-logo-2x.png')); }
+	#logo-twitter { @include retina(image-url('logo-twitter-2x.png')); }
+	#logo-facebook { @include retina(image-url('logo-facebook-2x.png')); }
+}
