@@ -23,4 +23,4 @@ Development with Vagrant requires local installations of Ruby, Virtual Box, and 
 	* Install project gems (`bundle install`)
 	* Start the Rails test server (`rails server`)
 
-From this point on, the server can be suspended and restarted whenever needed.  Af the initial setup, the only step that has to be repeated on reboot is starting the rails test server.
+From this point on, the server can be suspended and restarted whenever needed.  After the initial setup, the only step that has to be repeated on reboot is starting the rails test server.
