@@ -4,7 +4,11 @@
 only screen and (-o-min-device-pixel-ratio: 2/1),
 only screen and (min-resolution: 2dppx) {
 
-	#header-logo { @include retina(image-url('header-logo-2x.png')); }
-	#logo-twitter { @include retina(image-url('logo-twitter-2x.png')); }
-	#logo-facebook { @include retina(image-url('logo-facebook-2x.png')); }
+	#header-logo   { @include retina(image-url('sprites/bitpivot-logo@2x.png')); }
+	#logo-twitter  { @include retina(image-url('sprites/twitter@2x.png')); }
+	#logo-facebook { @include retina(image-url('sprites/facebook@2x.png')); }
+
+	#banner        { @include retina(image-url('backgrounds/banner-blur-01@2x.jpg')); }
+	#banner-image  { @include retina(image-url('photos/stock-mobile-user@2x.jpg')); }
+
 }
