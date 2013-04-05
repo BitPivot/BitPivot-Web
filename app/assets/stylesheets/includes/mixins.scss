@@ -9,7 +9,7 @@
 }
 
 @mixin retina($image) {
-	background-image: url($image);
+	background-image: $image !important;
 }
 
 
@@ -35,4 +35,56 @@
 	background: -moz-linear-gradient(left, $start, $end);
 	background: -o-linear-gradient(left, $start, $end);
 	background: linear-gradient(to right, $start, $end);
+}
+
+
+
+// Rounded Corners
+@mixin rounded-top-left($radius) {
+	-moz-border-top-left-radius: $radius;
+	-webkit-border-top-left-radius: $radius;
+	border-top-left-radius: $radius;
+}
+
+@mixin rounded-top-right($radius) {
+	-moz-border-top-right-radius: $radius;
+	-webkit-border-top-right-radius: $radius;
+	border-top-right-radius: $radius;
+}
+
+@mixin rounded-bottom-left($radius) {
+	-moz-border-bottom-left-radius: $radius;
+	-webkit-border-bottom-left-radius: $radius;
+	border-bottom-left-radius: $radius;
+}
+
+@mixin rounded-bottom-right($radius) {
+	-moz-border-bottom-right-radius: $radius;
+	-webkit-border-bottom-right-radius: $radius;
+	border-bottom-right-radius: $radius;
+}
+
+@mixin rounded-top($radius) {
+	@include rounded-top-left($radius);
+	@include rounded-top-right($radius);
+}
+
+@mixin rounded-bottom($radius) {
+	@include rounded-bottom-left($radius);
+	@include rounded-bottom-right($radius);
+}
+
+@mixin rounded-left($radius) {
+	@include rounded-top-left($radius);
+	@include rounded-bottom-left($radius);
+}
+
+@mixin rounded-right($radius) {
+	@include rounded-top-right($radius);
+	@include rounded-bottom-right($radius);
+}
+
+@mixin rounded($radius) {
+	@include rounded-top($radius);
+	@include rounded-bottom($radius);
 }
