@@ -1,0 +1,87 @@
+// Media Queries
+=respond-to($media)
+  @if $media == phone
+    @media (max-width: 480px)
+      @content
+  @if $media == tablet-portrait
+    @media (max-width: 767px)
+      @content
+  @if $media == tablet-landscape-desktop
+    @media (min-width: 768px) and (max-width: 979px)
+      @content
+  @if $media == large-desktop
+    @media (min-width: 1200px)
+      @content
+  @if $media == non-retina
+    @media screen and (-webkit-max-device-pixel-ratio: 1)
+      @content
+  @if $media == retina
+    @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-resolution: 2dppx)
+      @content
+
+
+
+=sprite($image, $width, $height, $type: 'png', $retina: true)
+  display: block
+  float: left
+  width: $width
+  height: $height
+  background: url("#{$image}.#{$type}") top left no-repeat
+  background-size: $width $height
+  @if $retina == true
+    +respond-to(retina)
+      background-image: url("#{$image}@2x.#{$type}")
+
+
+
+// Gradients
+=gradient-vertical($start, $end, $fallback)
+  background: mix($start, $end) $fallback left top repeat-x
+  .gradient &
+    background: -webkit-linear-gradient($start, $end)
+    background: -moz-linear-gradient($start, $end)
+    background: -o-linear-gradient($start, $end)
+    background: linear-gradient($start, $end)
+
+
+
+// Rounded Corners
+=rounded-top-left($radius)
+  -moz-border-top-left-radius: $radius
+  -webkit-border-top-left-radius: $radius
+  border-top-left-radius: $radius
+
+=rounded-top-right($radius)
+  -moz-border-top-right-radius: $radius
+  -webkit-border-top-right-radius: $radius
+  border-top-right-radius: $radius
+
+=rounded-bottom-left($radius)
+  -moz-border-bottom-left-radius: $radius
+  -webkit-border-bottom-left-radius: $radius
+  border-bottom-left-radius: $radius
+
+=rounded-bottom-right($radius)
+  -moz-border-bottom-right-radius: $radius
+  -webkit-border-bottom-right-radius: $radius
+  border-bottom-right-radius: $radius
+
+=rounded-top($radius)
+  +rounded-top-left($radius)
+  +rounded-top-right($radius)
+
+=rounded-bottom($radius)
+  +rounded-bottom-left($radius)
+  +rounded-bottom-right($radius)
+
+=rounded-left($radius)
+  +rounded-top-left($radius)
+  +rounded-bottom-left($radius)
+
+=rounded-right($radius)
+  +rounded-top-right($radius)
+  +rounded-bottom-right($radius)
+
+=rounded($radius)
+  +rounded-top($radius)
+  +rounded-bottom($radius)

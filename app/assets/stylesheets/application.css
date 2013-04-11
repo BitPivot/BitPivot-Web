@@ -1,4 +1,7 @@
 /*
  *= require_self
- *= require screen
+ *= require _reset
+ *= require layout
+ *= require responsive
+ *= require sprites
  */
