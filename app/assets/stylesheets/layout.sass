@@ -1,14 +1,63 @@
 @import variables
+@import mixins
 
 html, body, #container
   height: 100%
+  font:
+    family: $font-primary-family
+    size: $font-size
+    line-height: $line-height
+
+
 
 header
   background: $header-background
   color: $header-foreground
   height: $header-height
+
   #social-links
     list-style: none
+
     li
       float: left
       margin: ($header-height - $social-links-height) / 2
+
+
+
+#banner
+  color: $banner-foreground
+  position: relative
+
+  #banner-image
+    max-width: 100%
+    height: auto !important
+
+  #banner-content
+    position: absolute
+    text-justify: justify
+    bottom: 0px
+    right: 0px
+    font-weight: bold
+    text-shadow: 3px 3px 3px #000
+    text-align: right
+    line-height: 1.25em
+
+    +respond-to(large-desktop)
+      width: 700px
+      margin: $margin
+      font-size: 70px
+
+    +respond-to(tablet-landscape-desktop)
+      width: 500px
+      margin: $margin
+      font-size: 50px
+
+    +respond-to(tablet-portrait)
+      width: 500px
+      margin: $margin
+      font-size: 40px
+
+    +respond-to(phone)
+      width: 240px
+      margin: $margin / 2
+      font-size: 25px

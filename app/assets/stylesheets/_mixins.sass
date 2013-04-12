@@ -4,13 +4,13 @@
     @media (max-width: 480px)
       @content
   @if $media == tablet-portrait
-    @media (max-width: 767px)
+    @media (max-width: 768px)
       @content
   @if $media == tablet-landscape-desktop
-    @media (min-width: 768px) and (max-width: 979px)
+    @media (min-width: 769px) and (max-width: 1024px)
       @content
   @if $media == large-desktop
-    @media (min-width: 1200px)
+    @media (min-width: 1025px)
       @content
   @if $media == non-retina
     @media screen and (-webkit-max-device-pixel-ratio: 1)
@@ -21,6 +21,7 @@
 
 
 
+// Retina capable sprites
 =sprite($image, $width, $height, $type: 'png', $retina: true)
   display: block
   float: left
@@ -31,6 +32,15 @@
   @if $retina == true
     +respond-to(retina)
       background-image: url("#{$image}@2x.#{$type}")
+
+
+
+// Single line positioning
+=position($top, $right, $bottom, $left)
+  top: $top
+  right: $right
+  bottom: $bottom
+  left: $left
 
 
 
