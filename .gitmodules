@@ -1,6 +1,0 @@
-[submodule "submodules/puppet-rvm"]
-	path = submodules/puppet-rvm
-	url = https://github.com/blt04/puppet-rvm
-[submodule "submodules/rails-dev-box"]
-	path = submodules/rails-dev-box
-	url = https://github.com/rails/rails-dev-box
