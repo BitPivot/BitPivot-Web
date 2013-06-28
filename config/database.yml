@@ -1,29 +1,17 @@
 development:
-  adapter: postgresql
-  encoding: unicode
-  database: bitpivot_development
+  adapter: sqlite3
+  database: db/development.sqlite3
   pool: 5
   timeout: 5000
-  host: localhost
-  user: rails
-  password: rails
 
 test:
-  adapter: postgresql
-  encoding: unicode
-  database: bitpivot_test
+  adapter: sqlite3
+  database: db/test.sqlite3
   pool: 5
   timeout: 5000
-  host: localhost
-  user: rails
-  password: rails
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: bitpivot_production
+  adapter: sqlite3
+  database: db/production.sqlite3
   pool: 5
   timeout: 5000
-  host: localhost
-  user: rails
-  password: rails
