@@ -4,7 +4,7 @@ directory 'css'
 
 site_sass_files = FileList.new(
   '_sass/site.sass',
-  '_sass/_reset.sass',
+  '_sass/_reset.sass'
 )
 
 file 'css/site.css' => site_sass_files do |t|
