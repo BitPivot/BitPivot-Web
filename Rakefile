@@ -3,13 +3,13 @@ directory 'css'
 
 
 site_sass_files = FileList.new(
-  '_sass/site.sass',
-  '_sass/_reset.sass'
+  '_assets/sass/site.sass',
+  '_assets/sass/_reset.sass'
 )
 
 file 'css/site.css' => site_sass_files do |t|
   puts "Compiling: '#{t.name}'"
-  system "sass --force --style compressed _sass/site.sass #{t.name}" or
+  system "sass --force --style compressed _assets/sass/site.sass #{t.name}" or
     abort 'Failed to compile CSS asset. Is SASS installed?'
 end
 
