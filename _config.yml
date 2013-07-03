@@ -1,4 +1,5 @@
 exclude:
+  - vendor
   - Rakefile
   - README.md
   - Gemfile
