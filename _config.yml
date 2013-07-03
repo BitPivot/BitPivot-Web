@@ -1,6 +1,7 @@
 exclude:
   - Rakefile
   - README.md
-  - hooks
+  - Gemfile
+  - Gemfile.lock
 
 permalink: /articles/:year-:month-:day-:title/
