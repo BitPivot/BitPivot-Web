@@ -10,22 +10,26 @@
     <meta name="author" content="{{ page.author }}"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
-    {% for stylesheet in page.stylesheets %}
-      <link rel="stylesheet" type="text/css" href="{{ stylesheet }}"/>
-    {% endfor %}
+    <link rel="stylesheet" href="/css/site.css"/>
 
-    {% for head_script in page.head_scripts %}
-      <script type="text/javascript" src="{{ head_script }}"></script>
-    {% endfor %}
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-31606593-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+    <script src="//use.typekit.net/rri7gyh.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
   </head>
 
   <body>
 
     {{ content }}
-
-    {% for body_script in page.body_scripts %}
-      <script type="text/javascript" src="{{ body_script }}"></script>
-    {% endfor %}
 
   </body>
 
