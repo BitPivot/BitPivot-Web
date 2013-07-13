@@ -1,6 +1,5 @@
 .vagrant
 .idea/
-log/*.log
-*.log
-tmp/**/*
-tmp/*
+log/
+tmp/
+tmp/
