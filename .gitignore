@@ -1,5 +1,4 @@
-.vagrant
+.vagrant/
 .idea/
 log/
-tmp/
 tmp/
