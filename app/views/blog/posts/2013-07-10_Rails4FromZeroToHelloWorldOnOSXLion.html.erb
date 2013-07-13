@@ -1,37 +1,26 @@
-<p>Development with Ruby on Rails can be a very productive and rewarding experience, but it has gained a reputation
-    among the development community as being very painful to initially set up, especially if you are using Rails for the
-    first time. A recent factory reset on OSX Lion means coaxing Ruby 2, Rails 4, and Postgres to play nicely with each
-    other once again, so I’ve decided to take some extra time and document in detail each install, configuration,
-    terminal command, and error fix I encounter along the way.  The result should be a working Ruby 2 and Rails 4 project.</p>
+<p>Development with Ruby on Rails can be a very productive and rewarding experience, but it has gained a reputation among the development community as being very painful to initially set up, especially if you are using Rails for the first time. A recent factory reset on OSX Lion means coaxing Ruby 2 and Rails 4 to play nicely with each other once again, so I’ve decided to take some extra time and document each step along the way for reference.  The result should be a working rails project.</p>
 
 <h2>Step 1: Homebrew</h2>
 
 <p>Go over to <a href="http://brew.sh">http://brew.sh</a> and install and update homebrew.</p>
 
-<pre><code>$ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
-$ brew update
+<pre><code>$ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)" &amp;&amp; brew update
 </code></pre>
 
-<p>Running <code>brew doctor</code>, warns that I haven't accepted the XCode license and don't have XCode's Command Line
-    Tools.</p>
+<p>Running <code>brew doctor</code>, warns that I haven't accepted the XCode license and don't have XCode's Command Line Tools.</p>
 
-<hr/>
+<hr />
 
 <h2>Step 2: XCode + Command Line Tools</h2>
 
-<p>Install the latest version of XCode from the App Store, fire it up and open Preferences. Under the Downloads tab,
-    install Command Line Tools.</p>
+<p>Install the latest version of XCode from the App Store, fire it up and open Preferences.  Under the Downloads tab, install Command Line Tools.</p>
 
-<p>The default gcc compiler installed with XCode works, but some features are <a
-        href="http://stackoverflow.com/questions/14045359/cant-install-ruby-on-mountain-lion-with-rvm">buggy</a>, so
-    let's grab Unix's standard command line tools, as well as a stand alone version of gcc-4.2.</p>
+<p>The default gcc compiler installed with XCode works, but some features are <a href="http://stackoverflow.com/questions/14045359/cant-install-ruby-on-mountain-lion-with-rvm">buggy</a>, so let's grab Unix's standard command line tools, as well as a stand alone version of gcc-4.2.</p>
 
-<pre><code>$ brew tap homebrew/dupes
-$ brew install apple-gcc42
+<pre><code>$ brew tap homebrew/dupes &amp;&amp; brew install apple-gcc42
 </code></pre>
 
-<p>Running <code>brew doctor</code> again reveals another warning that <code>/usr/bin</code> occurs before <code>/usr/local/bin</code>.
-    To fix this error, add the following to <code>~/.profile</code></p>
+<p>Running <code>brew doctor</code> again reveals another warning that <code>/usr/bin</code> occurs before <code>/usr/local/bin</code>.  To fix this error, add the following to <code>~/.profile</code></p>
 
 <pre><code>homebrew=/usr/local/bin:/usr/local/sbin
 export PATH=$homebrew:$PATH
@@ -39,7 +28,7 @@ export PATH=$homebrew:$PATH
 
 <p>Running <code>brew doctor</code> should reveal the system is "ready to brew".</p>
 
-<hr/>
+<hr />
 
 <h2>Step 3: RVM (Ruby Version Manager)</h2>
 
@@ -57,11 +46,10 @@ export PATH=$homebrew:$PATH
 
 <pre><code>$ rvm -v
 
-rvm 1.21.8 () by Wayne E. Seguin &lt;wayneeseguin@gmail.com&gt;, Michal Papis &lt;mpapis@gmail.com&gt;
-[https://rvm.io/]
+rvm 1.21.8 () by Wayne E. Seguin &lt;wayneeseguin@gmail.com&gt;, Michal Papis &lt;mpapis@gmail.com&gt; [https://rvm.io/]
 </code></pre>
 
-<hr/>
+<hr />
 
 <h2>Step 4: Ruby 2.0</h2>
 
@@ -87,7 +75,7 @@ rvm rubies
 
 # =&gt; - current
 # =* - current &amp;&amp; default
-# * - default
+#  * - default
 </code></pre>
 
 <p>Just to make sure…</p>
@@ -99,7 +87,7 @@ ruby 2.0.0p247 (2013-06-27 revision 41674) [x86_64-darwin11.4.2]
 
 <p>Neat.</p>
 
-<hr/>
+<hr />
 
 <h2>Step 5: Rails 4.0</h2>
 
@@ -115,7 +103,7 @@ ruby 2.0.0p247 (2013-06-27 revision 41674) [x86_64-darwin11.4.2]
 Rails 4.0.0
 </code></pre>
 
-<hr/>
+<hr />
 
 <h2>Step 6: Test Drive</h2>
 
