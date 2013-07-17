@@ -1,9 +1,35 @@
-@import variables
-@import mixins
+@import partials/variables
+@import partials/mixins
 
 header
   padding: 0
-  background: $header-background
+  height: 48px
+  background: #000
+  font: 1em $font-helvetica normal
 
-  font: $header-font
-  color: $header-foreground
+  a
+    color: #555
+    text-decoration: none
+
+    &:hover, &:active
+      color: #fff
+      text-decoration: none
+
+
+
+.header-bitpivot-logo
+  +sprite('header-bitpivot-logo', 220px, 48px)
+  float: right
+
+
+
+.header-social-icons
+  float: left
+  padding-left: 4px
+
+  li
+    display: inline
+    text-decoration: none
+    font-size: 35px
+    position: relative
+    top: 4px
