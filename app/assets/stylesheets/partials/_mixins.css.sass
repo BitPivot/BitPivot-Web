@@ -1,21 +1,25 @@
+@import 'partials/variables'
+
+
+
 // Media Queries
 =respond-to($media)
-  @if $media == phone
-    @media (max-width: 480px)
+  @if $media == "tiny"
+    @media (max-width: 640px)
       @content
-  @if $media == tablet-portrait
-    @media (max-width: 768px)
+
+  @if $media == "narrow"
+    @media (max-width: 900px)
       @content
-  @if $media == tablet-landscape-desktop
-    @media (min-width: 769px) and (max-width: 1024px)
+
+  @if $media == "wide"
+    @media (min-width: 901px)
       @content
-  @if $media == large-desktop
-    @media (min-width: 1025px)
-      @content
-  @if $media == non-retina
+
+  @if $media == 'non-retina'
     @media screen and (-webkit-max-device-pixel-ratio: 1)
       @content
-  @if $media == retina
+  @if $media == 'retina'
     @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-resolution: 2dppx)
       @content
 

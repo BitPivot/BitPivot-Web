@@ -4,3 +4,25 @@
  *= require ss-social-circle
  *= require header
  */
+
+@import 'partials/mixins'
+
+.splash
+  height: 640px
+  background: #000 no-repeat 35% 40%
+  background-size: cover
+
+  +respond-to('narrow')
+    height: 480px
+
+  +respond-to('tiny')
+    height: 320px
+
+.splash-mobile
+  background-image: url('splash-mobile-large-landscape.jpg')
+
+
+
+.content
+  height: 480px
+  background: #590059
