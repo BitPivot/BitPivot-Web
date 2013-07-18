@@ -1,5 +1,6 @@
 /*
  *= require_self
- *= require reset
- *= require layout
+ *= require partials/_reset
+ *= require partials/_header
+ *= require ss-social-circle
  */
