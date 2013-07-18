@@ -8,6 +8,7 @@
 @import 'partials/mixins'
 
 .splash
+  position: relative
   height: 640px
   background: #000 no-repeat 35% 40%
   background-size: cover
@@ -18,9 +19,20 @@
   +respond-to('tiny')
     height: 320px
 
-.splash-mobile
-  background-image: url('splash-mobile-large-landscape.jpg')
 
+
+.splash-mobile
+  background-image: url('splash-mobile-background.jpg')
+
+
+
+.splash-text-area
+  +position(absolute, auto, 0, $margin, 0)
+  padding: 0 $margin
+  text-align: center
+
+  img
+    max-width: 100%
 
 
 .content

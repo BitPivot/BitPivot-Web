@@ -19,6 +19,7 @@
   @if $media == 'non-retina'
     @media screen and (-webkit-max-device-pixel-ratio: 1)
       @content
+
   @if $media == 'retina'
     @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-resolution: 2dppx)
       @content
@@ -39,12 +40,29 @@
 
 
 
-// Single line positioning
-=position($top, $right, $bottom, $left)
-  top: $top
-  right: $right
-  bottom: $bottom
-  left: $left
+// Position shorthand
+=position($position, $top: false, $right: false, $bottom: false, $left: false)
+  position: $position
+  @if $top and $right and $bottom and $left
+    top: $top
+    right: $right
+    bottom: $bottom
+    left: $left
+  @if $top and $right and $bottom and not $left
+    top: $top
+    right: $right
+    bottom: $bottom
+    left: $right
+  @if $top and $right and not $bottom and not $left
+    top: $top
+    right: $right
+    bottom: $top
+    left: $right
+  @if $top and not $right and not $bottom and not $left
+    top: $top
+    right: $top
+    bottom: $top
+    left: $top
 
 
 
