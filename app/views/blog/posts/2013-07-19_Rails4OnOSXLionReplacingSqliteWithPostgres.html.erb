@@ -19,7 +19,7 @@
 <p>By default, a new Rails 4 project uses the <a href="http://rubygems.org/gems/sqlite3">sqlite3</a> gem, so at this point we should see the following in our gemfile.</p>
 
 <pre><code># Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
+gem 'sqlite3'
 </code></pre>
 
 <p>Let's remove the sqlite3 gem and replace it with the PostgreSQL gem, known as 'pg'.</p>
@@ -44,13 +44,13 @@
   pool: 5
   timeout: 5000
 
-  test:
+test:
   adapter: sqlite3
   database: db/test.sqlite3
   pool: 5
   timeout: 5000
 
-  production:
+production:
   adapter: sqlite3
   database: db/production.sqlite3
   pool: 5
@@ -68,7 +68,7 @@
   username: rails
   password: rails
 
-  test:
+test:
   adapter: postgresql
   encoding: unicode
   database: testdrive_test
@@ -77,7 +77,7 @@
   username: rails
   password: rails
 
-  production:
+production:
   adapter: postgresql
   encoding: unicode
   database: testdrive_production
@@ -94,12 +94,12 @@
 <p>At this point, restarting your rails server and navigating to <code>localhost:3000</code> should result in an error like the following.</p>
 
 <pre><code>PG::Error
-  could not connect to server: Connection refused Is the server running on
-  host "localhost" (127.0.0.1) and accepting TCP/IP connections on port 5432?
-  could not connect to server: Connection refused Is the server running on
-  host "localhost" (::1) and accepting TCP/IP connections on port 5432?
-  could not connect to server: Connection refused Is the server running on
-  host "localhost" (fe80::1) and accepting TCP/IP connections on port 5432?
+could not connect to server: Connection refused Is the server running on
+host "localhost" (127.0.0.1) and accepting TCP/IP connections on port 5432?
+could not connect to server: Connection refused Is the server running on
+host "localhost" (::1) and accepting TCP/IP connections on port 5432?
+could not connect to server: Connection refused Is the server running on
+host "localhost" (fe80::1) and accepting TCP/IP connections on port 5432?
 </code></pre>
 
 <p>The Postgres gem is installed looking for a database, but we don't yet have a Postgres database running locally.  To make this easy, I recommend installing <a href="http://postgresapp.com/">Postgres.app</a>.  Once this is complete, run Postgres.app.  It should appear in your menubar as an elephant icon.  Viewing the menu for the app should indicate a server is running on port <code>5432</code>.</p>
@@ -107,7 +107,7 @@
 <p>Let's restart the Rails server again and reload <code>localhost:3000</code>.  You should see an error similar to the following.</p>
 
 <pre><code>PG::Error
-  FATAL: database "testdrive_development" does not exist
+FATAL: database "testdrive_development" does not exist
 </code></pre>
 
 <h3>Step 4: Creating The Database Using Rake</h3>
@@ -128,16 +128,16 @@
 
 <pre><code>user=# \l
 
-  List of databases
-  Name          |  Owner   | Encoding |   Collate
-  -----------------------+----------+----------+-------------  username              | username | UTF8     | en_US.UTF-8
-  postgres              | username | UTF8     | en_US.UTF-8
-  template0             | username | UTF8     | en_US.UTF-8
-  template1             | username | UTF8     | en_US.UTF-8
-  testdrive_development | rails    | UTF8     | en_US.UTF-8
-  testdrive_production  | rails    | UTF8     | en_US.UTF-8
-  testdrive_test        | rails    | UTF8     | en_US.UTF-8
-  (7 rows)
+List of databases
+Name          |  Owner   | Encoding |   Collate
+-----------------------+----------+----------+-------------  username              | username | UTF8     | en_US.UTF-8
+postgres              | username | UTF8     | en_US.UTF-8
+template0             | username | UTF8     | en_US.UTF-8
+template1             | username | UTF8     | en_US.UTF-8
+testdrive_development | rails    | UTF8     | en_US.UTF-8
+testdrive_production  | rails    | UTF8     | en_US.UTF-8
+testdrive_test        | rails    | UTF8     | en_US.UTF-8
+(7 rows)
 </code></pre>
 
 <p>Looking good!</p>
