@@ -1,0 +1,146 @@
+<div class='post'>
+
+<p><br/></p>
+
+<h1>Rails 4 on OSX Lion</h1>
+
+<h2><em>Replacing Sqlite With Postgres</em></h2>
+
+<p><br/></p>
+
+<hr />
+
+<p><br/></p>
+
+<p>On our recent project, we decided to go with PostgreSQL over the default  installation that comes with Rails 4.  I'll be using the Rails project resulting from <a href="http://todo">Rails 4: From Zero to Hello World on OSX Lion</a>. I'll cover installation, setup, and some basic actions for those new to Postgres.</p>
+
+<h3>Step 1: Swapping Out The Sqlite3 and Postgres Gems</h3>
+
+<p>By default, a new Rails 4 project uses the <a href="http://rubygems.org/gems/sqlite3">sqlite3</a> gem, so at this point we should see the following in our gemfile.</p>
+
+<pre><code># Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+</code></pre>
+
+<p>Let's remove the sqlite3 gem and replace it with the PostgreSQL gem, known as 'pg'.</p>
+
+<pre><code>gem 'pg'
+</code></pre>
+
+<p>Let's tell bundler to update our gems based on the new gem file.</p>
+
+<pre><code>$ bundle install
+</code></pre>
+
+<p>In the output, you should see <code>using pg (some.ver.num)</code>, and you should <em>not</em> see <code>using sqlite3 (some.ver.num)</code>.</p>
+
+<h3>Step 2: Replace Database Adapter Definitions</h3>
+
+<p>Sqlite3 is also defined as our database adapter in database.yml.</p>
+
+<pre><code>development:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+
+  test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+  production:
+  adapter: sqlite3
+  database: db/production.sqlite3
+  pool: 5
+  timeout: 5000
+</code></pre>
+
+<p>Let's replace the previous lines with these.</p>
+
+<pre><code>development:
+  adapter: postgresql
+  encoding: unicode
+  database: testdrive_development
+  host: localhost
+  pool: 5
+  username: rails
+  password: rails
+
+  test:
+  adapter: postgresql
+  encoding: unicode
+  database: testdrive_test
+  host: localhost
+  pool: 5
+  username: rails
+  password: rails
+
+  production:
+  adapter: postgresql
+  encoding: unicode
+  database: testdrive_production
+  host: localhost
+  pool: 5
+  username: rails
+  password: rails
+</code></pre>
+
+<p>This new database configuration will tell ActiveRecord to use the PostgreSQL database adapter with unicode encoding.  I've also defined some dummy usernames and passwords.</p>
+
+<h3>Step 3: Installing Postgres for OSX</h3>
+
+<p>At this point, restarting your rails server and navigating to <code>localhost:3000</code> should result in an error like the following.</p>
+
+<pre><code>PG::Error
+  could not connect to server: Connection refused Is the server running on
+  host "localhost" (127.0.0.1) and accepting TCP/IP connections on port 5432?
+  could not connect to server: Connection refused Is the server running on
+  host "localhost" (::1) and accepting TCP/IP connections on port 5432?
+  could not connect to server: Connection refused Is the server running on
+  host "localhost" (fe80::1) and accepting TCP/IP connections on port 5432?
+</code></pre>
+
+<p>The Postgres gem is installed looking for a database, but we don't yet have a Postgres database running locally.  To make this easy, I recommend installing <a href="http://postgresapp.com/">Postgres.app</a>.  Once this is complete, run Postgres.app.  It should appear in your menubar as an elephant icon.  Viewing the menu for the app should indicate a server is running on port <code>5432</code>.</p>
+
+<p>Let's restart the Rails server again and reload <code>localhost:3000</code>.  You should see an error similar to the following.</p>
+
+<pre><code>PG::Error
+  FATAL: database "testdrive_development" does not exist
+</code></pre>
+
+<h3>Step 4: Creating The Database Using Rake</h3>
+
+<p>Our Rails project has the correct Postgres gem, the correct database adapters defined, and we have a Postgres database server running locally.  We can now use predefined rake tasks to create our database.</p>
+
+<p>Let's stop our rails server and tell rake to create our databases using our new configuration.</p>
+
+<pre><code>$ rake db:create:all
+</code></pre>
+
+<p>To ensure the databases were created, let's run the Postgres prompt…</p>
+
+<pre><code>$ psql
+</code></pre>
+
+<p>…then run the <code>\l</code> command to list our databases.</p>
+
+<pre><code>user=# \l
+
+  List of databases
+  Name          |  Owner   | Encoding |   Collate
+  -----------------------+----------+----------+-------------  username              | username | UTF8     | en_US.UTF-8
+  postgres              | username | UTF8     | en_US.UTF-8
+  template0             | username | UTF8     | en_US.UTF-8
+  template1             | username | UTF8     | en_US.UTF-8
+  testdrive_development | rails    | UTF8     | en_US.UTF-8
+  testdrive_production  | rails    | UTF8     | en_US.UTF-8
+  testdrive_test        | rails    | UTF8     | en_US.UTF-8
+  (7 rows)
+</code></pre>
+
+<p>Looking good!</p>
+
+<p>From here you should be able to use ActiveRecord models and database migrations just as you would using Sqlite.</p>
+</div>

@@ -15,7 +15,6 @@ body {
   line-height: 18px;
   color: #737373;
   background-color: white;
-  margin: 10px 13px 10px 13px;
 }
 table {
   margin: 10px 0 15px 0;
@@ -130,12 +129,6 @@ sup {
 }
 * {
   -webkit-print-color-adjust: exact;
-}
-@media screen and (min-width: 914px) {
-  body {
-    width: 854px;
-    margin:10px auto;
-  }
 }
 @media print {
   body,code,pre code,h1,h2,h3,h4,h5,h6 {

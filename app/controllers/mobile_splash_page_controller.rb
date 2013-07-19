@@ -1,5 +1,5 @@
 class MobileSplashPageController < ApplicationController
-  layout "splash"
+  layout 'splash'
 
   def view
   end
