@@ -1,0 +1,34 @@
+/*
+ *= require partials/_reset
+ *= require partials/_header
+ *= require_self
+ *= require ss-social-circle
+ */
+
+@import 'partials/mixins'
+
+#home_controller
+
+  overflow-y: hidden
+
+  section
+
+    &.normal
+      .content
+        display: none
+    &.expanded
+      .content
+        display: inline
+    &.collapsed
+      .content
+        display: none
+
+    a
+      text-decoration-line: no-underline
+      border-bottom: 1px solid black
+
+      h2
+        background: #DDDDDD
+        text-align: center
+        border: 1px solid black
+        width: auto
