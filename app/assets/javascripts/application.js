@@ -3,60 +3,48 @@
 //= require jquery_ujs
 //= require jquery.easing.1.3
 
+// Set jquery default animation easing
 $.easing.def = "easeOutQuad";
 
 var sections = [];
-var hNormal = '33.33%';
-var hExpanded = '80%';
-var hCollapsed = '10%';
+var hExpanded = '90%';
+var hCollapsed = '5%';
 var fadeDuration = 2000;
 
-function resize(el, height, duration) {
-    el.animate({height: height}, duration);
-}
-
-function overlay(section, bool) {
-    var o = section.find('.overlay');
-    if (bool) {
-        o.fadeIn(fadeDuration);
-        return;
-    }
-    o.fadeOut(fadeDuration);
-
+function resize(element, height, duration) {
+    element.animate({height: height}, duration);
 }
 
 function expand(i) {
-    for (var ix = 0; ix < sections.length; ix++) {
-        if (ix !== i) collapse(ix);
+    var section = sections[i];
+    for (var j = 0; j < sections.length; j++) {
+        if (j !== i) collapse(j);
     }
-    var s = sections[i];
-
-    overlay(s, false);
-    resize(s, hExpanded, fadeDuration);
-    s.addClass('expanded');
+    resize(section, hExpanded, fadeDuration);
+    $(section.find('.overlay')).fadeOut(fadeDuration);
+    section.addClass('expanded');
 }
 
 function collapse(i) {
-    console.log(sections);
-    var s = sections[i];
-    overlay(s, true);
-    resize(s, hCollapsed, fadeDuration);
-    s.addClass('collapsed');
-    s.removeClass('normal expanded');
+    var section = sections[i];
+    resize(section, hCollapsed, fadeDuration);
+    section.addClass('collapsed');
+    $(section.find('.overlay')).fadeIn(fadeDuration);
+    section.removeClass('normal expanded');
 }
 
 $(document).ready(function () {
-    $.each($('section'), function (i, s) {
-        sections.push($(s));
+    // cache jquery objects
+    $.each($('section'), function (i, section) {
+        sections.push($(section));
     });
 
     // Initial animation
     setTimeout(function () {
         sections[0].click();
-    }, 2000);
+    }, 1000);
 });
 
-//
 $(document).on('click', '.splash', function () {
     expand($(this).parent().find('.splash').index($(this)));
 });
