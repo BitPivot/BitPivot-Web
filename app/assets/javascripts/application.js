@@ -6,10 +6,9 @@
 $.easing.def = "easeInOutCubic";
 
 var sections = [];
-var hNormal = '33.33%';
-var hExpanded = '80%';
-var hCollapsed = '10%';
+var hExpanded = '70%';
 var fadeDuration = 750;
+var hCollapsed;
 
 function resize(el, height, duration) {
     el.animate({height: height}, duration);
@@ -46,9 +45,12 @@ function collapse(i) {
 }
 
 window.onload = function() {
-    $.each($('section'), function (i, s) {
+    $.each($('.splash'), function (i, s) {
         sections.push($(s));
     });
+
+    // Calculate hCollapsed base on hExpanded
+    hCollapsed = (100 - parseInt(hExpanded)) / (sections.length - 1) + '%'
 
     // Initial animation
     setTimeout(function () {
