@@ -3,6 +3,7 @@
 //= require jquery_ujs
 //= require jquery.easing.1.3
 
+// Set jquery default animation easing
 $.easing.def = "easeInOutCubic";
 
 var sections = [];
@@ -10,41 +11,30 @@ var hExpanded = '70%';
 var fadeDuration = 750;
 var hCollapsed;
 
-function resize(el, height, duration) {
-    el.animate({height: height}, duration);
-}
-
-function overlay(section, bool) {
-    var o = section.find('.overlay');
-    if (bool) {
-        o.fadeIn(fadeDuration);
-        return;
-    }
-    o.fadeOut(fadeDuration);
-
+function resize(element, height, duration) {
+    element.animate({height: height}, duration);
 }
 
 function expand(i) {
-    for (var ix = 0; ix < sections.length; ix++) {
-        if (ix !== i) collapse(ix);
+    var section = sections[i];
+    for (var j = 0; j < sections.length; j++) {
+        if (j !== i) collapse(j);
     }
-    var s = sections[i];
-
-    overlay(s, false);
-    resize(s, hExpanded, fadeDuration);
-    s.addClass('expanded');
+    resize(section, hExpanded, fadeDuration);
+    $(section.find('.overlay')).fadeOut(fadeDuration);
+    section.addClass('expanded');
 }
 
 function collapse(i) {
-    console.log(sections);
-    var s = sections[i];
-    overlay(s, true);
-    resize(s, hCollapsed, fadeDuration);
-    s.addClass('collapsed');
-    s.removeClass('normal expanded');
+    var section = sections[i];
+    resize(section, hCollapsed, fadeDuration);
+    section.addClass('collapsed');
+    $(section.find('.overlay')).fadeIn(fadeDuration);
+    section.removeClass('normal expanded');
 }
 
 window.onload = function() {
+    // cache jquery objects
     $.each($('.splash'), function (i, s) {
         sections.push($(s));
     });
