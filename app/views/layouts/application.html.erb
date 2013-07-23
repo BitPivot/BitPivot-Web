@@ -9,6 +9,8 @@
 
   <body id="<%= params[:controller].parameterize %>_controller">
 
+    <div id="js-loading-overlay" class="loading-overlay"></div>
+
     <%= render 'partials/header' %>
 
     <%= yield %>
