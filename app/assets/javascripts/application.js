@@ -4,12 +4,12 @@
 //= require jquery.easing.1.3
 
 // Set jquery default animation easing
-$.easing.def = "easeOutQuad";
+$.easing.def = "easeInOutCubic";
 
 var sections = [];
-var hExpanded = '90%';
-var hCollapsed = '5%';
-var fadeDuration = 2000;
+var hExpanded = '80%';
+var hCollapsed = '10%';
+var fadeDuration = 750;
 
 function resize(element, height, duration) {
     element.animate({height: height}, duration);
@@ -33,7 +33,7 @@ function collapse(i) {
     section.removeClass('normal expanded');
 }
 
-$(document).ready(function () {
+window.onload = function() {
     // cache jquery objects
     $.each($('section'), function (i, section) {
         sections.push($(section));
@@ -42,8 +42,11 @@ $(document).ready(function () {
     // Initial animation
     setTimeout(function () {
         sections[0].click();
-    }, 1000);
-});
+    }, fadeDuration * 2);
+
+    // Fade out loading overlay
+    $('#js-loading-overlay').fadeOut(fadeDuration)
+}
 
 $(document).on('click', '.splash', function () {
     expand($(this).parent().find('.splash').index($(this)));
