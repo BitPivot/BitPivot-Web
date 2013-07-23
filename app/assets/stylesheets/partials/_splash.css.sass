@@ -13,27 +13,44 @@ body
 
 .splash
   position: relative
-  height: 25%
+  height: 33.33333%
+  overflow: hidden
 
-  .heading
-    width: 100%
-    background: black
+  &.expanded
+    overflow-y: scroll
 
-    span
-      color: white
-      font-size: 28px
 
-  .overlay
-    position: absolute
-    width: 100%
-    height: 100%
-    background: black
+
+.splash-banner
+  +position(relative)
+  height: 450px
 
   &.mobile
-    background: #f00
+    background: #000 image-url('splash-mobile-background.jpg') no-repeat 50% 50%
 
   &.integration
     background: #0f0
 
   &.custom
     background: #00f
+
+
+
+.splash-banner__header
+  img
+    display: block
+    margin: 0 auto
+    height: 100%
+    width: auto
+
+.splash-banner__text
+  display: none
+  +position(absolute, auto, $margin, $margin, $margin)
+
+  img
+    max-width: 100%
+
+
+.splash-content
+  display: none
+  color: #fff
