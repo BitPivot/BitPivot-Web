@@ -20,8 +20,6 @@ function setCollapsedHeaderHeights() {
     $('.splash-banner__header').height(collapsedHeight);
 }
 
-
-
 function resize(element, height, duration) {
     element.animate({height: height}, duration);
 }

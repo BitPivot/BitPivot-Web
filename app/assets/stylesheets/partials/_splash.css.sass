@@ -13,7 +13,7 @@ body
 
 .splash
   position: relative
-  height: 33.33333%
+  height: 25%
   overflow: hidden
 
   &.expanded
@@ -25,14 +25,21 @@ body
   +position(relative)
   height: 450px
 
+  &.mission
+    background: #000 image-url('splash/mission-background.jpg') no-repeat 50% 50%
+    +background-size-cover
+
   &.mobile
-    background: #000 image-url('splash-mobile-background.jpg') no-repeat 50% 50%
+    background: #000 image-url('splash/mobile-background.jpg') no-repeat 50% 50%
+    +background-size-cover
 
   &.integration
-    background: #0f0
+    background: #000 image-url('splash/integration-background.jpg') no-repeat 50% 50%
+    +background-size-cover
 
-  &.custom
-    background: #00f
+  &.consulting
+    background: #000 image-url('splash/consulting-background.jpg') no-repeat 50% 50%
+    +background-size-cover
 
 
 
@@ -43,12 +50,16 @@ body
     height: 100%
     width: auto
 
+
+
 .splash-banner__text
   display: none
   +position(absolute, auto, $margin, $margin, $margin)
+  text-align: center
 
   img
     max-width: 100%
+
 
 
 .splash-content
