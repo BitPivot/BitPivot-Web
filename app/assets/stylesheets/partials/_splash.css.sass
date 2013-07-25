@@ -1,5 +1,7 @@
 @import 'partials/mixins'
 
+
+
 body
   overflow-y: hidden
 
@@ -10,6 +12,8 @@ body
 .splash-area
   +position(relative)
   height: 100%
+
+
 
 .splash
   position: relative
@@ -26,7 +30,7 @@ body
   height: 450px
 
   &.mission
-    background: #000 image-url('splash/mission-background.jpg') no-repeat 50% 50%
+    background: #000 image-url('splash/mission-background.jpg') no-repeat 70% 50%
     +background-size-cover
 
   &.mobile
@@ -44,6 +48,8 @@ body
 
 
 .splash-banner__header
+  background: #f00
+
   img
     display: block
     margin: 0 auto
