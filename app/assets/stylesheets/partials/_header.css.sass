@@ -8,6 +8,9 @@ header
   background: #000
   font: 1em $font-helvetica normal
 
+  +breakpoint('tiny')
+    height: $page-header-height-tiny
+
   a
     color: #555
     text-decoration: none
@@ -22,6 +25,10 @@ header
   +sprite('/assets/header/bitpivot-logo', 220px, 48px)
   float: right
 
+  +breakpoint('tiny')
+    +sprite('/assets/header/bitpivot-logo-tiny', 174px, 38px)
+    float: right
+
 
 
 .header-social-icons
@@ -34,3 +41,6 @@ header
     font-size: 35px
     position: relative
     top: 4px
+
+    +breakpoint('tiny')
+      font-size: 25px

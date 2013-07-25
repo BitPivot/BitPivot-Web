@@ -9,6 +9,9 @@ body
   +position(absolute, $page-header-height, 0, 0, 0)
   background: #000
 
+  +breakpoint('tiny')
+    +position(absolute, $page-header-height-tiny, 0, 0, 0)
+
 .blinds-area
   +position(relative)
   height: 100%
@@ -20,7 +23,7 @@ body
   height: 25%
 
   &.collapsed
-    height: $splash-collapsed-height
+    height: $blind-collapsed-height
     overflow: hidden
 
   &.expanded
@@ -30,7 +33,7 @@ body
 
 .blind-banner
   +position(relative)
-  height: $splash-expanded-height
+  height: $page-header-height
   background: #000 no-repeat 50% 50%
   +background-size-cover
 
@@ -49,8 +52,8 @@ body
 
   h1
     display: block
-    height: $splash-collapsed-height
-    line-height: $splash-collapsed-height
+    height: $blind-collapsed-height
+    line-height: $blind-collapsed-height
     vertical-align: middle
     text-align: center
     +font-pragmatica-extra-light

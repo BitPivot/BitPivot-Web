@@ -3,7 +3,7 @@
 
 
 // Media Queries
-=respond-to($media)
+=breakpoint($media)
   @if $media == "tiny"
     @media (max-width: 640px)
       @content
@@ -35,7 +35,7 @@
   background: url("#{$image}.#{$type}") top left no-repeat
   background-size: $width $height
   @if $retina == true
-    +respond-to(retina)
+    +breakpoint(retina)
       background-image: url("#{$image}@2x.#{$type}")
 
 
