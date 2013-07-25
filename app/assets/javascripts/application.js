@@ -34,29 +34,43 @@ function redrawExpanded() {
 
 function resize(section, height, duration, expanded) {
     expanding = true;
+    toggleSplashHeader(section, expanded);
     section.animate({scrollTop: 0}, {duration: fadeDuration, queue: false});
     section.animate({ height: height }, {
         duration: duration,
         complete: function() {
-            toggleSectionContent(section, expanded);
+            toggleSplashClass(section, expanded);
             expanding = false;
         },
         queue: false
     });
 }
 
-function toggleSectionContent(section, expanded) {
+function toggleSplashClass(section, expanded) {
     if (expanded) {
         section.addClass('expanded');
         section.removeClass('collapsed');
-        section.find('.splash-banner__header').fadeOut(fadeDuration);
+        section.find('.splash-banner h1').fadeOut(fadeDuration);
         section.find('.splash-banner__text').fadeIn(fadeDuration);
         section.find('.splash-content').fadeIn(fadeDuration);
     }
     else {
         section.removeClass('expanded');
         section.addClass('collapsed');
-        section.find('.splash-banner__header').fadeIn(fadeDuration);
+        section.find('.splash-banner h1').fadeIn(fadeDuration);
+        section.find('.splash-banner__text').fadeOut(fadeDuration);
+        section.find('.splash-content').fadeOut(fadeDuration);
+    }
+}
+
+function toggleSplashHeader(section, expanded) {
+    if (expanded) {
+        section.find('.splash-banner h1').fadeOut(fadeDuration);
+        section.find('.splash-banner__text').fadeIn(fadeDuration);
+        section.find('.splash-content').fadeIn(fadeDuration);
+    }
+    else {
+        section.find('.splash-banner h1').fadeIn(fadeDuration);
         section.find('.splash-banner__text').fadeOut(fadeDuration);
         section.find('.splash-content').fadeOut(fadeDuration);
     }
