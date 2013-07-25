@@ -33,12 +33,15 @@ function redrawExpanded() {
 }
 
 function resize(section, height, duration, expanded) {
+    expanding = true;
+    section.animate({scrollTop: 0}, {duration: fadeDuration, queue: false});
     section.animate({ height: height }, {
         duration: duration,
         complete: function() {
             toggleSectionContent(section, expanded);
             expanding = false;
-        }
+        },
+        queue: false
     });
 }
 
