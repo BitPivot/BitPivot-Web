@@ -4,15 +4,17 @@
 //= require jquery.easing.1.3
 
 
-
 $.easing.def = "easeInOutCubic";
 var fadeDuration = 750;
-
 
 
 var sections = [];
 var hExpanded;
 var hCollapsed;
+
+var expanding = false;
+var scrolledToTop = null;
+var scrolledToBottom = null;
 
 function calculateHeights() {
     // Calculate collapsed height from CSS
@@ -33,8 +35,14 @@ function redrawExpanded() {
     $('.splash.expanded').height(hExpanded);
 }
 
-function resize(element, height, duration) {
-    element.animate({height: height}, duration);
+function resize(section, height, duration, expanded) {
+    section.animate({ height: height }, {
+        duration: duration,
+        complete: function() {
+            toggleSectionContent(section, expanded);
+            expanding = false;
+        }
+    });
 }
 
 function toggleSectionContent(section, expanded) {
@@ -55,44 +63,76 @@ function toggleSectionContent(section, expanded) {
 }
 
 function expand(i) {
-    var section = sections[i];
-
-    for (var j = 0; j < sections.length; j++) {
+    for (var j = 0; j < sections.length; j++)
         if (j !== i) collapse(j);
-    }
-
-    resize(section, hExpanded, fadeDuration);
-    toggleSectionContent(section, true);
+    resize(sections[i], hExpanded, fadeDuration, true);
 }
 
 function collapse(i) {
-    var section = sections[i];
-    resize(section, hCollapsed, fadeDuration);
-    toggleSectionContent(section, false);
+    resize(sections[i], hCollapsed, fadeDuration, false);
 }
 
-$(document).on('click', '.splash-banner__header', function () {
-    var parent = $(this).closest('.splash');
-    expand($('.splash').index(parent));
-});
+function handleSectionScroll(e) {
+    if (expanding) return;
 
+    var section = $(e.currentTarget);
+
+    var scrollTop = section.scrollTop();
+    var scrollHeight = section[0].scrollHeight;
+    var outerHeight = section.outerHeight();
+    var direction = e.originalEvent.wheelDelta >= 0 ? 'up' : 'down';
+
+    // scrolled to bottom of element
+    if (scrollHeight - (scrollTop + 1) == outerHeight
+        || scrollHeight - scrollTop == outerHeight) {
+        // scrolling down
+        if (scrolledToBottom && direction == 'down') {
+            var sectionIndex = section.parent().find('section').index(e.currentTarget);
+            sections[++sectionIndex].find('.splash-banner__header').click();
+            scrolledToBottom = false;
+        } else {
+            scrolledToBottom = true;
+        }
+    }
+    // scrolled to top of div
+    if (section.scrollTop() == 0) {
+        // scrolling up
+        if (scrolledToTop && direction == 'up') {
+            var sectionIndex = section.parent().find('section').index(e.currentTarget);
+            sections[--sectionIndex].find('.splash-banner__header').click();
+            scrolledToTop = false;
+        } else {
+            scrolledToTop = true;
+        }
+    }
+}
 
 
 window.onload = function() {
+    $(document).on('click', '.splash-banner__header', function() {
+        var parent = $(this).closest('.splash');
+        expand($('.splash').index(parent));
+    });
+
+    $('.splash').bind('mousewheel', function(e) {
+        handleSectionScroll(e);
+    });
+
     // Cache jQuery objects
-    $.each($('.splash'), function (i, s) {
+    $.each($('.splash'), function(i, s) {
         sections.push($(s));
     });
 
     calculateHeights();
 
     // Initial animation
-    setTimeout(function () {
+    setTimeout(function() {
         sections[0].find('.splash-banner__header').click();
     }, fadeDuration * 2);
 
     // Fade out loading overlay
     $('#js-loading-overlay').fadeOut(fadeDuration)
+
 }
 
 window.onresize = function(event) {
