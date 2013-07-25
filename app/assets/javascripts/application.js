@@ -25,9 +25,6 @@ function calculateHeights() {
     // Calculate expanded height based on size of wrapper minus collapsed divs
     var hWrapper = parseInt($('.splash-wrapper').css('height'));
     hExpanded = hWrapper - ((sections.length - 1) * parseInt(hCollapsed)) + 'px';
-
-    console.log('hCollapsed : ' + hCollapsed);
-    console.log('hExpanded  : ' + hExpanded);
 }
 
 function redrawExpanded() {
