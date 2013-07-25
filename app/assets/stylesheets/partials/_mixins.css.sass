@@ -3,7 +3,7 @@
 
 
 // Media Queries
-=respond-to($media)
+=breakpoint($media)
   @if $media == "tiny"
     @media (max-width: 640px)
       @content
@@ -35,7 +35,7 @@
   background: url("#{$image}.#{$type}") top left no-repeat
   background-size: $width $height
   @if $retina == true
-    +respond-to(retina)
+    +breakpoint(retina)
       background-image: url("#{$image}@2x.#{$type}")
 
 
@@ -126,3 +126,25 @@
   -moz-background-size: cover
   -o-background-size: cover
   background-size: cover
+
+
+
+// Font faces (via TypeKit)
+=font($font-size, $font-color, $font-family: false)
+  font-size: $font-size
+  color: $font-color
+
+  @if $font-family == 'pragmatica-extra-light'
+    font-family: 'pragmatica-web', 'Helvetica Neue', Helvetica, Arial, sans-serif
+    font-weight: 200
+    font-style: normal
+
+  @if $font-family == 'pragmatica-light'
+    font-family: 'pragmatica-web', 'Helvetica Neue', Helvetica, Arial, sans-serif
+    font-weight: 300
+    font-style: normal
+
+  @if $font-family == 'pragmatica-book'
+    font-family: 'pragmatica-web', 'Helvetica Neue', Helvetica, Arial, sans-serif
+    font-weight: 400
+    font-style: normal
