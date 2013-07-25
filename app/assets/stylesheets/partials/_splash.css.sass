@@ -5,17 +5,17 @@
 body
   overflow-y: hidden
 
-.splash-wrapper
+.blinds-wrapper
   +position(absolute, $page-header-height, 0, 0, 0)
   background: #000
 
-.splash-area
+.blinds-area
   +position(relative)
   height: 100%
 
 
 
-.splash
+.blind
   position: relative
   height: 25%
 
@@ -28,49 +28,38 @@ body
 
 
 
-.splash-banner
+.blind-banner
   +position(relative)
   height: $splash-expanded-height
+  background: #000 no-repeat 50% 50%
+  +background-size-cover
 
-  &.mission
-    background: #000 image-url('splash/mission-background.jpg') no-repeat 70% 50%
-    +background-size-cover
+  .mission &
+    background-image: image-url('splash/mission-background.jpg')
+    background-position: 70% 50%
 
-  &.mobile
-    background: #000 image-url('splash/mobile-background.jpg') no-repeat 50% 50%
-    +background-size-cover
+  .mobile &
+    background-image: image-url('splash/mobile-background.jpg')
 
-  &.integration
-    background: #000 image-url('splash/integration-background.jpg') no-repeat 50% 50%
-    +background-size-cover
+  .integration &
+    background-image: image-url('splash/integration-background.jpg')
 
-  &.consulting
-    background: #000 image-url('splash/consulting-background.jpg') no-repeat 50% 50%
-    +background-size-cover
+  .consulting &
+    background-image: image-url('splash/consulting-background.jpg')
 
-
-
-.splash-banner__header
-  height: $splash-collapsed-height
-
-  img
+  h1
     display: block
-    margin: 0 auto
-    height: 100%
-    width: auto
+    height: $splash-collapsed-height
+    line-height: $splash-collapsed-height
+    vertical-align: middle
+    text-align: center
+    +font-pragmatica-extra-light
+    font-size: 25px
+    color: #fff
+    background: #f00
 
 
 
-.splash-banner__text
-  display: none
-  +position(absolute, auto, $margin, $margin, $margin)
-  text-align: center
-
-  img
-    max-width: 100%
-
-
-
-.splash-content
+.blind-content
   display: none
   color: #fff

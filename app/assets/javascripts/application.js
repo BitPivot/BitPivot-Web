@@ -18,61 +18,55 @@ var scrolledToBottom = null;
 
 function calculateHeights() {
     // Calculate collapsed height from CSS
-    var $div = $('<div class="splash collapsed"></div>').hide().appendTo('body');
+    var $div = $('<div class="blind collapsed"></div>').hide().appendTo('body');
     hCollapsed = $div.css('height');
     $div.remove();
 
     // Calculate expanded height based on size of wrapper minus collapsed divs
-    var hWrapper = parseInt($('.splash-wrapper').css('height'));
+    var hWrapper = parseInt($('.blinds-wrapper').css('height'));
     hExpanded = hWrapper - ((sections.length - 1) * parseInt(hCollapsed)) + 'px';
 }
 
 function redrawExpanded() {
     calculateHeights();
-    $('.splash.expanded').height(hExpanded);
+    $('.blind.expanded').height(hExpanded);
 }
 
 function resize(section, height, duration, expanded) {
     expanding = true;
-    toggleSplashHeader(section, expanded);
+    toggleBlindHeader(section, expanded);
     section.animate({scrollTop: 0}, {duration: fadeDuration, queue: false});
     section.animate({ height: height }, {
         duration: duration,
         complete: function() {
-            toggleSplashClass(section, expanded);
+            toggleBlindClass(section, expanded);
             expanding = false;
         },
         queue: false
     });
 }
 
-function toggleSplashClass(section, expanded) {
+function toggleBlindClass(section, expanded) {
     if (expanded) {
         section.addClass('expanded');
         section.removeClass('collapsed');
-        section.find('.splash-banner h1').fadeOut(fadeDuration);
-        section.find('.splash-banner__text').fadeIn(fadeDuration);
-        section.find('.splash-content').fadeIn(fadeDuration);
     }
     else {
         section.removeClass('expanded');
         section.addClass('collapsed');
-        section.find('.splash-banner h1').fadeIn(fadeDuration);
-        section.find('.splash-banner__text').fadeOut(fadeDuration);
-        section.find('.splash-content').fadeOut(fadeDuration);
     }
 }
 
-function toggleSplashHeader(section, expanded) {
+function toggleBlindHeader(section, expanded) {
     if (expanded) {
-        section.find('.splash-banner h1').fadeOut(fadeDuration);
-        section.find('.splash-banner__text').fadeIn(fadeDuration);
-        section.find('.splash-content').fadeIn(fadeDuration);
+        section.find('.blind-banner h1').fadeOut(fadeDuration);
+        section.find('.blind-banner span').fadeIn(fadeDuration);
+        section.find('.blind-content').fadeIn(fadeDuration);
     }
     else {
-        section.find('.splash-banner h1').fadeIn(fadeDuration);
-        section.find('.splash-banner__text').fadeOut(fadeDuration);
-        section.find('.splash-content').fadeOut(fadeDuration);
+        section.find('.blind-banner h1').fadeIn(fadeDuration);
+        section.find('.blind-banner span').fadeOut(fadeDuration);
+        section.find('.blind-content').fadeOut(fadeDuration);
     }
 }
 
@@ -102,7 +96,7 @@ function handleSectionScroll(e) {
         // scrolling down
         if (scrolledToBottom && direction == 'down') {
             var sectionIndex = section.parent().find('section').index(e.currentTarget);
-            sections[++sectionIndex].find('.splash-banner__header').click();
+            sections[++sectionIndex].find('.blind-banner h1').click();
             scrolledToBottom = false;
         } else {
             scrolledToBottom = true;
@@ -113,7 +107,7 @@ function handleSectionScroll(e) {
         // scrolling up
         if (scrolledToTop && direction == 'up') {
             var sectionIndex = section.parent().find('section').index(e.currentTarget);
-            sections[--sectionIndex].find('.splash-banner__header').click();
+            sections[--sectionIndex].find('.blind-banner h1').click();
             scrolledToTop = false;
         } else {
             scrolledToTop = true;
@@ -123,17 +117,17 @@ function handleSectionScroll(e) {
 
 
 window.onload = function() {
-    $(document).on('click', '.splash-banner__header', function() {
-        var parent = $(this).closest('.splash');
-        expand($('.splash').index(parent));
+    $(document).on('click', '.blind-banner h1', function() {
+        var parent = $(this).closest('.blind');
+        expand($('.blind').index(parent));
     });
 
-    $('.splash').bind('mousewheel', function(e) {
+    $('.blind').bind('mousewheel', function(e) {
         handleSectionScroll(e);
     });
 
     // Cache jQuery objects
-    $.each($('.splash'), function(i, s) {
+    $.each($('.blind'), function(i, s) {
         sections.push($(s));
     });
 
@@ -141,7 +135,7 @@ window.onload = function() {
 
     // Initial animation
     setTimeout(function() {
-        sections[0].find('.splash-banner__header').click();
+        sections[0].find('.blind-banner h1').click();
     }, fadeDuration * 2);
 
     // Fade out loading overlay
