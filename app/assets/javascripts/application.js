@@ -6,18 +6,31 @@
 
 
 $.easing.def = "easeInOutCubic";
-var hExpanded = '80%';
 var fadeDuration = 750;
 
 
 
 var sections = [];
+var hExpanded;
 var hCollapsed;
 
-function setCollapsedHeaderHeights() {
-    var wrapperHeight = parseInt($('.splash-wrapper').height());
-    var collapsedHeight = (parseInt(hCollapsed) / 100) * wrapperHeight + 'px';
-    $('.splash-banner__header').height(collapsedHeight);
+function calculateHeights() {
+    // Calculate collapsed height from CSS
+    var $div = $('<div class="splash collapsed"></div>').hide().appendTo('body');
+    hCollapsed = $div.css('height');
+    $div.remove();
+
+    // Calculate expanded height based on size of wrapper minus collapsed divs
+    var hWrapper = parseInt($('.splash-wrapper').css('height'));
+    hExpanded = hWrapper - ((sections.length - 1) * parseInt(hCollapsed)) + 'px';
+
+    console.log('hCollapsed : ' + hCollapsed);
+    console.log('hExpanded  : ' + hExpanded);
+}
+
+function redrawExpanded() {
+    calculateHeights();
+    $('.splash.expanded').height(hExpanded);
 }
 
 function resize(element, height, duration) {
@@ -27,15 +40,17 @@ function resize(element, height, duration) {
 function toggleSectionContent(section, expanded) {
     if (expanded) {
         section.addClass('expanded');
-        section.find('.splash-banner__header').fadeOut(fadeDuration)
-        section.find('.splash-banner__text').fadeIn(fadeDuration)
-        section.find('.splash-content').fadeIn(fadeDuration)
+        section.removeClass('collapsed');
+        section.find('.splash-banner__header').fadeOut(fadeDuration);
+        section.find('.splash-banner__text').fadeIn(fadeDuration);
+        section.find('.splash-content').fadeIn(fadeDuration);
     }
     else {
-        section.removeClass('expanded')
-        section.find('.splash-banner__header').fadeIn(fadeDuration)
-        section.find('.splash-banner__text').fadeOut(fadeDuration)
-        section.find('.splash-content').fadeOut(fadeDuration)
+        section.removeClass('expanded');
+        section.addClass('collapsed');
+        section.find('.splash-banner__header').fadeIn(fadeDuration);
+        section.find('.splash-banner__text').fadeOut(fadeDuration);
+        section.find('.splash-content').fadeOut(fadeDuration);
     }
 }
 
@@ -69,9 +84,7 @@ window.onload = function() {
         sections.push($(s));
     });
 
-    // Calculate hCollapsed base on hExpanded
-    hCollapsed = (100 - parseInt(hExpanded)) / (sections.length - 1) + '%'
-    setCollapsedHeaderHeights();
+    calculateHeights();
 
     // Initial animation
     setTimeout(function () {
@@ -83,5 +96,5 @@ window.onload = function() {
 }
 
 window.onresize = function(event) {
-    setCollapsedHeaderHeights();
+    redrawExpanded();
 }

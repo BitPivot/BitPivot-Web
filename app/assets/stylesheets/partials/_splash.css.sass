@@ -20,6 +20,9 @@ body
   height: 25%
   overflow: hidden
 
+  &.collapsed
+    height: $splash-collapsed-height
+
   &.expanded
     overflow-y: scroll
 
@@ -27,7 +30,7 @@ body
 
 .splash-banner
   +position(relative)
-  height: 450px
+  height: $splash-expanded-height
 
   &.mission
     background: #000 image-url('splash/mission-background.jpg') no-repeat 70% 50%
@@ -48,7 +51,7 @@ body
 
 
 .splash-banner__header
-  background: #f00
+  height: $splash-collapsed-height
 
   img
     display: block
