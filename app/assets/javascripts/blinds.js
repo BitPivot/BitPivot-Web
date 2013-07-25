@@ -66,11 +66,11 @@ var Blinds = function(options) {
 
     function toggleSplashHeader(section, expanded) {
         if (expanded) {
-            //fade('out', section, ['.splash-banner h1']);
+            //fade('out', section, ['.splash-banner h1']); // TODO: Mergy with Matt's unpushed banner changes
             fade('in', section, ['.splash-banner__text', '.splash-content']);
         }
         else {
-            //fade('in', section, ['.splash-banner h1']);
+            //fade('in', section, ['.splash-banner h1']); // TODO: Mergy with Matt's unpushed banner changes
             fade('out', section, ['.splash-banner__text', '.splash-content']);
         }
     };
