@@ -1,5 +1,3 @@
-$.easing.def = "easeInOutCubic";
-
 var Blinds = function(options) {
 
     var sections = [];
@@ -8,20 +6,28 @@ var Blinds = function(options) {
     var expanding = false;
     var scrolledToTop = null;
     var scrolledToBottom = null;
-    var fadeDuration = options.fadeDuration || 1000;
-
     var fnFadeIn = options.fnFadeIn || null;
     var fnScroll = options.fnScroll || null;
     var fnResize = options.fnResize || null;
+    var fadeDuration = options.fadeDuration || 1000;
     var fnHeaderClick = options.fnHeaderClick || null;
 
-    this.initialize = function() {
+    var classBlind = options.classBlind || '.blind';
+    var classBlindWrapper = options.classBlindWrapper || '.blind-wrapper';
+    var classBlindExpanded = options.classBlindExpanded || '.expanded';
+    var classBlindCollapsed = options.classBlindCollapsed || '.collapsed';
+    var classBlindBanner = options.classBlindBanner || '.blind-banner';
+    var classBlindBannerHeader = options.classBlindBannerHeader || '.blind-banner__header';
+    var classBlindBannerText = options.classBlindBannerText || '.blind-banner__text';
+    var classBlindContent = options.classBlindContent || '.blind-content';
+
+    var initialize = function() {
         // Cache jQuery objects
-        $.each($('.splash'), function(i, s) { sections.push($(s)); });
+        $.each($(classBlind), function(i, s) { sections.push($(s)); });
 
         // Events
-        $(document).on('click', '.splash-banner__header', function(e) { headerClickCallback(this, e); });
-        $(document).on('mousewheel', '.splash', function(e) { mousewheelCallback(this, e); });
+        $(document).on('click', classBlindBannerHeader, function(e) { headerClickCallback(this, e); });
+        $(document).on('mousewheel', classBlind, function(e) { mousewheelCallback(this, e); });
         $(window).on('resize', function(e) { resizeCallback(this, e); });
 
         // Calculate initial sizes
@@ -30,16 +36,16 @@ var Blinds = function(options) {
         // Fade out loading overlay
         if (fnFadeIn) fnFadeIn(this);
         // Initial animation
-        setTimeout(function() { sections[0].find('.splash-banner__header').click(); }, fadeDuration * 2);
-    }
+        setTimeout(function() { sections[0].find(classBlindBannerHeader).click(); }, fadeDuration * 2);
+    };
 
     function calculateHeights() {
         // Calculate collapsed height from CSS
-        var $div = $('<div class="splash collapsed"></div>').hide().appendTo('body');
+        var $div = $('<div class="{0} {1}"></div>'.fmt(classBlind, classBlindCollapsed).replace(/\./g, '')).hide().appendTo('body');
         hCollapsed = $div.css('height');
         $div.remove();
         // Calculate expanded height based on size of wrapper minus collapsed divs
-        hExpanded = parseInt($('.splash-wrapper').css('height')) - ((sections.length - 1) * parseInt(hCollapsed)) + 'px';
+        hExpanded = parseInt($(classBlindWrapper).css('height')) - ((sections.length - 1) * parseInt(hCollapsed)) + 'px';
     };
 
 
@@ -58,21 +64,22 @@ var Blinds = function(options) {
     };
 
     function toggleSplashClass(section, expanded) {
-        if (expanded) section.addClass('expanded').removeClass('collapsed');
-        else section.removeClass('expanded').addClass('collapsed');
-
+        if (expanded) {
+            section.addClass(classBlindExpanded.removeAll('\\.'));
+            section.removeClass(classBlindCollapsed.removeAll('\\.'));
+            fade('in', section, [classBlindBannerText, classBlindContent]);
+        }
+        else {
+            section.removeClass(classBlindExpanded.removeAll('\\.'));
+            section.addClass(classBlindCollapsed.removeAll('\\.'));
+            fade('out', section, [classBlindBannerText, classBlindContent]);
+        }
         toggleSplashHeader(section, expanded);
     };
 
     function toggleSplashHeader(section, expanded) {
-        if (expanded) {
-            //fade('out', section, ['.splash-banner h1']); // TODO: Mergy with Matt's unpushed banner changes
-            fade('in', section, ['.splash-banner__text', '.splash-content']);
-        }
-        else {
-            //fade('in', section, ['.splash-banner h1']); // TODO: Mergy with Matt's unpushed banner changes
-            fade('out', section, ['.splash-banner__text', '.splash-content']);
-        }
+        if (expanded) fade('out', section, [classBlindBannerHeader + ' img']);
+        else fade('in', section, [classBlindBannerHeader + ' img']);
     };
 
     function expand(i) {
@@ -100,6 +107,7 @@ var Blinds = function(options) {
     /*
      * Event callbacks
      */
+
     function mousewheelCallback(sender, e) {
         if (expanding) return;
 
@@ -109,26 +117,23 @@ var Blinds = function(options) {
         var outerHeight = section.outerHeight();
         var direction = e.originalEvent.wheelDelta >= 0 ? 'up' : 'down';
 
-        scrolledToBottom = scrollHeight - (scrollTop + 1) == outerHeight || scrollHeight - scrollTop == outerHeight;
-        scrolledToTop = !scrolledToBottom && section.scrollTop() == 0;
-
         // scrolled to bottom of element
-        if (scrolledToBottom) {
+        if (scrollHeight - (scrollTop + 1) == outerHeight || scrollHeight - scrollTop == outerHeight) {
             // scrolling down
             if (scrolledToBottom && direction === 'down') {
-                var sectionIndex = section.parent().find('section').index(e.currentTarget);
-                sections[++sectionIndex].find('.splash-banner__header').click();
+                var sectionIndex = section.parent().find(classBlind).index(e.currentTarget);
+                sections[++sectionIndex].find(classBlindBannerHeader).click();
                 scrolledToBottom = false;
             } else {
                 scrolledToBottom = true;
             }
         }
         // scrolled to top of div
-        if (scrolledToTop) {
+        if (section.scrollTop() == 0) {
             // scrolling up
             if (scrolledToTop && direction === 'up') {
-                var sectionIndex = section.parent().find('section').index(e.currentTarget);
-                sections[--sectionIndex].find('.splash-banner__header').click();
+                var sectionIndex = section.parent().find(classBlind).index(e.currentTarget);
+                sections[--sectionIndex].find(classBlindBannerHeader).click();
                 scrolledToTop = false;
             } else {
                 scrolledToTop = true;
@@ -139,14 +144,34 @@ var Blinds = function(options) {
 
     function resizeCallback(sender, e) {
         calculateHeights();
-        if (fnResize) fnResize(this); // Custom callback
+        if (fnResize) fnResize(hExpanded, hCollapsed); // Custom callback
     };
 
     function headerClickCallback(sender, e) {
-        expand($('.splash').index($(sender).closest('.splash')));
+        expand($(classBlind).index($(sender).closest(classBlind)));
         if (fnHeaderClick) fnHeaderClick(this); // Custom callback
     };
 
 
-    this.initialize();
+    // Go!
+    initialize();
+};
+
+/*
+ * Extensions
+ */
+
+// Set Jquery default easing
+$.easing.def = "easeInOutCubic";
+
+// For .NET-like string format
+String.prototype.fmt = function() {
+    var s = this;
+    for (var i = 0; i < arguments.length; i++)
+        s = s.replace('{' + i + '}', arguments[i]);
+    return s;
+};
+
+String.prototype.removeAll = function(toRemove) {
+    return this.replace(new RegExp(toRemove, 'g'), '');
 };

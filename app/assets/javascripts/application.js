@@ -7,6 +7,12 @@
 window.onload = function() {
     new Blinds({
         fadeDuration: 750,
+        classBlind: '.splash',
+        classBlindWrapper: '.splash-wrapper',
+        classBlindBanner: '.splash-banner',
+        classBlindBannerHeader: '.splash-banner__header',
+        classBlindBannerText: '.splash-banner__text',
+        classBlindContent:'.splash-content',
         fnFadeIn: function(blinds) {
             $('#js-loading-overlay').fadeOut(blinds.fadeDuration)
         },
@@ -16,8 +22,8 @@ window.onload = function() {
         fnHeaderClick: function(blinds) {
 
         },
-        fnResize: function(blinds) {
-            $('.splash.expanded').height(blinds.hExpanded);
+        fnResize: function(hExpanded, hCollapsed) {
+            $('.splash.expanded').height(hExpanded);
         }
     });
 }
