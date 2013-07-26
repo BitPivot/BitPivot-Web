@@ -11,6 +11,7 @@ var Blinds = function(options) {
     var fnResize = options.fnResize || null;
     var fadeDuration = options.fadeDuration || 1000;
     var fnHeaderClick = options.fnHeaderClick || null;
+    var headerIndex = function($header) { return $('.blind').index($header.closest('.blind')); };
 
     var initialize = function() {
         // Cache jQuery objects
@@ -30,17 +31,6 @@ var Blinds = function(options) {
         // Initial animation
         setTimeout(function() { sections[0].find('header').click(); }, fadeDuration * 2);
     };
-
-    function calculateHeights() {
-        // Calculate collapsed height from CSS
-        var $div = $('<div class="blind collapsed"></div>').hide().appendTo('body');
-        hCollapsed = $div.css('height');
-        $div.remove();
-
-        // Calculate expanded height based on size of wrapper minus collapsed divs
-        hExpanded = parseInt($('.blinds-wrapper').css('height')) - ((sections.length - 1) * parseInt(hCollapsed)) + 'px';
-    };
-
 
     function resize(section, height, duration, expanded) {
         expanding = true;
@@ -66,15 +56,6 @@ var Blinds = function(options) {
         }
     };
 
-    function expand(i) {
-        for (var j = 0; j < sections.length; j++) if (j !== i) collapse(j);
-        resize(sections[i], hExpanded, fadeDuration, true);
-    };
-
-    function collapse(i) {
-        resize(sections[i], hCollapsed, fadeDuration, false);
-    };
-
 
     /*
      * Event callbacks
@@ -88,24 +69,29 @@ var Blinds = function(options) {
         var scrollHeight = section[0].scrollHeight;
         var outerHeight = section.outerHeight();
         var direction = e.originalEvent.wheelDelta >= 0 ? 'up' : 'down';
+        var i = section.parent().find('.blind').index(e.currentTarget);
 
         // scrolled to bottom of element
-        if (scrollHeight - (scrollTop + 1) == outerHeight || scrollHeight - scrollTop == outerHeight) {
+        if (scrollHeight - (scrollTop + 1) === outerHeight || scrollHeight - scrollTop === outerHeight) {
             // scrolling down
             if (scrolledToBottom && direction === 'down') {
-                var sectionIndex = section.parent().find('.blind').index(e.currentTarget);
-                sections[++sectionIndex].find('.blind header').click();
+                // not viewing bottom section
+                if (i !== sections.length - 1)
+                // open section below
+                    sections[++i].find('.blind header').click();
                 scrolledToBottom = false;
             } else {
                 scrolledToBottom = true;
             }
         }
         // scrolled to top of div
-        if (section.scrollTop() == 0) {
+        if (section.scrollTop() === 0) {
             // scrolling up
             if (scrolledToTop && direction === 'up') {
-                var sectionIndex = section.parent().find('.blind').index(e.currentTarget);
-                sections[--sectionIndex].find('.blind header').click();
+                // not viewing top section
+                if (i !== 0)
+                // open section above
+                    sections[--i].find('.blind header').click();
                 scrolledToTop = false;
             } else {
                 scrolledToTop = true;
@@ -115,12 +101,26 @@ var Blinds = function(options) {
     };
 
     function resizeCallback(sender, e) {
-        calculateHeights();
+        // Calculate collapsed height from CSS
+        var $div = $('<div class="blind collapsed"></div>').hide().appendTo('body');
+        hCollapsed = $div.css('height');
+        $div.remove();
+
+        // Calculate expanded height based on size of wrapper minus collapsed divs
+        hExpanded = parseInt($('.blinds-wrapper').css('height')) - ((sections.length - 1) * parseInt(hCollapsed)) + 'px';
+
         if (fnResize) fnResize(hExpanded, hCollapsed); // Custom callback
     };
 
     function headerClickCallback(sender, e) {
-        expand($('.blind').index($(sender).closest('.blind')));
+        var index = headerIndex($(sender));
+
+        for (var i = 0; i < sections.length; i++) {
+            var expanded = i === index;
+            var height = expanded ? hExpanded : hCollapsed
+            resize(sections[i], height, fadeDuration, expanded);
+        }
+
         if (fnHeaderClick) fnHeaderClick(this); // Custom callback
     };
 
