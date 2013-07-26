@@ -7,10 +7,6 @@
 window.onload = function() {
     new Blinds({
         fadeDuration: 750,
-        classBlind: '.blind',
-        classBlindsWrapper: '.blinds-wrapper',
-        classBlindBanner: '.blind-banner',
-        classBlindContent:'.blind-content',
         fnFadeIn: function(blinds) {
             $('#js-loading-overlay').fadeOut(blinds.fadeDuration)
         },
