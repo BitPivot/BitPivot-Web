@@ -28,6 +28,7 @@ var Blinds = function(options) {
 
         // Fade out loading overlay
         if (fnFadeIn) fnFadeIn(this);
+
         // Initial animation
         setTimeout(function() { sections[0].find('header').click(); }, fadeDuration * 2);
     };
@@ -48,19 +49,19 @@ var Blinds = function(options) {
     function toggleBlind(section, expanded) {
         if (expanded) {
             section.addClass('expanded');
-            section.find('.blinc-content-area').fadeIn(fadeDuration);
+            section.find('.blind-content-area').fadeIn(fadeDuration);
         }
         else {
             section.removeClass('expanded');
-            section.find('.blinc-content-area').fadeOut(fadeDuration);
+            section.find('.blind-content-area').fadeOut(fadeDuration);
         }
     };
+
 
 
     /*
      * Event callbacks
      */
-
     function mousewheelCallback(sender, e) {
         if (expanding) return;
 
