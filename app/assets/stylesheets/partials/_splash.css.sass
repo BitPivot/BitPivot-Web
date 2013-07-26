@@ -21,6 +21,7 @@ body
 .blind
   position: relative
   height: 25%
+  -webkit-overflow-scrolling: touch
 
   &.collapsed
     height: $blind-collapsed-height
@@ -52,13 +53,15 @@ body
 
   h1
     display: block
+    cursor: pointer
     height: $blind-collapsed-height
     line-height: $blind-collapsed-height
     vertical-align: middle
     text-align: center
     +font(25px, #fff, 'pragmatica-extra-light')
-    background: #f00
 
+    .mission &
+      background: #0f0
 
 
 .blind-content
