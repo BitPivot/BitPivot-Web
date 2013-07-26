@@ -12,24 +12,13 @@ var Blinds = function(options) {
     var fadeDuration = options.fadeDuration || 1000;
     var fnHeaderClick = options.fnHeaderClick || null;
 
-    var classBlind = options.classBlind || '.blind';
-    var classBlindsWrapper = options.classBlindsWrapper || '.blinds-wrapper';
-    var classBlindExpanded = options.classBlindExpanded || '.expanded';
-    var classBlindCollapsed = options.classBlindCollapsed || '.collapsed';
-    var classBlindBanner = options.classBlindBanner || '.blind-banner';
-    var classBlindBannerHeader = '{0} {1}'.fmt(classBlindBanner, 'h1');
-    var classBlindBannerText = '{0} {1}'.fmt(classBlindBanner, 'span');
-    var classBlindContent = options.classBlindContent || '.blind-content';
-
-    console.log(classBlindBannerHeader);
-
     var initialize = function() {
         // Cache jQuery objects
-        $.each($(classBlind), function(i, s) { sections.push($(s)); });
+        $.each($('.blind'), function(i, s) { sections.push($(s)); });
 
         // Events
-        $(document).on('click', classBlindBannerHeader, function(e) { headerClickCallback(this, e); });
-        $(document).on('mousewheel', classBlind, function(e) { mousewheelCallback(this, e); });
+        $(document).on('click', '.blind-banner h1', function(e) { headerClickCallback(this, e); });
+        $(document).on('mousewheel', '.blind', function(e) { mousewheelCallback(this, e); });
         $(window).on('resize', function(e) { resizeCallback(this, e); });
 
         // Calculate initial sizes
@@ -38,16 +27,16 @@ var Blinds = function(options) {
         // Fade out loading overlay
         if (fnFadeIn) fnFadeIn(this);
         // Initial animation
-        setTimeout(function() { sections[0].find(classBlindBannerHeader).click(); }, fadeDuration * 2);
+        setTimeout(function() { sections[0].find('.blind-banner h1').click(); }, fadeDuration * 2);
     };
 
     function calculateHeights() {
         // Calculate collapsed height from CSS
-        var $div = $('<div class="{0} {1}"></div>'.fmt(classBlind, classBlindCollapsed).replace(/\./g, '')).hide().appendTo('body');
+        var $div = $('<div class="blind collapsed"></div>').hide().appendTo('body');
         hCollapsed = $div.css('height');
         $div.remove();
         // Calculate expanded height based on size of wrapper minus collapsed divs
-        hExpanded = parseInt($(classBlindsWrapper).css('height')) - ((sections.length - 1) * parseInt(hCollapsed)) + 'px';
+        hExpanded = parseInt($('.blinds-wrapper').css('height')) - ((sections.length - 1) * parseInt(hCollapsed)) + 'px';
     };
 
 
@@ -65,23 +54,30 @@ var Blinds = function(options) {
         });
     };
 
+
     function toggleSplashClass(section, expanded) {
         if (expanded) {
-            section.addClass(classBlindExpanded.removeAll('\\.'));
-            section.removeClass(classBlindCollapsed.removeAll('\\.'));
-            fade('in', section, [classBlindBannerText, classBlindContent]);
+            section.addClass('expanded');
+            section.removeClass('collapsed');
+            section.find('.blind-content').fadeIn(fadeDuration);
         }
         else {
-            section.removeClass(classBlindExpanded.removeAll('\\.'));
-            section.addClass(classBlindCollapsed.removeAll('\\.'));
-            fade('out', section, [classBlindBannerText, classBlindContent]);
+            section.removeClass('expanded');
+            section.addClass('collapsed');
+            section.find('.blind-content').fadeOut(fadeDuration);
         }
-    };
+    }
 
     function toggleSplashHeader(section, expanded) {
-        if (expanded) fade('out', section, [classBlindBannerHeader + ' img']);
-        else fade('in', section, [classBlindBannerHeader + ' img']);
-    };
+        if (expanded) {
+            section.find('.blind-banner h1').fadeOut(fadeDuration);
+            section.find('.blind-banner span').fadeIn(fadeDuration);
+        }
+        else {
+            section.find('.blind-banner h1').fadeIn(fadeDuration);
+            section.find('.blind-banner span').fadeOut(fadeDuration);
+        }
+    }
 
     function expand(i) {
         for (var j = 0; j < sections.length; j++) if (j !== i) collapse(j);
@@ -90,17 +86,6 @@ var Blinds = function(options) {
 
     function collapse(i) {
         resize(sections[i], hCollapsed, fadeDuration, false);
-    };
-
-    // Fade an array of elements by their class names
-    function fade(direction, section, elements, duration) {
-        $.each(elements, function(i, e) {
-            if (direction === 'in') {
-                section.find(e).fadeIn(duration || fadeDuration);
-            } else if (direction === 'out') {
-                section.find(e).fadeOut(duration || fadeDuration);
-            }
-        });
     };
 
 
@@ -121,8 +106,8 @@ var Blinds = function(options) {
         if (scrollHeight - (scrollTop + 1) == outerHeight || scrollHeight - scrollTop == outerHeight) {
             // scrolling down
             if (scrolledToBottom && direction === 'down') {
-                var sectionIndex = section.parent().find(classBlind).index(e.currentTarget);
-                sections[++sectionIndex].find(classBlindBannerHeader).click();
+                var sectionIndex = section.parent().find('.blind').index(e.currentTarget);
+                sections[++sectionIndex].find('.blind-banner h1').click();
                 scrolledToBottom = false;
             } else {
                 scrolledToBottom = true;
@@ -132,8 +117,8 @@ var Blinds = function(options) {
         if (section.scrollTop() == 0) {
             // scrolling up
             if (scrolledToTop && direction === 'up') {
-                var sectionIndex = section.parent().find(classBlind).index(e.currentTarget);
-                sections[--sectionIndex].find(classBlindBannerHeader).click();
+                var sectionIndex = section.parent().find('.blind').index(e.currentTarget);
+                sections[--sectionIndex].find('.blind-banner h1').click();
                 scrolledToTop = false;
             } else {
                 scrolledToTop = true;
@@ -148,7 +133,7 @@ var Blinds = function(options) {
     };
 
     function headerClickCallback(sender, e) {
-        expand($(classBlind).index($(sender).closest(classBlind)));
+        expand($('.blind').index($(sender).closest('.blind')));
         if (fnHeaderClick) fnHeaderClick(this); // Custom callback
     };
 
@@ -163,15 +148,3 @@ var Blinds = function(options) {
 
 // Set Jquery default easing
 $.easing.def = "easeInOutCubic";
-
-// For .NET-like string format
-String.prototype.fmt = function() {
-    var s = this;
-    for (var i = 0; i < arguments.length; i++)
-        s = s.replace('{' + i + '}', arguments[i]);
-    return s;
-};
-
-String.prototype.removeAll = function(toRemove) {
-    return this.replace(new RegExp(toRemove, 'g'), '');
-};
