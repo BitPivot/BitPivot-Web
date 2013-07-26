@@ -17,7 +17,7 @@ var Blinds = function(options) {
         $.each($('.blind'), function(i, s) { sections.push($(s)); });
 
         // Events
-        $(document).on('click', '.blind-banner h1', function(e) { headerClickCallback(this, e); });
+        $(document).on('click', '.blind header', function(e) { headerClickCallback(this, e); });
         $(document).on('mousewheel', '.blind', function(e) { mousewheelCallback(this, e); });
         $(window).on('resize', function(e) { resizeCallback(this, e); });
 
@@ -27,7 +27,7 @@ var Blinds = function(options) {
         // Fade out loading overlay
         if (fnFadeIn) fnFadeIn(this);
         // Initial animation
-        setTimeout(function() { sections[0].find('.blind-banner h1').click(); }, fadeDuration * 2);
+        setTimeout(function() { sections[0].find('header').click(); }, fadeDuration * 2);
     };
 
     function calculateHeights() {
@@ -42,40 +42,24 @@ var Blinds = function(options) {
 
     function resize(section, height, duration, expanded) {
         expanding = true;
-        toggleSplashHeader(section, expanded);
+        toggleBlindVisibility(section, expanded);
         section.animate({scrollTop: 0}, {duration: fadeDuration, queue: false});
         section.animate({ height: height }, {
             duration: duration,
             complete: function() {
-                toggleSplashClass(section, expanded);
+                toggleBlindClass(section, expanded);
                 expanding = false;
             },
             queue: false
         });
     };
 
-
-    function toggleSplashClass(section, expanded) {
+    function toggleBlindVisibility(section, expanded) {
         if (expanded) {
-            section.addClass('expanded');
-            section.removeClass('collapsed');
             section.find('.blind-content').fadeIn(fadeDuration);
         }
         else {
-            section.removeClass('expanded');
-            section.addClass('collapsed');
             section.find('.blind-content').fadeOut(fadeDuration);
-        }
-    }
-
-    function toggleSplashHeader(section, expanded) {
-        if (expanded) {
-            section.find('.blind-banner h1').fadeOut(fadeDuration);
-            section.find('.blind-banner span').fadeIn(fadeDuration);
-        }
-        else {
-            section.find('.blind-banner h1').fadeIn(fadeDuration);
-            section.find('.blind-banner span').fadeOut(fadeDuration);
         }
     }
 
@@ -107,7 +91,7 @@ var Blinds = function(options) {
             // scrolling down
             if (scrolledToBottom && direction === 'down') {
                 var sectionIndex = section.parent().find('.blind').index(e.currentTarget);
-                sections[++sectionIndex].find('.blind-banner h1').click();
+                sections[++sectionIndex].find('.blind header').click();
                 scrolledToBottom = false;
             } else {
                 scrolledToBottom = true;
@@ -118,7 +102,7 @@ var Blinds = function(options) {
             // scrolling up
             if (scrolledToTop && direction === 'up') {
                 var sectionIndex = section.parent().find('.blind').index(e.currentTarget);
-                sections[--sectionIndex].find('.blind-banner h1').click();
+                sections[--sectionIndex].find('.blind header').click();
                 scrolledToTop = false;
             } else {
                 scrolledToTop = true;

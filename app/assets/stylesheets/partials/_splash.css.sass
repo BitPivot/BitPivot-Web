@@ -21,14 +21,34 @@ body
 .blind
   position: relative
   height: 25%
-  //-webkit-overflow-scrolling: touch
+  overflow: hidden
 
   &.collapsed
     height: $blind-collapsed-height
-    overflow: hidden
 
-  &.expanded
-    overflow-y: scroll
+
+
+header
+  display: block
+  cursor: pointer
+  height: $blind-collapsed-height
+  line-height: $blind-collapsed-height
+  vertical-align: middle
+  text-align: center
+  +font(25px, #fff, 'pragmatica-extra-light')
+  text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5)
+
+  .our-mission &
+    background: $blinds-purple-1
+
+  .mobile-presence &
+    background: $blinds-purple-2
+
+  .consulting &
+    background: $blinds-purple-3
+
+  .contact-us &
+    background: $blinds-purple-4
 
 
 
@@ -51,29 +71,10 @@ body
   .contact-us &
     background-image: image-url('splash/consulting-background.jpg')
 
-  h1
-    display: block
-    cursor: pointer
-    height: $blind-collapsed-height
-    line-height: $blind-collapsed-height
-    vertical-align: middle
-    text-align: center
-    +font(25px, #fff, 'pragmatica-extra-light')
-    text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5)
-
-    .our-mission &
-      background: $blinds-purple-1
-
-    .mobile-presence &
-      background: $blinds-purple-2
-
-    .consulting &
-      background: $blinds-purple-3
-
-    .contact-us &
-      background: $blinds-purple-4
-
 
 .blind-content
-  display: none
+  +position(relative)
+  height: 100%
   color: #fff
+  -webkit-overflow-scrolling: touch
+  overflow-y: scroll
