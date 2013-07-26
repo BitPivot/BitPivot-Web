@@ -13,13 +13,15 @@ var Blinds = function(options) {
     var fnHeaderClick = options.fnHeaderClick || null;
 
     var classBlind = options.classBlind || '.blind';
-    var classBlindWrapper = options.classBlindWrapper || '.blind-wrapper';
+    var classBlindsWrapper = options.classBlindsWrapper || '.blinds-wrapper';
     var classBlindExpanded = options.classBlindExpanded || '.expanded';
     var classBlindCollapsed = options.classBlindCollapsed || '.collapsed';
     var classBlindBanner = options.classBlindBanner || '.blind-banner';
-    var classBlindBannerHeader = options.classBlindBannerHeader || '.blind-banner__header';
-    var classBlindBannerText = options.classBlindBannerText || '.blind-banner__text';
+    var classBlindBannerHeader = '{0} {1}'.fmt(classBlindBanner, 'h1');
+    var classBlindBannerText = '{0} {1}'.fmt(classBlindBanner, 'span');
     var classBlindContent = options.classBlindContent || '.blind-content';
+
+    console.log(classBlindBannerHeader);
 
     var initialize = function() {
         // Cache jQuery objects
@@ -45,7 +47,7 @@ var Blinds = function(options) {
         hCollapsed = $div.css('height');
         $div.remove();
         // Calculate expanded height based on size of wrapper minus collapsed divs
-        hExpanded = parseInt($(classBlindWrapper).css('height')) - ((sections.length - 1) * parseInt(hCollapsed)) + 'px';
+        hExpanded = parseInt($(classBlindsWrapper).css('height')) - ((sections.length - 1) * parseInt(hCollapsed)) + 'px';
     };
 
 
@@ -74,7 +76,6 @@ var Blinds = function(options) {
             section.addClass(classBlindCollapsed.removeAll('\\.'));
             fade('out', section, [classBlindBannerText, classBlindContent]);
         }
-        toggleSplashHeader(section, expanded);
     };
 
     function toggleSplashHeader(section, expanded) {
@@ -101,7 +102,6 @@ var Blinds = function(options) {
             }
         });
     };
-
 
 
     /*
