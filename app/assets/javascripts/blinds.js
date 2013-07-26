@@ -54,7 +54,6 @@ var Blinds = function(options) {
         });
     };
 
-
     function toggleSplashClass(section, expanded) {
         if (expanded) {
             section.addClass('expanded');
@@ -66,7 +65,7 @@ var Blinds = function(options) {
             section.addClass('collapsed');
             section.find('.blind-content').fadeOut(fadeDuration);
         }
-    }
+    };
 
     function toggleSplashHeader(section, expanded) {
         if (expanded) {
@@ -77,7 +76,7 @@ var Blinds = function(options) {
             section.find('.blind-banner h1').fadeIn(fadeDuration);
             section.find('.blind-banner span').fadeOut(fadeDuration);
         }
-    }
+    };
 
     function expand(i) {
         for (var j = 0; j < sections.length; j++) if (j !== i) collapse(j);
