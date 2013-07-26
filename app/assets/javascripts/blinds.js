@@ -20,6 +20,7 @@ var Blinds = function(options) {
         $(document).on('click', '.blind header', function(e) { headerClickCallback(this, e); });
         $(document).on('mousewheel', '.blind', function(e) { mousewheelCallback(this, e); });
         $(window).on('resize', function(e) { resizeCallback(this, e); });
+        $(window).on('orientationchange', function(e) { resizeCallback(this, e); });
 
         // Calculate initial sizes
         $(window).trigger('resize');
@@ -35,6 +36,7 @@ var Blinds = function(options) {
         var $div = $('<div class="blind collapsed"></div>').hide().appendTo('body');
         hCollapsed = $div.css('height');
         $div.remove();
+
         // Calculate expanded height based on size of wrapper minus collapsed divs
         hExpanded = parseInt($('.blinds-wrapper').css('height')) - ((sections.length - 1) * parseInt(hCollapsed)) + 'px';
     };
@@ -42,26 +44,27 @@ var Blinds = function(options) {
 
     function resize(section, height, duration, expanded) {
         expanding = true;
-        toggleBlindVisibility(section, expanded);
+        toggleBlind(section, expanded);
         section.animate({scrollTop: 0}, {duration: fadeDuration, queue: false});
         section.animate({ height: height }, {
             duration: duration,
             complete: function() {
-                toggleBlindClass(section, expanded);
-                expanding = false;
+            expanding = false;
             },
             queue: false
         });
     };
 
-    function toggleBlindVisibility(section, expanded) {
+    function toggleBlind(section, expanded) {
         if (expanded) {
+            section.addClass('expanded');
             section.find('.blind-content').fadeIn(fadeDuration);
         }
         else {
+            section.removeClass('expanded');
             section.find('.blind-content').fadeOut(fadeDuration);
         }
-    }
+    };
 
     function expand(i) {
         for (var j = 0; j < sections.length; j++) if (j !== i) collapse(j);
