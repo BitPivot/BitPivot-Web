@@ -66,14 +66,17 @@
 
 
 
-// Gradients
-=gradient-vertical($start, $end, $fallback)
-  background: mix($start, $end) $fallback left top repeat-x
-  .gradient &
-    background: -webkit-linear-gradient($start, $end)
-    background: -moz-linear-gradient($start, $end)
-    background: -o-linear-gradient($start, $end)
-    background: linear-gradient($start, $end)
+=gradient-radial($start, $end: false)
+  @if not $end
+    $end: darken($start, 5%)
+
+  background: $start
+  background-image: -ms-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
+  background-image: -moz-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
+  background-image: -o-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
+  background-image: -webkit-gradient(radial, center center, 0, center center, 497, color-stop(0, $start), color-stop(1, $end))
+  background-image: -webkit-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
+  background-image: radial-gradient(circle farthest-corner at center, $start 0%, $end 100%)
 
 
 
