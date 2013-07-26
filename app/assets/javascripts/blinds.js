@@ -19,7 +19,7 @@ var Blinds = function(options) {
 
         // Events
         $(document).on('click', '.blind header', function(e) { headerClickCallback(this, e); });
-        $(document).on('mousewheel', '.blind', function(e) { mousewheelCallback(this, e); });
+        $(document).on('mousewheel', '.blind-content', function(e) { mousewheelCallback(this, e); });
         $(window).on('resize', function(e) { resizeCallback(this, e); });
         $(window).on('orientationchange', function(e) { resizeCallback(this, e); });
 
@@ -65,21 +65,23 @@ var Blinds = function(options) {
     function mousewheelCallback(sender, e) {
         if (expanding) return;
 
-        var section = $(e.currentTarget);
+        var $blindContent = $(e.currentTarget);
+        var section = $blindContent.closest('.blind');
         var scrollTop = section.scrollTop();
         var scrollHeight = section[0].scrollHeight;
+        var scrollbarPresent = $blindContent.scrollHeight > $blindContent.height();
         var outerHeight = section.outerHeight();
         var direction = e.originalEvent.wheelDelta >= 0 ? 'up' : 'down';
-        var i = section.parent().find('.blind').index(e.currentTarget);
+        var i = $('.blind').index(section);
 
         // scrolled to bottom of element
         if (scrollHeight - (scrollTop + 1) === outerHeight || scrollHeight - scrollTop === outerHeight) {
             // scrolling down
             if (scrolledToBottom && direction === 'down') {
                 // not viewing bottom section
-                if (i !== sections.length - 1)
+                if (i !== sections.length - 1 || !scrollbarPresent)
                 // open section below
-                    sections[++i].find('.blind header').click();
+                    sections[i+1].find('header').click();
                 scrolledToBottom = false;
             } else {
                 scrolledToBottom = true;
@@ -90,9 +92,9 @@ var Blinds = function(options) {
             // scrolling up
             if (scrolledToTop && direction === 'up') {
                 // not viewing top section
-                if (i !== 0)
+                if (i !== 0 || !scrollbarPresent)
                 // open section above
-                    sections[--i].find('.blind header').click();
+                    sections[i-1].find('header').click();
                 scrolledToTop = false;
             } else {
                 scrolledToTop = true;
