@@ -87,15 +87,39 @@ body
     background: rgba(0, 0, 0, 0.65)
     padding: $margin / 2
     text-align: center
-    +font(25px, #fff, 'pragmatica-extra-light')
+    +font(30px, #fff, 'pragmatica-extra-light')
 
     +breakpoint('tiny')
       +font(17px, #fff, 'pragmatica-extra-light')
 
 
-.blind-content
-  +position(relative)
-  height: 100%
-  color: #fff
+
+.blind-content-area
+  +position(absolute, $blind-collapsed-height, 0, 0, 0)
   -webkit-overflow-scrolling: touch
   overflow-y: scroll
+
+  +breakpoint('tiny')
+    +position(absolute, $blind-collapsed-height-tiny, 0, 0, 0)
+
+
+
+.blind-content
+  padding: $margin
+  +font($page-font-size, #aaa, 'pragmatica-light')
+  line-height: $page-line-height
+
+  h1
+    +font(20px, #ddd, 'pragmatica-extra-light')
+    line-height: 20px
+    +h1-border
+    +type-pad-bottom
+
+  h2
+    +font(17px, #ddd, 'pragmatica-extra-light')
+    line-height: 17px
+    +h1-border
+    +type-pad-bottom
+
+  p
+    +type-pad-bottom
