@@ -144,7 +144,19 @@
     font-weight: 300
     font-style: normal
 
-  @if $font-family == 'pragmatica-book'
+  @if $font-family == 'pragmatica-bold'
     font-family: 'pragmatica-web', 'Helvetica Neue', Helvetica, Arial, sans-serif
-    font-weight: 400
+    font-weight: 700
     font-style: normal
+
+
+
+=h1-border
+  padding-bottom: 5px
+  border-bottom: 1px solid $purple-dark
+
+=type-pad-bottom
+  margin-bottom: $margin
+
+  &:last-child
+    margin-bottom: 0

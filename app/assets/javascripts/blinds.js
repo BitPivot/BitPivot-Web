@@ -39,7 +39,7 @@ var Blinds = function(options) {
         section.animate({ height: height }, {
             duration: duration,
             complete: function() {
-                expanding = false;
+            expanding = false;
             },
             queue: false
         });
@@ -48,11 +48,11 @@ var Blinds = function(options) {
     function toggleBlind(section, expanded) {
         if (expanded) {
             section.addClass('expanded');
-            section.find('.blind-content').fadeIn(fadeDuration);
+            section.find('.blinc-content-area').fadeIn(fadeDuration);
         }
         else {
             section.removeClass('expanded');
-            section.find('.blind-content').fadeOut(fadeDuration);
+            section.find('.blinc-content-area').fadeOut(fadeDuration);
         }
     };
 
