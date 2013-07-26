@@ -21,7 +21,7 @@ body
 .blind
   position: relative
   height: 25%
-  -webkit-overflow-scrolling: touch
+  //-webkit-overflow-scrolling: touch
 
   &.collapsed
     height: $blind-collapsed-height
@@ -38,17 +38,17 @@ body
   background: #000 no-repeat 50% 50%
   +background-size-cover
 
-  .mission &
+  .our-mission &
     background-image: image-url('splash/mission-background.jpg')
     background-position: 70% 50%
 
-  .mobile &
+  .mobile-presence &
     background-image: image-url('splash/mobile-background.jpg')
 
-  .integration &
+  .consulting &
     background-image: image-url('splash/integration-background.jpg')
 
-  .consulting &
+  .contact-us &
     background-image: image-url('splash/consulting-background.jpg')
 
   h1
@@ -59,9 +59,19 @@ body
     vertical-align: middle
     text-align: center
     +font(25px, #fff, 'pragmatica-extra-light')
+    text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5)
 
-    .mission &
-      background: #0f0
+    .our-mission &
+      background: $blinds-purple-1
+
+    .mobile-presence &
+      background: $blinds-purple-2
+
+    .consulting &
+      background: $blinds-purple-3
+
+    .contact-us &
+      background: $blinds-purple-4
 
 
 .blind-content
