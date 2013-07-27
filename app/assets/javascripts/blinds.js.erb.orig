@@ -33,40 +33,61 @@ var Blinds = function(options) {
         setTimeout(function() { blinds[0].find('header').click(); }, fadeDuration * 2);
     };
 
+<<<<<<< HEAD:app/assets/javascripts/blinds.js.erb
     function resize($blind, height, duration, expanded) {
-        blockScroll = true;
+        expanding = true;
         toggleBlind($blind, expanded);
         $blind.animate({scrollTop: 0}, {duration: fadeDuration, queue: false});
         $blind.animate({ height: height }, {
             duration: duration,
             complete: function() {
+                expanding = false;
+=======
+    function resize(section, height, duration, expanded) {
+        blockScroll = true;
+        toggleBlind(section, expanded)
+        section.animate({scrollTop: 0}, {duration: fadeDuration, queue: false});
+        section.animate({ height: height }, {
+            duration: duration,
+            complete: function() {
                 blockScroll = false;
+>>>>>>> 27ed413c4600ed959fb3c9395ec5f614afd1362e:app/assets/javascripts/blinds.js
             },
             queue: false
         });
     };
 
+<<<<<<< HEAD:app/assets/javascripts/blinds.js.erb
     function toggleBlind($blind, expanded) {
-        toggleBlindShadows($blind, expanded);
         if (expanded) {
+            $blind.addClass('expanded');
             $blind.find('.blind-content-area').fadeIn(fadeDuration);
         }
         else {
+            $blind.removeClass('expanded');
             $blind.find('.blind-content-area').fadeOut(fadeDuration);
+=======
+    function toggleBlind(section, expanded) {
+        toggleBlindShadows(section, expanded);
+        if (expanded) {
+            section.find('.blind-content-area').fadeIn(fadeDuration);
+        }
+        else {
+            section.find('.blind-content-area').fadeOut(fadeDuration);
+>>>>>>> 27ed413c4600ed959fb3c9395ec5f614afd1362e:app/assets/javascripts/blinds.js
         }
     };
 
-    function toggleBlindShadows($blind, expanded) {
+    function toggleBlindShadows(section, expanded) {
         setTimeout(function() {
             if (expanded) {
-                $blind.removeClass('collapsed').addClass('expanded');
+                section.removeClass('collapsed').addClass('expanded');
             }
             else {
-                $blind.removeClass('expanded').addClass('collapsed');
+                section.removeClass('expanded').addClass('collapsed');
             }
         }, fadeDuration / 2);
     }
-
 
 
     /*

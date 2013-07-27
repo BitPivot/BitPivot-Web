@@ -16,6 +16,10 @@
     @media (min-width: 901px)
       @content
 
+  @if $media == "landscape"
+    @media screen and (orientation: landscape)
+      @content
+
   @if $media == 'non-retina'
     @media screen and (-webkit-max-device-pixel-ratio: 1)
       @content
@@ -80,46 +84,20 @@
 
 
 
-// Rounded Corners
-=rounded-top-left($radius)
-  -moz-border-top-left-radius: $radius
-  -webkit-border-top-left-radius: $radius
-  border-top-left-radius: $radius
+=no-drop-shadow()
+  -webkit-box-shadow: none
+  -moz-box-shadow: none
+  box-shadow: none
 
-=rounded-top-right($radius)
-  -moz-border-top-right-radius: $radius
-  -webkit-border-top-right-radius: $radius
-  border-top-right-radius: $radius
+=drop-shadow-bottom($size, $color: rgba(0, 0, 0, 0.65))
+  -webkit-box-shadow: 0px 0px $size $color
+  -moz-box-shadow: 0px 0px $size $color
+  box-shadow: 0px 0px $size $color
 
-=rounded-bottom-left($radius)
-  -moz-border-bottom-left-radius: $radius
-  -webkit-border-bottom-left-radius: $radius
-  border-bottom-left-radius: $radius
-
-=rounded-bottom-right($radius)
-  -moz-border-bottom-right-radius: $radius
-  -webkit-border-bottom-right-radius: $radius
-  border-bottom-right-radius: $radius
-
-=rounded-top($radius)
-  +rounded-top-left($radius)
-  +rounded-top-right($radius)
-
-=rounded-bottom($radius)
-  +rounded-bottom-left($radius)
-  +rounded-bottom-right($radius)
-
-=rounded-left($radius)
-  +rounded-top-left($radius)
-  +rounded-bottom-left($radius)
-
-=rounded-right($radius)
-  +rounded-top-right($radius)
-  +rounded-bottom-right($radius)
-
-=rounded($radius)
-  +rounded-top($radius)
-  +rounded-bottom($radius)
+=drop-shadow-inner-bottom($size, $color: rgba(0, 0, 0, 1))
+  -webkit-box-shadow: 0px 0px $size $color inset
+  -moz-box-shadow: 0px 0px $size $color inset
+  box-shadow: 0px 0px $size $color inset
 
 
 
@@ -129,6 +107,11 @@
   -moz-background-size: cover
   -o-background-size: cover
   background-size: cover
+
+=box-sizing-border-box
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  box-sizing: border-box
 
 
 
@@ -154,6 +137,7 @@
 
 
 
+// Reusable typography components
 =h1-border
   padding-bottom: 5px
   border-bottom: 1px solid $purple-dark
