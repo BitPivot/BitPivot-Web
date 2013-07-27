@@ -33,39 +33,34 @@ var Blinds = function(options) {
         setTimeout(function() { sections[0].find('header').click(); }, fadeDuration * 2);
     };
 
-    function resize(section, height, duration, expanded) {
+    function resize(section, expanded, position) {
         blockScroll = true;
-        toggleBlind(section, expanded)
-        section.animate({scrollTop: 0}, {duration: fadeDuration, queue: false});
-        section.animate({ height: height }, {
-            duration: duration,
-            complete: function() {
-                blockScroll = false;
-            },
-            queue: false
-        });
-    };
-
-    function toggleBlind(section, expanded) {
-        toggleBlindShadows(section, expanded);
+        //section.animate({scrollTop: 0}, {duration: fadeDuration, queue: false}); // TODO
         if (expanded) {
-            section.find('.blind-content-area').fadeIn(fadeDuration);
+            section.removeClass('collapsed').removeClass('top').removeClass('bottom');
+            section.addClass('expanded');
         }
         else {
-            section.find('.blind-content-area').fadeOut(fadeDuration);
+            section.removeClass('expanded');
+            switch(position) {
+                case 'top':
+                    section.removeClass('expanded').removeClass('bottom');
+                    section.addClass('collapsed').addClass('top');
+                    break;
+                case 'bottom':
+                    section.removeClass('expanded').removeClass('top');
+                    section.addClass('collapsed').addClass('bottom');
+                    break;
+            }
         }
+        //section.animate({ height: height }, {
+        //    duration: duration,
+        //    complete: function() {
+        //        blockScroll = false;
+        //    },
+        //    queue: false
+        //});
     };
-
-    function toggleBlindShadows(section, expanded) {
-        setTimeout(function() {
-            if (expanded) {
-                section.removeClass('collapsed').addClass('expanded');
-            }
-            else {
-                section.removeClass('expanded').addClass('collapsed');
-            }
-        }, fadeDuration / 2);
-    }
 
 
 
@@ -130,8 +125,8 @@ var Blinds = function(options) {
 
         for (var i = 0; i < sections.length; i++) {
             var expanded = i === index;
-            var height = expanded ? hExpanded : hCollapsed
-            resize(sections[i], height, fadeDuration, expanded);
+            var position = i < index ? 'top' : 'bottom'
+            resize(sections[i], expanded, position);
         }
 
         if (fnHeaderClick) fnHeaderClick(this); // Custom callback
