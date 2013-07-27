@@ -1,6 +1,6 @@
 var Blinds = function(options) {
 
-    var sections = [];
+    var blinds = [];
     var hExpanded = 0;
     var hCollapsed = 0;
     var expanding = false;
@@ -15,7 +15,7 @@ var Blinds = function(options) {
 
     var initialize = function() {
         // Cache jQuery objects
-        $.each($('.blind'), function(i, s) { sections.push($(s)); });
+        $.each($('.blind'), function(i, s) { blinds.push($(s)); });
 
         // Events
         $(document).on('click', '.blind header', function(e) { headerClickCallback(this, e); });
@@ -30,14 +30,14 @@ var Blinds = function(options) {
         if (fnFadeIn) fnFadeIn(this);
 
         // Initial animation
-        setTimeout(function() { sections[0].find('header').click(); }, fadeDuration * 2);
+        setTimeout(function() { blinds[0].find('header').click(); }, fadeDuration * 2);
     };
 
-    function resize(section, height, duration, expanded) {
+    function resize($blind, height, duration, expanded) {
         expanding = true;
-        toggleBlind(section, expanded);
-        section.animate({scrollTop: 0}, {duration: fadeDuration, queue: false});
-        section.animate({ height: height }, {
+        toggleBlind($blind, expanded);
+        $blind.animate({scrollTop: 0}, {duration: fadeDuration, queue: false});
+        $blind.animate({ height: height }, {
             duration: duration,
             complete: function() {
                 expanding = false;
@@ -46,14 +46,14 @@ var Blinds = function(options) {
         });
     };
 
-    function toggleBlind(section, expanded) {
+    function toggleBlind($blind, expanded) {
         if (expanded) {
-            section.addClass('expanded');
-            section.find('.blind-content-area').fadeIn(fadeDuration);
+            $blind.addClass('expanded');
+            $blind.find('.blind-content-area').fadeIn(fadeDuration);
         }
         else {
-            section.removeClass('expanded');
-            section.find('.blind-content-area').fadeOut(fadeDuration);
+            $blind.removeClass('expanded');
+            $blind.find('.blind-content-area').fadeOut(fadeDuration);
         }
     };
 
@@ -64,23 +64,23 @@ var Blinds = function(options) {
     function mousewheelCallback(sender, e) {
         if (expanding) return;
 
-        var blind = $(e.currentTarget);
-        var content = $(blind.find('.blind-content-area'));
-        var scrollTop = content.scrollTop();
-        var scrollHeight = blind.find('.blind-content-area')[0].scrollHeight
-        var scrollbarPresent = content.scrollHeight > content.height();
-        var outerHeight = content.outerHeight();
+        var $blind = $(e.currentTarget);
+        var $content = $($blind.find('.blind-content-area'));
+        var iBlind = $('.blind').index($blind);
+        var scrollTop = $content.scrollTop();
+        var scrollHeight = $blind.find('.blind-content-area')[0].scrollHeight
+        var scrollbarPresent = $content.scrollHeight > $content.height();
+        var outerHeight = $content.outerHeight();
         var direction = e.originalEvent.wheelDelta >= 0 ? 'up' : 'down';
-        var i = $('.blind').index(blind);
 
         // scrolled to bottom of blind
         if (scrollHeight - (scrollTop + 1) === outerHeight || scrollHeight - scrollTop === outerHeight) {
             // scrolling down
             if (scrolledToBottom && direction === 'down') {
                 // not viewing bottom blind
-                if (i !== sections.length - 1 || !scrollbarPresent)
+                if (iBlind !== blinds.length - 1 || !scrollbarPresent)
                     // open blind below
-                    sections[i + 1].find('header').click();
+                    blinds[iBlind + 1].find('header').click();
                 scrolledToBottom = false;
             } else {
                 scrolledToBottom = true;
@@ -91,9 +91,9 @@ var Blinds = function(options) {
             // scrolling up
             if (scrolledToTop && direction === 'up') {
                 // not viewing top blind
-                if (i !== 0 || !scrollbarPresent)
+                if (iBlind !== 0 || !scrollbarPresent)
                     // open blind above
-                    sections[i - 1].find('header').click();
+                    blinds[iBlind - 1].find('header').click();
                 scrolledToTop = false;
             } else {
                 scrolledToTop = true;
@@ -109,7 +109,7 @@ var Blinds = function(options) {
         $div.remove();
 
         // Calculate expanded height based on size of wrapper minus collapsed divs
-        hExpanded = parseInt($('.blinds-wrapper').css('height')) - ((sections.length - 1) * parseInt(hCollapsed)) + 'px';
+        hExpanded = parseInt($('.blinds-wrapper').css('height')) - ((blinds.length - 1) * parseInt(hCollapsed)) + 'px';
 
         if (fnResize) fnResize(hExpanded, hCollapsed); // Custom callback
     };
@@ -117,10 +117,10 @@ var Blinds = function(options) {
     function headerClickCallback(sender, e) {
         var index = headerIndex($(sender));
 
-        for (var i = 0; i < sections.length; i++) {
+        for (var i = 0; i < blinds.length; i++) {
             var expanded = i === index;
             var height = expanded ? hExpanded : hCollapsed
-            resize(sections[i], height, fadeDuration, expanded);
+            resize(blinds[i], height, fadeDuration, expanded);
         }
 
         if (fnHeaderClick) fnHeaderClick(this); // Custom callback
