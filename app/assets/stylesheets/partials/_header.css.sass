@@ -3,10 +3,13 @@
 
 
 header
+  +position(relative)
   padding: 0
   height: $page-header-height
   background: #000
   font: 1em $font-helvetica normal
+  z-index: 1000
+  +drop-shadow-bottom(10px)
 
   +breakpoint('tiny')
     height: $page-header-height-tiny

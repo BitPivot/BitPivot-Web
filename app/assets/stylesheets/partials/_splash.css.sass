@@ -18,6 +18,23 @@ body
   position: relative
   height: 25%
   overflow: hidden
+  +drop-shadow-bottom(20px)
+
+  &.our-mission
+    z-index: 103
+
+  &.mobile-presence
+    z-index: 102
+
+  &.consulting
+    z-index: 101
+
+  &.contact-us
+    z-index: 100
+
+  &.expanded
+    z-index: 99
+    +no-drop-shadow()
 
   &.collapsed
     height: $blind-collapsed-height
@@ -26,14 +43,17 @@ body
       height: $blind-collapsed-height-tiny
 
   header
+    +position(relative)
     display: block
     cursor: pointer
     height: $blind-collapsed-height
     line-height: $blind-collapsed-height
     vertical-align: middle
     text-align: center
-    +font($blind-collapsed-height - ($margin / 1.25), #fff, 'pragmatica-extra-light')
+    +font($blind-collapsed-height - ($margin * 1.25), #fff, 'pragmatica-extra-light')
     text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5)
+    z-index: 100
+    +drop-shadow-bottom(20px, rgba(0, 0, 0, 1))
 
     +breakpoint('tiny')
       height: $blind-collapsed-height-tiny
@@ -104,6 +124,7 @@ body
   padding: $margin
   +font($page-font-size, #aaa, 'pragmatica-light')
   line-height: $page-line-height
+  +drop-shadow-inner-bottom(50px)
 
   h1
     +font(20px, #ddd, 'pragmatica-extra-light')

@@ -68,7 +68,7 @@
 
 =gradient-radial($start, $end: false)
   @if not $end
-    $end: darken($start, 5%)
+    $end: darken($start, 7%)
 
   background: $start
   background-image: -ms-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
@@ -77,6 +77,23 @@
   background-image: -webkit-gradient(radial, center center, 0, center center, 497, color-stop(0, $start), color-stop(1, $end))
   background-image: -webkit-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
   background-image: radial-gradient(circle farthest-corner at center, $start 0%, $end 100%)
+
+
+
+=no-drop-shadow()
+  -webkit-box-shadow: none
+  -moz-box-shadow: none
+  box-shadow: none
+
+=drop-shadow-bottom($size, $color: rgba(0, 0, 0, 0.65))
+  -webkit-box-shadow: 0px 0px $size $color
+  -moz-box-shadow: 0px 0px $size $color
+  box-shadow: 0px 0px $size $color
+
+=drop-shadow-inner-bottom($size, $color: rgba(0, 0, 0, 1))
+  -webkit-box-shadow: 0px 0px $size $color inset
+  -moz-box-shadow: 0px 0px $size $color inset
+  box-shadow: 0px 0px $size $color inset
 
 
 
