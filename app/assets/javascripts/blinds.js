@@ -3,7 +3,7 @@ var Blinds = function(options) {
     var sections = [];
     var hExpanded = 0;
     var hCollapsed = 0;
-    var expanding = false;
+    var blockScroll = false;
     var scrolledToTop = null;
     var scrolledToBottom = null;
     var fnFadeIn = options.fnFadeIn || null;
@@ -34,28 +34,38 @@ var Blinds = function(options) {
     };
 
     function resize(section, height, duration, expanded) {
-        expanding = true;
-        toggleBlind(section, expanded);
+        blockScroll = true;
+        toggleBlind(section, expanded)
         section.animate({scrollTop: 0}, {duration: fadeDuration, queue: false});
         section.animate({ height: height }, {
             duration: duration,
             complete: function() {
-            expanding = false;
+            blockScroll = false;
             },
             queue: false
         });
     };
 
     function toggleBlind(section, expanded) {
+        toggleBlindShadows(section, expanded);
         if (expanded) {
-            section.addClass('expanded');
             section.find('.blind-content-area').fadeIn(fadeDuration);
         }
         else {
-            section.removeClass('expanded');
             section.find('.blind-content-area').fadeOut(fadeDuration);
         }
     };
+
+    function toggleBlindShadows(section, expanded) {
+        setTimeout(function() {
+            if (expanded) {
+                section.removeClass('collapsed').addClass('expanded');
+            }
+            else {
+                section.removeClass('expanded').addClass('collapsed');
+            }
+        }, fadeDuration / 2);
+    }
 
 
 
@@ -63,7 +73,7 @@ var Blinds = function(options) {
      * Event callbacks
      */
     function mousewheelCallback(sender, e) {
-        if (expanding) return;
+        if (blockScroll) return;
 
         var $blindContent = $(e.currentTarget);
         var section = $blindContent.closest('.blind');
