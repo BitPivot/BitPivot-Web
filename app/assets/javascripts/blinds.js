@@ -40,7 +40,7 @@ var Blinds = function(options) {
         section.animate({ height: height }, {
             duration: duration,
             complete: function() {
-            blockScroll = false;
+                blockScroll = false;
             },
             queue: false
         });

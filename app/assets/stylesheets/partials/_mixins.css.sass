@@ -68,7 +68,7 @@
 
 =gradient-radial($start, $end: false)
   @if not $end
-    $end: darken($start, 7%)
+    $end: darken($start, 5%)
 
   background: $start
   background-image: -ms-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
@@ -94,49 +94,6 @@
   -webkit-box-shadow: 0px 0px $size $color inset
   -moz-box-shadow: 0px 0px $size $color inset
   box-shadow: 0px 0px $size $color inset
-
-
-
-// Rounded Corners
-=rounded-top-left($radius)
-  -moz-border-top-left-radius: $radius
-  -webkit-border-top-left-radius: $radius
-  border-top-left-radius: $radius
-
-=rounded-top-right($radius)
-  -moz-border-top-right-radius: $radius
-  -webkit-border-top-right-radius: $radius
-  border-top-right-radius: $radius
-
-=rounded-bottom-left($radius)
-  -moz-border-bottom-left-radius: $radius
-  -webkit-border-bottom-left-radius: $radius
-  border-bottom-left-radius: $radius
-
-=rounded-bottom-right($radius)
-  -moz-border-bottom-right-radius: $radius
-  -webkit-border-bottom-right-radius: $radius
-  border-bottom-right-radius: $radius
-
-=rounded-top($radius)
-  +rounded-top-left($radius)
-  +rounded-top-right($radius)
-
-=rounded-bottom($radius)
-  +rounded-bottom-left($radius)
-  +rounded-bottom-right($radius)
-
-=rounded-left($radius)
-  +rounded-top-left($radius)
-  +rounded-bottom-left($radius)
-
-=rounded-right($radius)
-  +rounded-top-right($radius)
-  +rounded-bottom-right($radius)
-
-=rounded($radius)
-  +rounded-top($radius)
-  +rounded-bottom($radius)
 
 
 
@@ -171,6 +128,7 @@
 
 
 
+// Reusable typography components
 =h1-border
   padding-bottom: 5px
   border-bottom: 1px solid $purple-dark

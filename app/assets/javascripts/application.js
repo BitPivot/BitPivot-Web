@@ -18,6 +18,7 @@ window.onload = function() {
         },
         fnResize: function(hExpanded, hCollapsed) {
             $('.blind.expanded').height(hExpanded);
+            $('.blind.collapsed').height(hCollapsed);
         }
     });
 }

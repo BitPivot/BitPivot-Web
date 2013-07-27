@@ -58,7 +58,7 @@ body
     +breakpoint('tiny')
       height: $blind-collapsed-height-tiny
       line-height: $blind-collapsed-height-tiny
-      +font($blind-collapsed-height-tiny - ($margin / 1.5), #fff, 'pragmatica-extra-light')
+      +font($blind-collapsed-height-tiny - ($margin * 1.05), #fff, 'pragmatica-extra-light')
 
   &.our-mission header
     +gradient-radial($blinds-purple-1)
@@ -79,6 +79,9 @@ body
   height: $blind-banner-height
   background: #000 no-repeat 50% 50%
   +background-size-cover
+
+  +breakpoint('narrow')
+    height: $blind-banner-height-narrow
 
   +breakpoint('tiny')
     height: $blind-banner-height-tiny
