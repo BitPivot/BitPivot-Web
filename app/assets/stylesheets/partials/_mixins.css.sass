@@ -16,6 +16,10 @@
     @media (min-width: 901px)
       @content
 
+  @if $media == "landscape"
+    @media screen and (orientation: landscape)
+      @content
+
   @if $media == 'non-retina'
     @media screen and (-webkit-max-device-pixel-ratio: 1)
       @content
@@ -103,6 +107,11 @@
   -moz-background-size: cover
   -o-background-size: cover
   background-size: cover
+
+=box-sizing-border-box
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  box-sizing: border-box
 
 
 

@@ -83,6 +83,9 @@ body
   +breakpoint('narrow')
     height: $blind-banner-height-narrow
 
+  +breakpoint('landscape')
+    height: $blind-banner-height-narrow
+
   +breakpoint('tiny')
     height: $blind-banner-height-tiny
 
@@ -137,9 +140,42 @@ body
 
   h2
     +font(17px, #ddd, 'pragmatica-extra-light')
-    line-height: 17px
+    line-height: 20px
     +h1-border
     +type-pad-bottom
 
   p
     +type-pad-bottom
+
+  .row
+    width: 100%
+    overflow: auto
+    margin: 0 0 $margin 0
+
+    &:last-child
+      margin: 0
+
+    .column
+      +position(relative)
+      float: left
+      width: 50%
+      +box-sizing-border-box
+
+      &:nth-child(odd)
+        padding: 0 ($margin / 2) 0 0
+
+      &:nth-child(even)
+        padding: 0 0 0 ($margin / 2)
+
+      +breakpoint('tiny')
+        width: 100%
+        margin: 0 0 $margin 0
+
+        &:nth-child(odd)
+          padding: 0
+
+        &:nth-child(even)
+          padding: 0
+
+        &:last-child
+          margin: 0
