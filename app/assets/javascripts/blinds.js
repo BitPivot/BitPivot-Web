@@ -19,7 +19,7 @@ var Blinds = function(options) {
 
         // Events
         $(document).on('click', '.blind header', function(e) { headerClickCallback(this, e); });
-        $(document).on('mousewheel', '.blind-content', function(e) { mousewheelCallback(this, e); });
+        $(document).on('mousewheel', '.blind', function(e) { mousewheelCallback(this, e); });
         $(window).on('resize', function(e) { resizeCallback(this, e); });
         $(window).on('orientationchange', function(e) { resizeCallback(this, e); });
 
@@ -40,7 +40,7 @@ var Blinds = function(options) {
         section.animate({ height: height }, {
             duration: duration,
             complete: function() {
-            expanding = false;
+                expanding = false;
             },
             queue: false
         });
@@ -58,43 +58,42 @@ var Blinds = function(options) {
     };
 
 
-
     /*
      * Event callbacks
      */
     function mousewheelCallback(sender, e) {
         if (expanding) return;
 
-        var $blindContent = $(e.currentTarget);
-        var section = $blindContent.closest('.blind');
-        var scrollTop = section.scrollTop();
-        var scrollHeight = section[0].scrollHeight;
-        var scrollbarPresent = $blindContent.scrollHeight > $blindContent.height();
-        var outerHeight = section.outerHeight();
+        var blind = $(e.currentTarget);
+        var content = $(blind.find('.blind-content-area'));
+        var scrollTop = content.scrollTop();
+        var scrollHeight = blind.find('.blind-content-area')[0].scrollHeight
+        var scrollbarPresent = content.scrollHeight > content.height();
+        var outerHeight = content.outerHeight();
         var direction = e.originalEvent.wheelDelta >= 0 ? 'up' : 'down';
-        var i = $('.blind').index(section);
+        var i = $('.blind').index(blind);
 
-        // scrolled to bottom of element
+        // scrolled to bottom of blind
         if (scrollHeight - (scrollTop + 1) === outerHeight || scrollHeight - scrollTop === outerHeight) {
             // scrolling down
             if (scrolledToBottom && direction === 'down') {
-                // not viewing bottom section
+                // not viewing bottom blind
                 if (i !== sections.length - 1 || !scrollbarPresent)
-                // open section below
-                    sections[i+1].find('header').click();
+                    // open blind below
+                    sections[i + 1].find('header').click();
                 scrolledToBottom = false;
             } else {
                 scrolledToBottom = true;
             }
         }
-        // scrolled to top of div
-        if (section.scrollTop() === 0) {
+        // scrolled to top of blind
+        if (scrollTop === 0) {
             // scrolling up
             if (scrolledToTop && direction === 'up') {
-                // not viewing top section
+                // not viewing top blind
                 if (i !== 0 || !scrollbarPresent)
-                // open section above
-                    sections[i-1].find('header').click();
+                    // open blind above
+                    sections[i - 1].find('header').click();
                 scrolledToTop = false;
             } else {
                 scrolledToTop = true;
