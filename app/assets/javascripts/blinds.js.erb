@@ -65,39 +65,36 @@ var Blinds = function(options) {
         if (expanding) return;
 
         var $blind = $(e.currentTarget);
-        var $content = $($blind.find('.blind-content-area'));
-        var iBlind = $('.blind').index($blind);
-        var scrollTop = $content.scrollTop();
-        var scrollHeight = $blind.find('.blind-content-area')[0].scrollHeight
-        var scrollbarPresent = $content.scrollHeight > $content.height();
-        var outerHeight = $content.outerHeight();
-        var direction = e.originalEvent.wheelDelta >= 0 ? 'up' : 'down';
+        var blindIndex = $('.blind').index($blind);
+        var contentElement = $blind.find('.blind-content-area')[0];
+        var $content = $(contentElement);
 
-        // scrolled to bottom of blind
-        if (scrollHeight - (scrollTop + 1) === outerHeight || scrollHeight - scrollTop === outerHeight) {
-            // scrolling down
-            if (scrolledToBottom && direction === 'down') {
-                // not viewing bottom blind
-                if (iBlind !== blinds.length - 1 || !scrollbarPresent)
-                    // open blind below
-                    blinds[iBlind + 1].find('header').click();
-                scrolledToBottom = false;
-            } else {
-                scrolledToBottom = true;
-            }
-        }
-        // scrolled to top of blind
-        if (scrollTop === 0) {
-            // scrolling up
-            if (scrolledToTop && direction === 'up') {
-                // not viewing top blind
-                if (iBlind !== 0 || !scrollbarPresent)
-                    // open blind above
-                    blinds[iBlind - 1].find('header').click();
-                scrolledToTop = false;
-            } else {
-                scrolledToTop = true;
-            }
+        var direction = e.originalEvent.wheelDelta >= 0 ? 'up' : 'down';
+        var scrollTop = $content.scrollTop();
+        var scrollHeight = contentElement.scrollHeight
+        var scrollbarPresent = scrollHeight > $content.height();
+        var outerHeight = $content.outerHeight();
+
+        switch (direction) {
+            case 'up':
+                if (blindIndex === 0) break; // ensure not viewing first blind
+                if (scrolledToTop || !scrollbarPresent) {
+                    blinds[blindIndex - 1].find('header').click(); // open blind above
+                    scrolledToTop = false;
+                } else {
+                    scrolledToTop = scrollTop === 0;
+                }
+                break;
+            case 'down':
+                if (blindIndex === blinds.length - 1) break; // ensure not viewing last blind
+                if (scrolledToBottom || !scrollbarPresent) {
+                    blinds[blindIndex + 1].find('header').click(); // open blind below
+                    scrolledToBottom = false;
+                } else {
+                    scrolledToBottom = scrollHeight - (scrollTop + 1) === outerHeight
+                            || scrollHeight - scrollTop === outerHeight
+                }
+                break;
         }
         if (fnScroll) fnScroll(this); // Custom callback
     };
