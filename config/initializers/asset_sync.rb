@@ -6,11 +6,14 @@ AssetSync.configure do |config|
 
   config.existing_remote_files = 'delete'
   config.manifest = true
-  config.gzip_compression = true
+  config.gzip_compression = false
 
   # Ignored files
   config.ignored_files = [
-    %r(partials/.*),
-    %r(turbolinks-.*\.js)
+    %r(partials/.*),          # Ignore partials/ folder
+    %r(turbolinks-.*\.js),    # Ignore turbolinks gem JS
+    %r(coffee-script-.*\.js), # Ignore coffee script gem JS
+    %r(jquery.*\.js),         # Ignore jQuery related JS
+    %r(ss-.*\.css)      # Ignore Symbolset CSS
   ]
 end
