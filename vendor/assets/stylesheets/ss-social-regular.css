@@ -7,16 +7,16 @@
 *
 * Upload this file to your web server
 * and place this within your <head> tags.
-* <link href="webfonts/ss-social-circle.css" rel="stylesheet" />
+* <link href="webfonts/ss-social-regular.css" rel="stylesheet" />
 */
 
 @font-face {
-  font-family: "SSSocialCircle";
-  src: url('ss-social-circle.eot');
-  src: url('ss-social-circle.eot?#iefix') format('embedded-opentype'),
-       url('ss-social-circle.woff') format('woff'),
-       url('ss-social-circle.ttf')  format('truetype'),
-       url('ss-social-circle.svg#SSSocialCircle') format('svg');
+  font-family: "SSSocialRegular";
+  src: url('ss-social-regular.eot');
+  src: url('ss-social-regular.eot?#iefix') format('embedded-opentype'),
+       url('ss-social-regular.woff') format('woff'),
+       url('ss-social-regular.ttf')  format('truetype'),
+       url('ss-social-regular.svg#SSSocialRegular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,12 +24,12 @@
 /* This triggers a redraw in IE to Fix IE8's :before content rendering. */
 html:hover [class^="ss-"]{-ms-zoom: 1;}
 
-.ss-icon, .ss-icon.ss-social-circle,
+.ss-icon, .ss-icon.ss-social-regular,
 [class^="ss-"]:before, [class*=" ss-"]:before,
-[class^="ss-"].ss-social-circle:before, [class*=" ss-"].ss-social-circle:before,
+[class^="ss-"].ss-social-regular:before, [class*=" ss-"].ss-social-regular:before,
 [class^="ss-"].right:after, [class*=" ss-"].right:after,
-[class^="ss-"].ss-social-circle.right:after, [class*=" ss-"].ss-social-circle.right:after {
-  font-family: "SSSocialCircle";
+[class^="ss-"].ss-social-regular.right:after, [class*=" ss-"].ss-social-regular.right:after {
+  font-family: "SSSocialRegular";
   font-style: normal;
   font-weight: normal;
   text-decoration: none;

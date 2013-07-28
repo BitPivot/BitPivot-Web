@@ -2,13 +2,12 @@
 
 
 
-$total-blinds: 4
+$total-blinds: 4 // TODO Move to global config
 
 
 
 .blinds-wrapper
   +position(absolute, $page-header-height, 0, 0, 0)
-  background: #000
 
   +breakpoint('tiny')
     +position(absolute, $page-header-height-tiny, 0, 0, 0)
@@ -17,11 +16,10 @@ $total-blinds: 4
 
 .blind
   position: absolute
-  height: 25%
+  height: percentage(1 / $total-blinds)
   width: 100%
   overflow: hidden
-  +drop-shadow-bottom(20px)
-
+  +drop-shadow-bottom(10px)
   +transition(all 0.5s ease)
 
   &.expanded
@@ -42,14 +40,14 @@ $total-blinds: 4
     line-height: $blind-collapsed-height
     vertical-align: middle
     text-align: center
-    +font($blind-collapsed-height - ($margin * 1.25), #fff, 'pragmatica-extra-light')
-    text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5)
+    +font($blind-collapsed-height * 0.45, $blind-header-text-color, 'pragmatica-extra-light')
+    text-shadow: 0px 3px 5px $blind-header-text-shadow-color
     +drop-shadow-bottom(20px)
 
     +breakpoint('tiny')
       height: $blind-collapsed-height-tiny
       line-height: $blind-collapsed-height-tiny
-      +font($blind-collapsed-height-tiny - ($margin * 1.05), #fff, 'pragmatica-extra-light')
+      +font($blind-collapsed-height-tiny  * 0.5, $blind-header-text-color, 'pragmatica-extra-light')
 
 
 
@@ -69,14 +67,13 @@ $total-blinds: 4
 
   span
     +position(absolute, auto, 0, 0, 0)
-    background: #000
-    background: rgba(0, 0, 0, 0.5)
     padding: $margin / 2
+    +background-rgba-fallback($blind-banner-text-background-color)
+    +font($header-font-size, $blind-banner-text-color, 'pragmatica-extra-light')
     text-align: center
-    +font(30px, #fff, 'pragmatica-extra-light')
 
     +breakpoint('tiny')
-      +font(17px, #fff, 'pragmatica-extra-light')
+      +font($page-font-size, $blind-banner-text-color, 'pragmatica-extra-light')
 
 
 
@@ -92,18 +89,18 @@ $total-blinds: 4
 
 .blind-content
   padding: $margin
-  +font($page-font-size, #aaa, 'pragmatica-light')
+  +font($page-font-size, $blind-content-text-color, 'pragmatica-light')
   line-height: $page-line-height
 
   h1
-    +font(20px, #ddd, 'pragmatica-extra-light')
-    line-height: 20px
+    +font($header-font-size, $blind-content-header-text-color, 'pragmatica-extra-light')
+    line-height: $header-font-size
     +h1-border
     +type-pad-bottom
 
   h2
-    +font(17px, #ddd, 'pragmatica-extra-light')
-    line-height: 20px
+    +font($header-font-size * 0.75, $blind-content-header-text-color, 'pragmatica-extra-light')
+    line-height: $header-font-size
     +h1-border
     +type-pad-bottom
 
@@ -122,7 +119,7 @@ $total-blinds: 4
     margin: 0
 
   .column
-    +position(relative)
+    position: relative
     float: left
     width: 50%
     +box-sizing-border-box
@@ -148,9 +145,9 @@ $total-blinds: 4
 
 
 
-=blind-section($class, $index, $header-color, $banner-image, $image-position)
+=blind($class, $index, $header-color, $banner-image, $image-position)
   .blind#{$class}
-    top: percentage((100 / $total-blinds) * $index / 100)
+    top: percentage((1 / $total-blinds) * $index)
     z-index: 100 + ($total-blinds - $index)
 
   .blind#{$class} header
@@ -160,9 +157,7 @@ $total-blinds: 4
     background-image: image-url($banner-image)
     background-position: $image-position
 
-
-
-+blind-section('.our-mission',     0, $blinds-purple-1, 'splash/mission-background.jpg',     70% 50%)
-+blind-section('.mobile-presence', 1, $blinds-purple-2, 'splash/mobile-background.jpg',      50% 50%)
-+blind-section('.consulting',      2, $blinds-purple-3, 'splash/integration-background.jpg', 50% 50%)
-+blind-section('.contact-us',      3, $blinds-purple-4, 'splash/consulting-background.jpg',  50% 50%)
++blind('.our-mission',     0, $blind-header-background-color-1, 'splash/mission-background.jpg',     70% 50%)
++blind('.mobile-presence', 1, $blind-header-background-color-2, 'splash/mobile-background.jpg',      50% 50%)
++blind('.consulting',      2, $blind-header-background-color-3, 'splash/integration-background.jpg', 50% 50%)
++blind('.contact-us',      3, $blind-header-background-color-4, 'splash/consulting-background.jpg',  50% 50%)

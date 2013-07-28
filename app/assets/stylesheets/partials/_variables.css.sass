@@ -1,3 +1,9 @@
+// Breakpoints
+$breakpoint-tiny: 640px
+$breakpoint-narrow: 900px
+
+
+
 // Page Metrics
 $margin: 20px
 
@@ -11,22 +17,46 @@ $blind-banner-height: 450px
 $blind-banner-height-narrow: 350px
 $blind-banner-height-tiny: 150px
 
+$blind-content-header-border-width: 1px
 
 
+
+// Font metrics
 $page-font-size: 15px
 $page-line-height: 20px
+
+$header-font-size: 20px
+
+
+
+// Palette
+$white: #fff
+$black: #000
+$gray-light: #ddd
+$gray-medium: #888
+$gray-dark: #444
+$purple-light: #707
+$purple-dark: #590059
 
 
 
 // Page colors
-$purple-dark: #590059
+$page-background-color: $black
 
-$blinds-purple-1: $purple-dark
-$blinds-purple-2: darken($purple-dark, 3%)
-$blinds-purple-3: darken($purple-dark, 6%)
-$blinds-purple-4: darken($purple-dark, 8%)
+$header-background-color: $black
+$header-link-color: $gray-dark
+$header-link-color-hover: $purple-light
 
+$blind-header-background-color-1: $purple-dark
+$blind-header-background-color-2: darken($purple-dark, 3%)
+$blind-header-background-color-3: darken($purple-dark, 6%)
+$blind-header-background-color-4: darken($purple-dark, 8%)
+$blind-header-text-color: $white
+$blind-header-text-shadow-color: rgba($black, 0.75)
 
+$blind-banner-text-color: $white
+$blind-banner-text-background-color: rgba($black, 0.5)
 
-// Page Fonts (from TypeKit with fallbacks)
-$font-helvetica: 'Helvetica Neue', Helvetica, Arial, sans-serif
+$blind-content-text-color: $gray-medium
+$blind-content-header-text-color: $gray-light
+$blind-content-header-border-color: $purple-dark

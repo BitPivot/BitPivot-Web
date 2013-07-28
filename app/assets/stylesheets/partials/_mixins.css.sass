@@ -5,15 +5,15 @@
 // Media Queries
 =breakpoint($media)
   @if $media == "tiny"
-    @media (max-width: 640px)
+    @media (max-width: $breakpoint-tiny)
       @content
 
   @if $media == "narrow"
-    @media (max-width: 900px)
+    @media (max-width: $breakpoint-narrow)
       @content
 
   @if $media == "wide"
-    @media (min-width: 901px)
+    @media (min-width: $breakpoint-narrow + 1)
       @content
 
   @if $media == "landscape"
@@ -67,6 +67,13 @@
     right: $top
     bottom: $top
     left: $top
+
+
+
+// RGBA with fallback
+=background-rgba-fallback($rgba)
+  background: rgb(red($rgba), green($rgba), blue($rgba))
+  background: $rgba
 
 
 
@@ -148,8 +155,8 @@
 
 // Reusable typography components
 =h1-border
-  padding-bottom: 5px
-  border-bottom: 1px solid $purple-dark
+  padding-bottom: $margin / 4
+  border-bottom: $blind-content-header-border-width solid $blind-content-header-border-color
 
 =type-pad-bottom
   margin-bottom: $margin

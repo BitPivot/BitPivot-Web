@@ -1,8 +1,8 @@
 /*
  *= require partials/_reset
- *= require ss-social-circle
+ *= require ss-social-regular
  *= require partials/_header
- *= require partials/_splash
+ *= require partials/_blinds
  *= require_self
  */
 
@@ -15,9 +15,11 @@ html
 
 body
   position: relative
-  background: #000
+  background: $page-background-color
   height: 100%
   overflow-y: hidden
+
+
 
 .transition-preload *
   -webkit-transition: none !important
@@ -30,6 +32,6 @@ body
 
 .loading-overlay
   +position(absolute, 0, 0, 0, 0)
-  background: #000 image-url('bitpivot-loading-logo.png') no-repeat center center
+  background: $page-background-color image-url('bitpivot-loading-logo.png') no-repeat center center
   background-size: 310px 84px
   z-index: 10000
