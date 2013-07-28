@@ -1,6 +1,7 @@
 var Blinds = function(options) {
 
     var sections = [];
+    var totalBlinds = 4;
     var hExpanded = 0;
     var hCollapsed = 0;
     var blockScroll = false;
@@ -33,23 +34,35 @@ var Blinds = function(options) {
         setTimeout(function() { sections[0].find('header').click(); }, fadeDuration * 2);
     };
 
-    function resize(section, expanded, position) {
+    function resize(index, expanding, position) {
+        var section = sections[index];
         blockScroll = true;
         //section.animate({scrollTop: 0}, {duration: fadeDuration, queue: false}); // TODO
-        if (expanded) {
-            section.removeClass('collapsed').removeClass('top').removeClass('bottom');
+
+        if (expanding) {
+            section.removeClass('collapsed');
             section.addClass('expanded');
+            section.css({
+                top: index * hCollapsed,
+                height: hExpanded
+            });
         }
         else {
             section.removeClass('expanded');
-            switch(position) {
+            section.addClass('collapsed');
+            switch (position) {
                 case 'top':
-                    section.removeClass('expanded').removeClass('bottom');
-                    section.addClass('collapsed').addClass('top');
+                    section.css({
+                        top: index * hCollapsed,
+                        height: hCollapsed
+                    });
                     break;
+
                 case 'bottom':
-                    section.removeClass('expanded').removeClass('top');
-                    section.addClass('collapsed').addClass('bottom');
+                    section.css({
+                        top: (--index * hCollapsed) + hExpanded,
+                        height: hCollapsed
+                    });
                     break;
             }
         }
@@ -84,7 +97,7 @@ var Blinds = function(options) {
             // scrolling down
             if (scrolledToBottom && direction === 'down') {
                 // not viewing bottom section
-                if (i !== sections.length - 1 || !scrollbarPresent)
+                if (i !== totalBlinds - 1 || !scrollbarPresent)
                 // open section below
                     sections[i+1].find('header').click();
                 scrolledToBottom = false;
@@ -111,11 +124,13 @@ var Blinds = function(options) {
     function resizeCallback(sender, e) {
         // Calculate collapsed height from CSS
         var $div = $('<div class="blind collapsed"></div>').hide().appendTo('body');
-        hCollapsed = $div.css('height');
+        hCollapsed = parseInt($div.css('height'));
+        console.log(hCollapsed);
         $div.remove();
 
         // Calculate expanded height based on size of wrapper minus collapsed divs
-        hExpanded = parseInt($('.blinds-wrapper').css('height')) - ((sections.length - 1) * parseInt(hCollapsed)) + 'px';
+        hExpanded = parseInt($('.blinds-wrapper').css('height')) - ((totalBlinds - 1) * hCollapsed);
+        console.log(hExpanded);
 
         if (fnResize) fnResize(hExpanded, hCollapsed); // Custom callback
     };
@@ -123,10 +138,10 @@ var Blinds = function(options) {
     function headerClickCallback(sender, e) {
         var index = headerIndex($(sender));
 
-        for (var i = 0; i < sections.length; i++) {
-            var expanded = i === index;
+        for (var i = 0; i < totalBlinds; i++) {
+            var expanding = i === index;
             var position = i < index ? 'top' : 'bottom'
-            resize(sections[i], expanded, position);
+            resize(i, expanding, position);
         }
 
         if (fnHeaderClick) fnHeaderClick(this); // Custom callback

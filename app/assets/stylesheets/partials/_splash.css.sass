@@ -16,17 +16,20 @@ $total-blinds: 4
 
 
 .blind
-  +position(absolute, auto, 0 auto, 0)
+  position: absolute
+  height: 25%
   width: 100%
   overflow: hidden
   +drop-shadow-bottom(20px)
-  //+transition(height 0.5s ease 0.5s)
+  +transition(all 0.5s ease)
 
   &.expanded
+    position: absolute !important
     z-index: 99
     +no-drop-shadow
 
   &.collapsed
+    position: absolute !important
     height: $blind-collapsed-height
 
     .blind-banner
@@ -39,8 +42,6 @@ $total-blinds: 4
       height: $blind-collapsed-height-tiny
 
   header
-    +position(relative)
-    display: block
     cursor: pointer
     height: $blind-collapsed-height
     line-height: $blind-collapsed-height
@@ -48,7 +49,6 @@ $total-blinds: 4
     text-align: center
     +font($blind-collapsed-height - ($margin * 1.25), #fff, 'pragmatica-extra-light')
     text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5)
-    z-index: 100
     +drop-shadow-bottom(20px, rgba(0, 0, 0, 1))
 
     +breakpoint('tiny')
@@ -59,9 +59,8 @@ $total-blinds: 4
 
 
 .blind-banner
-  +position(relative)
+  position: relative
   height: $blind-banner-height
-  background: #000 no-repeat
   +background-size-cover
   +transition(opacity 0.5s ease)
 
@@ -75,7 +74,6 @@ $total-blinds: 4
     height: $blind-banner-height-tiny
 
   span
-    display: block
     +position(absolute, auto, 0, 0, 0)
     background: #000
     background: rgba(0, 0, 0, 0.5)
@@ -157,24 +155,9 @@ $total-blinds: 4
 
 
 
-=calculate-blind-position($class, $index)
-  // Expanded
-  .blind#{$class}.expanded
-    top: $index * $blind-collapsed-height
-    bottom: ($total-blinds - ($index + 1)) * $blind-collapsed-height
-
-  .blind#{$class}.collapsed.top
-    top: $index * $blind-collapsed-height
-    bottom: auto
-
-  .blind#{$class}.collapsed.bottom
-    top: auto
-    bottom: ($total-blinds - ($index + 1)) * $blind-collapsed-height
-
-
-
 =blind-section($class, $index, $header-color, $banner-image, $image-position)
   .blind#{$class}
+    top: percentage((100 / $total-blinds) * $index / 100)
     z-index: 100 + ($total-blinds - $index)
 
   .blind#{$class} header
@@ -183,8 +166,6 @@ $total-blinds: 4
   .blind#{$class} .blind-banner
     background-image: image-url($banner-image)
     background-position: $image-position
-
-  +calculate-blind-position($class, $index)
 
 
 
