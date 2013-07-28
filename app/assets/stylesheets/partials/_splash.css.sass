@@ -21,12 +21,19 @@ $total-blinds: 4
   width: 100%
   overflow: hidden
   +drop-shadow-bottom(20px)
+
   +transition(all 0.5s ease)
 
   &.expanded
     position: absolute !important
     z-index: 99
     +no-drop-shadow
+
+    .blind-banner
+      opacity: 1
+
+    .blind-content
+      opacity: 1
 
   &.collapsed
     position: absolute !important
@@ -49,7 +56,7 @@ $total-blinds: 4
     text-align: center
     +font($blind-collapsed-height - ($margin * 1.25), #fff, 'pragmatica-extra-light')
     text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5)
-    +drop-shadow-bottom(20px, rgba(0, 0, 0, 1))
+    +drop-shadow-bottom(20px)
 
     +breakpoint('tiny')
       height: $blind-collapsed-height-tiny
@@ -91,6 +98,7 @@ $total-blinds: 4
   -webkit-overflow-scrolling: touch
   overflow-y: scroll
 
+
   +breakpoint('tiny')
     +position(absolute, $blind-collapsed-height-tiny, 0, 0, 0)
 
@@ -100,7 +108,6 @@ $total-blinds: 4
   padding: $margin
   +font($page-font-size, #aaa, 'pragmatica-light')
   line-height: $page-line-height
-  +drop-shadow-inner-bottom(50px)
 
   h1
     +font(20px, #ddd, 'pragmatica-extra-light')
