@@ -29,21 +29,9 @@ $total-blinds: 4
     z-index: 99 !important
     +no-drop-shadow
 
-    .blind-banner
-      opacity: 1
-
-    .blind-content
-      opacity: 1
-
   &.collapsed
     position: absolute !important
     height: $blind-collapsed-height
-
-    .blind-banner
-      opacity: 0
-
-    .blind-content
-      opacity: 0
 
     +breakpoint('tiny')
       height: $blind-collapsed-height-tiny
@@ -69,7 +57,6 @@ $total-blinds: 4
   position: relative
   height: $blind-banner-height
   +background-size-cover
-  +transition(opacity 0.5s ease)
 
   +breakpoint('narrow')
     height: $blind-banner-height-narrow
