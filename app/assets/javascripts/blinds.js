@@ -13,6 +13,7 @@ var Blinds = function(options) {
     var fadeDuration = options.fadeDuration || 1000;
     var fnHeaderClick = options.fnHeaderClick || null;
     var headerIndex = function($header) { return $('.blind').index($header.closest('.blind')); };
+    var selectedSection = function() { return $('.blind.expanded'); }
 
     var initialize = function() {
         // Cache jQuery objects
@@ -125,12 +126,14 @@ var Blinds = function(options) {
         // Calculate collapsed height from CSS
         var $div = $('<div class="blind collapsed"></div>').hide().appendTo('body');
         hCollapsed = parseInt($div.css('height'));
-        console.log(hCollapsed);
         $div.remove();
 
         // Calculate expanded height based on size of wrapper minus collapsed divs
         hExpanded = parseInt($('.blinds-wrapper').css('height')) - ((totalBlinds - 1) * hCollapsed);
-        console.log(hExpanded);
+
+        // Call click again on selected section to redraw
+        var section = selectedSection();
+        section.find('header').click();
 
         if (fnResize) fnResize(hExpanded, hCollapsed); // Custom callback
     };
