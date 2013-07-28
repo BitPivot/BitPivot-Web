@@ -1,7 +1,7 @@
 var Blinds = function(options) {
 
     var blinds = [];
-    var totalBlinds = 4;
+    var totalBlinds = 4; // TODO Move to global config
     var hExpanded = 0;
     var hCollapsed = 0;
     var blockScroll = false;
@@ -10,7 +10,7 @@ var Blinds = function(options) {
     var fnFadeIn = options.fnFadeIn || null;
     var fnScroll = options.fnScroll || null;
     var fnResize = options.fnResize || null;
-    var fadeDuration = options.fadeDuration || 1000;
+    var fadeDuration = options.fadeDuration || 1000; // TODO Move to global config
     var fnHeaderClick = options.fnHeaderClick || null;
     var headerIndex = function($header) { return $('.blind').index($header.closest('.blind')); };
     var selectedSection = function() { return $('.blind.expanded'); }
@@ -38,7 +38,8 @@ var Blinds = function(options) {
     function resize(index, expanding, position) {
         var section = blinds[index];
         blockScroll = true;
-        //section.animate({scrollTop: 0}, {duration: fadeDuration, queue: false}); // TODO
+        setInterval(function() { blockScroll = false; }, fadeDuration); // TODO Move to global config
+        section.animate({scrollTop: 0}, {duration: fadeDuration, queue: false}); // TODO Move to global config
 
         if (expanding) {
             section.removeClass('collapsed');
@@ -67,13 +68,6 @@ var Blinds = function(options) {
                     break;
             }
         }
-        //section.animate({ height: height }, {
-        //    duration: duration,
-        //    complete: function() {
-        //        blockScroll = false;
-        //    },
-        //    queue: false
-        //});
     };
 
 
