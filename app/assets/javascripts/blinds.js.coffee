@@ -108,6 +108,8 @@ App.Blinds = (options) ->
       i++
     fnHeaderClick this if @fnHeaderClick # Custom callback
 
+
+
   initialize: ->
     # Events
     self = this

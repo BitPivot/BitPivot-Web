@@ -7,19 +7,12 @@
 
 window.onload = function() {
     $('body').removeClass('transition-preload');
-    new Blinds({
+    var b = new App.Blinds({
         fadeDuration: 750,
         fnFadeIn: function(blinds) {
             $('#js-loading-overlay').fadeOut(blinds.fadeDuration)
-        },
-        fnScroll: function(blinds) {
-
-        },
-        fnHeaderClick: function(blinds) {
-
-        },
-        fnResize: function(hExpanded, hCollapsed) {
-
         }
     });
+
+    b.initialize();
 }
