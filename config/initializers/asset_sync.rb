@@ -10,10 +10,10 @@ AssetSync.configure do |config|
 
   # Ignored files
   config.ignored_files = [
-    %r(partials/.*),          # Ignore partials/ folder
-    %r(turbolinks-.*\.js),    # Ignore turbolinks gem JS
-    %r(coffee-script-.*\.js), # Ignore coffee script gem JS
-    %r(jquery.*\.js),         # Ignore jQuery related JS
-    %r(ss-.*\.css)      # Ignore Symbolset CSS
+    %r(partials/.*),         # Ignore partials/ folder
+    %r(turbolinks.*\.js),    # Ignore turbolinks gem JS
+    %r(coffee-script.*\.js), # Ignore coffee script gem JS
+    %r(jquery.*\.js),        # Ignore jQuery related JS
+    %r(ss-.*\.css)           # Ignore Symbolset CSS
   ]
 end
