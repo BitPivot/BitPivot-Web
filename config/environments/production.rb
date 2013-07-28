@@ -26,7 +26,7 @@ BitPivot::Application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = true
+  config.assets.compile = false
 
   # Generate digests for assets URLs.
   config.assets.digest = true
@@ -83,6 +83,8 @@ BitPivot::Application.configure do
   config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
   config.assets.digest = true
   config.assets.enabled = true
+
+  config.assets.paths << Rails.root.join('app', 'assets', 'stylesheets', 'partials')
 
 
 
