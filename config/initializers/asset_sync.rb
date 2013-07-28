@@ -5,7 +5,7 @@ AssetSync.configure do |config|
   config.fog_directory = ENV['FOG_DIRECTORY']                 # heroku config:set FOG_DIRECTORY
 
   config.existing_remote_files = 'delete'
-  config.manifest = false
+  config.manifest = true
   config.gzip_compression = true
 
   # Ignored files
