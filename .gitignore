@@ -1,3 +1,4 @@
+*.orig
 public/assets
 .vagrant/
 .idea/
