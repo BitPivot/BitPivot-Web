@@ -84,7 +84,6 @@ BitPivot::Application.configure do
   config.assets.digest = true
   config.assets.enabled = true
 
-  config.assets.paths << Rails.root.join('app', 'assets', 'stylesheets', 'partials')
 
 
 
