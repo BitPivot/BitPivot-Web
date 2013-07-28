@@ -4,6 +4,8 @@ AssetSync.configure do |config|
   config.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY'] # heroku config:set AWS_SECRET_ACCESS_KEY
   config.fog_directory = ENV['FOG_DIRECTORY']                 # heroku config:set FOG_DIRECTORY
 
+  config.existing_remote_files = 'delete'
+
   # Invalidate a file on a cdn after uploading files
   # config.cdn_distribution_id = "12345"
   # config.invalidate = ['file1.js']
