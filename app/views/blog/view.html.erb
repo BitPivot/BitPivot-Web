@@ -1,0 +1,12 @@
+<% @page_posts.each do |p| %>
+  <div class='post'>
+    <div class='blog-divider'></div>
+    <%= render file: p %>
+  </div>
+<% end %>
+<% if @page > 1 %>
+  <%= link_to "Later posts \u2190", "/blog/#{@page-1}" %>
+<% end %>
+<% if @posts.length > @page_size * @page %>
+  <%= link_to "Earlier posts \u2192", "/blog/#{@page+1}" %>
+<% end %>
