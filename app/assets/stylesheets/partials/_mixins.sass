@@ -36,11 +36,11 @@
   float: left
   width: $width
   height: $height
-  background: url("#{$image}.#{$type}") top left no-repeat
+  background: asset-url("#{$image}.#{$type}") top left no-repeat
   background-size: $width $height
   @if $retina == true
     +breakpoint(retina)
-      background-image: url("#{$image}@2x.#{$type}")
+      background-image: asset-url("#{$image}@2x.#{$type}")
 
 
 
