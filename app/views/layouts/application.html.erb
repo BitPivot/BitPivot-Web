@@ -7,7 +7,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   </head>
 
-  <body id="<%= params[:controller].parameterize %>_controller">
+  <body class="transition-preload" id="<%= params[:controller].parameterize %>_controller">
 
     <div id="js-loading-overlay" class="loading-overlay"></div>
 

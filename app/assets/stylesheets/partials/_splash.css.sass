@@ -2,8 +2,9 @@
 
 
 
-body
-  overflow-y: hidden
+$total-blinds: 4
+
+
 
 .blinds-wrapper
   +position(absolute, $page-header-height, 0, 0, 0)
@@ -15,36 +16,27 @@ body
 
 
 .blind
-  position: relative
+  position: absolute
   height: 25%
+  width: 100%
   overflow: hidden
   +drop-shadow-bottom(20px)
 
-  &.our-mission
-    z-index: 103
-
-  &.mobile-presence
-    z-index: 102
-
-  &.consulting
-    z-index: 101
-
-  &.contact-us
-    z-index: 100
+  +transition(all 0.5s ease)
 
   &.expanded
-    z-index: 99
-    +no-drop-shadow()
+    position: absolute
+    z-index: 99 !important
+    +no-drop-shadow
 
   &.collapsed
+    position: absolute !important
     height: $blind-collapsed-height
 
     +breakpoint('tiny')
       height: $blind-collapsed-height-tiny
 
   header
-    +position(relative)
-    display: block
     cursor: pointer
     height: $blind-collapsed-height
     line-height: $blind-collapsed-height
@@ -52,32 +44,18 @@ body
     text-align: center
     +font($blind-collapsed-height - ($margin * 1.25), #fff, 'pragmatica-extra-light')
     text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5)
-    z-index: 100
-    +drop-shadow-bottom(20px, rgba(0, 0, 0, 1))
+    +drop-shadow-bottom(20px)
 
     +breakpoint('tiny')
       height: $blind-collapsed-height-tiny
       line-height: $blind-collapsed-height-tiny
       +font($blind-collapsed-height-tiny - ($margin * 1.05), #fff, 'pragmatica-extra-light')
 
-  &.our-mission header
-    +gradient-radial($blinds-purple-1)
-
-  &.mobile-presence header
-    +gradient-radial($blinds-purple-2)
-
-  &.consulting header
-    +gradient-radial($blinds-purple-3)
-
-  &.contact-us header
-    +gradient-radial($blinds-purple-4)
-
 
 
 .blind-banner
-  +position(relative)
+  position: relative
   height: $blind-banner-height
-  background: #000 no-repeat 50% 50%
   +background-size-cover
 
   +breakpoint('narrow')
@@ -89,21 +67,7 @@ body
   +breakpoint('tiny')
     height: $blind-banner-height-tiny
 
-  .our-mission &
-    background-image: image-url('splash/mission-background.jpg')
-    background-position: 70% 50%
-
-  .mobile-presence &
-    background-image: image-url('splash/mobile-background.jpg')
-
-  .consulting &
-    background-image: image-url('splash/integration-background.jpg')
-
-  .contact-us &
-    background-image: image-url('splash/consulting-background.jpg')
-
   span
-    display: block
     +position(absolute, auto, 0, 0, 0)
     background: #000
     background: rgba(0, 0, 0, 0.5)
@@ -130,7 +94,6 @@ body
   padding: $margin
   +font($page-font-size, #aaa, 'pragmatica-light')
   line-height: $page-line-height
-  +drop-shadow-inner-bottom(50px)
 
   h1
     +font(20px, #ddd, 'pragmatica-extra-light')
@@ -145,37 +108,61 @@ body
     +type-pad-bottom
 
   p
+    text-align: justify
     +type-pad-bottom
 
-  .row
-    width: 100%
-    overflow: auto
-    margin: 0 0 $margin 0
 
-    &:last-child
-      margin: 0
 
-    .column
-      +position(relative)
-      float: left
-      width: 50%
-      +box-sizing-border-box
+.row
+  width: 100%
+  overflow: auto
+  margin: 0 0 $margin 0
+
+  &:last-child
+    margin: 0
+
+  .column
+    +position(relative)
+    float: left
+    width: 50%
+    +box-sizing-border-box
+
+    &:nth-child(odd)
+      padding: 0 ($margin / 2) 0 0
+
+    &:nth-child(even)
+      padding: 0 0 0 ($margin / 2)
+
+    +breakpoint('tiny')
+      width: 100%
+      margin: 0 0 $margin 0
 
       &:nth-child(odd)
-        padding: 0 ($margin / 2) 0 0
+        padding: 0
 
       &:nth-child(even)
-        padding: 0 0 0 ($margin / 2)
+        padding: 0
 
-      +breakpoint('tiny')
-        width: 100%
-        margin: 0 0 $margin 0
+      &:last-child
+        margin: 0
 
-        &:nth-child(odd)
-          padding: 0
 
-        &:nth-child(even)
-          padding: 0
 
-        &:last-child
-          margin: 0
+=blind-section($class, $index, $header-color, $banner-image, $image-position)
+  .blind#{$class}
+    top: percentage((100 / $total-blinds) * $index / 100)
+    z-index: 100 + ($total-blinds - $index)
+
+  .blind#{$class} header
+    +gradient-radial($header-color)
+
+  .blind#{$class} .blind-banner
+    background-image: image-url($banner-image)
+    background-position: $image-position
+
+
+
++blind-section('.our-mission',     0, $blinds-purple-1, 'splash/mission-background.jpg',     70% 50%)
++blind-section('.mobile-presence', 1, $blinds-purple-2, 'splash/mobile-background.jpg',      50% 50%)
++blind-section('.consulting',      2, $blinds-purple-3, 'splash/integration-background.jpg', 50% 50%)
++blind-section('.contact-us',      3, $blinds-purple-4, 'splash/consulting-background.jpg',  50% 50%)

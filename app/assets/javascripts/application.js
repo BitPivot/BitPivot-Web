@@ -5,6 +5,7 @@
 //= require blinds
 
 window.onload = function() {
+    $('body').removeClass('transition-preload');
     new Blinds({
         fadeDuration: 750,
         fnFadeIn: function(blinds) {
@@ -17,8 +18,7 @@ window.onload = function() {
 
         },
         fnResize: function(hExpanded, hCollapsed) {
-            $('.blind.expanded').height(hExpanded);
-            $('.blind.collapsed').height(hCollapsed);
+
         }
     });
 }

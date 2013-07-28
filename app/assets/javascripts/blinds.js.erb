@@ -1,6 +1,7 @@
 var Blinds = function(options) {
 
     var blinds = [];
+    var totalBlinds = 4; // TODO Move to global config
     var hExpanded = 0;
     var hCollapsed = 0;
     var blockScroll = false;
@@ -9,9 +10,10 @@ var Blinds = function(options) {
     var fnFadeIn = options.fnFadeIn || null;
     var fnScroll = options.fnScroll || null;
     var fnResize = options.fnResize || null;
-    var fadeDuration = options.fadeDuration || 1000;
+    var fadeDuration = options.fadeDuration || 1000; // TODO Move to global config
     var fnHeaderClick = options.fnHeaderClick || null;
     var headerIndex = function($header) { return $('.blind').index($header.closest('.blind')); };
+    var selectedSection = function() { return $('.blind.expanded'); }
 
     var initialize = function() {
         // Cache jQuery objects
@@ -33,39 +35,40 @@ var Blinds = function(options) {
         setTimeout(function() { blinds[0].find('header').click(); }, fadeDuration * 2);
     };
 
-    function resize($blind, height, duration, expanded) {
+    function resize(index, expanding, position) {
+        var section = blinds[index];
         blockScroll = true;
-        toggleBlind($blind, expanded);
-        $blind.animate({scrollTop: 0}, {duration: fadeDuration, queue: false});
-        $blind.animate({ height: height }, {
-            duration: duration,
-            complete: function() {
-                blockScroll = false;
-            },
-            queue: false
-        });
-    };
+        setInterval(function() { blockScroll = false; }, fadeDuration); // TODO Move to global config
+        section.animate({scrollTop: 0}, {duration: fadeDuration, queue: false}); // TODO Move to global config
 
-    function toggleBlind($blind, expanded) {
-        toggleBlindShadows($blind, expanded);
-        if (expanded) {
-            $blind.find('.blind-content-area').fadeIn(fadeDuration);
+        if (expanding) {
+            section.removeClass('collapsed');
+            section.addClass('expanded');
+            section.css({
+                top: index * hCollapsed,
+                height: hExpanded
+            });
         }
         else {
-            $blind.find('.blind-content-area').fadeOut(fadeDuration);
+            section.removeClass('expanded');
+            section.addClass('collapsed');
+            switch (position) {
+                case 'top':
+                    section.css({
+                        top: index * hCollapsed,
+                        height: hCollapsed
+                    });
+                    break;
+
+                case 'bottom':
+                    section.css({
+                        top: (--index * hCollapsed) + hExpanded,
+                        height: hCollapsed
+                    });
+                    break;
+            }
         }
     };
-
-    function toggleBlindShadows($blind, expanded) {
-        setTimeout(function() {
-            if (expanded) {
-                $blind.removeClass('collapsed').addClass('expanded');
-            }
-            else {
-                $blind.removeClass('expanded').addClass('collapsed');
-            }
-        }, fadeDuration / 2);
-    }
 
 
 
@@ -113,11 +116,15 @@ var Blinds = function(options) {
     function resizeCallback(sender, e) {
         // Calculate collapsed height from CSS
         var $div = $('<div class="blind collapsed"></div>').hide().appendTo('body');
-        hCollapsed = $div.css('height');
+        hCollapsed = parseInt($div.css('height'));
         $div.remove();
 
         // Calculate expanded height based on size of wrapper minus collapsed divs
-        hExpanded = parseInt($('.blinds-wrapper').css('height')) - ((blinds.length - 1) * parseInt(hCollapsed)) + 'px';
+        hExpanded = parseInt($('.blinds-wrapper').css('height')) - ((totalBlinds - 1) * hCollapsed);
+
+        // Call click again on selected section to redraw
+        var section = selectedSection();
+        section.find('header').click();
 
         if (fnResize) fnResize(hExpanded, hCollapsed); // Custom callback
     };
@@ -125,10 +132,10 @@ var Blinds = function(options) {
     function headerClickCallback(sender, e) {
         var index = headerIndex($(sender));
 
-        for (var i = 0; i < blinds.length; i++) {
-            var expanded = i === index;
-            var height = expanded ? hExpanded : hCollapsed
-            resize(blinds[i], height, fadeDuration, expanded);
+        for (var i = 0; i < totalBlinds; i++) {
+            var expanding = i === index;
+            var position = i < index ? 'top' : 'bottom'
+            resize(i, expanding, position);
         }
 
         if (fnHeaderClick) fnHeaderClick(this); // Custom callback
