@@ -10,7 +10,6 @@ BitPivot::Application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
 
-  # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
@@ -80,7 +79,12 @@ BitPivot::Application.configure do
 
 
 
+  # Set Amazon S3 as asset host
+  config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+  config.assets.digest = true
+  config.assets.enabled = true
+
   # Add Symbolsets to asset pipeline
   config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
-  config.assets.precompile += %w(.svg .eot .woff .ttf)
+  config.assets.precompile += ['*.svg', '*.eot', '*.woff', '*.ttf']
 end
