@@ -81,9 +81,9 @@ BitPivot::Application.configure do
 
 
   # Precompile
-  config.assets.precompile += ['application.js', 'blinds.js', 'blog.js', 'application.css', 'blog.css']
+  #config.assets.precompile += ['application.js', 'blinds.js', 'blog.js', 'application.css', 'blog.css']
 
   # Add Symbolsets to asset pipeline
-  config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
-  config.assets.precompile += ['*.svg', '*.eot', '*.woff', '*.ttf']
+  #config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
+  #config.assets.precompile += ['*.svg', '*.eot', '*.woff', '*.ttf']
 end
