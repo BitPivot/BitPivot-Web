@@ -12,6 +12,7 @@ App.Blinds = (options) ->
   fnScroll: options.fnScroll or null
   fnResize: options.fnResize or null
   fadeDuration: options.fadeDuration or <%= APP_CONFIG.fade_duration %>
+  delayScrollDuration: 100
   fnHeaderClick: options.fnHeaderClick or null
   headerIndex: ($header) ->
     $('.blind').index $header.closest '.blind'
@@ -53,7 +54,8 @@ App.Blinds = (options) ->
 
   # Event callbacks
   mousewheelCallback: (sender, e) ->
-    return if @blockScroll
+    return if @blockScroll or @delayScrollTransition
+    self = this
     $blind = $ e.currentTarget
     blindIndex = $('.blind').index $blind
     contentElement = $blind.find('.blind-content-area')[0]
@@ -68,19 +70,25 @@ App.Blinds = (options) ->
     switch direction
       when 'up'
         if blindIndex != 0 # ensure not viewing first blind
-          if @scrolledToTop or not scrollbarPresent
+          if (@scrolledToTop) or not scrollbarPresent
             @blinds[blindIndex - 1].find('header').click() # open blind above
             @scrolledToTop = false
           else
             @scrolledToTop = scrollTop is 0
+            @delayScrollTransition = true
+            setTimeout (->
+              self.delayScrollTransition = false), @delayScrollDuration
       when 'down'
         if blindIndex != (@blinds.length - 1)  # ensure not viewing last blind
-          if @scrolledToBottom or !scrollbarPresent
+          if (@scrolledToBottom) or !scrollbarPresent
             @blinds[blindIndex + 1].find('header').click() # open blind below
             @scrolledToBottom = false
           else
             @scrolledToBottom = scrollHeight - (scrollTop + 1) is outerHeight\
-                            or scrollHeight - scrollTop is outerHeight
+              or scrollHeight - scrollTop is outerHeight
+            @delayScrollTransition = true
+            setTimeout (->
+              self.delayScrollTransition = false), @delayScrollDuration
     fnScroll this if @fnScroll  # Custom callback
 
   resizeCallback: (sender, e) ->
