@@ -1,0 +1,12 @@
+common: &common
+  total_blinds: 4
+  fade_duration: 750
+
+development:
+  <<: *common
+
+test:
+  <<: *common
+
+production:
+  <<: *common

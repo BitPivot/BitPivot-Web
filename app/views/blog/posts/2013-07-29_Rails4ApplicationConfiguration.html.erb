@@ -1,0 +1,153 @@
+
+<h1>Rails 4 Application Configuration</h1>
+
+<h2>Environment-Aware YAML Config With a Side of ERB</h2>
+
+<p>Hard coded values such as database credentials and other common values duplicated between files can become messy and hard to maintain, but given a few minutes of work you can have a clean, dynamic configuration file that is easy to work with.</p>
+
+<h3>Rails Global Variables</h3>
+
+<p>The first and probably least desirable way to use global variables in Rails is to define them in your environment configuration file, like so.</p>
+
+<pre><code># config/environment.rb
+
+  module AwesomeSite
+  class Application &lt; Rails::Application
+  api_key = '1234'
+  ...
+  end
+  end
+</code></pre>
+
+<p>Using this method we can access the global variable in a javascript file or stylesheet, for example, like this.</p>
+
+<pre><code>&lt;%= AwesomeSite::Application::api_key %&gt;
+</code></pre>
+
+<p>Not only is this ugly and verbose but it will become quite messy after you begin to add more configuration variables, or if you'd like to make them environment specific.</p>
+
+<h3>The YAML Configuration File</h3>
+
+<p>Declaring all your configuration variables in a YAML file is much better solution.  Start by creating your YAML configuration file.</p>
+
+<pre><code># config/config.yml
+
+  api_key: '1234'
+</code></pre>
+
+<p>Now we create an initializer for parsing the YAML file.  All files in the <code>config/initializers</code> directory are initialized automatically upon starting the server.  Note you'll have to restart your rails server to see any changes in your config.</p>
+
+<pre><code># config/initializers/config.rb
+
+  APP_CONFIG = YAML.load_file("#{Rails.root}/config/config.yml")
+</code></pre>
+
+<p>Now we can be more concise.</p>
+
+<pre><code>&lt;%= APP_CONFIG['api_key'] %&gt;
+</code></pre>
+
+<h3>Environment Awareness</h3>
+
+<p>We can go a step further and define configuration variables specific to which environment we are in.</p>
+
+<pre><code># config/config.yml
+
+  development:
+  db_username: dev_user
+  db_password: dev_pass
+
+  test:
+  db_username: test_user
+  db_password: test_pass
+
+  production:
+  db_username: production_user
+  db_password: production_pass
+</code></pre>
+
+<p>Now edit your initializer to only load the configuration settings for the current environment.</p>
+
+<pre><code># config/initializers/config.rb
+
+  APP_CONFIG = YAML.load_file("#{Rails.root}/config/config.yml")[Rails.env]
+</code></pre>
+
+<p>We can improve the above by defining a group of common variables, and passing those to each environment to prevent redundancy.</p>
+
+<pre><code># config/config.yml
+
+  common: &amp;common
+  api_key: 1234
+
+  development:
+  &lt;&lt;: *common
+  db_username: dev_user
+  db_password: dev_pass
+
+  test:
+  &lt;&lt;: *common
+  db_username: test_user
+  db_password: test_pass
+
+  production:
+  &lt;&lt;: *common
+  db_username: production_user
+  db_password: production_pass
+</code></pre>
+
+<h3>Using YAML and ERB</h3>
+
+<p>In order to use Ruby code in your YAML file in the same way you would in a View, we'll manually parse the contents of the config using ERB, and load the result with YAML.</p>
+
+<pre><code># config/initializers/config.rb
+  require 'yaml'
+
+  raw_config = File.read("#{Rails.root}/config/config.yml")
+  erb_result = ERB.new(raw_config).result
+  APP_CONFIG = YAML.load(erb_result)[Rails.env]
+</code></pre>
+
+<p>Now we can have dynamic values!</p>
+
+<pre><code># config/config.yml
+
+  common: &amp;common
+  api_key: 1234
+  some_path: &lt;%= RAILS_ROOT %&gt;/example/dir
+
+  ...
+</code></pre>
+
+<h3>OpenStruct</h3>
+
+<p>Even with the above, we are still accessing our config variables like so.</p>
+
+<pre><code>&lt;%= APP_CONFIG['api_key'] %&gt;
+</code></pre>
+
+<p>We can clean this up a bit by using <a href="http://ruby-doc.org/stdlib-2.0/libdoc/ostruct/rdoc/OpenStruct.html">OpenStruct</a>, which is available in stdlib.  In order to use OpenStruct, simply require it at the top of your <code>config.rb</code>, and pass the results of YAML.load() to it's constructor.</p>
+
+<pre><code># config/initializers/config.rb
+  require 'ostruct'
+  require 'yaml'
+
+  raw_config = File.read("#{Rails.root}/config/config.yml")
+  erb_result = ERB.new(raw_config).result
+  config = YAML.load(erb_result)[Rails.env]
+  APP_CONFIG = OpenStruct.new(config)
+</code></pre>
+
+<p>Available in a one-liner, if you prefer.</p>
+
+<pre><code># config/initializers/config.rb
+  require 'ostruct'
+  require 'yaml'
+
+  APP_CONFIG = OpenStruct.new(YAML.load(ERB.new(File.read("#{Rails.root}/config/config.yml")).result)[Rails.env])
+</code></pre>
+
+<p>Now we can access our configuration variables in a much cleaner fashion.</p>
+
+<pre><code>&lt;%= APP_CONFIG.api_key %&gt;
+</code></pre>
