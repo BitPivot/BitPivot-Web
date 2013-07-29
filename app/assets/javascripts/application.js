@@ -7,7 +7,7 @@
 //= require partials/_blog
 
 window.onload = function() {
-    if (disableJavascript) return;
+    if (typeof(disableJavascript) !== 'undefined' && disableJavascript) return;
 
     $('body').removeClass('transition-preload');
     var blinds = new App.Blinds({
