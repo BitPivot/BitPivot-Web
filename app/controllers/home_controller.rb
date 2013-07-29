@@ -3,7 +3,7 @@ class HomeController < ApplicationController
     @blinds = []
     paths = Dir['app/views/home/blinds/*.erb']
     puts "\nPATHS\n\n #{paths}\n\n"
-    paths.sort
+    paths.sort!
     puts "\nPATHS_SORTED\n\n #{paths}\n\n"
     paths.each do |p|
       @blinds.push("/#{p}")
