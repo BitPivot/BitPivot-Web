@@ -3,23 +3,16 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.easing.1.3
-//= require blinds
+//= require partials/_blinds
+//= require partials/_blog
 
 window.onload = function() {
     $('body').removeClass('transition-preload');
-    new Blinds({
-        fadeDuration: 750,
+    var b = new App.Blinds({
         fnFadeIn: function(blinds) {
             $('#js-loading-overlay').fadeOut(blinds.fadeDuration)
-        },
-        fnScroll: function(blinds) {
-
-        },
-        fnHeaderClick: function(blinds) {
-
-        },
-        fnResize: function(hExpanded, hCollapsed) {
-
         }
     });
+
+    b.initialize();
 }
