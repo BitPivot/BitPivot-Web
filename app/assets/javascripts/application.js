@@ -9,7 +9,6 @@
 window.onload = function() {
     $('body').removeClass('transition-preload');
     var b = new App.Blinds({
-        fadeDuration: 750,
         fnFadeIn: function(blinds) {
             $('#js-loading-overlay').fadeOut(blinds.fadeDuration)
         }

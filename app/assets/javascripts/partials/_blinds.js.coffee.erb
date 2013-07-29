@@ -2,7 +2,7 @@ window.App = {}
 
 App.Blinds = (options) ->
   blinds: []
-  totalBlinds: 4 # TODO Move to global config
+  totalBlinds: <%= BitPivot::Application::TOTAL_BLINDS %>
   hExpanded: 0
   hCollapsed: 0
   blockScroll: true
@@ -11,7 +11,7 @@ App.Blinds = (options) ->
   fnFadeIn: options.fnFadeIn or null
   fnScroll: options.fnScroll or null
   fnResize: options.fnResize or null
-  fadeDuration: options.fadeDuration or 1000 # TODO Move to global config
+  fadeDuration: options.fadeDuration or <%= BitPivot::Application::FADE_DURATION %>
   fnHeaderClick: options.fnHeaderClick or null
   headerIndex: ($header) ->
     $('.blind').index $header.closest '.blind'
