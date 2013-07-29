@@ -7,12 +7,14 @@
 //= require partials/_blog
 
 window.onload = function() {
+    if (disableJavascript) return;
+
     $('body').removeClass('transition-preload');
-    var b = new App.Blinds({
+    var blinds = new App.Blinds({
         fnFadeIn: function(blinds) {
             $('#js-loading-overlay').fadeOut(blinds.fadeDuration)
         }
     });
 
-    b.initialize();
+    blinds.initialize();
 }
