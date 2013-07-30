@@ -4,7 +4,6 @@
 
 header
   position: relative
-  padding: 0
   height: $page-header-height
   line-height: $page-header-height
   background: $header-background-color
@@ -29,17 +28,15 @@ header
 
 .header-bitpivot-logo
   +sprite('header-bitpivot-logo', 220px, 48px)
-  float: right
   cursor: pointer
+  float: right
 
   +breakpoint('tiny')
     +sprite('header-bitpivot-logo-tiny', 174px, 38px)
-    float: right
 
 
 
 .header-social-icons
-  float: left
   padding-left: 9px
 
   +breakpoint('tiny')
