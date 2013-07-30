@@ -10,7 +10,7 @@ header
   background: $header-background-color
   vertical-align: middle
   z-index: 1000
-  //+drop-shadow-bottom(10px)
+  +drop-shadow-bottom(10px)
 
   +breakpoint('tiny')
     height: $page-header-height-tiny
@@ -30,6 +30,7 @@ header
 .header-bitpivot-logo
   +sprite('header-bitpivot-logo', 220px, 48px)
   float: right
+  cursor: pointer
 
   +breakpoint('tiny')
     +sprite('header-bitpivot-logo-tiny', 174px, 38px)
