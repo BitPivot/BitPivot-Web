@@ -6,9 +6,12 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <!--[if lt IE 9]>
-      <%= javascript_include_tag 'application-ie-fallback', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'application-fallback-ie', 'data-turbolinks-track' => true %>
       <%= stylesheet_link_tag 'application-fallback', media: 'all', 'data-turbolinks-track' => true %>
     <![endif]-->
+    <noscript>
+      <%= stylesheet_link_tag 'application-fallback', media: 'all', 'data-turbolinks-track' => true %>
+    </noscript>
   </head>
 
   <body class="transition-preload" id="<%= params[:controller].parameterize %>_controller">
