@@ -95,7 +95,7 @@ App.Blinds = (options) ->
     # Calculate collapsed height from CSS
     $div = $('<div class="blind collapsed"></div>').hide().appendTo 'body'
     @hCollapsed = parseInt($div.height())
-    $div.remove
+    $div.remove()
 
     # Calculate expanded height based on size of wrapper minus collapsed divs
     @hExpanded = parseInt($('.blinds-wrapper').height() - (@totalBlinds - 1) * @hCollapsed)
