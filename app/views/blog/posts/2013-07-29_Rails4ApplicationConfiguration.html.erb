@@ -1,7 +1,19 @@
+---
+title: Rails 4 on OSX Lion
+subtitle: Environment-Aware YAML Config With a Side of ERB
+author: Sean Kennedy
+year: 2013
+month: 7
+day: 29
+categories:
+- ruby
+- rails
+- yaml
+- erb
+- openstruct
+---
 
-<h1>Rails 4 Application Configuration</h1>
-
-<h2>Environment-Aware YAML Config With a Side of ERB</h2>
+<!-- Paste contents of <body> from Mou exported html file below -->
 
 <p>Hard coded values such as database credentials and other common values duplicated between files can become messy and hard to maintain, but given a few minutes of work you can have a clean, dynamic configuration file that is easy to work with.</p>
 
@@ -11,12 +23,12 @@
 
 <pre><code># config/environment.rb
 
-  module AwesomeSite
+module AwesomeSite
   class Application &lt; Rails::Application
-  api_key = '1234'
-  ...
+    api_key = '1234'
+    ...
   end
-  end
+end
 </code></pre>
 
 <p>Using this method we can access the global variable in a javascript file or stylesheet, for example, like this.</p>
