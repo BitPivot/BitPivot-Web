@@ -40,14 +40,14 @@ $total-blinds: <%= APP_CONFIG.total_blinds %>
     line-height: $blind-collapsed-height
     vertical-align: middle
     text-align: center
-    +font($blind-collapsed-height * 0.45, $blind-header-text-color, 'pragmatica-extra-light')
+    +font($blind-header-font-size, $blind-header-text-color, 'pragmatica-extra-light')
     text-shadow: 0px 3px 5px $blind-header-text-shadow-color
     +drop-shadow-bottom(20px)
 
     +breakpoint('tiny')
       height: $blind-collapsed-height-tiny
       line-height: $blind-collapsed-height-tiny
-      +font($blind-collapsed-height-tiny  * 0.55, $blind-header-text-color, 'pragmatica-extra-light')
+      +font($blind-header-font-size-tiny, $blind-header-text-color, 'pragmatica-extra-light')
 
 
 
@@ -152,6 +152,13 @@ $total-blinds: <%= APP_CONFIG.total_blinds %>
 
   .blind#{$class} header
     +gradient-radial($header-color)
+
+    &:hover
+      +gradient-radial(lighten($header-color, 1%))
+      font-size: $blind-header-font-size * 1.1
+
+      +breakpoint('tiny')
+        font-size: $blind-header-font-size-tiny * 1.1
 
   .blind#{$class} .blind-banner
     background-image: image-url($banner-image)
