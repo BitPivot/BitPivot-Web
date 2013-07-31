@@ -4,5 +4,4 @@
  *= require partials/_page
  *= require partials/_header
  *= require partials/_blinds
- *= require_self
  */
