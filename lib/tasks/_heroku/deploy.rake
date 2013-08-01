@@ -22,7 +22,7 @@ namespace :deploy do
   end
 
   task :after_deploy, :env, :branch do |t, args|
-    puts "Deployment Complete"
+    puts 'Deployment Complete'
   end
 
   task :update_code, :env, :branch do |t, args|
