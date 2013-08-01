@@ -8,6 +8,7 @@ App.Blinds = (options) ->
   blockScroll: true
   scrolledToTop: null
   scrolledToBottom: null
+  disabled: false
   fnFadeIn: options.fnFadeIn or null
   fnScroll: options.fnScroll or null
   fnResize: options.fnResize or null
@@ -19,6 +20,8 @@ App.Blinds = (options) ->
   selectedSection: ->
     $ '.blind.expanded'
 
+
+
   resize: (index, expanding, position) ->
     self = this
     $section = @blinds[index]
@@ -29,7 +32,6 @@ App.Blinds = (options) ->
       null
     ), @fadeDuration
 
-    # TODO Move to global config
     $section.animate {scrollTop: 0}, {duration: @fadeDuration, queue: false}
 
     if expanding
@@ -52,44 +54,45 @@ App.Blinds = (options) ->
             height: @hCollapsed
 
 
+
   # Event callbacks
-  mousewheelCallback: (sender, e) ->
-    return if @blockScroll or @delayScrollTransition
-    self = this
-    $blind = $ e.currentTarget
-    blindIndex = $('.blind').index $blind
-    contentElement = $blind.find('.blind-content-area')[0]
-    $content = $ contentElement
-
-    direction = if e.originalEvent.wheelDelta >= 0 then 'up' else 'down'
-    scrollTop = $content.scrollTop()
-    scrollHeight = contentElement.scrollHeight
-    scrollbarPresent = scrollHeight > $content.height()
-    outerHeight = $content.outerHeight()
-
-    switch direction
-      when 'up'
-        if blindIndex != 0 # ensure not viewing first blind
-          if (@scrolledToTop) or not scrollbarPresent
-            @blinds[blindIndex - 1].find('header').click() # open blind above
-            @scrolledToTop = false
-          else
-            @scrolledToTop = scrollTop is 0
-            @delayScrollTransition = true
-            setTimeout (->
-              self.delayScrollTransition = false), @delayScrollDuration
-      when 'down'
-        if blindIndex != (@blinds.length - 1)  # ensure not viewing last blind
-          if (@scrolledToBottom) or !scrollbarPresent
-            @blinds[blindIndex + 1].find('header').click() # open blind below
-            @scrolledToBottom = false
-          else
-            @scrolledToBottom = scrollHeight - (scrollTop + 1) is outerHeight\
-              or scrollHeight - scrollTop is outerHeight
-            @delayScrollTransition = true
-            setTimeout (->
-              self.delayScrollTransition = false), @delayScrollDuration
-    fnScroll this if @fnScroll  # Custom callback
+  #mousewheelCallback: (sender, e) ->
+  #  return if @blockScroll or @delayScrollTransition or @disabled
+  #  self = this
+  #  $blind = $ e.currentTarget
+  #  blindIndex = $('.blind').index $blind
+  #  contentElement = $blind.find('.blind-content-area')[0]
+  #  $content = $ contentElement
+  #
+  #  direction = if e.originalEvent.wheelDelta >= 0 then 'up' else 'down'
+  #  scrollTop = $content.scrollTop()
+  #  scrollHeight = contentElement.scrollHeight
+  #  scrollbarPresent = scrollHeight > $content.height()
+  #  outerHeight = $content.outerHeight()
+  #
+  #  switch direction
+  #    when 'up'
+  #      if blindIndex != 0 # ensure not viewing first blind
+  #        if (@scrolledToTop) or not scrollbarPresent
+  #          @blinds[blindIndex - 1].find('header').click() # open blind above
+  #          @scrolledToTop = false
+  #        else
+  #          @scrolledToTop = scrollTop is 0
+  #          @delayScrollTransition = true
+  #          setTimeout (->
+  #            self.delayScrollTransition = false), @delayScrollDuration
+  #    when 'down'
+  #      if blindIndex != (@blinds.length - 1)  # ensure not viewing last blind
+  #        if (@scrolledToBottom) or !scrollbarPresent
+  #          @blinds[blindIndex + 1].find('header').click() # open blind below
+  #          @scrolledToBottom = false
+  #        else
+  #          @scrolledToBottom = scrollHeight - (scrollTop + 1) is outerHeight\
+  #            or scrollHeight - scrollTop is outerHeight
+  #          @delayScrollTransition = true
+  #          setTimeout (->
+  #            self.delayScrollTransition = false), @delayScrollDuration
+  #  fnScroll this if @fnScroll  # Custom callback
 
   resizeCallback: (sender, e) ->
     # Calculate collapsed height from CSS
@@ -106,7 +109,67 @@ App.Blinds = (options) ->
 
     fnResize(@hExpanded, @hCollapsed) if @fnResize # Custom callback
 
+  expandAll: ->
+    @disabled = true
+    self = this
+    lastTop = 0
+    lastHeight = 0
+    scrollToTop = 0
+
+    selectedSection = $('.blind.expanded')[0]
+
+    $('body').addClass('full')
+
+    $.each self.blinds, (i, b) ->
+      $(b).removeClass('collapsed').addClass('expanded')
+
+      # Calculate height based on content
+      contentHeight = 0
+      $(b).children().each ->
+        contentHeight += $(this).outerHeight(true)
+
+      # Calculate top based on previous blind's height
+      contentTop = (lastTop + lastHeight)
+
+      $(b).css
+        height: contentHeight,
+        top: contentTop
+
+      lastTop = contentTop
+      lastHeight = contentHeight
+      scrollToTop = contentTop if $(selectedSection).is(b)
+
+    if scrollToTop > 0
+      $('html, body').animate
+        scrollTop: scrollToTop
+        2000
+        'swing'
+
+  collaspeAndFocus: ->
+    @disabled = false
+    self = this
+
+    $('body').removeClass('full')
+
+    # Find focused blind
+    windowCenter = $(window).scrollTop() + $(window).height() / 2
+    $.each self.blinds, (i, b) ->
+      offset = $(b).offset()
+      top = offset.top
+      bottom = top + $(b).height()
+      if (top <= windowCenter) and (bottom > windowCenter)
+        $(b).find('header').click()
+
+  orientationCallback: ->
+    if window.orientation == 90 or window.orientation == -90
+      @expandAll()
+
+    if window.orientation == 0
+      @collaspeAndFocus()
+
   headerClickCallback: (sender, e) ->
+    return if @disabled
+
     index = @headerIndex($(sender))
     i = 0
     while i < @totalBlinds
@@ -123,12 +186,15 @@ App.Blinds = (options) ->
     self = this
     $(document).on 'click', '.blind header', (e) ->
       self.headerClickCallback this, (e)
-    $(document).on 'mousewheel', '.blind', (e) ->
-      self.mousewheelCallback this, e
+
+    #$(document).on 'mousewheel', '.blind', (e) ->
+    #  self.mousewheelCallback this, e
+
     $(window).on 'resize', (e) ->
       self.resizeCallback this, e
+
     $(window).on 'orientationchange', (e) ->
-      self.resizeCallback this, e
+      self.orientationCallback()
 
     # Cache jQuery objects
     $.each $('.blind'), (i, s) ->
@@ -136,6 +202,10 @@ App.Blinds = (options) ->
 
     # Calculate initial sizes
     $(window).trigger 'resize'
+
+    # Check to see if phone in landscape
+    if window.orientation == 90 or window.orientation == -90
+      self.expandAll()
 
     # Fade out loading overlay
     @fnFadeIn(this) if @fnFadeIn

@@ -6,15 +6,13 @@
 //= require partials/_blinds
 //= require partials/_blog
 
+var blinds = new App.Blinds({
+    fnFadeIn: function(blinds) {
+        $('#js-loading-overlay').fadeOut(blinds.fadeDuration)
+    }
+});
+
 window.onload = function() {
-    if (typeof(disableJavascript) !== 'undefined' && disableJavascript) return;
-
     $('body').removeClass('transition-preload');
-    var blinds = new App.Blinds({
-        fnFadeIn: function(blinds) {
-            $('#js-loading-overlay').fadeOut(blinds.fadeDuration)
-        }
-    });
-
     blinds.initialize();
 }

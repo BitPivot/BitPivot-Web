@@ -160,6 +160,14 @@ $total-blinds: <%= APP_CONFIG.total_blinds %>
       +breakpoint('tiny')
         font-size: $blind-header-font-size-tiny * 1.1
 
+  .blind#{$class}.expanded header
+    &:hover
+      +gradient-radial($header-color)
+      font-size: $blind-header-font-size
+
+      +breakpoint('tiny')
+        font-size: $blind-header-font-size-tiny
+
   .blind#{$class} .blind-banner
     background-image: image-url($banner-image)
     background-position: $image-position
