@@ -110,6 +110,8 @@ App.Blinds = (options) ->
     fnResize(@hExpanded, @hCollapsed) if @fnResize # Custom callback
 
   expandAll: ->
+    return if $(window).height() >= 650
+
     @disabled = true
     self = this
     lastTop = 0
