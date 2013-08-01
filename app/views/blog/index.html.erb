@@ -1,0 +1,9 @@
+<% @page_posts.each do |p| %>
+  <%= render 'post.html.erb', locals: p %>
+<% end %>
+<% if @posts.length > @page_size * @page %>
+  <%= link_to "\u2190 Earlier posts", "/blog/page/#{@page+1}" %>
+<% end %>
+<% if @page > 1 %>
+  <%= link_to "Later posts \u2192", "/blog/page/#{@page-1}" %>
+<% end %>

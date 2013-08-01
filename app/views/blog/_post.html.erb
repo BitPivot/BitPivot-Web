@@ -1,0 +1,18 @@
+<div class='post'>
+  
+  <div class='blog-divider'></div>
+
+  <h1><%= locals.title %></h1>
+
+  <h2><em><%= locals.subtitle %></em></h2>
+
+  <div class='author-date'>
+    By <%= ActionController::Base.helpers.link_to locals.author, "blog/authors/#{locals.author.split(' ')[0]}" %>
+    on <span class='date'><%= "#{Date::MONTHNAMES[locals.month]} #{locals.day}, #{locals.year}" %></span>
+  </div>
+
+  <div class='post-body'>
+    <%= render inline: locals.body %>
+  </div>
+
+</div>
