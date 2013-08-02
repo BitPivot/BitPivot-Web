@@ -1,5 +1,5 @@
-<% @page_posts.each do |p| %>
-  <%= render 'post.html.erb', locals: p %>
+<% @page_posts.each do |post| %>
+  <%= render template: 'blog/view_post.html.erb', locals: {post:post} %>
 <% end %>
 <% if @posts.length > @page_size * @page %>
   <%= link_to "\u2190 Earlier posts", "/blog/page/#{@page+1}" %>

@@ -1,0 +1,50 @@
+<div class='post-area'>
+  <div class='post'>
+    <div class='blog-divider'></div>
+
+    <h1><%= link_to post.title, "/blog/posts/#{post.file_name.slice(0..(post.file_name.index('.')-1))}" %></h1>
+
+    <h2><%= link_to post.subtitle, "/blog/posts/#{post.file_name.slice(0..(post.file_name.index('.')-1))}" %></h2>
+
+    <div class='author-date'>
+      By <%= link_to post.author, "/blog/authors/#{post.author.split(' ')[0]}".downcase %>
+      on <span class='date'><%= "#{Date::MONTHNAMES[post.month]} #{post.day}, #{post.year}" %></span>
+    </div>
+
+    <div class='post-body'>
+      <%= render inline: post.body %>
+    </div>
+
+  </div>
+
+  <div class='comments'>
+    <h3>Discussion</h3>
+    <% post.blog_post_comments.all.each do |c| %>
+      <div class='comment'>
+        <div class='comment-header'>Written by <%= c.author %> (<%= c.email %>) on <%= c.created_at.to_formatted_s(:long_ordinal) %></div>
+        <div class='comment-content'><%= c.content %></div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class='create-comment'>
+    <h3>Help contribute to making this article more valuable.</h3>
+
+    <%= form_for :comment,  url: '/blog/create_comment', method: 'POST' do |f| %>
+
+      <%= f.hidden_field :post_file_name, value: post.file_name %>
+
+      <div class='create-comment-author-email'>
+        <%= f.text_field :author, placeholder: 'Your name', class: 'create-comment-author' %>
+        <%= f.text_field :email, placeholder: 'Your email', class: 'create-comment-email' %>
+      </div>
+
+      <div class='create-comment-content'>
+        <%= f.text_area :content, placeholder: 'Your contribution...', class: 'create-comment-body' %>
+      </div>
+
+      <%= f.submit 'Post comment' %>
+
+    <% end %>
+  </div>
+</div>
