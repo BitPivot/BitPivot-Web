@@ -1,6 +1,6 @@
 BitPivot::Application.routes.draw do
 
-  get '/', to: 'home#view'
+  get '/', to: 'home#index'
 
   get 'blog', to: 'blog#index', page: 1                 # get most recent blog posts
   get 'blog/page/:page', to: 'blog#index'               # pages > 1 get earlier blog posts, 5 posts per page

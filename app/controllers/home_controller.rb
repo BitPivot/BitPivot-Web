@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  def view
+  def index
     @blinds = []
     paths = Dir['app/views/home/blinds/*.erb']
     paths.sort!
