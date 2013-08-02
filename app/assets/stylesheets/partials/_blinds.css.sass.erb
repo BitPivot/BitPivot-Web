@@ -169,10 +169,11 @@ $total-blinds: <%= APP_CONFIG.total_blinds %>
         font-size: $blind-header-font-size-tiny
 
   .blind#{$class} .blind-banner
-    background-image: image-url($banner-image)
-    background-position: $image-position
+    @if $banner-image
+      background-image: image-url($banner-image)
+      background-position: $image-position
 
-+blind('.our-mission',     0, $blind-header-background-color-1, 'blind-mission-background.jpg',     70% 50%)
-+blind('.mobile-presence', 1, $blind-header-background-color-2, 'blind-mobile-background.jpg',      50% 50%)
-+blind('.consulting',      2, $blind-header-background-color-3, 'blind-integration-background.jpg', 50% 50%)
-+blind('.contact-us',      3, $blind-header-background-color-4, 'blind-consulting-background.jpg',  50% 50%)
++blind('.our-philosophy',     0, $blind-header-background-color-1, 'blind-our-philosophy-background.jpg',     70% 50%)
++blind('.mobile-and-web-presence', 1, $blind-header-background-color-2, 'blind-mobile-and-web-presence-background.jpg',      50% 50%)
++blind('.consulting',      2, $blind-header-background-color-3, 'blind-consulting-background.jpg', 50% 50%)
++blind('.our-team',      3, $blind-header-background-color-4, '',  50% 50%)
