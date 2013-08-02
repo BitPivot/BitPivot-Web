@@ -1,5 +1,6 @@
 class BlogPost < ActiveRecord::Base
-  attr_accessible :file_name, :title, :subtitle, :author, :year, :month, :day, :categories, :body, :md5_hash, :blog_post_comment
+  attr_accessible :file_name, :title, :subtitle, :author, :year, :month, :day,
+                  :categories, :body, :md5_hash, :blog_post_comment, :banner_image
 
   has_many :blog_post_comments
 
@@ -14,7 +15,8 @@ class BlogPost < ActiveRecord::Base
       #{self.month}\
       #{self.day}\
       #{self.categories}\
-      #{self.body}"
+      #{self.body}\
+      #{self.banner_image}"
     )
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130802184712) do
+ActiveRecord::Schema.define(version: 20130802204037) do
 
   create_table "blog_post_comments", force: true do |t|
     t.integer  "blog_post_id"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20130802184712) do
     t.string   "file_name",             null: false
     t.string   "md5_hash",              null: false
     t.integer  "blog_post_comments_id"
+    t.string   "banner_image"
   end
 
   add_index "blog_posts", ["blog_post_comments_id"], name: "index_blog_posts_on_blog_post_comments_id", using: :btree
