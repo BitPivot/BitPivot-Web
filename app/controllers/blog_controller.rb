@@ -26,25 +26,23 @@ class BlogController < ApplicationController
   end
 
   def year
-    # TODO
-    year = Integer(params[:year])
-    @page_posts = @posts.select { |p| }
+    year =  Integer(params[:year])
+    @page_posts = @posts.select { |p| p.year == year}
     render :index
   end
 
   def month
-    # TODO
     year = Integer(params[:year])
-    @page_posts = @posts.select { |p| }
+    month = Integer(params[:month])
+    @page_posts = @posts.select { |p| p.year == year && p.month == month }
     render :index
   end
 
   def day
-    # TODO
     year = Integer(params[:year])
     month = Integer(params[:month])
     day = Integer(params[:day])
-    @page_posts = @posts.select { |p| }
+    @page_posts = @posts.select { |p| p.year == year && p.month == month && p.day == day}
     render :index
   end
 
