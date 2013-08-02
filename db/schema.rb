@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130801013251) do
+ActiveRecord::Schema.define(version: 20130802184712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blog_post_comments", force: true do |t|
+    t.integer  "blog_post_id"
+    t.integer  "votes"
+    t.string   "author",       null: false
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "email",        null: false
+  end
 
   create_table "blog_posts", force: true do |t|
     t.string   "title"
@@ -27,8 +37,11 @@ ActiveRecord::Schema.define(version: 20130801013251) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "body"
-    t.string   "file_name",  null: false
-    t.string   "md5_hash",   null: false
+    t.string   "file_name",             null: false
+    t.string   "md5_hash",              null: false
+    t.integer  "blog_post_comments_id"
   end
+
+  add_index "blog_posts", ["blog_post_comments_id"], name: "index_blog_posts_on_blog_post_comments_id", using: :btree
 
 end

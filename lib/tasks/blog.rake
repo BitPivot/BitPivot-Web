@@ -3,7 +3,7 @@ require 'ostruct'
 namespace :blog do
 
   task :compile => :environment do
-    include ERB::Util # Contains html_escape
+    include ERB::Util
 
     puts "\nCompiling blog posts...\n"
 
