@@ -12,7 +12,6 @@ class BlogController < ApplicationController
         @page_posts.push(p)
       end
     end
-    puts @page_posts[0].title
   end
 
   def author
@@ -47,7 +46,7 @@ class BlogController < ApplicationController
   def get_posts
     @page_size = 5
     @page = params[:page].nil? ? 1 : Integer(params[:page])
-    @page_posts = []    
+    @page_posts = []
     @posts = BlogPost.all
     @posts.each do |p|
       p.body = CGI.unescapeHTML(p.body)
