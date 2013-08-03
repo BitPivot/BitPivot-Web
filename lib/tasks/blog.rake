@@ -9,7 +9,7 @@ namespace :blog do
 
     posts_input_path = 'app/views/blog/posts/'
 
-    # Keep track of changes as filesnames for terminal output
+    # Keep track of changes as files names for terminal output
     current_file_names = []
     changes = {
         created: [],
@@ -95,6 +95,6 @@ namespace :blog do
       end
     end
 
-    puts "\nSuccess!"
+    puts "\nSuccess!\n"
   end
 end

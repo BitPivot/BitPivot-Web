@@ -1,0 +1,10 @@
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "blog_post_comments" DISABLE TRIGGER ALL;ALTER TABLE "blog_posts" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "blog_posts"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "blog_posts" ("created_at", "updated_at", "id") VALUES ('2013-08-03 19:33:18', '2013-08-03 19:33:18', 980190962)[0m
+PG::NotNullViolation: ERROR:  null value in column "file_name" violates not-null constraint
+DETAIL:  Failing row contains (980190962, null, null, null, null, null, null, null, 2013-08-03 19:33:18, 2013-08-03 19:33:18, null, null, null, null, null).
+: INSERT INTO "blog_posts" ("created_at", "updated_at", "id") VALUES ('2013-08-03 19:33:18', '2013-08-03 19:33:18', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "blog_post_comments" ENABLE TRIGGER ALL;ALTER TABLE "blog_posts" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
