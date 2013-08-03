@@ -19,7 +19,7 @@ $total-blinds: <%= APP_CONFIG.total_blinds %>
   height: percentage(1 / $total-blinds)
   width: 100%
   overflow: hidden
-  +drop-shadow-bottom(10px)
+  +drop-shadow(10px)
   +transition(all 0.5s ease)
 
   &.expanded
@@ -42,7 +42,7 @@ $total-blinds: <%= APP_CONFIG.total_blinds %>
     text-align: center
     +font($blind-header-font-size, $blind-header-text-color, 'pragmatica-extra-light')
     text-shadow: 0px 3px 5px $blind-header-text-shadow-color
-    +drop-shadow-bottom(20px)
+    +drop-shadow(20px)
 
     +breakpoint('tiny')
       height: $blind-collapsed-height-tiny

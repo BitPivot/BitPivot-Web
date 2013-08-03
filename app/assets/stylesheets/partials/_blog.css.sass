@@ -1,0 +1,100 @@
+@import 'mixins'
+
+
+
+body
+  max-width: $blog-post-max-width
+  margin: $margin * 2 auto
+  background: $blog-page-background
+
+
+
+header
+  +position(fixed, 0, 0, auto, 0)
+
+
+
+.post
+  margin: $margin * 2
+  padding: $margin * 2
+  background: $blog-post-background
+  +drop-shadow($margin, rgba(0, 0, 0, 0.45))
+
+  a
+    &:link, &:visited
+      color: $blog-link-text-color
+      text-decoration: underline
+
+    &:hover, &:hover
+      color: lighten($blog-link-text-color, 7%)
+
+
+
+.post-area
+  padding-bottom: $margin
+  margin-bottom: $margin
+  border-bottom: 1px solid $blog-post-border-color
+  +font($blog-font-size, $blog-text-color, 'pragmatica-light')
+  line-height: $blog-line-height
+
+
+
+.post-header
+  *
+    margin-bottom: 5px
+
+  a
+    text-decoration: none !important
+
+  h1
+    +font($blog-title-font-size, $blog-title-text-color, 'pragmatica-extra-light')
+    line-height: $blog-title-font-size
+
+  h2
+    +font($blog-title-font-size * 0.75, $blog-title-text-color, 'pragmatica-extra-light')
+    line-height: $blog-title-font-size
+    +type-pad-bottom
+
+
+
+.post-metadata
+  margin-bottom: $margin
+  padding-bottom: $margin
+  font-size: 13px
+  color: $blog-post-metadata-text-color
+  border-bottom: 1px solid $blog-post-border-color
+
+
+
+=post-header($font-size-modifier)
+  padding: $margin / 2
+  margin: ($margin * 2) 0
+  +gradient-radial($blog-header-background)
+  +font($blog-header-font-size * $font-size-modifier, $blog-header-text-color, 'pragmatica-extra-light')
+  text-shadow: 0px 3px 5px $blind-header-text-shadow-color
+  line-height: $header-font-size
+  +type-pad-bottom
+
+.post-body
+  h1
+    +post-header(1)
+
+  h2
+    +post-header(0.8)
+
+  h3
+    +post-header(0.65)
+
+  p
+    text-align: justify
+    +type-pad-bottom
+
+  pre
+    margin: $margin
+    padding: $margin / 2
+    background: $blog-code-background
+    +font($blog-font-size, $blog-text-color, 'source-code-pro-regular')
+    line-height: $blog-line-height
+    border: 1px solid $blog-code-border-color
+    overflow: scroll
+    +type-pad-bottom

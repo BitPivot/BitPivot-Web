@@ -98,10 +98,15 @@
   -moz-box-shadow: none
   box-shadow: none
 
-=drop-shadow-bottom($size, $color: rgba(0, 0, 0, 1))
+=drop-shadow($size, $color: rgba(0, 0, 0, 1))
   -webkit-box-shadow: 0px 0px $size $color
   -moz-box-shadow: 0px 0px $size $color
   box-shadow: 0px 0px $size $color
+
+=inner-shadow($size, $color: rgba(0, 0, 0, 1))
+  -webkit-box-shadow: inset 0px 0px $size $color
+  -moz-box-shadow: inset 0px 0px $size $color
+  box-shadow: inset 0px 0px $size $color
 
 
 
@@ -144,6 +149,16 @@
   @if $font-family == 'pragmatica-light'
     font-family: 'pragmatica-web-n3', 'pragmatica-web', 'Helvetica Neue', Helvetica, Arial, sans-serif
     font-weight: 300
+    font-style: normal
+
+  @if $font-family == 'pragmatica-bold'
+    font-family: 'pragmatica-web-n7', 'pragmatica-web', 'Helvetica Neue', Helvetica, Arial, sans-serif
+    font-weight: 700
+    font-style: normal
+
+  @if $font-family == 'source-code-pro-regular'
+    font-family: 'source-code-pro-n4', 'source-code-pro', 'Andale Mono', AndaleMono, monospace
+    font-weight: 400
     font-style: normal
 
 

@@ -1,12 +1,18 @@
-<div class='post-area'>
-  <div class='post'>
-    <div class='blog-divider'></div>
+<article class='post'>
 
-    <h1><%= link_to post.title, "/blog/posts/#{post.file_name.slice(0..(post.file_name.index('.')-1))}" %></h1>
+  <section class="post-area">
+    <div class="post-header">
+      <% if post.banner_image %>
+        <%= image_tag post.banner_image, class: "blog-banner" %>
+      <% end %>
 
-    <h2><%= link_to post.subtitle, "/blog/posts/#{post.file_name.slice(0..(post.file_name.index('.')-1))}" %></h2>
+      <hgroup>
+        <h1><%= link_to post.title, "/blog/posts/#{post.file_name.slice(0..(post.file_name.index('.')-1))}" %></h1>
+        <h2><%= link_to post.subtitle, "/blog/posts/#{post.file_name.slice(0..(post.file_name.index('.')-1))}" %></h2>
+      </hgroup>
+    </div>
 
-    <div class='author-date'>
+    <div class='post-metadata'>
       By <%= link_to post.author, "/blog/authors/#{post.author.split(' ')[0]}".downcase %>
       on <span class='date'><%= "#{Date::MONTHNAMES[post.month]} #{post.day}, #{post.year}" %></span>
     </div>
@@ -14,21 +20,24 @@
     <div class='post-body'>
       <%= render inline: post.body %>
     </div>
+  </section>
 
-  </div>
 
-  <div class='comments'>
-    <h3>Discussion</h3>
+
+  <section class="post-comments">
+    <h2>Discussion</h2>
     <% post.blog_post_comments.all.each do |c| %>
       <div class='comment'>
         <div class='comment-header'>Written by <%= c.author %> (<%= c.email %>) on <%= c.created_at.to_formatted_s(:long_ordinal) %></div>
         <div class='comment-content'><%= c.content %></div>
       </div>
     <% end %>
-  </div>
+  </section>
 
-  <div class='create-comment'>
-    <h3>Help contribute to making this article more valuable.</h3>
+
+
+  <section class='post-create-comment'>
+    <h2>Help contribute and make this article more valuable.</h2>
 
     <%= form_for :comment,  url: '/blog/create_comment', method: 'POST' do |f| %>
 
@@ -46,5 +55,6 @@
       <%= f.submit 'Post comment' %>
 
     <% end %>
-  </div>
-</div>
+  </section>
+
+</article>
