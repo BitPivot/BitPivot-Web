@@ -28,7 +28,8 @@
     <h2>Discussion</h2>
     <% post.blog_post_comments.all.each do |c| %>
       <div class='comment'>
-        <div class='comment-header'>Written by <%= c.author %> (<%= c.email %>) on <%= c.created_at.to_formatted_s(:long_ordinal) %></div>
+        <div class='comment-header'>Written by <%= c.author %> (<%= c.email %>) on <%= c.created_at.to_formatted_s(:long_ordinal) %>
+        </div>
         <div class='comment-content'><%= c.content %></div>
       </div>
     <% end %>
