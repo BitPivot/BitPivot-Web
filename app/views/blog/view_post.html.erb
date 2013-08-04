@@ -26,38 +26,35 @@
 
 
 
-  <section class='comments-area'>
+  <section class='comments'>
+    <h1>Discussion</h1>
 
-    <section class='comments'>
-      <h1>Discussion</h1>
-
-      <% post.blog_post_comments.all.each do |c| %>
-        <div class='comment'>
-          <div class='comment-header'>
-            Written by <em><%= c.author %></em> on <%= c.created_at.to_formatted_s(:long_ordinal) %>
-          </div>
-          <div class='comment-content'>
-            <%= c.content %>
-          </div>
-
-          <% if defined? respond_to_id %>
-            <div id='respond' class='respond-to-comment'>
-              Respond
-            </div>
-          <% else %>
-            <div class='respond-to-link'>
-              <%= link_to 'Click here to reply to this comment', "/blog/respond_to_comment/#{post.id}/#{c.id}#respond", method: 'post' %>
-            </div>
-          <% end %>
+    <% post.blog_post_comments.all.each do |c| %>
+      <div class='comment'>
+        <div class='comment-header'>
+          Written by <em><%= c.author %></em> on <%= c.created_at.to_formatted_s(:long_ordinal) %>
         </div>
-      <% end %>
-    </section>
+        <div class='comment-content'>
+          <%= c.content %>
+        </div>
 
-    <section class='create-comment'>
-      <h1>Contribute to this Article</h1>
-      <%= render template: 'blog/create_comment', locals: { post: post } %>
-    </section>
+        <% if defined? respond_to_id and respond_to_id == c.id %>
+          <div id='respond' class='respond-to-comment'>
+            <%= render template: 'blog/create_comment', locals: { post: post, respond_to_id: respond_to_id } %>
+          </div>
+        <% else %>
+          <div class='respond-to-link'>
+            <%= link_to 'Click here to reply to this comment', "/blog/respond_to_comment/#{post.id}/#{c.id}#respond", method: 'post' %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
 
+
+  <section class='create-comment'>
+    <h1>Contribute to this Article</h1>
+    <%= render template: 'blog/create_comment', locals: { post: post, respond_to_id: nil } %>
   </section>
 
 </article>
