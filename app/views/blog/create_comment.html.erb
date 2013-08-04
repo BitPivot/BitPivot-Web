@@ -1,0 +1,16 @@
+<%= form_for :comment,  url: '/blog/create_comment', method: 'POST' do |f| %>
+
+  <%= f.hidden_field :post_file_name, value: post.file_name %>
+
+  <div class='create-comment-author-email'>
+    <%= f.text_field :author, placeholder: 'Your name', class: 'input-text' %>
+    <%= f.text_field :email, placeholder: 'Your email', class: 'input-text' %>
+  </div>
+
+  <div class='create-comment-content'>
+    <%= f.text_area :content, placeholder: 'Your contribution...', class: 'create-comment-body input-text' %>
+  </div>
+
+  <%= f.submit 'Post comment', class: 'button' %>
+
+<% end %>

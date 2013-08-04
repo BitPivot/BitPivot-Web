@@ -57,6 +57,11 @@ class BlogController < ApplicationController
     redirect_to "/blog/posts/#{post.file_name.slice(0..(post.file_name.index('.')-1))}"
   end
 
+  def respond_to_comment
+    post = @posts.select { |p| p.id ==  Integer(params[:post_id])}.shift
+    render template: 'blog/view_post', locals: { post: post, respond_to_id: Integer(params['respond_to_id'])}
+  end
+
 
 
   private

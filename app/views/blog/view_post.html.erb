@@ -1,7 +1,8 @@
 <article class='post'>
 
-  <section class="post-area">
-    <div class="post-header">
+  <section class='post-area'>
+
+    <div class='post-header'>
       <% if post.banner_image %>
         <%= image_tag post.banner_image, class: "blog-banner" %>
       <% end %>
@@ -20,42 +21,43 @@
     <div class='post-body'>
       <%= render inline: post.body %>
     </div>
+
   </section>
 
 
 
-  <section class="post-comments">
-    <h2>Discussion</h2>
-    <% post.blog_post_comments.all.each do |c| %>
-      <div class='comment'>
-        <div class='comment-header'>Written by <%= c.author %> (<%= c.email %>) on <%= c.created_at.to_formatted_s(:long_ordinal) %>
+  <section class='comments-area'>
+
+    <section class='comments'>
+      <h1>Discussion</h1>
+
+      <% post.blog_post_comments.all.each do |c| %>
+        <div class='comment'>
+          <div class='comment-header'>
+            Written by <em><%= c.author %></em> on <%= c.created_at.to_formatted_s(:long_ordinal) %>
+          </div>
+          <div class='comment-content'>
+            <%= c.content %>
+          </div>
+
+          <% if defined? respond_to_id %>
+            <div id='respond' class='respond-to-comment'>
+              Respond
+            </div>
+          <% else %>
+            <div class='respond-to-link'>
+              <%= link_to 'Click here to reply to this comment', "/blog/respond_to_comment/#{post.id}/#{c.id}#respond", method: 'post' %>
+            </div>
+          <% end %>
         </div>
-        <div class='comment-content'><%= c.content %></div>
-      </div>
-    <% end %>
-  </section>
+      <% end %>
+    </section>
 
+    <section class='create-comment'>
+      <h1>Help contribute and make this article more valuable</h1>
+      <%= render template: 'blog/create_comment', locals: { post: post } %>
+    </section>
 
-
-  <section class='post-create-comment'>
-    <h2>Help contribute and make this article more valuable.</h2>
-
-    <%= form_for :comment,  url: '/blog/create_comment', method: 'POST' do |f| %>
-
-      <%= f.hidden_field :post_file_name, value: post.file_name %>
-
-      <div class='create-comment-author-email'>
-        <%= f.text_field :author, placeholder: 'Your name', class: 'create-comment-author' %>
-        <%= f.text_field :email, placeholder: 'Your email', class: 'create-comment-email' %>
-      </div>
-
-      <div class='create-comment-content'>
-        <%= f.text_area :content, placeholder: 'Your contribution...', class: 'create-comment-body' %>
-      </div>
-
-      <%= f.submit 'Post comment' %>
-
-    <% end %>
   </section>
 
 </article>
