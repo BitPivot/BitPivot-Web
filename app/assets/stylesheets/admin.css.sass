@@ -1,0 +1,31 @@
+/*
+ *= require partials/_reset
+ *= require partials/_mixins
+ *= require partials/_header
+ *= require ss-social-regular
+ *= require_self
+ */
+
+
+.admin-area
+  .login
+    top: 100px
+    position: relative
+    width: 150px
+    margin-left: auto
+    margin-right: auto
+
+    a,input
+      &.error
+        /* WebKit browsers */
+        &::-webkit-input-placeholder
+          color: red
+        /* Mozilla Firefox 4 to 18 */
+        &:-moz-placeholder
+          color: red
+        /* Mozilla Firefox 19+ */
+        &::-moz-placeholder
+          color: red
+        /* Internet Explorer 10+ */
+        &:-ms-input-placeholder
+          color: red
