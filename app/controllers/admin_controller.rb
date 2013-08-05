@@ -67,10 +67,7 @@ class AdminController < ApplicationController
     @unapproved_comments.keys.each do |author|
       BlogPost.where(author: author).to_a.each do |post|
         post.blog_post_comments.select { |c| c.approved == false }.each do |unapproved|
-          comment = OpenStruct.new(unapproved.attributes)
-          comment.approval_url = "/admin/blog/approve_comment/#{unapproved.id}"
-          comment.delete_url = "/admin/blog/delete_comment/#{unapproved.id}"
-          @unapproved_comments[author] << comment
+          @unapproved_comments[author] << unapproved
         end
       end
     end

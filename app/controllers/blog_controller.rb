@@ -3,6 +3,8 @@ require 'ostruct'
 
 class BlogController < ApplicationController
   include ERB::Util
+
+  before_action :get_max_comment_depth
   before_action :get_posts
 
   layout 'blog'
@@ -55,8 +57,9 @@ class BlogController < ApplicationController
     comment.respond_to_id = params[:comment][:respond_to_id]
 
     post.blog_post_comments << comment
+    puts post.blog_post_comments.inspect
     post.save
-    redirect_to "/blog/posts/#{post.file_name.slice(0..(post.file_name.index('.')-1))}"
+    redirect_to post.post_url
   end
 
   def respond_to_comment
@@ -68,9 +71,9 @@ class BlogController < ApplicationController
   private
 
   def get_posts
-    @page_size = 5
-    @page = params[:page].nil? ? 1 : Integer(params[:page])
     @page_posts = []
+    @page_size = APP_CONFIG.blog_posts_per_page
+    @page = params[:page].nil? ? 1 : Integer(params[:page])
     @posts = BlogPost.all
     @posts.each do |p|
       p.body = CGI.unescapeHTML(p.body)
@@ -78,6 +81,10 @@ class BlogController < ApplicationController
         c.content = CGI.unescapeHTML(c.content)
       end
     end
+  end
+
+  def get_max_comment_depth
+    @max_comment_depth = APP_CONFIG.max_comment_reply_depth
   end
 
 end

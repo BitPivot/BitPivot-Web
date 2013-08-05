@@ -8,15 +8,15 @@
       <% end %>
 
       <hgroup>
-        <h1><%= link_to post.title, "/blog/posts/#{post.file_name.slice(0..(post.file_name.index('.')-1))}" %></h1>
+        <h1><%= link_to post.title, post.post_url %></h1>
 
-        <h2><%= link_to post.subtitle, "/blog/posts/#{post.file_name.slice(0..(post.file_name.index('.')-1))}" %></h2>
+        <h2><%= link_to post.subtitle, post.post_url %></h2>
       </hgroup>
     </div>
 
     <div class='post-metadata'>
-      By <%= link_to post.author, "/blog/authors/#{post.author.split(' ')[0]}".downcase %>
-      on <span class='date'><%= "#{Date::MONTHNAMES[post.month]} #{post.day}, #{post.year}" %></span>
+      By <%= link_to post.author, post.author_url %>
+      on <span class='date'><%= post.formatted_date %></span>
     </div>
 
     <div class='post-body'>
@@ -31,7 +31,7 @@
       <% if post.blog_post_comments.length == 0 %>
         <p>There are currently no comments.</p>
       <% end %>
-      <% post.blog_post_comments.where(:respond_to_id => nil).each do |comment| %>
+      <% post.top_level_comments.each do |comment| %>
         <% if comment.approved %>
           <%= render template: 'blog/comment', locals: {
               depth: 1,
@@ -46,7 +46,7 @@
 
   <section class='create-comment'>
     <% if hide_comments %>
-      <input class='btn-view-comments' value="<%= "View Comments \u2192" %>" onclick="document.location='<%=  %>'"/>
+      <input class='btn-view-comments' value="<%= "View Comments \u2192" %>" onclick="document.location='<%= post.post_url %>'"/>
     <% else %>
       <h1>Contribute to this Article</h1>
       <%= render template: 'blog/create_comment', locals: {post: post, respond_to_id: nil} %>

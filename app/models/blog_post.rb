@@ -4,6 +4,22 @@ class BlogPost < ActiveRecord::Base
 
   has_many :blog_post_comments
 
+  def post_url
+    "/blog/posts/#{self.file_name.slice(0..(self.file_name.index('.')-1))}"
+  end
+
+  def author_url
+    "/blog/authors/#{self.author.split(' ')[0]}".downcase
+  end
+
+  def formatted_date
+    "#{Date::MONTHNAMES[self.month]} #{self.day}, #{self.year}"
+  end
+
+  def top_level_comments
+    self.blog_post_comments.where(:respond_to_id => nil)
+  end
+
   def md5
     require 'digest/md5'
     Digest::MD5.hexdigest("

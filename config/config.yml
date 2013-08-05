@@ -2,6 +2,7 @@ common: &common
   total_blinds: 4
   fade_duration: 750
   max_comment_reply_depth: 4
+  blog_posts_per_page: 5
 
 development:
   <<: *common

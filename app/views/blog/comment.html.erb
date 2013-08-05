@@ -1,6 +1,6 @@
-<div class="comment depth-<%= depth %> <%= is_admin_email(comment.email) ? 'admin' : '' %>">
+<div class="comment depth-<%= depth %> <%= comment.is_admin_comment ? 'admin' : '' %>">
   <div class='comment-header'>
-    Written by <em><%= comment.author %></em> on <%= comment.created_at.to_formatted_s(:long_ordinal) %>
+    Written by <em><%= comment.author %></em> on <%= comment.formatted_date %>
   </div>
 
   <div class='comment-content'>
@@ -8,13 +8,17 @@
   </div>
 
   <% if respond_to_id == comment.id %>
+
     <div id='respond' class='respond-to-comment'>
       <%= render template: 'blog/create_comment', locals: { post: post, respond_to_id: respond_to_id } %>
     </div>
-  <% elsif depth < APP_CONFIG.max_comment_reply_depth %>
+
+  <% elsif depth < @max_comment_depth %>
+
     <div class='respond-to-link'>
-      <%= link_to 'Reply to this Comment', "/blog/respond_to_comment/#{post.id}/#{comment.id}#respond", method: 'post' %>
+      <%= link_to 'Reply to this Comment', comment.respond_to_comment_url(post.id) , method: 'post' %>
     </div>
+
   <% end %>
 
   <% if comment.blog_post_comments.length > 0 %>
