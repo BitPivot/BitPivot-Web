@@ -16,18 +16,18 @@ class BlogController < ApplicationController
   end
 
   def view_post
-    post = @posts.select { |p| p.file_name ==  "#{params[:file_name]}.html.erb" }.shift
-    render locals: { post: post }
+    post = @posts.select { |p| p.file_name == "#{params[:file_name]}.html.erb" }.shift
+    render locals: { post: post, hide_comments: false }
   end
 
   def author
-    @page_posts = @posts.select { |p| p.author.slice(0..(p.author.rindex(' ')-1)).downcase == params[:author]}
+    @page_posts = @posts.select { |p| p.author.slice(0..(p.author.rindex(' ')-1)).downcase == params[:author] }
     render :index
   end
 
   def year
-    year =  Integer(params[:year])
-    @page_posts = @posts.select { |p| p.year == year}
+    year = Integer(params[:year])
+    @page_posts = @posts.select { |p| p.year == year }
     render :index
   end
 
@@ -42,7 +42,7 @@ class BlogController < ApplicationController
     year = Integer(params[:year])
     month = Integer(params[:month])
     day = Integer(params[:day])
-    @page_posts = @posts.select { |p| p.year == year && p.month == month && p.day == day}
+    @page_posts = @posts.select { |p| p.year == year && p.month == month && p.day == day }
     render :index
   end
 
@@ -60,10 +60,9 @@ class BlogController < ApplicationController
   end
 
   def respond_to_comment
-    post = @posts.select { |p| p.id ==  Integer(params[:post_id])}.shift
-    render template: 'blog/view_post', locals: { post: post, respond_to_id: Integer(params[:respond_to_id])}
+    post = @posts.select { |p| p.id == Integer(params[:post_id]) }.shift
+    render template: 'blog/view_post', locals: {post: post, respond_to_id: Integer(params[:respond_to_id])}
   end
-
 
 
   private

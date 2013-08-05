@@ -25,30 +25,32 @@
 
   </section>
 
-  
-  <section class='comments'>
-    <h1>Discussion</h1>
-
-    <% if post.blog_post_comments.length == 0 %>
-      <p>There are currently no comments.</p>
-    <% end %>
-
-    <% post.blog_post_comments.where(:respond_to_id => nil).each do |comment| %>
-      <% if comment.approved %>
-        <%= render template: 'blog/comment', locals: {
-            depth: 1,
-            post: post,
-            comment: comment,
-            respond_to_id: defined?(respond_to_id) ? respond_to_id : nil
-        } %>
+  <% unless hide_comments %>
+    <section class='comments'>
+      <h1>Discussion</h1>
+      <% if post.blog_post_comments.length == 0 %>
+        <p>There are currently no comments.</p>
       <% end %>
-    <% end %>
-  </section>
-
+      <% post.blog_post_comments.where(:respond_to_id => nil).each do |comment| %>
+        <% if comment.approved %>
+          <%= render template: 'blog/comment', locals: {
+              depth: 1,
+              post: post,
+              comment: comment,
+              respond_to_id: defined?(respond_to_id) ? respond_to_id : nil
+          } %>
+        <% end %>
+      <% end %>
+    </section>
+  <% end %>
 
   <section class='create-comment'>
-    <h1>Contribute to this Article</h1>
-    <%= render template: 'blog/create_comment', locals: {post: post, respond_to_id: nil} %>
+    <% if hide_comments %>
+      <input class='btn-view-comments' value="<%= "View Comments \u2192" %>" onclick="document.location='<%=  %>'"/>
+    <% else %>
+      <h1>Contribute to this Article</h1>
+      <%= render template: 'blog/create_comment', locals: {post: post, respond_to_id: nil} %>
+    <% end %>
   </section>
 
 </article>
