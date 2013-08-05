@@ -1,0 +1,22 @@
+<div id='tab_blog' class='tab'>
+  <% @unapproved_comments.keys.each do |author| %>
+    <div class='comments-wrapper'>
+      <h2><%= author %></h2>
+
+      <div class='comments-column'>
+        <% @unapproved_comments[author].each do |c| %>
+          <div class='comment'>
+            <h3>By <b><%= c.author %></b> on <%= c.created_at.to_formatted_s(:long_ordinal) %></h3>
+
+            <div class='comment-content'>
+              <%= render inline: c.content %>
+              <br/>
+            </div>
+            <input class='btn-approve-comment' type='button' value='Approve' onclick="location.href='<%= c.approval_url%>'"/>
+            <input class='btn-delete-comment' type='button' value='Delete' onclick="location.href='<%= c.delete_url%>'"/>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

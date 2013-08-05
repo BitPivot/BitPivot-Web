@@ -1,0 +1,104 @@
+/*
+ *= require partials/_reset
+ *= require partials/_header
+ *= require ss-social-regular
+ *= require jquery-ui
+ *= require_self
+ */
+
+@import partials/mixins
+
+html,body
+  overflow: hidden
+  height: 100%
+
+.login
+  top: 100px
+  position: relative
+  width: 150px
+  margin-left: auto
+  margin-right: auto
+
+  a,input
+    &.error
+      /* WebKit browsers */
+      &::-webkit-input-placeholder
+        color: red
+      /* Mozilla Firefox 4 to 18 */
+      &:-moz-placeholder
+        color: red
+      /* Mozilla Firefox 19+ */
+      &::-moz-placeholder
+        color: red
+      /* Internet Explorer 10+ */
+      &:-ms-input-placeholder
+        color: red
+
+.btn-logout
+  position: relative
+  top: 4px
+  right: 10px
+  float: right
+
+.admin-area
+  background-image: url('admin-background.jpg')
+  background-repeat: no-repeat
+  background-size: 100% 100%
+  height: 100%
+  width: 100%
+
+  #tabs
+    background-color: #fff
+    background-color: rgba(255,255,255,0.5)
+    margin-right: auto
+    margin-left: auto
+    height: 100%
+    background-position: 0 0
+
+    ul
+      height: 35px
+
+    .tab
+      overflow-y: scrolls
+      height: 78%
+      width: 1200px
+      margin-left: auto
+      margin-right: auto
+
+.comments-wrapper
+  background-color: #000
+  background-color: rgba(255,255,255,0.5)
+  position: relative
+  height: 100%
+  width: 385px
+  top: 28px
+  margin: 6px
+  float: left
+
+  h2
+    position: fixed
+    text-align: center
+    top: 100px
+    +font(25px, black, 'pragmatica-extra-light')
+
+  .comments-column
+    padding: 8px
+    overflow-y: auto
+    height: 97%
+
+
+    .comment
+      margin-bottom: 40px
+      +font(14px, black, 'pragmatica-extra-light')
+
+      .btn-approve-comment,.btn-delete-comment
+        float: right
+
+      .comment-content
+        padding: 10px
+
+      h3
+        white-space: nowrap
+        margin-bottom: 20px
+        border-bottom: 1px solid black
+        +font(14px, #666, 'pragmatica-extra-light')

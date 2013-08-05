@@ -1,5 +1,5 @@
 class BlogPostComment < ActiveRecord::Base
-  attr_accessible :author, :email, :votes, :content
+  attr_accessible :author, :email, :votes, :content, :approved
 
   belongs_to :blog_post
 end

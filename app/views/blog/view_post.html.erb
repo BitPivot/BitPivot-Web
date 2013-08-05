@@ -27,10 +27,12 @@
   <section class="post-comments">
     <h2>Discussion</h2>
     <% post.blog_post_comments.all.each do |c| %>
-      <div class='comment'>
-        <div class='comment-header'>Written by <%= c.author %> (<%= c.email %>) on <%= c.created_at.to_formatted_s(:long_ordinal) %></div>
-        <div class='comment-content'><%= c.content %></div>
-      </div>
+      <% if c.approved %>
+        <div class='comment'>
+          <div class='comment-header'>Written by <%= c.author %> (<%= c.email %>) on <%= c.created_at.to_formatted_s(:long_ordinal) %></div>
+          <div class='comment-content'><%= c.content %></div>
+        </div>
+      <% end %>
     <% end %>
   </section>
 
@@ -39,7 +41,7 @@
   <section class='post-create-comment'>
     <h2>Help contribute and make this article more valuable.</h2>
 
-    <%= form_for :comment,  url: '/blog/create_comment', method: 'POST' do |f| %>
+    <%= form_for :comment, url: '/blog/create_comment', method: 'POST' do |f| %>
 
       <%= f.hidden_field :post_file_name, value: post.file_name %>
 

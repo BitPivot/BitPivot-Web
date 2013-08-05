@@ -13,4 +13,11 @@ BitPivot::Application.routes.draw do
 
   match '/blog/create_comment', to: 'blog#create_comment', via: 'post'
 
+  get 'admin', to: 'admin#index'
+  get 'admin/logout', to: 'admin#logout'
+  get 'admin/blog/approve_comment/:id', to: 'admin#approve_comment'
+  get 'admin/blog/delete_comment/:id', to: 'admin#delete_comment'
+
+  match '/admin/login', to: 'admin#login', via: 'post'
+
 end
