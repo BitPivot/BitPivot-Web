@@ -25,12 +25,12 @@
 
   </section>
 
-  
+
   <section class='comments'>
     <h1>Discussion</h1>
 
     <% if post.blog_post_comments.length == 0 %>
-      <p>There are currently no comments.</p>
+      <span class='no-comments'>There are currently no comments.</span>
     <% end %>
 
     <% post.blog_post_comments.where(:respond_to_id => nil).each do |comment| %>
