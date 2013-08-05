@@ -1,0 +1,27 @@
+<div class="comment depth-<%= depth %> <%= is_admin_email(comment.email) ? 'admin' : '' %>">
+  <div class='comment-header'>
+    Written by <em><%= comment.author %></em> on <%= comment.created_at.to_formatted_s(:long_ordinal) %>
+  </div>
+
+  <div class='comment-content'>
+    <%= comment.content %>
+  </div>
+
+  <% if respond_to_id == comment.id %>
+    <div id='respond' class='respond-to-comment'>
+      <%= render template: 'blog/create_comment', locals: { post: post, respond_to_id: respond_to_id } %>
+    </div>
+  <% elsif depth < APP_CONFIG.max_comment_reply_depth %>
+    <div class='respond-to-link'>
+      <%= link_to 'Reply to this Comment', "/blog/respond_to_comment/#{post.id}/#{comment.id}#respond", method: 'post' %>
+    </div>
+  <% end %>
+
+  <% if comment.blog_post_comments.length > 0 %>
+  <div class='responses'>
+    <% comment.blog_post_comments.each do |r| %>
+      <%= render template: 'blog/comment', locals: { depth: depth + 1, post: post, comment: r, respond_to_id: defined?(respond_to_id) ? respond_to_id : nil } %>
+    <% end %>
+  </div>
+  <% end %>
+</div>

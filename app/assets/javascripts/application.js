@@ -4,7 +4,6 @@
 //= require jquery_ujs
 //= require jquery.easing.1.3
 //= require partials/_blinds
-//= require partials/_blog
 
 var blinds = new App.Blinds({
     fnFadeIn: function(blinds) {

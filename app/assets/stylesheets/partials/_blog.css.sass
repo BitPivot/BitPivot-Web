@@ -6,6 +6,11 @@ body
   max-width: $blog-post-max-width
   margin: $margin * 2 auto
   background: $blog-page-background
+  +font($blog-font-size, $blog-text-color, 'pragmatica-light')
+  line-height: $blog-line-height
+
+  em
+    font-weight: bold
 
 
 
@@ -16,7 +21,6 @@ header
 
 .post
   margin: $margin * 2
-  padding: $margin * 2
   background: $blog-post-background
   +drop-shadow($margin, rgba(0, 0, 0, 0.45))
 
@@ -31,9 +35,7 @@ header
 
 
 .post-area
-  padding-bottom: $margin
-  margin-bottom: $margin
-  border-bottom: 1px solid $blog-post-border-color
+  padding: $margin * 2
   +font($blog-font-size, $blog-text-color, 'pragmatica-light')
   line-height: $blog-line-height
 
@@ -60,7 +62,7 @@ header
 .post-metadata
   margin-bottom: $margin
   padding-bottom: $margin
-  font-size: 13px
+  font-size: 0.8em
   color: $blog-post-metadata-text-color
   border-bottom: 1px solid $blog-post-border-color
 
@@ -70,7 +72,8 @@ header
   padding: $margin / 2
   margin: ($margin * 2) 0
   +gradient-radial($blog-header-background)
-  +font($blog-header-font-size * $font-size-modifier, $blog-header-text-color, 'pragmatica-extra-light')
+  font-size: $blog-header-font-size * $font-size-modifier
+  color: $blog-header-text-color
   text-shadow: 0px 3px 5px $blind-header-text-shadow-color
   line-height: $header-font-size
   +type-pad-bottom
@@ -98,3 +101,91 @@ header
     border: 1px solid $blog-code-border-color
     overflow: scroll
     +type-pad-bottom
+
+
+
+.comments
+  padding: $margin * 1.5
+  background: $blog-comments-background
+  border-top: 1px solid $blog-comments-border-color
+
+  h1
+    margin: ($margin / 2) 0 ($margin * 1.5) ($margin / 2)
+    font-size: $blog-header-font-size
+    line-height: $header-font-size
+    color: $blog-title-text-color
+
+  .comment
+    margin-bottom: $margin / 2
+    padding: $margin / 2
+
+    &:last-child
+      margin-bottom: 0
+
+    .comment-header
+      margin-bottom: $margin / 4
+      font-size: 0.8em
+      color: $blog-post-metadata-text-color
+
+    .comment-content
+      padding: $margin / 2
+      border-top: 1px solid $blog-comment-border-color
+
+    .respond-to-link
+      padding-left: $margin / 2
+      font-size: 0.8em
+
+    &.admin
+      background: $blog-admin-comment-background
+      color: $blog-admin-comment-text-color
+      border-color: $blog-admin-comment-border-color
+
+  .responses
+    padding-left: $margin
+    margin-top: $margin
+    border-left: 1px solid $blog-comments-border-color
+
+
+
+.create-comment
+  padding: ($margin * 2)
+  background: $blog-create-comment-background
+  border-top: 1px solid $blog-create-comment-border-color
+
+  h1
+    margin-bottom: $margin * 2
+    font-size: $blog-header-font-size
+    line-height: $header-font-size
+    color: $blog-title-text-color
+
+.respond-to-comment
+  padding: ($margin / 2) 0 0 ($margin / 2)
+  margin-left: $margin
+
+
+
+.create-comment-area
+  .input-text
+    margin: 0 ($margin / 2) ($margin / 2) 0
+    padding: $margin / 4
+    +font(0.8em, $blog-comment-input-text-color, 'pragmatica-light')
+    background: $blog-comment-input-background
+    border: 1px solid $blog-comment-input-border-color
+    resize: none
+
+  .button
+    margin: 0
+    padding: $margin / 2
+    +font(1em, $blog-comment-button-text-color, 'pragmatica-extra-light')
+    background: $blog-comment-button-background
+    border: none
+    cursor: pointer
+
+  .create-comment-author-email
+    input
+      width: 220px
+
+  .create-comment-content
+    textarea
+      width: 100%
+      height: 80px

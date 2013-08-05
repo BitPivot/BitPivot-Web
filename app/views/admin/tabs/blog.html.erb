@@ -6,7 +6,7 @@
       <div class='comments-column'>
         <% @unapproved_comments[author].each do |c| %>
           <div class='comment'>
-            <h3>By <b><%= c.author %></b> on <%= c.created_at.to_formatted_s(:long_ordinal) %></h3>
+            <h3>By <em><%= c.author %></em> on <%= c.created_at.to_formatted_s(:long_ordinal) %></h3>
 
             <div class='comment-content'>
               <%= render inline: c.content %>

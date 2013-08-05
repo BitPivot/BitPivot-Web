@@ -1,13 +1,15 @@
 <article class='post'>
 
-  <section class="post-area">
-    <div class="post-header">
+  <section class='post-area'>
+
+    <div class='post-header'>
       <% if post.banner_image %>
-        <%= image_tag post.banner_image, class: "blog-banner" %>
+        <%= image_tag post.banner_image, class: 'blog-banner' %>
       <% end %>
 
       <hgroup>
         <h1><%= link_to post.title, "/blog/posts/#{post.file_name.slice(0..(post.file_name.index('.')-1))}" %></h1>
+
         <h2><%= link_to post.subtitle, "/blog/posts/#{post.file_name.slice(0..(post.file_name.index('.')-1))}" %></h2>
       </hgroup>
     </div>
@@ -20,43 +22,33 @@
     <div class='post-body'>
       <%= render inline: post.body %>
     </div>
+
   </section>
 
+  
+  <section class='comments'>
+    <h1>Discussion</h1>
 
+    <% if post.blog_post_comments.length == 0 %>
+      <p>There are currently no comments.</p>
+    <% end %>
 
-  <section class="post-comments">
-    <h2>Discussion</h2>
-    <% post.blog_post_comments.all.each do |c| %>
-      <% if c.approved %>
-        <div class='comment'>
-          <div class='comment-header'>Written by <%= c.author %> (<%= c.email %>) on <%= c.created_at.to_formatted_s(:long_ordinal) %></div>
-          <div class='comment-content'><%= c.content %></div>
-        </div>
+    <% post.blog_post_comments.where(:respond_to_id => nil).each do |comment| %>
+      <% if comment.approved %>
+        <%= render template: 'blog/comment', locals: {
+            depth: 1,
+            post: post,
+            comment: comment,
+            respond_to_id: defined?(respond_to_id) ? respond_to_id : nil
+        } %>
       <% end %>
     <% end %>
   </section>
 
 
-
-  <section class='post-create-comment'>
-    <h2>Help contribute and make this article more valuable.</h2>
-
-    <%= form_for :comment, url: '/blog/create_comment', method: 'POST' do |f| %>
-
-      <%= f.hidden_field :post_file_name, value: post.file_name %>
-
-      <div class='create-comment-author-email'>
-        <%= f.text_field :author, placeholder: 'Your name', class: 'create-comment-author' %>
-        <%= f.text_field :email, placeholder: 'Your email', class: 'create-comment-email' %>
-      </div>
-
-      <div class='create-comment-content'>
-        <%= f.text_area :content, placeholder: 'Your contribution...', class: 'create-comment-body' %>
-      </div>
-
-      <%= f.submit 'Post comment' %>
-
-    <% end %>
+  <section class='create-comment'>
+    <h1>Contribute to this Article</h1>
+    <%= render template: 'blog/create_comment', locals: {post: post, respond_to_id: nil} %>
   </section>
 
 </article>
