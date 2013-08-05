@@ -17,9 +17,11 @@
     </div>
   <% end %>
 
+  <% if comment.blog_post_comments.length > 0 %>
   <div class='responses'>
     <% comment.blog_post_comments.each do |r| %>
       <%= render template: 'blog/comment', locals: { depth: depth + 1, post: post, comment: r, respond_to_id: defined?(respond_to_id) ? respond_to_id : nil } %>
     <% end %>
   </div>
+  <% end %>
 </div>
