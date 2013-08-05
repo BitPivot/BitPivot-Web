@@ -29,16 +29,16 @@
     <section class='comments'>
       <h1>Discussion</h1>
       <% if post.blog_post_comments.length == 0 %>
-        <p>There are currently no comments.</p>
-      <% end %>
-      <% post.top_level_comments.each do |comment| %>
-        <% if comment.approved %>
-          <%= render template: 'blog/comment', locals: {
-              depth: 1,
-              post: post,
-              comment: comment,
-              respond_to_id: defined?(respond_to_id) ? respond_to_id : nil
-          } %>
+        <span class='no-comments'>There are currently no comments.</span>
+        <% post.top_level_comments.each do |comment| %>
+          <% if comment.approved %>
+            <%= render template: 'blog/comment', locals: {
+                depth: 1,
+                post: post,
+                comment: comment,
+                respond_to_id: defined?(respond_to_id) ? respond_to_id : nil
+            } %>
+          <% end %>
         <% end %>
       <% end %>
     </section>
