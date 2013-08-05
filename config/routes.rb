@@ -15,6 +15,8 @@ BitPivot::Application.routes.draw do
 
   get 'admin', to: 'admin#index'
   get 'admin/logout', to: 'admin#logout'
+  get 'admin/blog/approve_comment/:id', to: 'admin#approve_comment'
+  get 'admin/blog/delete_comment/:id', to: 'admin#delete_comment'
 
   match '/admin/login', to: 'admin#login', via: 'post'
 

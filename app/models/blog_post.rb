@@ -1,6 +1,6 @@
 class BlogPost < ActiveRecord::Base
   attr_accessible :file_name, :title, :subtitle, :author, :year, :month, :day,
-                  :categories, :body, :md5_hash, :blog_post_comment, :banner_image
+                  :categories, :body, :md5_hash, :banner_image
 
   has_many :blog_post_comments
 

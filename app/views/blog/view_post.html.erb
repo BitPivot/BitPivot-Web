@@ -20,17 +20,19 @@
   <div class='comments'>
     <h3>Discussion</h3>
     <% post.blog_post_comments.all.each do |c| %>
-      <div class='comment'>
-        <div class='comment-header'>Written by <%= c.author %> (<%= c.email %>) on <%= c.created_at.to_formatted_s(:long_ordinal) %></div>
-        <div class='comment-content'><%= c.content %></div>
-      </div>
+      <% if c.approved %>
+        <div class='comment'>
+          <div class='comment-header'>Written by <%= c.author %> (<%= c.email %>) on <%= c.created_at.to_formatted_s(:long_ordinal) %></div>
+          <div class='comment-content'><%= c.content %></div>
+        </div>
+      <% end %>
     <% end %>
   </div>
 
   <div class='create-comment'>
     <h3>Help contribute to making this article more valuable.</h3>
 
-    <%= form_for :comment,  url: '/blog/create_comment', method: 'POST' do |f| %>
+    <%= form_for :comment, url: '/blog/create_comment', method: 'POST' do |f| %>
 
       <%= f.hidden_field :post_file_name, value: post.file_name %>
 
