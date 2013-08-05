@@ -29,25 +29,17 @@
   <section class='comments'>
     <h1>Discussion</h1>
 
-    <% post.blog_post_comments.all.each do |c| %>
-      <div class='comment'>
-        <div class='comment-header'>
-          Written by <em><%= c.author %></em> on <%= c.created_at.to_formatted_s(:long_ordinal) %>
-        </div>
-        <div class='comment-content'>
-          <%= c.content %>
-        </div>
+    <% if post.blog_post_comments.length == 0 %>
+      <p>There are currently no comments.</p>
+    <% end %>
 
-        <% if defined? respond_to_id and respond_to_id == c.id %>
-          <div id='respond' class='respond-to-comment'>
-            <%= render template: 'blog/create_comment', locals: { post: post, respond_to_id: respond_to_id } %>
-          </div>
-        <% else %>
-          <div class='respond-to-link'>
-            <%= link_to 'Click here to reply to this comment', "/blog/respond_to_comment/#{post.id}/#{c.id}#respond", method: 'post' %>
-          </div>
-        <% end %>
-      </div>
+    <% post.blog_post_comments.where(:respond_to_id => nil).each do |comment| %>
+      <%= render template: 'blog/comment', locals: {
+        depth: 1,
+        post: post,
+        comment: comment,
+        respond_to_id: defined?(respond_to_id) ? respond_to_id : nil
+      } %>
     <% end %>
   </section>
 

@@ -1,6 +1,8 @@
 class BlogPostComment < ActiveRecord::Base
-  attr_accessible :author, :email, :votes, :content, :response_to
+  attr_accessible :author, :email, :votes, :content, :respond_to_id
 
   belongs_to :blog_post
-  has_one :blog_post_comment, :foreign_key => 'response_to'
+
+  belongs_to :blog_post_comments
+  has_many :blog_post_comments, :foreign_key => 'respond_to_id'
 end

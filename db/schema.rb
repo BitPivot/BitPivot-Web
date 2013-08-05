@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130803234945) do
+ActiveRecord::Schema.define(version: 20130804230322) do
 
   create_table "blog_post_comments", force: true do |t|
     t.integer  "blog_post_id"
     t.integer  "votes"
-    t.string   "author",       null: false
+    t.string   "author",        null: false
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",        null: false
-    t.integer  "response_to"
+    t.string   "email",         null: false
+    t.integer  "respond_to_id"
   end
 
   create_table "blog_posts", force: true do |t|

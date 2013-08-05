@@ -2,6 +2,7 @@
   <%= form_for :comment,  url: '/blog/create_comment', method: 'post' do |f| %>
 
     <%= f.hidden_field :post_file_name, value: post.file_name %>
+    <%= f.hidden_field :respond_to_id, value: respond_to_id %>
 
     <div class='create-comment-author-email'>
       <%= f.text_field :author, placeholder: 'Your name', class: 'input-text' %>
