@@ -1,4 +1,4 @@
-<div class='comment depth-<%= depth %>'>
+<div class="comment depth-<%= depth %> <%= is_admin_email(comment.email) ? 'admin' : '' %>">
   <div class='comment-header'>
     Written by <em><%= comment.author %></em> on <%= comment.created_at.to_formatted_s(:long_ordinal) %>
   </div>

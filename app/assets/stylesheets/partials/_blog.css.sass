@@ -105,18 +105,19 @@ header
 
 
 .comments
-  padding: ($margin * 2)
+  padding: $margin * 1.5
   background: $blog-comments-background
   border-top: 1px solid $blog-comments-border-color
 
   h1
-    margin-bottom: $margin * 2
+    margin: ($margin / 2) 0 ($margin * 1.5) ($margin / 2)
     font-size: $blog-header-font-size
     line-height: $header-font-size
     color: $blog-title-text-color
 
   .comment
-    margin-bottom: $margin * 2
+    margin-bottom: $margin / 2
+    padding: $margin / 2
 
     &:last-child
       margin-bottom: 0
@@ -134,9 +135,14 @@ header
       padding-left: $margin / 2
       font-size: 0.8em
 
+    &.admin
+      background: $blog-admin-comment-background
+      color: $blog-admin-comment-text-color
+      border-color: $blog-admin-comment-border-color
+
   .responses
     padding-left: $margin
-    margin-top: $margin * 2
+    margin-top: $margin
     border-left: 1px solid $blog-comments-border-color
 
 
