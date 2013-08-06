@@ -24,6 +24,9 @@ header
   background: $blog-post-background
   +drop-shadow($margin, rgba(0, 0, 0, 0.45))
 
+  +breakpoint('tiny')
+    margin: $margin
+
   a
     &:link, &:visited
       color: $blog-link-text-color
@@ -141,6 +144,9 @@ header
     .comment-content
       padding: $margin / 2
       border-top: 1px solid $blog-comment-border-color
+
+      p
+        +type-pad-bottom
 
     .respond-to-link
       padding-left: $margin / 2
