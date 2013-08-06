@@ -9,7 +9,7 @@
             <h3>By <em><%= c.author %></em> on <%= c.formatted_date %></h3>
 
             <div class='comment-content'>
-              <%= render inline: c.content %>
+              <%= render inline: simple_format(c.content) %>
               <br/>
             </div>
             <input class='btn-approve-comment' type='button' value='Approve' onclick="location.href='<%= c.approval_url %>'"/>
