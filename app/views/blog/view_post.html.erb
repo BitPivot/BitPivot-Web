@@ -9,14 +9,18 @@
 
       <hgroup>
         <h1><%= link_to post.title, post.post_url %></h1>
-
         <h2><%= link_to post.subtitle, post.post_url %></h2>
       </hgroup>
     </div>
 
     <div class='post-metadata'>
-      By <%= link_to post.author, post.author_url %>
-      on <span class='date'><%= post.formatted_date %></span>
+      <ul>
+        <li>By <%= link_to post.author, post.author_url %> on <span class='date'><%= post.formatted_date %></span></li>
+        <% if post.blog_post_comments.length > 0 %>
+          <li>|</li>
+          <li><%= link_to "#{post.blog_post_comments.length} Comment(s)", post.post_url + '#comments' %></li>
+        <% end %>
+      </ul>
     </div>
 
     <div class='post-body'>
@@ -26,31 +30,37 @@
   </section>
 
   <% unless hide_comments %>
-    <section class='comments'>
+
+    <section id='comments' class='comments'>
       <h1>Discussion</h1>
       <% if post.blog_post_comments.length == 0 %>
         <span class='no-comments'>There are currently no comments.</span>
       <% end %>
       <% post.top_level_comments.each do |comment| %>
-        <% if comment.approved %>
-          <%= render template: 'blog/comment', locals: {
-              depth: 1,
-              post: post,
-              comment: comment,
-              respond_to_id: defined?(respond_to_id) ? respond_to_id : nil
-          } %>
-        <% end %>
+        <%= render template: 'blog/comment', locals: {
+            depth: 1,
+            post: post,
+            comment: comment,
+            respond_to_id: defined?(respond_to_id) ? respond_to_id : nil
+        } %>
       <% end %>
     </section>
-  <% end %>
 
-  <section class='create-comment'>
-    <% if hide_comments %>
-      <input class='btn-view-comments' value="<%= "View Comments \u2192" %>" onclick="document.location='<%= post.post_url %>'"/>
-    <% else %>
+    <section class='create-comment'>
       <h1>Contribute to this Article</h1>
       <%= render template: 'blog/create_comment', locals: {post: post, respond_to_id: nil} %>
-    <% end %>
-  </section>
+    </section>
+
+  <% else %>
+
+    <section class='comments view-comments'>
+      <% if post.blog_post_comments.length > 0 %>
+        <%= link_to "View Comments (#{post.blog_post_comments.length}) or Contribute to this Article \u2192", post.post_url + '#comments' %>
+      <% else %>
+        <%= link_to "Contribute to this Article \u2192", post.post_url + '#comments' %>
+      <% end %>
+    </section>
+
+  <% end %>
 
 </article>

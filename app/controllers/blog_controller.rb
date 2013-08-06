@@ -77,7 +77,7 @@ class BlogController < ApplicationController
     @posts = BlogPost.all
     @posts.each do |p|
       p.body = CGI.unescapeHTML(p.body)
-      p.blog_post_comments.each do |c|
+      p.blog_post_comments.where(approved: true).each do |c|
         c.content = CGI.unescapeHTML(c.content)
       end
     end
