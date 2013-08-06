@@ -67,9 +67,14 @@ class AdminController < ApplicationController
     @unapproved_comments.keys.each do |author|
       BlogPost.where(author: author).to_a.each do |post|
         post.blog_post_comments.select { |c| c.approved == false }.each do |unapproved|
-          @unapproved_comments[author] << unapproved
+          if unapproved.is_admin_comment
+            @unapproved_comments[author].unshift(unapproved)
+          else
+            @unapproved_comments[author] << unapproved
+          end
         end
       end
     end
   end
+
 end

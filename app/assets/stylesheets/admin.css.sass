@@ -83,17 +83,26 @@ html,body
     +font(25px, black, 'pragmatica-extra-light')
 
   .comments-column
-    padding: 8px
     overflow-y: auto
     height: 97%
 
 
     .comment
+      padding: 6px
       margin-bottom: 40px
       +font(14px, black, 'pragmatica-extra-light')
 
+
+      &.admin
+        background: $blog-admin-comment-background
+        color: $blog-admin-comment-text-color
+        border-color: $blog-admin-comment-border-color
+
       .btn-approve-comment,.btn-delete-comment
+        position: relative
         float: right
+        top: -20px
+        left: 5px
 
       .comment-content
         padding: 10px
