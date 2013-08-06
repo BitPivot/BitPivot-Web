@@ -30,6 +30,9 @@ header
   background: $blog-post-background
   +drop-shadow($margin, rgba(0, 0, 0, 0.45))
 
+  +breakpoint('tiny')
+    margin: $margin
+
   a
     &:link, &:visited
       color: $blog-link-text-color
@@ -71,6 +74,10 @@ header
   font-size: 0.8em
   color: $blog-post-metadata-text-color
   border-bottom: 1px solid $blog-post-border-color
+
+  li
+    display: inline
+    margin-right: $margin
 
 
 
@@ -115,6 +122,10 @@ header
   background: $blog-comments-background
   border-top: 1px solid $blog-comments-border-color
 
+  &.view-comments
+    padding: $margin * 2
+    text-align: right
+
   h1
     margin: ($margin / 2) 0 ($margin * 1.5) ($margin / 2)
     font-size: $blog-header-font-size
@@ -139,6 +150,9 @@ header
     .comment-content
       padding: $margin / 2
       border-top: 1px solid $blog-comment-border-color
+
+      p
+        +type-pad-bottom
 
     .respond-to-link
       padding-left: $margin / 2
@@ -199,16 +213,3 @@ header
       width: 100%
       height: 80px
       +box-sizing-border-box
-
-.btn-view-comments
-  position: relative
-  width: 125px
-  top: -20px
-  left: 18px
-  float: right
-  margin: 0
-  padding: $margin / 2
-  +font(1em, $blog-comment-button-text-color, 'pragmatica-extra-light')
-  background: $blog-comment-button-background
-  border: none
-  cursor: pointer

@@ -17,7 +17,11 @@ class BlogPost < ActiveRecord::Base
   end
 
   def top_level_comments
-    self.blog_post_comments.where(:respond_to_id => nil)
+    self.approved_comments.where(:respond_to_id => nil)
+  end
+
+  def approved_comments
+    self.blog_post_comments.where(:approved => true)
   end
 
   def md5
