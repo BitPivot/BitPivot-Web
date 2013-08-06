@@ -5,7 +5,7 @@
 
       <div class='comments-column'>
         <% @unapproved_comments[author].each do |c| %>
-          <div class='comment'>
+          <div class='comment <%= c.is_admin_comment ? 'admin' : ''%>'>
             <h3>By <em><%= c.author %></em> on <%= c.formatted_date %></h3>
 
             <div class='comment-content'>
