@@ -16,7 +16,7 @@
     <div class='post-metadata'>
       <ul>
         <li>By <%= link_to post.author, post.author_url %> on <span class='date'><%= post.formatted_date %></span></li>
-        <% if post.blog_post_comments.length > 0 %>
+        <% if post.approved_comments.length > 0 %>
           <li>|</li>
           <li><%= link_to "#{post.blog_post_comments.length} Comment(s)", post.post_url + '#comments' %></li>
         <% end %>
@@ -33,7 +33,7 @@
 
     <section id='comments' class='comments'>
       <h1>Discussion</h1>
-      <% if post.blog_post_comments.length == 0 %>
+      <% if post.approved_comments.length == 0 %>
         <span class='no-comments'>There are currently no comments.</span>
       <% end %>
       <% post.top_level_comments.each do |comment| %>
@@ -54,7 +54,7 @@
   <% else %>
 
     <section class='comments view-comments'>
-      <% if post.blog_post_comments.length > 0 %>
+      <% if post.approved_comments.length > 0 %>
         <%= link_to "View Comments (#{post.blog_post_comments.length}) or Contribute to this Article \u2192", post.post_url + '#comments' %>
       <% else %>
         <%= link_to "Contribute to this Article \u2192", post.post_url + '#comments' %>
