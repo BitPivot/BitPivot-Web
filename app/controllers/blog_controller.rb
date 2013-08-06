@@ -57,9 +57,14 @@ class BlogController < ApplicationController
     comment.respond_to_id = params[:comment][:respond_to_id]
 
     post.blog_post_comments << comment
-    puts post.blog_post_comments.inspect
     post.save
-    redirect_to post.post_url
+    post = unescape_post(post)
+    render template: 'blog/comment_confirmation.html.erb', locals: {
+        post: post,
+        comment: comment,
+        hide_comments: false,
+        respond_to_id: nil
+    }
   end
 
   def respond_to_comment
@@ -76,15 +81,20 @@ class BlogController < ApplicationController
     @page = params[:page].nil? ? 1 : Integer(params[:page])
     @posts = BlogPost.all
     @posts.each do |p|
-      p.body = CGI.unescapeHTML(p.body)
-      p.blog_post_comments.each do |c|
-        c.content = CGI.unescapeHTML(c.content)
-      end
+      unescape_post(p)
     end
   end
 
   def get_max_comment_depth
     @max_comment_depth = APP_CONFIG.max_comment_reply_depth
+  end
+
+  def unescape_post(post)
+    post.body = CGI.unescapeHTML(post.body)
+    post.blog_post_comments.each do |c|
+      c.content = CGI.unescapeHTML(c.content)
+    end
+    post
   end
 
 end

@@ -1,0 +1,31 @@
+<article class='comment-confirmation'>
+
+  <section class='comment-confirmation-area'>
+
+    <div class='comment-confirmation-header'>
+      <h1><%= link_to 'Thanks!', post.post_url %></h1>
+
+      <h2><%= link_to 'Your comment has been submitted for approval.', post.post_url %></h2>
+    </div>
+
+  </section>
+
+  <section class='comment'>
+    <div class="comment <%= comment.is_admin_comment ? 'admin' : '' %>">
+      <div class='comment-header'>
+        Written by <em><%= comment.author %></em> on <%= comment.formatted_date %>
+      </div>
+
+      <div class='comment-content'>
+        <%= simple_format(comment.content) %>
+      </div>
+
+    </div>
+  </section>
+
+  <section class='return-to-post'>
+    <%= link_to "Return to Post", post.post_url %>
+  </section>
+
+
+</article>
