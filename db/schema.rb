@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130805042805) do
+ActiveRecord::Schema.define(version: 20130806194327) do
 
   create_table "blog_post_comments", force: true do |t|
-    t.integer  "blog_post_id"
+    t.integer  "blog_post_id",                  null: false
     t.integer  "votes"
     t.string   "author",                        null: false
     t.text     "content"
