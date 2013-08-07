@@ -58,6 +58,9 @@ class BlogController < ApplicationController
 
     post.blog_post_comments << comment
     post.save
+
+    puts CommentMailer.new_comment_notification(comment).deliver
+
     post = unescape_post(post)
     render template: 'blog/comment_confirmation.html.erb', locals: {
         post: post,
