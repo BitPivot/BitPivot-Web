@@ -2,6 +2,9 @@ class CommentMailer < ActionMailer::Base
   default from: 'info@bitpivot.com'
 
   def new_comment_notification(comment)
-    mail(to: 'info@bitpivot.com', subject: 'EAR HOLE', body: 'DICK FOOT')
+    to = 'info@bitpivot.com'
+    subject = "New comment from #{comment.author} (#{comment.email})"
+    body = comment.to_email
+    mail(to: to, subject: subject, body: body)
   end
 end

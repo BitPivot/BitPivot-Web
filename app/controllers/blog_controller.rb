@@ -50,29 +50,48 @@ class BlogController < ApplicationController
 
   def create_comment
     post = BlogPost.find_by(file_name: params[:comment][:post_file_name])
-    comment = BlogPostComment.new
-    comment.author = params[:comment][:author]
-    comment.email = params[:comment][:email]
-    comment.content = params[:comment][:content]
-    comment.respond_to_id = params[:comment][:respond_to_id]
+    comment = BlogPostComment.new(params[:comment])
+    if comment.valid?
+      post.blog_post_comments << comment
+      post.save
+      CommentMailer.new_comment_notification(comment).deliver
+      render template: 'blog/comment_confirmation.html.erb', locals: {
+          post: unescape_post(post),
+          comment: comment,
+          respond_to_id: nil
+      }
+      return
+    end
 
-    post.blog_post_comments << comment
-    post.save
+    # get hash with full error messages
+    errors = comment.errors.to_hash(true)
+    if errors[:author]
+      flash[:author_placeholder] = errors[:author][0]
+      flash[:author_class] = 'error'
+    else
+      flash[:author] = comment.author
+    end
 
-    puts CommentMailer.new_comment_notification(comment).deliver
+    if errors[:email]
+      flash[:email_placeholder] = errors[:email][0]
+      flash[:email_class] = flash[:email_placeholder].nil? ? '' : 'error'
+    else
+      flash[:email] = comment.email
+    end
 
-    post = unescape_post(post)
-    render template: 'blog/comment_confirmation.html.erb', locals: {
-        post: post,
-        comment: comment,
-        hide_comments: false,
-        respond_to_id: nil
-    }
+    if  errors[:content]
+      flash[:content_placeholder] = errors[:content][0]
+      flash[:content_class] = 'error'
+    else
+      flash[:content] = comment.content
+    end
+    # jump to create comment to show errors
+    redirect_to "#{post.post_url}#create-comment"
   end
 
   def respond_to_comment
     post = @posts.select { |p| p.id == Integer(params[:post_id]) }.shift
-    render template: 'blog/view_post', locals: {post: post, respond_to_id: Integer(params[:respond_to_id])}
+    render template: 'blog/view_post', locals: { post: post, respond_to_id: Integer(params[:respond_to_id]) }
   end
 
 
