@@ -3,6 +3,7 @@ require 'ostruct'
 
 class BlogController < ApplicationController
   include ERB::Util
+  include ErrorsHelper
 
   before_action :get_max_comment_depth
   before_action :get_posts
@@ -62,29 +63,11 @@ class BlogController < ApplicationController
       }
       return
     end
-
     # get hash with full error messages
-    errors = comment.errors.to_hash(true)
-    if errors[:author]
-      flash[:author_placeholder] = errors[:author][0]
-      flash[:author_class] = 'error'
-    else
-      flash[:author] = comment.author
+    flash_error_placeholders(comment, [:author, :email, :content]).each do |k,v|
+      flash[k] = v
     end
 
-    if errors[:email]
-      flash[:email_placeholder] = errors[:email][0]
-      flash[:email_class] = flash[:email_placeholder].nil? ? '' : 'error'
-    else
-      flash[:email] = comment.email
-    end
-
-    if  errors[:content]
-      flash[:content_placeholder] = errors[:content][0]
-      flash[:content_class] = 'error'
-    else
-      flash[:content] = comment.content
-    end
     # jump to create comment to show errors
     redirect_to "#{post.post_url}#create-comment"
   end
