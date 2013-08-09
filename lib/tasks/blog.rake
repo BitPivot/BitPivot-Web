@@ -7,7 +7,7 @@ namespace :blog do
 
     puts "\nCompiling blog posts...\n"
 
-    posts_input_path = 'app/views/blog/posts/'
+    posts_input_path = 'blog/live/'
 
     # Keep track of changes as files names for terminal output
     current_file_names = []
@@ -21,7 +21,7 @@ namespace :blog do
     post_paths = Dir["#{posts_input_path}*.erb"]
     puts "\nFound #{post_paths.length} blog posts in input directory'#{posts_input_path}'"
 
-    # Create / update posts in DB from input file paths
+    # Create / update drafts in DB from input file paths
     post_paths.each do |path|
 
       # Get all contents of post file
@@ -73,7 +73,7 @@ namespace :blog do
 
 
 
-    # Remove deleted posts from DB
+    # Remove deleted drafts from DB
     existing = BlogPost.all.to_a
     existing.each do |existing_post|
       # Blog post was deleted from input directory
