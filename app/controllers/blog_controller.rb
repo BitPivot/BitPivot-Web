@@ -3,6 +3,7 @@ require 'ostruct'
 
 class BlogController < ApplicationController
   include ERB::Util
+  include ErrorsHelper
 
   before_action :get_max_comment_depth
   before_action :get_posts
@@ -50,26 +51,30 @@ class BlogController < ApplicationController
 
   def create_comment
     post = BlogPost.find_by(file_name: params[:comment][:post_file_name])
-    comment = BlogPostComment.new
-    comment.author = params[:comment][:author]
-    comment.email = params[:comment][:email]
-    comment.content = params[:comment][:content]
-    comment.respond_to_id = params[:comment][:respond_to_id]
+    comment = BlogPostComment.new(params[:comment])
+    if comment.valid?
+      post.blog_post_comments << comment
+      post.save
+      CommentMailer.new_comment_notification(comment).deliver
+      render template: 'blog/comment_confirmation.html.erb', locals: {
+          post: unescape_post(post),
+          comment: comment,
+          respond_to_id: nil
+      }
+      return
+    end
+    # get hash with full error messages
+    flash_error_placeholders(comment, [:author, :email, :content]).each do |k,v|
+      flash[k] = v
+    end
 
-    post.blog_post_comments << comment
-    post.save
-    post = unescape_post(post)
-    render template: 'blog/comment_confirmation.html.erb', locals: {
-        post: post,
-        comment: comment,
-        hide_comments: false,
-        respond_to_id: nil
-    }
+    # jump to create comment to show errors
+    redirect_to "#{post.post_url}#create-comment"
   end
 
   def respond_to_comment
     post = @posts.select { |p| p.id == Integer(params[:post_id]) }.shift
-    render template: 'blog/view_post', locals: {post: post, respond_to_id: Integer(params[:respond_to_id])}
+    render template: 'blog/view_post', locals: { post: post, respond_to_id: Integer(params[:respond_to_id]) }
   end
 
 

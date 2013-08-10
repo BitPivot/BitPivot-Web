@@ -1,6 +1,4 @@
 /*
- *= require syntax_highlighter/shCore
- *= require syntax_highlighter/shThemeRDark
  *= require_self
  */
 
@@ -195,6 +193,8 @@ header
     background: $blog-comment-input-background
     border: 1px solid $blog-comment-input-border-color
     resize: none
+    &.error
+      +placeholder-text(red)
 
   .button
     margin: 0
@@ -213,3 +213,5 @@ header
       width: 100%
       height: 80px
       +box-sizing-border-box
+      &.error
+        +placeholder-text(red)
