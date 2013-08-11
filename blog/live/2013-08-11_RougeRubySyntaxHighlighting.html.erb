@@ -1,0 +1,74 @@
+---
+title: Rouge Syntax Highlighting
+subtitle: A Scaffold For Custom Themes
+author: Sean Kennedy
+year: 2013
+month: 8
+day: 10
+categories:
+- ruby
+- rails
+- rouge
+---
+<!-- Paste contents of <body> from Mou exported html file below -->
+## CoffeeScript
+<pre><code class='Coffeescript'>
+class Cat
+  constructor: (@name) ->
+
+  jump: (ft) ->
+    alert "#{@name} jumped #{ft}'"
+
+class SuperCat extends Cat
+  jump: ->
+    alert 'I am Super Cat!'
+    super 10
+
+class LazyCat extends Cat
+  jump: ->
+    alert 'Mrrrr...'
+    super 1
+
+lazycat = new LazyCat 'Big Nessie'
+supercat = new SuperCat 'Splandles'
+
+lazycat.jump()
+supercat.jump()
+
+Cat::spook = ->
+  this.jump 5
+
+lazycat.spook()
+</code></pre>
+
+<pre><code class='Ruby'>
+class Cat
+  def initialize(name)
+    @name = name
+  end
+
+  def jump(ft)
+    puts "#{@name} jumped #{ft}'"
+  end
+end
+
+class SuperCat < Cat
+  def jump
+    puts 'I am Super Cat!'
+    super(10)
+  end
+end
+
+class LazyCat < Cat
+  def jump
+    puts 'Mrrrr...'
+    super(1)
+  end
+end
+
+lazycat = LazyCat.new('Big Nessie')
+supercat = SuperCat.new('Splandles')
+
+lazycat.jump()
+supercat.jump()
+</code></pre>
