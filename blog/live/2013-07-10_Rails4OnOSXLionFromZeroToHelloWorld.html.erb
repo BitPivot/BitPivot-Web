@@ -16,14 +16,15 @@ categories:
 
 <!-- Paste contents of <body> from Mou exported html file below -->
 
+
 <p>Development with Ruby on Rails can be a very productive and rewarding experience, but it has gained a reputation among the development community as being very painful to initially set up, especially if you are using Rails for the first time. A recent factory reset on OSX Lion means coaxing Ruby 2 and Rails 4 to play nicely with each other once again, so I’ve decided to take some extra time and document each step along the way for reference.  The result should be a working rails project.</p>
 
 <h2>Step 1: Homebrew</h2>
 
 <p>Go over to <a href="http://brew.sh">http://brew.sh</a> and install and update homebrew.</p>
 
-<pre class='brush: bash'>$ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)" &amp;&amp; brew update
-</pre>
+<pre><code class='shell'>$ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)" &amp;&amp; brew update
+</code></pre>
 
 <p>Running <code>brew doctor</code>, warns that I haven't accepted the XCode license and don't have XCode's Command Line Tools.</p>
 
@@ -33,14 +34,14 @@ categories:
 
 <p>The default gcc compiler installed with XCode works, but some features are <a href="http://stackoverflow.com/questions/14045359/cant-install-ruby-on-mountain-lion-with-rvm">buggy</a>, so let's grab Unix's standard command line tools, as well as a stand alone version of gcc-4.2.</p>
 
-<pre class='brush: bash'>$ brew tap homebrew/dupes &amp;&amp; brew install apple-gcc42
-</pre>
+<pre><code class='shell'>$ brew tap homebrew/dupes &amp;&amp; brew install apple-gcc42
+</code></pre>
 
 <p>Running <code>brew doctor</code> again reveals another warning that <code>/usr/bin</code> occurs before <code>/usr/local/bin</code>.  To fix this error, add the following to <code>~/.profile</code></p>
 
-<pre class='brush: py'>homebrew=/usr/local/bin:/usr/local/sbin
+<pre><code class='python'>homebrew=/usr/local/bin:/usr/local/sbin
 export PATH=$homebrew:$PATH
-</pre>
+</code></pre>
 
 <p>Running <code>brew doctor</code> should reveal the system is "ready to brew".</p>
 
@@ -48,38 +49,38 @@ export PATH=$homebrew:$PATH
 
 <p>Install RVM by running the following in terminal.</p>
 
-<pre class='brush: bash'>$ bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
-</pre>
+<pre><code class='shell'>$ bash &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+</code></pre>
 
 <p>Now add the following to your <code>~/.profile</code>.</p>
 
-<pre class='brush: bash'>[[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; . "$HOME/.rvm/scripts/rvm"
-</pre>
+<pre><code class='shell'>[[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; . "$HOME/.rvm/scripts/rvm"
+</code></pre>
 
 <p>Restarting the terminal, let's confirm RVM is actually there.</p>
 
-<pre class='brush: bash'>$ rvm -v
+<pre><code class='shell'>$ rvm -v
 
 rvm 1.21.8 () by Wayne E. Seguin &lt;wayneeseguin@gmail.com&gt;, Michal Papis &lt;mpapis@gmail.com&gt; [https://rvm.io/]
-</pre>
+</code></pre>
 
 <h2>Step 4: Ruby 2.0</h2>
 
 <p>At this point, we don't have Ruby 2 yet.</p>
 
-<pre class='brush: bash'>$ ruby -v
+<pre><code class='shell'>$ ruby -v
 
 ruby 1.8.7 (2012-02-08 patchlevel 358) [universal-darwin11.0]`
-</pre>
+</code></pre>
 
 <p>Let's upgrade to Ruby 2.</p>
 
-<pre class='brush: bash'>$ rvm install ruby-2.0.0-p247
-</pre>
+<pre><code class='shell'>$ rvm install ruby-2.0.0-p247
+</code></pre>
 
 <p>Assuming all goes smoothly, running <code>rvm list</code> should show Ruby 2.</p>
 
-<pre class='brush: bash'>$ rvm list
+<pre><code class='shell'>$ rvm list
 
 rvm rubies
 
@@ -88,14 +89,14 @@ rvm rubies
 # =&gt; - current
 # =* - current &amp;&amp; default
 #  * - default
-</pre>
+</code></pre>
 
 <p>Just to make sure…</p>
 
-<pre class='brush: bash'>$ ruby -v
+<pre><code class='shell'>$ ruby -v
 
 ruby 2.0.0p247 (2013-06-27 revision 41674) [x86_64-darwin11.4.2]
-</pre>
+</code></pre>
 
 <p>Neat.</p>
 
@@ -103,31 +104,31 @@ ruby 2.0.0p247 (2013-06-27 revision 41674) [x86_64-darwin11.4.2]
 
 <p>We don't yet have rails, so let's install it.</p>
 
-<pre class='brush: bash'>$ gem install rails --version 4.0.0
-</pre>
+<pre><code class='shell'>$ gem install rails --version 4.0.0
+</code></pre>
 
 <p>Sanity check.</p>
 
-<pre class='brush: bash'>$ rails -v
+<pre><code class='shell'>$ rails -v
 
 Rails 4.0.0
-</pre>
+</code></pre>
 
 <h2>Step 6: Test Drive</h2>
 
 <p>Let's try setting up a brand new rails project.</p>
 
-<pre class='brush: bash'>$ rails new TestDrive &amp;&amp; cd TestDrive
-</pre>
+<pre><code class='shell'>$ rails new TestDrive &amp;&amp; cd TestDrive
+</code></pre>
 
 <p>Make sure all gems are updated.</p>
 
-<pre class='brush: bash'>$ bundle update
-</pre>
+<pre><code class='shell'>$ bundle update
+</code></pre>
 
 <p>Now start up your rails server.</p>
 
-<pre class='brush: bash'>$ rails server
-</pre>
+<pre><code class='shell'>$ rails server
+</code></pre>
 
 <p>Navigate to <code>localhost:3000</code> and you should see the "Welcome Aboard" page.</p>
