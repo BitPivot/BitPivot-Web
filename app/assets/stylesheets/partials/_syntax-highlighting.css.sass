@@ -1,0 +1,229 @@
+@import 'mixins'
+
+
+
+=comment
+  font-style: italic
+  color: $blog-code-comment-color
+
+=error
+  background: $blog-code-error-color
+  color: #fff
+
+=keyword
+  font-weight: bold
+  color: $blog-code-keyword-color
+
+=whitespace
+  color: $blog-code-whitespace-color
+
+=operator
+  color: $blog-code-operator-color
+
+=name($lighten: 0%)
+  color: lighten($blog-code-name-color, $lighten)
+
+=string
+  color: $blog-code-string-color
+
+=number
+  color: $blog-code-number-color
+
+
+
+.highlight
+
+  .c // Comment
+    +comment
+
+  .cm // Comment (Multi-line)
+    +comment
+
+  .cp // Comment (Pre-proc)
+    +comment
+
+  .c1 // Comment (Single)
+    +comment
+
+  .cs // Comment (Special)
+    +comment
+
+
+
+  .err // Error
+    +error
+
+
+
+  .k // Keyword
+    +keyword
+
+  .kc // Keyword (Constant)
+    +keyword
+
+  .kd // Keyword (Declaration)
+    +keyword
+
+  .kn // Keyword (Namespace)
+    +keyword
+
+  .kp // Keyword (Pseudo)
+    +keyword
+
+  .kr // Keyword (Reserved)
+    +keyword
+
+  .kt // Keyword (Type)
+    +keyword
+
+
+
+  .n // Name
+    +name
+
+  .na // Name (Attribute)
+    +name(15%)
+
+  .nb // Name (Built-in)
+    +name
+
+  .bp // Built-in (Pseudo)
+    +name
+
+  .nc // Name (Class)
+    +name
+
+  .no // Name (Constant)
+    +name
+
+  .nd // Name (Decorator)
+    +name
+
+  .ni // Name (Entity)
+    +name
+
+  .ne // Name (Exception)
+    +name
+
+  .nf // Name (Function)
+    +name(15%)
+
+  .nl // Name (Label)
+    +name
+
+  .nn // Name (Namespace)
+    +name
+
+  .nt // Name (Tag)
+    +name
+
+  .nx // Name (Other)
+    +name
+
+  .nv // Name (Variable)
+    +name
+
+  .vc // Variable (Class)
+    +name
+
+  .vg // Variable (Global)
+    +name
+
+  .vi // Variable (Instance)
+    +name
+
+
+
+  .p // Parenthesis
+    +whitespace
+
+  .w // Whitespace
+    +whitespace
+
+
+
+  .o // Operator
+    +operator
+
+  .ow // Operator (Word)
+    +operator
+
+
+
+  .gd // Generic Deleted
+
+  .ge // Generic Emphasis
+
+  .gr // Generic Error
+
+  .gh // Generic Heading
+
+  .gi // Generic Inserted
+
+  .go // Generic Output
+
+  .gp // Generic Prompt
+
+  .gs // Generic Strong
+
+  .gu // Generic Subheading
+
+  .gt // Generic Traceback
+
+
+
+  .m // Literal (Number)
+    +number
+
+  .mf // Number (Float)
+    +number
+
+  .mh // Number (Hex)
+    +number
+
+  .mi // Number (Integer)
+    +number
+
+  .il // Integer (Long)
+    +number
+
+  .mo // Number (Octal)
+    +number
+
+
+
+  .s // Literal (String)
+    +string
+
+  .sb // String (Backtick)
+    +string
+
+  .sc // String (Character)
+    +string
+
+  .sd // String (Doc)
+    +string
+
+  .s2 // String (Double)
+    +string
+
+  .se // String (Escape)
+    +string
+
+  .sh // String (Heredoc)
+    +string
+
+  .si // String (Interpolation)
+    +string
+
+  .sx // String (Other)
+    +string
+
+  .sr // String (Regex)
+    +string
+
+  .s1 // String (Single)
+    +string
+
+  .ss // String (Symbol)
+    +string
