@@ -19,7 +19,12 @@ class BlogController < ApplicationController
   end
 
   def view_post
+    file_name = params[:file_name]
     post = @posts.select { |p| p.file_name == "#{params[:file_name]}.html.erb" }.shift
+    if post.nil?
+      render template: 'blog/post_not_found.html.erb', locals: { file_name: file_name }
+      return
+    end
     render locals: { post: post, hide_comments: false }
   end
 
