@@ -39,6 +39,17 @@ header
     &:hover, &:hover
       color: lighten($blog-link-text-color, 7%)
 
+  &.simple
+    padding: $margin * 2
+
+    h1
+      +font($blog-title-font-size, $blog-title-text-color, 'pragmatica-extra-light')
+      line-height: $blog-title-font-size
+
+    p
+      margin: $margin 0
+
+
 
 
 .post-area
@@ -213,17 +224,6 @@ header
       width: 100%
       height: 80px
       +box-sizing-border-box
+
       &.error
-        +placeholder-text(red)
-
-
-
-.post-not-found
-  padding: $margin * 2
-
-  h1
-    +font($blog-title-font-size, $blog-title-text-color, 'pragmatica-extra-light')
-    line-height: $blog-title-font-size
-
-  p
-    margin: $margin 0
+        +placeholder-text($blog-comment-input-error-color)
