@@ -7,6 +7,7 @@ class BlogController < ApplicationController
 
   before_action :get_max_comment_depth
   before_action :get_posts
+  before_action :validate_params
 
   layout 'blog'
 
@@ -19,68 +20,82 @@ class BlogController < ApplicationController
   end
 
   def view_post
-    file_name = params[:file_name]
-    post = @posts.select { |p| p.file_name == "#{params[:file_name]}.html.erb" }.shift
-    if post.nil?
-      render template: 'blog/post_not_found.html.erb', locals: { file_name: file_name }
+    if @action_params_valid
+      post = @posts.select { |p| p.file_name == "#{params[:file_name]}.html.erb" }.shift
+      render locals: { post: post, hide_comments: false }
       return
     end
-    render locals: { post: post, hide_comments: false }
+    post_not_found
   end
 
   def author
-    @page_posts = @posts.select { |p| p.author.slice(0..(p.author.rindex(' ')-1)).downcase == params[:author] }
-    render :index
+    if @action_params_valid
+      @page_posts = @posts.select { |p| p.author.slice(0..(p.author.rindex(' ')-1)).downcase == params[:author] }
+      render :index
+      return
+    end
+    post_not_found
   end
 
   def year
-    year = Integer(params[:year])
-    @page_posts = @posts.select { |p| p.year == year }
-    render :index
+    if @action_params_valid
+      @page_posts = @posts.select { |p| p.year == year }
+      render :index
+      return
+    end
+    post_not_found
   end
 
   def month
-    year = Integer(params[:year])
-    month = Integer(params[:month])
-    @page_posts = @posts.select { |p| p.year == year && p.month == month }
-    render :index
+    if @action_params_valid
+      year = Integer(params[:year])
+      month = Integer(params[:month])
+      @page_posts = @posts.select { |p| p.year == year && p.month == month }
+      render :index
+      return
+    end
+    post_not_found
   end
 
   def day
-    year = Integer(params[:year])
-    month = Integer(params[:month])
-    day = Integer(params[:day])
-    @page_posts = @posts.select { |p| p.year == year && p.month == month && p.day == day }
-    render :index
+    if @action_params_valid
+      year = Integer(params[:year])
+      month = Integer(params[:month])
+      day = Integer(params[:day])
+      @page_posts = @posts.select { |p| p.year == year && p.month == month && p.day == day }
+      render :index
+      return
+    end
+    post_not_found
   end
 
   def create_comment
     post = BlogPost.find_by(file_name: params[:comment][:post_file_name])
     comment = BlogPostComment.new(params[:comment])
-    if comment.valid?
-      post.blog_post_comments << comment
-      post.save
-      CommentMailer.new_comment_notification(comment).deliver
-      render template: 'blog/comment_confirmation.html.erb', locals: {
-          post: unescape_post(post),
-          comment: comment,
-          respond_to_id: nil
-      }
+    unless comment.valid?
+      # get hash with full error messages
+      flash_error_placeholders(comment, [:author, :email, :content]).each do |k,v|
+        flash[k] = v
+      end
+      # jump to create comment to show errors
+      redirect_to "#{post.post_url}#create-comment"
       return
     end
-    # get hash with full error messages
-    flash_error_placeholders(comment, [:author, :email, :content]).each do |k,v|
-      flash[k] = v
-    end
-
-    # jump to create comment to show errors
-    redirect_to "#{post.post_url}#create-comment"
+    post.blog_post_comments << comment
+    post.save
+    CommentMailer.new_comment_notification(comment).deliver
+    render template: 'blog/comment_confirmation.html.erb', locals: {
+      post: unescape_post(post),
+      comment: comment,
+      respond_to_id: nil
+    }
   end
 
   def respond_to_comment
     post = @posts.select { |p| p.id == Integer(params[:post_id]) }.shift
     render template: 'blog/view_post', locals: { post: post, respond_to_id: Integer(params[:respond_to_id]) }
   end
+
 
 
   private
@@ -107,4 +122,37 @@ class BlogController < ApplicationController
     post
   end
 
+  def validate_params()
+    valid = true
+    case params[:action]
+    when 'view_post'
+      valid = params_present? [:file_name]
+      valid = BlogPost.exists?(file_name: "#{params[:file_name]}.html.erb") if valid
+    when 'author'
+      valid = params_present? [:author]
+    when 'year'
+      param_keys = [:year]
+      valid = false unless params_present? param_keys
+      param_keys.each do |key| valid = false unless params[key].is_i? end
+    when 'month'
+      param_keys = [:year,:month]
+      valid = false unless params_present? param_keys
+      param_keys.each do |key| valid = false unless params[key].is_i? end
+    when 'day'
+      param_keys = [:year,:month,:day]
+      valid = false unless params_present? param_keys
+      param_keys.each do |key| valid = false unless params[key].is_i? end
+    end
+    @action_params_valid = valid
+  end
+
+  def params_present?(param_keys)
+    present = true
+    param_keys.each do |key| present = false if params[key].nil? end
+    present
+  end
+
+  def post_not_found
+    render template: 'blog/post_not_found.html.erb'
+  end
 end

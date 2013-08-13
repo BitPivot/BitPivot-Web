@@ -18,20 +18,21 @@ namespace :blog do
     post_paths.each do |path|      
       post = BlogHelper::compile(path,code_block_regex)
 
-      if BlogPost.exists?(file_name: post.file_name)
-        existing = BlogPost.find_by(file_name: post.file_name)
-        
-        if existing.md5_hash != post.md5_hash
-          existing.update_attributes(post.attributes)
-          existing.save
-          changes[:updated] << existing.file_name
-        end
-      else
+      current_file_names << post.file_name
+
+      unless BlogPost.exists?(file_name: post.file_name)
         post.save
         changes[:created] << post.file_name
+        next
       end
 
-      current_file_names << post.file_name
+      existing = BlogPost.find_by(file_name: post.file_name)
+
+      next if existing.md5_hash == post.md5_hash
+      existing.update_attributes(post.attributes)
+      existing.save
+      changes[:updated] << existing.file_name
+      end
     end
 
 
