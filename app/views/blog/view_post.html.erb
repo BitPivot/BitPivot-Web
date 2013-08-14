@@ -35,14 +35,15 @@
       <h1>Discussion</h1>
       <% if post.approved_comments.length == 0 %>
         <span class='no-comments'>There are currently no comments.</span>
-      <% end %>
-      <% post.top_level_comments.each do |comment| %>
-        <%= render template: 'blog/comment', locals: {
-            depth: 1,
-            post: post,
-            comment: comment,
-            respond_to_id: defined?(respond_to_id) ? respond_to_id : nil
-        } %>
+      <% else %>
+        <% post.top_level_comments.each do |comment| %>
+          <%= render template: 'blog/comment', locals: {
+              depth: 1,
+              post: post,
+              comment: comment,
+              respond_to_id: defined?(respond_to_id) ? respond_to_id : nil
+          } %>
+        <% end %>
       <% end %>
     </section>
 
