@@ -1,0 +1,10 @@
+section.post.simple.comment-confirmation
+
+  h1 Thanks!
+  p Your comment has been submitted for approval
+
+  .comment class='#{comment.is_admin_comment ? 'admin' : ''}'
+    .comment-header Written by <em>#{comment.author}</em> on #{comment.formatted_date}
+    .comment-content = simple_format(comment.content)
+
+  = link_to 'Return to Post', post.post_url

@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     @blinds = []
-    paths = Dir['app/views/home/blinds/*.erb']
+    paths = Dir['app/views/home/blinds/*.slim']
     paths.sort!
     paths.each do |p|
       @blinds.push("/#{p}")

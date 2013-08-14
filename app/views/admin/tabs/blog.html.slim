@@ -1,0 +1,18 @@
+#tab_blog.tab
+
+  - for author in @unapproved_comments.keys
+    .comments-wrapper
+
+      h2 = author
+
+      .comments-column
+        - for comment in @unapproved_comments[author]
+          .comment class='#{comment.is_admin_comment ? 'admin' : ''}'
+            h3 By <em>#{comment.author}</em> on #{comment.formatted_date}
+
+            .comment-content
+              = render inline: simple_format(comment.content)
+              br
+
+          input.btn-approve-comment type='button' value='Approve' onclick="location.href='<%= comment.approval_url %>'"
+          input.btn-delete-comment type='button' value='Delete' onclick="location.href='<%= comment.deletion_url %>'"

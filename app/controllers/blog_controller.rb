@@ -84,7 +84,7 @@ class BlogController < ApplicationController
     post.blog_post_comments << comment
     post.save
     CommentMailer.new_comment_notification(comment).deliver
-    render template: 'blog/comment_confirmation.html.erb', locals: {
+    render template: 'blog/comment_confirmation', locals: {
       post: unescape_post(post),
       comment: comment,
       respond_to_id: nil
@@ -153,6 +153,6 @@ class BlogController < ApplicationController
   end
 
   def post_not_found
-    render template: 'blog/post_not_found.html.erb'
+    render template: 'blog/post_not_found'
   end
 end

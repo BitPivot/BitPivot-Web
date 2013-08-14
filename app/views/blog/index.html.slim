@@ -1,0 +1,8 @@
+- for post in @page_posts
+  = render template: 'blog/view_post', locals: { post: post, hide_comments: true }
+
+- if @posts.length > @page_size * @page
+  = link_to "\u2190 Earlier posts", "/blog/page/#{@page+1}"
+
+- if @page > 1
+  = link_to "Later posts \u2192", "/blog/page/#{@page-1}"

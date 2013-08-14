@@ -1,0 +1,23 @@
+- if @user && @user.role == 1
+  .admin-area
+    .tabs
+      ul
+        li = link_to 'Logout', '/admin/logout', class: 'btn-logout'
+
+      = render template: 'admin/tabs/blog'
+
+- else
+  .login
+    h1 Administrative Login
+    = form_for :login_user, url: '/admin/login' do |f|
+      = f.text_field :login_email,
+        placeholder: @login_email_placeholder || 'Email',
+        class: @login_email_class
+      br
+
+      = f.password_field :login_password,
+        placeholder: @login_password_placeholder || 'Password',
+        class: @login_password_class
+      br
+
+      = f.submit 'Login', class: 'btn btn-mini btn-primary'

@@ -1,9 +1,0 @@
-<% @page_posts.each do |post| %>
-  <%= render template: 'blog/view_post.html.erb', locals: { post: post, hide_comments: true } %>
-<% end %>
-<% if @posts.length > @page_size * @page %>
-  <%= link_to "\u2190 Earlier posts", "/blog/page/#{@page+1}" %>
-<% end %>
-<% if @page > 1 %>
-  <%= link_to "Later posts \u2192", "/blog/page/#{@page-1}" %>
-<% end %>

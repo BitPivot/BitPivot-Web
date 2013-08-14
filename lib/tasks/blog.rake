@@ -15,7 +15,7 @@ namespace :blog do
     current_file_names = []
     changes = { created: [], updated: [], deleted: [] }
 
-    post_paths.each do |path|      
+    post_paths.each do |path|
       post = BlogHelper::compile(path,code_block_regex)
 
       current_file_names << post.file_name
