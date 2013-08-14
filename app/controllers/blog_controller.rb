@@ -93,7 +93,7 @@ class BlogController < ApplicationController
 
   def respond_to_comment
     post = @posts.select { |p| p.id == Integer(params[:post_id]) }.shift
-    render template: 'blog/view_post', locals: { post: post, respond_to_id: Integer(params[:respond_to_id]) }
+    render template: 'blog/view_post', locals: { post: post, respond_to_id: Integer(params[:respond_to_id]), hide_comments: false }
   end
 
 
