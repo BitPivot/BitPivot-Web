@@ -32,7 +32,6 @@ namespace :blog do
       existing.update_attributes(post.attributes)
       existing.save
       changes[:updated] << existing.file_name
-      end
     end
 
 
