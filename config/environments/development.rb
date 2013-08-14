@@ -24,16 +24,13 @@ BitPivot::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  # Use Mailtrap for development ('mailtrap start' on dev box)
   config.action_mailer.delivery_method = :smtp
-  # Defaults to:
   config.action_mailer.smtp_settings = {
-      enable_starttls_auto: true,
-      address: 'smtp.gmail.com',
-      port: 587,
-      authentication: :login,
+      domain: 'mydomain.net',
+      address: 'localhost',
+      port: 2525,
       content_type: 'text/html',
-      user_name: 'cspheregreen@gmail.com',
-      password: 'Asdf1597531`'
   }
 
   config.action_mailer.perform_deliveries = true
@@ -43,6 +40,5 @@ BitPivot::Application.configure do
   # Add Symbolsets to asset pipeline
   config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
   config.assets.precompile += %w(.svg .eot .woff .ttf)
-
 
 end
