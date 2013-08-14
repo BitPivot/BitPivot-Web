@@ -98,4 +98,5 @@ BitPivot::Application.configure do
   # Add Symbolsets to asset pipeline
   config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
   config.assets.precompile += ['*.svg', '*.eot', '*.woff', '*.ttf']
+  config.assets.precompile += ['application-fallback.css', 'blog.css', 'admin.css']
 end
