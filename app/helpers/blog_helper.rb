@@ -27,7 +27,8 @@ module BlogHelper
       formatter = Rouge::Formatters::HTML.new(:css_class => 'highlight')
       Rouge::Lexers.constants.each do |lexer_lang|
         if lexer_lang.to_s.downcase == lang.strip.chomp.downcase
-          return formatter.format(Rouge::Lexers.const_get(lexer_lang).lex(block))
+          unescaped = CGI.unescapeHTML(block)
+          return formatter.format(Rouge::Lexers.const_get(lexer_lang).lex(unescaped))
         end
       end
   end

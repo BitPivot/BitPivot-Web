@@ -122,7 +122,7 @@ class BlogController < ApplicationController
     post
   end
 
-  def validate_params()
+  def validate_params
     valid = true
     case params[:action]
     when 'view_post'
