@@ -141,7 +141,7 @@ common: &amp;common
 
 <p>We can clean this up a bit by using <a href="http://ruby-doc.org/stdlib-2.0/libdoc/ostruct/rdoc/OpenStruct.html">OpenStruct</a>, which is available in stdlib.  In order to use OpenStruct, simply require it at the top of your <code>config.rb</code>, and pass the results of YAML.load() to it's constructor.</p>
 
-<pre><code class='yaml'># config/initializers/config.rb
+<pre><code class='ruby'># config/initializers/config.rb
 require 'ostruct'
 require 'yaml'
 
