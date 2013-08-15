@@ -99,4 +99,5 @@ BitPivot::Application.configure do
   config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
   config.assets.precompile += ['*.svg', '*.eot', '*.woff', '*.ttf']
   config.assets.precompile += ['application-fallback.css', 'blog.css', 'admin.css']
+  config.assets.precompile += ['application-fallback-ie.js', 'blog.js', 'admin.js']
 end
