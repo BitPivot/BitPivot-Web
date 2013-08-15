@@ -38,7 +38,7 @@ categories:
 
 <p>Running <code>brew doctor</code> again reveals another warning that <code>/usr/bin</code> occurs before <code>/usr/local/bin</code>.  To fix this error, add the following to <code>~/.profile</code></p>
 
-<pre><code class='python'>homebrew=/usr/local/bin:/usr/local/sbin
+<pre><code class='shell'>homebrew=/usr/local/bin:/usr/local/sbin
 export PATH=$homebrew:$PATH
 </code></pre>
 
