@@ -14,7 +14,7 @@ class BlogPostComment < ActiveRecord::Base
   validates :author, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
   validates :content, presence: true
-
+  
 
   def approval_url
     "/admin/blog/approve_comment/#{self.id}"
