@@ -154,6 +154,24 @@ $total-blinds: <%= APP_CONFIG.total_blinds %>
 
 
 
+p.headline
+  color: $blind-content-headline-color
+  padding: ($margin / 2) ($margin * 4)
+  text-align: justify
+  font-size: 1.25em
+  line-height: 1.35em
+
+  +breakpoint('narrow')
+    padding: ($margin / 2) ($margin * 2)
+
+  +breakpoint('tiny')
+    padding: 0
+
+em
+  font-style: italic
+
+
+
 =blind($class, $index, $header-color, $banner-image, $image-position)
   .blind#{$class}
     top: percentage((1 / $total-blinds) * $index)
