@@ -130,6 +130,18 @@ $total-blinds: <%= APP_CONFIG.total_blinds %>
     &.full
       width: 100%
 
+    &.two-third
+      width: 66.66666%
+
+      +breakpoint('tiny')
+        width: 100%
+
+    &.third
+      width: 33.33333%
+
+      +breakpoint('tiny')
+        width: 100%
+
     &.half
       width: 50%
 
@@ -169,6 +181,43 @@ p.headline
 
 em
   font-style: italic
+
+
+
+.infographic-device-market-share
+  +position(relative)
+  +sprite('infographic-device-market-share', 275px, 275px)
+
+  .caption
+    +position(absolute, 65px, 65px, auto, 65px)
+    color: $infographic-caption-text-color
+    text-align: center
+
+  .legend
+    +position(absolute, auto, 65px, 65px, 65px)
+
+    li
+      margin: 0 0 5px 0
+
+      .key
+        margin: 0 5px 0 0
+        float: left
+        height: $page-line-height
+        width: $page-line-height
+
+      .description
+        height: $page-line-height
+        line-height: $page-line-height
+        vertical-align: middle
+
+    .smartphone .key
+      background-color: $infographic-key-purple-light
+
+    .tablet .key
+      background-color: $infographic-key-purple-dark
+
+    .pc .key
+      background-color: $infographic-key-gray-dark
 
 
 
