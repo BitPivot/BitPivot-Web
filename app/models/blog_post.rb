@@ -28,7 +28,7 @@ class BlogPost < ActiveRecord::Base
   end
 
   def approved_comments
-    self.blog_post_comments.where(:approved => true)
+    self.blog_post_comments.where(approved: true)
   end
 
   def md5
