@@ -5,11 +5,7 @@ class BlogController < ApplicationController
   include ERB::Util
   include ErrorsHelper
 
-  before_action :get_max_comment_depth
-  before_action :set_current_page
-  before_action :set_current_page_size
-  before_action :set_total_posts
-  before_action :validate_params
+  before_action :before
 
   layout 'blog'
 
@@ -105,20 +101,12 @@ class BlogController < ApplicationController
 
   private
 
-  def set_total_posts
-    @total_posts = BlogPost.count
-  end
-
-  def set_current_page    
-    @page = params[:page].nil? ? 1 : Integer(params[:page])
-  end
-
-  def set_current_page_size
-    @page_size = APP_CONFIG.blog_posts_per_page
-  end
-
-  def get_max_comment_depth
+  def before
     @max_comment_depth = APP_CONFIG.max_comment_reply_depth
+    @total_posts = BlogPost.count
+    @page = params[:page].nil? ? 1 : Integer(params[:page])
+    @page_size = APP_CONFIG.blog_posts_per_page
+    validate_params
   end
 
   def unescape_posts(posts)
