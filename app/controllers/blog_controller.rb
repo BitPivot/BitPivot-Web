@@ -5,18 +5,18 @@ class BlogController < ApplicationController
   include ERB::Util
   include ErrorsHelper
 
-  before_action :get_max_comment_depth
-  before_action :get_posts
-  before_action :validate_params
+  before_action :before
 
   layout 'blog'
 
   def index
-    @posts.each_with_index do |p, i|
+    @page_posts = []
+    BlogPost.all.each_with_index do |p, i|
       if i >= (@page - 1) * @page_size && i < ((@page-1) * @page_size) + @page_size
         @page_posts.push(p)
       end
     end
+    unescape_posts(@page_posts)
   end
 
   def view_post
@@ -30,7 +30,7 @@ class BlogController < ApplicationController
 
   def author
     if @action_params_valid
-      @page_posts = @posts.select { |p| p.author.slice(0..(p.author.rindex(' ')-1)).downcase == params[:author] }
+      @page_posts = unescape_posts(BlogPost.where(author: to_full_author_name(params[:author])))
       render :index
       return
     end
@@ -40,7 +40,7 @@ class BlogController < ApplicationController
   def year
     if @action_params_valid
       year = Integer(params[:year])
-      @page_posts = @posts.select { |p| p.year == year }
+      @page_posts = unescape_posts(BlogPost.where(year: year))
       render :index
       return
     end
@@ -51,7 +51,7 @@ class BlogController < ApplicationController
     if @action_params_valid
       year = Integer(params[:year])
       month = Integer(params[:month])
-      @page_posts = @posts.select { |p| p.year == year && p.month == month }
+      @page_posts = unescape_posts(BlogPost.where(year: year, month: month))
       render :index
       return
     end
@@ -63,7 +63,7 @@ class BlogController < ApplicationController
       year = Integer(params[:year])
       month = Integer(params[:month])
       day = Integer(params[:day])
-      @page_posts = @posts.select { |p| p.year == year && p.month == month && p.day == day }
+      @page_posts = unescape_posts(BlogPost.where(year: year, month: month, day: day))
       render :index
       return
     end
@@ -101,26 +101,21 @@ class BlogController < ApplicationController
 
   private
 
-  def get_posts
-    @page_posts = []
-    @page_size = APP_CONFIG.blog_posts_per_page
-    @page = params[:page].nil? ? 1 : Integer(params[:page])
-    @posts = BlogPost.all
-    @posts.each do |p|
-      unescape_post(p)
-    end
-  end
-
-  def get_max_comment_depth
+  def before
     @max_comment_depth = APP_CONFIG.max_comment_reply_depth
+    @total_posts = BlogPost.count
+    @page = params[:page].nil? ? 1 : Integer(params[:page])
+    @page_size = APP_CONFIG.blog_posts_per_page
+    validate_params
   end
 
-  def unescape_post(post)
-    post.body = CGI.unescapeHTML(post.body)
-    post.blog_post_comments.each do |c|
-      c.content = CGI.unescapeHTML(c.content)
+  def unescape_posts(posts)
+    posts.each do |p|
+      p.body = CGI.unescapeHTML(p.body)
+      p.blog_post_comments.each do |c|
+        c.content = CGI.unescapeHTML(c.content)
+      end
     end
-    post
   end
 
   def validate_params
@@ -131,6 +126,7 @@ class BlogController < ApplicationController
       valid = BlogPost.exists?(file_name: "#{params[:file_name]}.html.erb") if valid
     when 'author'
       valid = params_present? [:author]
+      valid = to_full_author_name params[:author] != ''
     when 'year'
       param_keys = [:year]
       valid = false unless params_present? param_keys
@@ -151,6 +147,19 @@ class BlogController < ApplicationController
     present = true
     param_keys.each do |key| present = false if params[key].nil? end
     present
+  end
+
+  def to_full_author_name(first_name)
+    name = ''
+    case first_name
+      when 'sean'
+        name = 'Sean Kennedy'
+      when 'rob'
+        name = 'Robert Hencke'
+      when 'matthew'
+        name = 'Matthew McMillion'
+    end
+    name
   end
 
   def post_not_found
