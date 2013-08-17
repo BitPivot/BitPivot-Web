@@ -197,34 +197,6 @@ em
 
 
 
-=blind($class, $index, $header-color, $banner-image, $image-position)
-  .blind#{$class}
-    top: percentage((1 / $total-blinds) * $index)
-    z-index: 100 + ($total-blinds - $index)
-
-  .blind#{$class} header
-    +gradient-radial($header-color)
-
-    &:hover
-      +gradient-radial(lighten($header-color, 1%))
-      font-size: $blind-header-font-size * 1.1
-
-      +breakpoint('tiny')
-        font-size: $blind-header-font-size-tiny * 1.1
-
-  .blind#{$class}.expanded header
-    &:hover
-      +gradient-radial($header-color)
-      font-size: $blind-header-font-size
-
-      +breakpoint('tiny')
-        font-size: $blind-header-font-size-tiny
-
-  .blind#{$class} .blind-banner
-    @if $banner-image
-      background-image: image-url($banner-image)
-      background-position: $image-position
-
 +blind('.our-philosophy',          0, $blind-header-background-color-1, 'blind-our-philosophy-background.jpg',          70% 30%)
 +blind('.mobile-and-web-presence', 1, $blind-header-background-color-2, 'blind-mobile-and-web-presence-background.jpg', 50% 50%)
 +blind('.consulting',              2, $blind-header-background-color-3, 'blind-consulting-background.jpg',              50% 50%)

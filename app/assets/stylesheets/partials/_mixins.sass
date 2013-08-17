@@ -163,16 +163,20 @@
 
 
 
-// Reusable typography components
+// Reusable typography / components
 =h-border
   padding-bottom: $margin / 4
   border-bottom: $blind-content-header-border-width solid $blind-content-header-border-color
+
+
 
 =type-pad-bottom
   margin-bottom: $margin
 
   &:last-child
     margin-bottom: 0
+
+
 
 =placeholder-text($color)
   &::-webkit-input-placeholder
@@ -187,6 +191,8 @@
   &:-ms-input-placeholder
     color: $color
 
+
+
 =blog-post-header($font-size-modifier)
   padding: $margin / 2
   margin: ($margin * 2) 0
@@ -196,6 +202,8 @@
   text-shadow: 0px 3px 5px $blind-header-text-shadow-color
   line-height: $header-font-size
   +type-pad-bottom
+
+
 
 =row-column($width)
   width: $width
@@ -211,3 +219,33 @@
 
     &:last-child
       margin: 0
+
+
+
+=blind($class, $index, $header-color, $banner-image, $image-position)
+  .blind#{$class}
+    top: percentage((1 / $total-blinds) * $index)
+    z-index: 100 + ($total-blinds - $index)
+
+  .blind#{$class} header
+    +gradient-radial($header-color)
+
+    &:hover
+      +gradient-radial(lighten($header-color, 1%))
+      font-size: $blind-header-font-size * 1.1
+
+      +breakpoint('tiny')
+        font-size: $blind-header-font-size-tiny * 1.1
+
+  .blind#{$class}.expanded header
+    &:hover
+      +gradient-radial($header-color)
+      font-size: $blind-header-font-size
+
+      +breakpoint('tiny')
+        font-size: $blind-header-font-size-tiny
+
+  .blind#{$class} .blind-banner
+    @if $banner-image
+      background-image: image-url($banner-image)
+      background-position: $image-position
