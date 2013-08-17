@@ -6,7 +6,7 @@ body
   max-width: $blog-post-max-width
   margin: $margin * 2 auto
   background: $blog-page-background
-  +font($blog-font-size, $blog-text-color, 'pragmatica-light')
+  +font($blog-font-size, $blog-text-color, $blog-font)
   line-height: $blog-line-height
 
   em
@@ -39,7 +39,7 @@ header
     padding: $margin * 2
 
     h1
-      +font($blog-title-font-size, $blog-title-text-color, 'pragmatica-extra-light')
+      +font($blog-title-font-size, $blog-title-text-color, $blog-header-font)
       line-height: $blog-title-font-size
 
     p
@@ -50,7 +50,7 @@ header
 
 .post-area
   padding: $margin * 2
-  +font($blog-font-size, $blog-text-color, 'pragmatica-light')
+  +font($blog-font-size, $blog-text-color)
   line-height: $blog-line-height
 
 
@@ -63,11 +63,11 @@ header
     text-decoration: none !important
 
   h1
-    +font($blog-title-font-size, $blog-title-text-color, 'pragmatica-extra-light')
+    +font($blog-title-font-size, $blog-title-text-color, $blog-header-font)
     line-height: $blog-title-font-size
 
   h2
-    +font($blog-title-font-size * 0.75, $blog-title-text-color, 'pragmatica-extra-light')
+    +font($blog-title-font-size * 0.75, $blog-title-text-color, $blog-header-font)
     line-height: $blog-title-font-size
     +type-pad-bottom
 
@@ -104,7 +104,7 @@ header
     margin: $margin 0
     padding: $margin / 2
     background: $blog-code-background
-    +font($blog-font-size, $blog-text-color, 'source-code-pro-regular')
+    +font($blog-font-size, $blog-text-color, $blog-code-font)
     line-height: $blog-line-height
     border: 1px solid $blog-code-border-color
     overflow: scroll
@@ -194,7 +194,7 @@ header
   .input-text
     margin: 0 ($margin / 2) ($margin / 2) 0
     padding: $margin / 4
-    +font(0.8em, $blog-comment-input-text-color, 'pragmatica-light')
+    +font(0.8em, $blog-comment-input-text-color, $blog-input-font)
     background: $blog-comment-input-background
     border: 1px solid $blog-comment-input-border-color
     resize: none
@@ -204,7 +204,7 @@ header
   .button
     margin: 0
     padding: $margin / 2
-    +font(1em, $blog-comment-button-text-color, 'pragmatica-extra-light')
+    +font(1em, $blog-comment-button-text-color, $blog-button-font)
     background: $blog-comment-button-background
     border: none
     cursor: pointer
