@@ -6,17 +6,21 @@ class BlogController < ApplicationController
   include ErrorsHelper
 
   before_action :get_max_comment_depth
-  before_action :get_posts
+  before_action :set_current_page
+  before_action :set_current_page_size
+  before_action :set_total_posts
   before_action :validate_params
 
   layout 'blog'
 
   def index
-    @posts.each_with_index do |p, i|
+    @page_posts = []
+    BlogPost.all.each_with_index do |p, i|
       if i >= (@page - 1) * @page_size && i < ((@page-1) * @page_size) + @page_size
         @page_posts.push(p)
       end
     end
+    unescape_posts(@page_posts)
   end
 
   def view_post
@@ -40,7 +44,7 @@ class BlogController < ApplicationController
   def year
     if @action_params_valid
       year = Integer(params[:year])
-      @page_posts = @posts.select { |p| p.year == year }
+      @page_posts = unescape_posts(BlogPost.where(year: year))
       render :index
       return
     end
@@ -51,7 +55,7 @@ class BlogController < ApplicationController
     if @action_params_valid
       year = Integer(params[:year])
       month = Integer(params[:month])
-      @page_posts = @posts.select { |p| p.year == year && p.month == month }
+      @page_posts = unescape_posts(BlogPost.where(year: year, month: month))
       render :index
       return
     end
@@ -63,7 +67,7 @@ class BlogController < ApplicationController
       year = Integer(params[:year])
       month = Integer(params[:month])
       day = Integer(params[:day])
-      @page_posts = @posts.select { |p| p.year == year && p.month == month && p.day == day }
+      @page_posts = unescape_posts(BlogPost.where(year: year, month: month, day: day))
       render :index
       return
     end
@@ -101,12 +105,16 @@ class BlogController < ApplicationController
 
   private
 
-  def get_posts
-    @page_posts = []
-    @page_size = APP_CONFIG.blog_posts_per_page
+  def set_total_posts
+    @total_posts = BlogPost.count
+  end
+
+  def set_current_page    
     @page = params[:page].nil? ? 1 : Integer(params[:page])
-    @posts = BlogPost.all
-    unescape_posts(@posts)
+  end
+
+  def set_current_page_size
+    @page_size = APP_CONFIG.blog_posts_per_page
   end
 
   def get_max_comment_depth
@@ -115,16 +123,11 @@ class BlogController < ApplicationController
 
   def unescape_posts(posts)
     posts.each do |p|
-      unescape_post(p)
+      p.body = CGI.unescapeHTML(p.body)
+      p.blog_post_comments.each do |c|
+        c.content = CGI.unescapeHTML(c.content)
+      end
     end
-  end
-
-  def unescape_post(post)
-    post.body = CGI.unescapeHTML(post.body)
-    post.blog_post_comments.each do |c|
-      c.content = CGI.unescapeHTML(c.content)
-    end
-    post
   end
 
   def validate_params
