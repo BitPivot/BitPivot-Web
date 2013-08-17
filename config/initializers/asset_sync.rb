@@ -6,7 +6,7 @@ AssetSync.configure do |config|
 
   config.existing_remote_files = 'delete'
   config.manifest = true
-  config.gzip_compression = false
+  config.gzip_compression = true
 
   # Ignored files
   config.ignored_files = [

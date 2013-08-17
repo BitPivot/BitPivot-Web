@@ -97,6 +97,10 @@ BitPivot::Application.configure do
   # Add Symbolsets to asset pipeline
   config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
   config.assets.precompile += ['*.svg', '*.eot', '*.woff', '*.ttf']
-  config.assets.precompile += ['application-fallback.css', 'blog.css', 'admin.css']
-  config.assets.precompile += ['application-fallback-ie.js', 'admin.js']
+
+  # Add top-level CSS manifests
+  config.assets.precompile += Dir.glob(Rails.root.join('app', 'assets', 'stylesheets', '*.css'))
+
+  # Add top-level JS manifests
+  config.assets.precompile += Dir.glob(Rails.root.join('app', 'assets', 'javascripts', '*.js'))
 end
