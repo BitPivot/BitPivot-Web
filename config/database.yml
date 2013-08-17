@@ -24,3 +24,12 @@ production:
   pool: 5
   username: rails
   password: rails
+
+loadimpact:
+  adapter: postgresql
+  encoding: unicode
+  database: bitpivot_production
+  host: localhost
+  pool: 5
+  username: rails
+  password: rails
