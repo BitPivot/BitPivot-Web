@@ -21,7 +21,8 @@ class BlogController < ApplicationController
 
   def view_post
     if @action_params_valid
-      post = @posts.select { |p| p.file_name == "#{params[:file_name]}.html.erb" }.shift
+      p = BlogPost.find_by(file_name: "#{params[:file_name]}.html.erb")
+      post = unescape_post(p)
       render locals: { post: post, hide_comments: false }
       return
     end
@@ -111,11 +112,16 @@ class BlogController < ApplicationController
 
   def unescape_posts(posts)
     posts.each do |p|
-      p.body = CGI.unescapeHTML(p.body)
-      p.blog_post_comments.each do |c|
-        c.content = CGI.unescapeHTML(c.content)
-      end
+      unescape_post(p)
     end
+  end
+
+  def unescape_post(post)
+    post.body = CGI.unescapeHTML(post.body)
+    post.blog_post_comments.each do |c|
+      c.content = CGI.unescapeHTML(c.content)
+    end
+    post
   end
 
   def validate_params
