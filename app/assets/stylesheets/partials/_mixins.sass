@@ -186,3 +186,13 @@
 
   &:-ms-input-placeholder
     color: $color
+
+=blog-post-header($font-size-modifier)
+  padding: $margin / 2
+  margin: ($margin * 2) 0
+  +gradient-radial($blog-header-background)
+  font-size: $blog-header-font-size * $font-size-modifier
+  color: $blog-header-text-color
+  text-shadow: 0px 3px 5px $blind-header-text-shadow-color
+  line-height: $header-font-size
+  +type-pad-bottom

@@ -14,7 +14,7 @@ class BlogPostComment < ActiveRecord::Base
   validates :author, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
   validates :content, presence: true
-  
+
 
   def approval_url
     "/admin/blog/approve_comment/#{self.id}"
@@ -29,7 +29,11 @@ class BlogPostComment < ActiveRecord::Base
   end
 
   def is_admin_comment
-    return self.email =~ /.*\@bitpivot\.com/
+    self.email =~ /.*\@bitpivot\.com/
+  end
+
+  def has_responses
+      self.blog_post_comments.length > 0 ? true: false
   end
 
   def respond_to_comment_url(post_id)

@@ -86,25 +86,15 @@ header
 
 
 
-=post-header($font-size-modifier)
-  padding: $margin / 2
-  margin: ($margin * 2) 0
-  +gradient-radial($blog-header-background)
-  font-size: $blog-header-font-size * $font-size-modifier
-  color: $blog-header-text-color
-  text-shadow: 0px 3px 5px $blind-header-text-shadow-color
-  line-height: $header-font-size
-  +type-pad-bottom
-
 .post-body
   h1
-    +post-header(1)
+    +blog-post-header(1)
 
   h2
-    +post-header(0.8)
+    +blog-post-header(0.8)
 
   h3
-    +post-header(0.65)
+    +blog-post-header(0.65)
 
   p
     text-align: justify
@@ -143,18 +133,22 @@ header
   .comment
     margin-bottom: $margin / 2
     padding: $margin / 2
+    background: $blog-comment-background
+    color: $blog-comment-text-color
 
     &:last-child
       margin-bottom: 0
 
     .comment-header
-      margin-bottom: $margin / 4
       font-size: 0.8em
       color: $blog-post-metadata-text-color
+      border-bottom: 1px solid $blog-comment-border-color
+
+    .has-responses
+      border-left: 1px solid $blog-comment-border-color
 
     .comment-content
-      padding: $margin / 2
-      border-top: 1px solid $blog-comment-border-color
+      padding: $margin ($margin / 2)
 
       p
         +type-pad-bottom
@@ -166,12 +160,16 @@ header
     &.admin
       background: $blog-admin-comment-background
       color: $blog-admin-comment-text-color
-      border-color: $blog-admin-comment-border-color
+
+      > .has-responses
+        border-color: $blog-admin-comment-border-color
+
+      > .comment-header
+        border-color: $blog-admin-comment-border-color
 
   .responses
-    padding-left: $margin
+    padding-left: $margin / 2
     margin-top: $margin
-    border-left: 1px solid $blog-comments-border-color
 
 
 

@@ -19,6 +19,8 @@ $blind-banner-height-tiny: 150px
 
 $blind-content-header-border-width: 1px
 
+$blog-post-max-width: 1000px
+
 
 
 // Font metrics
@@ -28,8 +30,6 @@ $header-font-size: 20px
 
 $blind-header-font-size: $blind-collapsed-height * 0.45
 $blind-header-font-size-tiny: $blind-collapsed-height-tiny  * 0.55
-
-$blog-post-max-width: 1000px
 
 $blog-font-size: 15px
 $blog-line-height: 20px
@@ -56,13 +56,15 @@ $orange: #f80
 
 
 
-// Page colors
+// Page
 $page-background-color: $black
 
+// Header
 $header-background-color: $black
 $header-link-color: $gray-dark
 $header-link-color-hover: $purple-light
 
+// Blind headers
 $blind-header-background-color-1: $purple-dark
 $blind-header-background-color-2: darken($purple-dark, 3%)
 $blind-header-background-color-3: darken($purple-dark, 6%)
@@ -70,31 +72,47 @@ $blind-header-background-color-4: darken($purple-dark, 8%)
 $blind-header-text-color: $white
 $blind-header-text-shadow-color: rgba($black, 0.75)
 
+// Blind banners
 $blind-banner-text-color: $white
 $blind-banner-text-background-color: rgba($black, 0.7)
 
+// Blind content
 $blind-content-text-color: $gray-medium
 $blind-content-header-text-color: $gray-light
 $blind-content-header-border-color: $purple-dark
 
+// Blog page
 $blog-page-background: $gray-medium
 $blog-post-background: $white
 $blog-post-border-color: $gray-light
 
+// Blog text
 $blog-link-text-color: $purple-light
-
 $blog-text-color: $gray-text
 $blog-title-text-color: $purple-dark
 $blog-post-metadata-text-color: $gray-medium
 $blog-header-text-color: $white
 $blog-header-background: $purple-dark
 
+// Blog comments area
 $blog-comments-background: lighten($gray-light, 10%)
 $blog-comments-border-color: $gray-light
+
+// Blog comment colors
+$blog-comment-background: $blog-comments-background
 $blog-comment-border-color: $gray-light
+$blog-comment-text-color: $gray-text
+
+// Blog admin comment colors
+$blog-admin-comment-background: darken($blog-comment-background, 5%)
+$blog-admin-comment-border-color: darken($blog-comment-border-color, 5%)
+$blog-admin-comment-text-color: $purple-dark
+
+// Blog create comment colors
 $blog-create-comment-background: lighten($gray-light, 5%)
 $blog-create-comment-border-color: $gray-light
 
+// Blog input controls
 $blog-comment-input-background: $white
 $blog-comment-input-border-color: $gray-light
 $blog-comment-input-text-color: $gray-text
@@ -102,10 +120,7 @@ $blog-comment-input-error-color: $red-dark
 $blog-comment-button-background: $purple-dark
 $blog-comment-button-text-color: $white
 
-$blog-admin-comment-background: lighten($gray-light, 5%)
-$blog-admin-comment-border-color: $purple-dark
-$blog-admin-comment-text-color: $purple-dark
-
+// Syntax highlighting
 $blog-code-background: lighten($gray-light, 10%)
 $blog-code-border-color: $gray-light
 $blog-code-comment-color: lighten($gray-medium, 10%)
