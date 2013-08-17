@@ -6,13 +6,19 @@ body
   height: auto
   overflow: visible
 
+
+
 .loading-overlay
   display: none
+
+
 
 .blinds-wrapper
   +position(relative, auto, auto, auto, auto)
   height: auto
   overflow: visible
+
+
 
 .blind
   +position(relative, auto, auto, auto, auto)
@@ -36,10 +42,28 @@ body
   +position(relative, auto, auto, auto, auto)
   overflow: hidden
 
-  .column
-    width: 47.9%
-    margin-right: 0
-    padding: 0
 
-    &:first-child
-      margin-right: 4%
+
+.blind-content
+  padding: $margin 0
+
+  .row
+    overflow: hidden
+    padding: 0 0 0 2%
+
+    .column
+      display: inline
+      margin: 0 2% 0 0
+      padding: 0
+
+      &.full
+        width: 96%
+
+      &.two-third
+        width: 63.3333%
+
+      &.half
+        width: 47%
+
+      &.third
+        width: 30.6667%

@@ -196,3 +196,18 @@
   text-shadow: 0px 3px 5px $blind-header-text-shadow-color
   line-height: $header-font-size
   +type-pad-bottom
+
+=row-column($width)
+  width: $width
+  padding: 0 $margin 0 0
+
+  &:last-child
+    padding: 0
+
+  +breakpoint('tiny')
+    width: 100%
+    margin: 0 0 $margin 0
+    padding: 0 !important // Override nth-child specificity
+
+    &:last-child
+      margin: 0

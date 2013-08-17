@@ -129,41 +129,16 @@ $total-blinds: <%= APP_CONFIG.total_blinds %>
     +box-sizing-border-box
 
     &.full
-      width: 100%
+      +row-column(100%)
 
     &.two-third
-      width: 66.66666%
-
-      +breakpoint('tiny')
-        width: 100%
-
-    &.third
-      width: 33.33333%
-
-      +breakpoint('tiny')
-        width: 100%
+      +row-column(66.66666%)
 
     &.half
-      width: 50%
+      +row-column(50%)
 
-      &:nth-child(odd)
-        padding: 0 ($margin / 2) 0 0
-
-      &:nth-child(even)
-        padding: 0 0 0 ($margin / 2)
-
-      +breakpoint('tiny')
-        width: 100%
-        margin: 0 0 $margin 0
-
-        &:nth-child(odd)
-          padding: 0
-
-        &:nth-child(even)
-          padding: 0
-
-        &:last-child
-          margin: 0
+    &.third
+      +row-column(33.33333%)
 
 
 
