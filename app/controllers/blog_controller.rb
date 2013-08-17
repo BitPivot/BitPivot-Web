@@ -30,7 +30,7 @@ class BlogController < ApplicationController
 
   def author
     if @action_params_valid
-      @page_posts = @posts.select { |p| p.author.slice(0..(p.author.rindex(' ')-1)).downcase == params[:author] }
+      @page_posts = unescape_posts(BlogPost.where(author: to_full_author_name(params[:author])))
       render :index
       return
     end
@@ -106,13 +106,17 @@ class BlogController < ApplicationController
     @page_size = APP_CONFIG.blog_posts_per_page
     @page = params[:page].nil? ? 1 : Integer(params[:page])
     @posts = BlogPost.all
-    @posts.each do |p|
-      unescape_post(p)
-    end
+    unescape_posts(@posts)
   end
 
   def get_max_comment_depth
     @max_comment_depth = APP_CONFIG.max_comment_reply_depth
+  end
+
+  def unescape_posts(posts)
+    posts.each do |p|
+      unescape_post(p)
+    end
   end
 
   def unescape_post(post)
@@ -131,6 +135,7 @@ class BlogController < ApplicationController
       valid = BlogPost.exists?(file_name: "#{params[:file_name]}.html.erb") if valid
     when 'author'
       valid = params_present? [:author]
+      valid = to_full_author_name params[:author] != ''
     when 'year'
       param_keys = [:year]
       valid = false unless params_present? param_keys
@@ -151,6 +156,19 @@ class BlogController < ApplicationController
     present = true
     param_keys.each do |key| present = false if params[key].nil? end
     present
+  end
+
+  def to_full_author_name(first_name)
+    name = ''
+    case first_name
+      when 'sean'
+        name = 'Sean Kennedy'
+      when 'rob'
+        name = 'Robert Hencke'
+      when 'matthew'
+        name = 'Matthew McMillion'
+    end
+    name
   end
 
   def post_not_found
