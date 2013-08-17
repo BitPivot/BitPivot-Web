@@ -39,6 +39,7 @@ class BlogController < ApplicationController
 
   def year
     if @action_params_valid
+      year = Integer(params[:year])
       @page_posts = @posts.select { |p| p.year == year }
       render :index
       return
@@ -122,7 +123,7 @@ class BlogController < ApplicationController
     post
   end
 
-  def validate_params()
+  def validate_params
     valid = true
     case params[:action]
     when 'view_post'

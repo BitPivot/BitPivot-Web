@@ -40,14 +40,14 @@ $total-blinds: <%= APP_CONFIG.total_blinds %>
     line-height: $blind-collapsed-height
     vertical-align: middle
     text-align: center
-    +font($blind-header-font-size, $blind-header-text-color, 'pragmatica-extra-light')
+    +font($blind-header-font-size, $blind-header-text-color, $blind-header-font)
     text-shadow: 0px 3px 5px $blind-header-text-shadow-color
     +drop-shadow(20px)
 
     +breakpoint('tiny')
       height: $blind-collapsed-height-tiny
       line-height: $blind-collapsed-height-tiny
-      +font($blind-header-font-size-tiny, $blind-header-text-color, 'pragmatica-extra-light')
+      +font($blind-header-font-size-tiny, $blind-header-text-color, $blind-header-font)
 
 
 
@@ -69,7 +69,7 @@ $total-blinds: <%= APP_CONFIG.total_blinds %>
     +position(absolute, auto, 0, 0, 0)
     padding: $margin / 2
     +background-rgba-fallback($blind-banner-text-background-color)
-    +font($header-font-size, $blind-banner-text-color, 'pragmatica-extra-light')
+    +font($header-font-size, $blind-banner-text-color, $blind-banner-font)
     text-align: center
 
     +breakpoint('wide')
@@ -93,17 +93,17 @@ $total-blinds: <%= APP_CONFIG.total_blinds %>
 
 .blind-content
   padding: $margin
-  +font($page-font-size, $blind-content-text-color, 'pragmatica-light')
+  +font($page-font-size, $blind-content-text-color, $blind-content-font)
   line-height: $page-line-height
 
   h1
-    +font($header-font-size, $blind-content-header-text-color, 'pragmatica-extra-light')
+    +font($header-font-size, $blind-content-header-text-color, $blind-content-header-font)
     line-height: $header-font-size
     +h-border
     +type-pad-bottom
 
   h2
-    +font($header-font-size * 0.75, $blind-content-header-text-color, 'pragmatica-extra-light')
+    +font($header-font-size * 0.75, $blind-content-header-text-color, $blind-content-header-font)
     line-height: $header-font-size
     +h-border
     +type-pad-bottom

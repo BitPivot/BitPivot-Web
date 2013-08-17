@@ -4,23 +4,20 @@
     = f.hidden_field :respond_to_id, value: respond_to_id
 
     .create-comment-author-email
-      = f.text_field \
-        :author,
+      = f.text_field :author,
         placeholder: flash[:author_placeholder] || 'Your name',
         class: "input-text #{flash[:author_class]}",
         value: flash[:author]
 
-      = f.text_field \
-        :email,
+      = f.text_field :email,
         placeholder: flash[:email_placeholder] || 'Your email',
         class: "input-text #{flash[:email_class]}",
         value: flash[:email]
 
     .create-comment-content
-      = f.text_area \
-        :content,
+      = f.text_area :content,
         placeholder: flash[:content_placeholder] || (respond_to_id ? 'Your reply...' : 'Your contribution...'),
-        class: "create-comment-body input-text #{flash[:content_class]}",
+        class: 'create-comment-body input-text #{flash[:content_class]}',
         value: flash[:content]
 
     = f.submit respond_to_id ? 'Post a Reply' : 'Post a New Comment', class: 'button'

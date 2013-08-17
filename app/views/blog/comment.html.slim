@@ -2,17 +2,18 @@
 
   .comment-header Written by <em>#{comment.author}</em> on #{comment.formatted_date}
 
-  .comment-content = simple_format(comment.content)
+  .comment-area class='#{comment.has_responses ? 'has-responses' : ''}'
+    .comment-content = simple_format(comment.content)
 
-  - if respond_to_id == comment.id
-    #respond.respond-to-comment
-      = render template: 'blog/create_comment', locals: { post: post, respond_to_id: respond_to_id }
+    - if respond_to_id == comment.id
+      #respond.respond-to-comment
+        = render template: 'blog/create_comment', locals: { post: post, respond_to_id: respond_to_id }
 
-  - elsif depth < @max_comment_depth
-    .respond-to-link
-      = link_to 'Reply to this Comment', comment.respond_to_comment_url(post.id) , method: 'post'
+    - elsif depth < @max_comment_depth
+      .respond-to-link
+        = link_to 'Reply to this Comment', comment.respond_to_comment_url(post.id) , method: 'post'
 
-  - if comment.blog_post_comments.length > 0
-    .responses
-      - for response in comment.blog_post_comments.each
-        = render template: 'blog/comment', locals: { depth: depth + 1, post: post, comment: response, respond_to_id: defined?(respond_to_id) ? respond_to_id : nil }
+    - if comment.has_responses
+      .responses
+        - for response in comment.blog_post_comments
+          = render template: 'blog/comment', locals: { depth: depth + 1, post: post, comment: response, respond_to_id: defined?(respond_to_id) ? respond_to_id : nil }

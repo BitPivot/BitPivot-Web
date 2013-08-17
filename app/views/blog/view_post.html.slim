@@ -12,7 +12,9 @@ article.post
 
     .post-metadata
       ul
-        li By #{link_to post.author, post.author_url} on #{post.formatted_date}
+        li
+          | By #{link_to post.author, post.author_url} on
+          = render inline: post.formatted_date
 
         - if post.approved_comments.length > 0
           li |
@@ -29,8 +31,7 @@ article.post
         span.no-comments There are currently no comments.
 
       - for comment in post.top_level_comments
-        = render \
-          template: 'blog/comment',
+        = render template: 'blog/comment',
           locals: { depth: 1, post: post, comment: comment, respond_to_id: defined?(respond_to_id) ? respond_to_id : nil }
 
     section.create-comment

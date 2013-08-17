@@ -14,5 +14,5 @@
               = render inline: simple_format(comment.content)
               br
 
-          input.btn-approve-comment type='button' value='Approve' onclick="location.href='<%= comment.approval_url %>'"
-          input.btn-delete-comment type='button' value='Delete' onclick="location.href='<%= comment.deletion_url %>'"
+          input.btn-approve-comment type='button' value='Approve' onclick="location.href='#{comment.approval_url}'"
+          input.btn-delete-comment type='button' value='Delete' onclick="location.href='#{comment.deletion_url}'"

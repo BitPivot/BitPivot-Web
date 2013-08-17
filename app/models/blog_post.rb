@@ -1,4 +1,6 @@
 class BlogPost < ActiveRecord::Base
+  include ActionView::Helpers::UrlHelper
+
   attr_accessible :file_name, :title, :subtitle, :author, :year, :month, :day,
                   :categories, :body, :md5_hash, :banner_image
 
@@ -13,7 +15,12 @@ class BlogPost < ActiveRecord::Base
   end
 
   def formatted_date
-    "#{Date::MONTHNAMES[self.month]} #{self.day}, #{self.year}"
+    year_link = "/blog/#{self.year}"
+    month_link = "#{year_link}/#{self.month}"
+    day_link = "#{month_link}/#{self.day}"
+    date = " #{link_to Date::MONTHNAMES[self.month], month_link} "
+    date << "#{link_to self.day, day_link}, "
+    date << "#{link_to self.year, year_link}"
   end
 
   def top_level_comments
@@ -21,7 +28,7 @@ class BlogPost < ActiveRecord::Base
   end
 
   def approved_comments
-    self.blog_post_comments.where(:approved => true)
+    self.blog_post_comments.where(approved: true)
   end
 
   def md5

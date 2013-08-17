@@ -6,7 +6,7 @@ body
   max-width: $blog-post-max-width
   margin: $margin * 2 auto
   background: $blog-page-background
-  +font($blog-font-size, $blog-text-color, 'pragmatica-light')
+  +font($blog-font-size, $blog-text-color, $blog-font)
   line-height: $blog-line-height
 
   em
@@ -39,7 +39,7 @@ header
     padding: $margin * 2
 
     h1
-      +font($blog-title-font-size, $blog-title-text-color, 'pragmatica-extra-light')
+      +font($blog-title-font-size, $blog-title-text-color, $blog-header-font)
       line-height: $blog-title-font-size
 
     p
@@ -50,7 +50,7 @@ header
 
 .post-area
   padding: $margin * 2
-  +font($blog-font-size, $blog-text-color, 'pragmatica-light')
+  +font($blog-font-size, $blog-text-color)
   line-height: $blog-line-height
 
 
@@ -63,11 +63,11 @@ header
     text-decoration: none !important
 
   h1
-    +font($blog-title-font-size, $blog-title-text-color, 'pragmatica-extra-light')
+    +font($blog-title-font-size, $blog-title-text-color, $blog-header-font)
     line-height: $blog-title-font-size
 
   h2
-    +font($blog-title-font-size * 0.75, $blog-title-text-color, 'pragmatica-extra-light')
+    +font($blog-title-font-size * 0.75, $blog-title-text-color, $blog-header-font)
     line-height: $blog-title-font-size
     +type-pad-bottom
 
@@ -86,25 +86,15 @@ header
 
 
 
-=post-header($font-size-modifier)
-  padding: $margin / 2
-  margin: ($margin * 2) 0
-  +gradient-radial($blog-header-background)
-  font-size: $blog-header-font-size * $font-size-modifier
-  color: $blog-header-text-color
-  text-shadow: 0px 3px 5px $blind-header-text-shadow-color
-  line-height: $header-font-size
-  +type-pad-bottom
-
 .post-body
   h1
-    +post-header(1)
+    +blog-post-header(1)
 
   h2
-    +post-header(0.8)
+    +blog-post-header(0.8)
 
   h3
-    +post-header(0.65)
+    +blog-post-header(0.65)
 
   p
     text-align: justify
@@ -114,7 +104,7 @@ header
     margin: $margin 0
     padding: $margin / 2
     background: $blog-code-background
-    +font($blog-font-size, $blog-text-color, 'source-code-pro-regular')
+    +font($blog-font-size, $blog-text-color, $blog-code-font)
     line-height: $blog-line-height
     border: 1px solid $blog-code-border-color
     overflow: scroll
@@ -143,18 +133,22 @@ header
   .comment
     margin-bottom: $margin / 2
     padding: $margin / 2
+    background: $blog-comment-background
+    color: $blog-comment-text-color
 
     &:last-child
       margin-bottom: 0
 
     .comment-header
-      margin-bottom: $margin / 4
       font-size: 0.8em
       color: $blog-post-metadata-text-color
+      border-bottom: 1px solid $blog-comment-border-color
+
+    .has-responses
+      border-left: 1px solid $blog-comment-border-color
 
     .comment-content
-      padding: $margin / 2
-      border-top: 1px solid $blog-comment-border-color
+      padding: $margin ($margin / 2)
 
       p
         +type-pad-bottom
@@ -166,12 +160,16 @@ header
     &.admin
       background: $blog-admin-comment-background
       color: $blog-admin-comment-text-color
-      border-color: $blog-admin-comment-border-color
+
+      > .has-responses
+        border-color: $blog-admin-comment-border-color
+
+      > .comment-header
+        border-color: $blog-admin-comment-border-color
 
   .responses
-    padding-left: $margin
+    padding-left: $margin / 2
     margin-top: $margin
-    border-left: 1px solid $blog-comments-border-color
 
 
 
@@ -196,7 +194,7 @@ header
   .input-text
     margin: 0 ($margin / 2) ($margin / 2) 0
     padding: $margin / 4
-    +font(0.8em, $blog-comment-input-text-color, 'pragmatica-light')
+    +font(0.8em, $blog-comment-input-text-color, $blog-input-font)
     background: $blog-comment-input-background
     border: 1px solid $blog-comment-input-border-color
     resize: none
@@ -206,7 +204,7 @@ header
   .button
     margin: 0
     padding: $margin / 2
-    +font(1em, $blog-comment-button-text-color, 'pragmatica-extra-light')
+    +font(1em, $blog-comment-button-text-color, $blog-button-font)
     background: $blog-comment-button-background
     border: none
     cursor: pointer

@@ -16,7 +16,6 @@ categories:
 
 <!-- Paste contents of <body> from Mou exported html file below -->
 
-
 <p>Development with Ruby on Rails can be a very productive and rewarding experience, but it has gained a reputation among the development community as being very painful to initially set up, especially if you are using Rails for the first time. A recent factory reset on OSX Lion means coaxing Ruby 2 and Rails 4 to play nicely with each other once again, so I’ve decided to take some extra time and document each step along the way for reference.  The result should be a working rails project.</p>
 
 <h2>Step 1: Homebrew</h2>
@@ -39,7 +38,7 @@ categories:
 
 <p>Running <code>brew doctor</code> again reveals another warning that <code>/usr/bin</code> occurs before <code>/usr/local/bin</code>.  To fix this error, add the following to <code>~/.profile</code></p>
 
-<pre><code class='python'>homebrew=/usr/local/bin:/usr/local/sbin
+<pre><code class='shell'>homebrew=/usr/local/bin:/usr/local/sbin
 export PATH=$homebrew:$PATH
 </code></pre>
 
