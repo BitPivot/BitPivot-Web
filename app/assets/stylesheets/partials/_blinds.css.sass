@@ -163,6 +163,21 @@ body
 
 
 
+button
+  padding: $margin / 2
+  margin: 0
+  +gradient-vertical($call-to-action-button-background)
+  border: 2px solid lighten($call-to-action-button-background, 3%)
+  border-radius: 6px
+  +font($call-to-action-button-font-size, $call-to-action-button-text-color, $call-to-action-button-font)
+  cursor: pointer
+
+  &:hover
+    +gradient-vertical(lighten($call-to-action-button-background, 5%))
+    border-color: lighten($call-to-action-button-background, 6%)
+
+
+
 .infographic-device-market-share
   +position(relative)
   +sprite('infographic-device-market-share', 275px, 275px)
