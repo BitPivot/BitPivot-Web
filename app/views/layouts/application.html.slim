@@ -10,6 +10,9 @@ html lang='en'
       = javascript_include_tag 'application-fallback-ie'
       = stylesheet_link_tag 'application-fallback', media: 'all'
 
+    /[if IE 6]
+      = stylesheet_link_tag 'application-fallback-ie6', media: 'all'
+
     noscript
       = stylesheet_link_tag 'application-fallback', media: 'all'
 

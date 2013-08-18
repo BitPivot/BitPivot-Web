@@ -97,7 +97,7 @@ body
     +position(absolute, auto, 0, 0, 0)
     padding: $margin / 2
     +background-rgba-fallback($blind-banner-text-background-color)
-    +font($header-font-size, $blind-banner-text-color, $blind-banner-font)
+    +font($page-header-font-size, $blind-banner-text-color, $blind-banner-font)
     +box-sizing-border-box
     text-align: center
 
@@ -121,12 +121,12 @@ body
   +font($page-font-size, $blind-content-text-color, $blind-content-font)
 
   h1
-    +font($header-font-size, $blind-content-header-text-color, $blind-content-header-font)
+    +font($page-header-font-size, $blind-content-header-text-color, $blind-content-header-font)
     +h-border
     +type-pad-bottom
 
   h2
-    +font($header-font-size * 0.75, $blind-content-header-text-color, $blind-content-header-font)
+    +font($page-header-font-size * 0.75, $blind-content-header-text-color, $blind-content-header-font)
     +h-border
     +type-pad-bottom
 

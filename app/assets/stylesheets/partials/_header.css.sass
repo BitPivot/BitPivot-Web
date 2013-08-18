@@ -7,6 +7,7 @@ header
   height: $page-header-height
   line-height: $page-header-height
   background: $header-background-color
+  +font($header-font-size, $header-text-color, $header-font)
   vertical-align: middle
   z-index: 1000
   +drop-shadow(10px)
@@ -44,14 +45,36 @@ header
     padding-left: 5px
 
   li
-    margin-right: $margin / 2
+    margin-right: $margin
     position: relative
     display: inline
     text-decoration: none
-    font-size: 30px
+    +font-size(30px)
     top: 4px
+    vertical-align: middle
 
     +breakpoint('tiny')
       top: 3px
       font-size: 21px
       margin-right: 10px
+
+    .description
+      position: relative
+      top: -9px
+      +font-size($header-font-size)
+      margin: 0 ($margin / 2)
+
+      &.short
+        display: none
+
+      +breakpoint('narrow')
+        display: none
+
+        &.short
+          display: inline
+
+      +breakpoint('tiny')
+        display: none
+
+        &.short
+          display: none
