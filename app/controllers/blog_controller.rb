@@ -72,7 +72,7 @@ class BlogController < ApplicationController
   end
 
   def create_comment
-    id = Integer(params[:id])
+    id = Integer(params[:comment][:post_id])
     post = BlogPost.find(id)
 
     # TODO: don't use mass assignment
@@ -88,12 +88,16 @@ class BlogController < ApplicationController
     end
     post.blog_post_comments << comment
     post.save
-    CommentMailer.new_comment_notification(comment).deliver
-    render template: 'blog/comment_confirmation', locals: {
-      post: unescape_post(post),
-      comment: comment,
-      respond_to_id: nil
-    }
+    begin
+      CommentMailer.new_comment_notification(comment).deliver
+    rescue
+    ensure
+      render template: 'blog/comment_confirmation', locals: {
+        post: unescape_post(post),
+        comment: comment,
+        respond_to_id: nil
+      }
+    end
   end
 
   def respond_to_comment
