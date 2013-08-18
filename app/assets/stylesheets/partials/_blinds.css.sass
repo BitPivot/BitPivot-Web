@@ -67,14 +67,12 @@
     padding: $margin / 2
     +background-rgba-fallback($blind-banner-text-background-color)
     +font($header-font-size, $blind-banner-text-color, $blind-banner-font)
+    +box-sizing-border-box
     text-align: center
-
-    +breakpoint('wide')
-      padding: $margin * 0.75
-      font-size: $header-font-size * 1.5
 
     +breakpoint('tiny')
       font-size: $page-font-size
+      line-height: $page-line-height
 
 
 
