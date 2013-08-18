@@ -2,7 +2,7 @@
 
 
 
-// Media Queries
+// Breakpoints
 =breakpoint($media)
   @if $media == "tiny"
     @media (max-width: $breakpoint-tiny)
@@ -136,7 +136,7 @@
 
 
 
-// Font faces (via TypeKit)
+// Font stacks
 =font($font-size, $font-color, $font-family: false)
   font-size: $font-size
   color: $font-color
@@ -168,15 +168,11 @@
   padding-bottom: $margin / 4
   border-bottom: $blind-content-header-border-width solid $blind-content-header-border-color
 
-
-
 =type-pad-bottom
   margin-bottom: $margin
 
   &:last-child
     margin-bottom: 0
-
-
 
 =placeholder-text($color)
   &::-webkit-input-placeholder
@@ -191,8 +187,6 @@
   &:-ms-input-placeholder
     color: $color
 
-
-
 =blog-post-header($font-size-modifier)
   padding: $margin / 2
   margin: ($margin * 2) 0
@@ -202,8 +196,6 @@
   text-shadow: 0px 3px 5px $blind-header-text-shadow-color
   line-height: $header-font-size
   +type-pad-bottom
-
-
 
 =row-column($width)
   width: $width
@@ -219,8 +211,6 @@
 
     &:last-child
       margin: 0
-
-
 
 =blind($class, $index, $header-color, $banner-image, $image-position)
   .blind#{$class}
