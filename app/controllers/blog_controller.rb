@@ -97,7 +97,6 @@ class BlogController < ApplicationController
   end
 
   def respond_to_comment
-    # Add post_id and respond_to_id to params_valid?
     post = @posts.select { |p| p.id == Integer(params[:post_id]) }.shift
     render template: 'blog/view_post', locals: { post: post, respond_to_id: Integer(params[:respond_to_id]), hide_comments: false }
   end
@@ -151,6 +150,10 @@ class BlogController < ApplicationController
       param_keys.each do |key| valid = false unless params[key].is_i? end
     when 'create_comment'
       param_keys = [:id]
+      valid = false unless params_present? param_keys
+    when 'respond_to_comment'
+      param_keys = [:post_id, :respond_to_id]
+      valid = false unless params_present? params_keys
     end
     @action_params_valid = valid
   end
