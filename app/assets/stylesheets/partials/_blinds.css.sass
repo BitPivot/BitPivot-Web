@@ -2,10 +2,6 @@
 
 
 
-$total-blinds: <%= APP_CONFIG.total_blinds %>
-
-
-
 .blinds-wrapper
   +position(absolute, $page-header-height, 0, 0, 0)
 
@@ -66,6 +62,7 @@ $total-blinds: <%= APP_CONFIG.total_blinds %>
     height: $blind-banner-height-tiny
 
   span
+    width: 100%
     +position(absolute, auto, 0, 0, 0)
     padding: $margin / 2
     +background-rgba-fallback($blind-banner-text-background-color)
@@ -128,59 +125,73 @@ $total-blinds: <%= APP_CONFIG.total_blinds %>
     +box-sizing-border-box
 
     &.full
-      width: 100%
+      +row-column(100%)
+
+    &.two-third
+      +row-column(66.66666%)
 
     &.half
-      width: 50%
+      +row-column(50%)
 
-      &:nth-child(odd)
-        padding: 0 ($margin / 2) 0 0
-
-      &:nth-child(even)
-        padding: 0 0 0 ($margin / 2)
-
-      +breakpoint('tiny')
-        width: 100%
-        margin: 0 0 $margin 0
-
-        &:nth-child(odd)
-          padding: 0
-
-        &:nth-child(even)
-          padding: 0
-
-        &:last-child
-          margin: 0
+    &.third
+      +row-column(33.33333%)
 
 
 
-=blind($class, $index, $header-color, $banner-image, $image-position)
-  .blind#{$class}
-    top: percentage((1 / $total-blinds) * $index)
-    z-index: 100 + ($total-blinds - $index)
+p.headline
+  color: $blind-content-headline-color
+  padding: ($margin / 2) ($margin * 4)
+  text-align: justify
+  font-size: 1.25em
+  line-height: 1.35em
 
-  .blind#{$class} header
-    +gradient-radial($header-color)
+  +breakpoint('narrow')
+    padding: ($margin / 2) ($margin * 2)
 
-    &:hover
-      +gradient-radial(lighten($header-color, 1%))
-      font-size: $blind-header-font-size * 1.1
+  +breakpoint('tiny')
+    padding: 0
 
-      +breakpoint('tiny')
-        font-size: $blind-header-font-size-tiny * 1.1
+em
+  font-style: italic
 
-  .blind#{$class}.expanded header
-    &:hover
-      +gradient-radial($header-color)
-      font-size: $blind-header-font-size
 
-      +breakpoint('tiny')
-        font-size: $blind-header-font-size-tiny
 
-  .blind#{$class} .blind-banner
-    @if $banner-image
-      background-image: image-url($banner-image)
-      background-position: $image-position
+.infographic-device-market-share
+  +position(relative)
+  +sprite('infographic-device-market-share', 275px, 275px)
+
+  .caption
+    +position(absolute, 65px, 65px, auto, 65px)
+    color: $infographic-caption-text-color
+    text-align: center
+
+  .legend
+    +position(absolute, auto, 65px, 65px, 65px)
+
+    li
+      margin: 0 0 5px 0
+
+      .key
+        margin: 0 5px 0 0
+        float: left
+        height: $page-line-height
+        width: $page-line-height
+
+      .description
+        height: $page-line-height
+        line-height: $page-line-height
+        vertical-align: middle
+
+    .smartphone .key
+      background-color: $infographic-key-purple-light
+
+    .tablet .key
+      background-color: $infographic-key-purple-dark
+
+    .pc .key
+      background-color: $infographic-key-gray-dark
+
+
 
 +blind('.our-philosophy',          0, $blind-header-background-color-1, 'blind-our-philosophy-background.jpg',          70% 30%)
 +blind('.mobile-and-web-presence', 1, $blind-header-background-color-2, 'blind-mobile-and-web-presence-background.jpg', 50% 50%)
