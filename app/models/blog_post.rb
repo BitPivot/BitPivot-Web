@@ -1,13 +1,13 @@
 class BlogPost < ActiveRecord::Base
   include ActionView::Helpers::UrlHelper
 
-  attr_accessible :file_name, :title, :subtitle, :author, :year, :month, :day,
+  attr_accessible :id, :file_name, :title, :subtitle, :author, :year, :month, :day,
                   :categories, :body, :md5_hash, :banner_image
 
   has_many :blog_post_comments
 
   def post_url
-    "/blog/posts/#{self.file_name.slice(0..(self.file_name.index('.')-1))}"
+    "/blog/posts/#{self.id}-#{self.file_name.slice(0..(self.file_name.index('.')-1))}"
   end
 
   def author_url

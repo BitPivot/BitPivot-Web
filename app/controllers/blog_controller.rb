@@ -21,8 +21,8 @@ class BlogController < ApplicationController
 
   def view_post
     if @action_params_valid
-      p = BlogPost.find_by(file_name: "#{params[:file_name]}.html.erb")
-      post = unescape_post(p)
+      id = Integer(params[:id])
+      post = unescape_post(BlogPost.find(id))
       render locals: { post: post, hide_comments: false }
       return
     end
@@ -72,7 +72,10 @@ class BlogController < ApplicationController
   end
 
   def create_comment
-    post = BlogPost.find_by(file_name: params[:comment][:post_file_name])
+    id = Integer(params[:id])
+    post = BlogPost.find(id)
+
+    # TODO: don't use mass assignment
     comment = BlogPostComment.new(params[:comment])
     unless comment.valid?
       # get hash with full error messages
@@ -94,6 +97,7 @@ class BlogController < ApplicationController
   end
 
   def respond_to_comment
+    # Add post_id and respond_to_id to params_valid?
     post = @posts.select { |p| p.id == Integer(params[:post_id]) }.shift
     render template: 'blog/view_post', locals: { post: post, respond_to_id: Integer(params[:respond_to_id]), hide_comments: false }
   end
@@ -128,8 +132,8 @@ class BlogController < ApplicationController
     valid = true
     case params[:action]
     when 'view_post'
-      valid = params_present? [:file_name]
-      valid = BlogPost.exists?(file_name: "#{params[:file_name]}.html.erb") if valid
+      valid = params_present? [:id]
+      valid = BlogPost.exists?(params[:id]) if valid
     when 'author'
       valid = params_present? [:author]
       valid = to_full_author_name params[:author] != ''
@@ -145,6 +149,8 @@ class BlogController < ApplicationController
       param_keys = [:year,:month,:day]
       valid = false unless params_present? param_keys
       param_keys.each do |key| valid = false unless params[key].is_i? end
+    when 'create_comment'
+      param_keys = [:id]
     end
     @action_params_valid = valid
   end
