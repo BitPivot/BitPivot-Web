@@ -1,6 +1,6 @@
 #create-comment.create-comment-area
   = form_for :comment, url: '/blog/create_comment', method: 'post' do |f|
-    = f.hidden_field :post_file_name, value: post.file_name
+    = f.hidden_field :post_id, value: post.id
     = f.hidden_field :respond_to_id, value: respond_to_id
 
     .create-comment-author-email
