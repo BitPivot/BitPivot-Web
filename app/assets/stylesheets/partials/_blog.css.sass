@@ -2,6 +2,11 @@
 
 
 
+html
+  font-size: $blog-font-size
+
+
+
 body
   max-width: $blog-post-max-width
   margin: $margin * 2 auto
@@ -40,7 +45,6 @@ header
 
     h1
       +font($blog-title-font-size, $blog-title-text-color, $blog-header-font)
-      line-height: $blog-title-font-size
 
     p
       margin: $margin 0
@@ -51,7 +55,6 @@ header
 .post-area
   padding: $margin * 2
   +font($blog-font-size, $blog-text-color)
-  line-height: $blog-line-height
 
 
 
@@ -64,11 +67,9 @@ header
 
   h1
     +font($blog-title-font-size, $blog-title-text-color, $blog-header-font)
-    line-height: $blog-title-font-size
 
   h2
     +font($blog-title-font-size * 0.75, $blog-title-text-color, $blog-header-font)
-    line-height: $blog-title-font-size
     +type-pad-bottom
 
 
@@ -76,7 +77,7 @@ header
 .post-metadata
   margin-bottom: $margin
   padding-bottom: $margin
-  font-size: 0.8em
+  +font-size($blog-metadata-font-size)
   color: $blog-post-metadata-text-color
   border-bottom: 1px solid $blog-post-border-color
 
@@ -105,7 +106,6 @@ header
     padding: $margin / 2
     background: $blog-code-background
     +font($blog-font-size, $blog-text-color, $blog-code-font)
-    line-height: $blog-line-height
     border: 1px solid $blog-code-border-color
     overflow-x: auto
     +type-pad-bottom
@@ -123,8 +123,7 @@ header
 
   h1
     margin: ($margin / 2) 0 ($margin * 1.5) ($margin / 2)
-    font-size: $blog-header-font-size
-    line-height: $header-font-size
+    +font-size($blog-header-font-size)
     color: $blog-title-text-color
 
   .no-comments
@@ -140,7 +139,7 @@ header
       margin-bottom: 0
 
     .comment-header
-      font-size: 0.8em
+      +font-size($blog-metadata-font-size)
       color: $blog-post-metadata-text-color
       border-bottom: 1px solid $blog-comment-border-color
 
@@ -155,7 +154,7 @@ header
 
     .respond-to-link
       padding-left: $margin / 2
-      font-size: 0.8em
+      +font-size($blog-metadata-font-size)
 
     &.admin
       background: $blog-admin-comment-background
@@ -180,8 +179,7 @@ header
 
   h1
     margin-bottom: $margin * 2
-    font-size: $blog-header-font-size
-    line-height: $header-font-size
+    +font-size($blog-header-font-size)
     color: $blog-title-text-color
 
 .respond-to-comment
@@ -194,7 +192,7 @@ header
   .input-text
     margin: 0 ($margin / 2) ($margin / 2) 0
     padding: $margin / 4
-    +font(0.8em, $blog-comment-input-text-color, $blog-input-font)
+    +font($blog-font-size, $blog-comment-input-text-color, $blog-input-font)
     background: $blog-comment-input-background
     border: 1px solid $blog-comment-input-border-color
     resize: none
@@ -204,7 +202,7 @@ header
   .button
     margin: 0
     padding: $margin / 2
-    +font(1em, $blog-comment-button-text-color, $blog-button-font)
+    +font($blog-font-size, $blog-comment-button-text-color, $blog-button-font)
     background: $blog-comment-button-background
     border: none
     cursor: pointer

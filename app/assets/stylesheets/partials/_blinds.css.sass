@@ -2,6 +2,37 @@
 
 
 
+html
+  height: 100%
+  -webkit-text-size-adjust: none
+  font-size: $page-font-size
+
+body
+  position: relative
+  background: $page-background-color
+  height: 100%
+  overflow-y: hidden
+  line-height: $page-line-height
+
+
+
+.transition-preload *
+  -webkit-transition: none !important
+  -moz-transition: none !important
+  -ms-transition: none !important
+  -o-transition: none !important
+  transition: none !important
+
+
+
+.loading-overlay
+  +position(absolute, 0, 0, 0, 0)
+  background: $page-background-color image-url('bitpivot-loading-logo.png') no-repeat center center
+  background-size: 310px 84px
+  z-index: 10000
+
+
+
 .blinds-wrapper
   +position(absolute, $page-header-height, 0, 0, 0)
 
@@ -71,8 +102,7 @@
     text-align: center
 
     +breakpoint('tiny')
-      font-size: $page-font-size
-      line-height: $page-line-height
+      +font-size($page-font-size)
 
 
 
@@ -89,17 +119,14 @@
 .blind-content
   padding: $margin
   +font($page-font-size, $blind-content-text-color, $blind-content-font)
-  line-height: $page-line-height
 
   h1
     +font($header-font-size, $blind-content-header-text-color, $blind-content-header-font)
-    line-height: $header-font-size
     +h-border
     +type-pad-bottom
 
   h2
     +font($header-font-size * 0.75, $blind-content-header-text-color, $blind-content-header-font)
-    line-height: $header-font-size
     +h-border
     +type-pad-bottom
 
@@ -136,24 +163,6 @@
 
 
 
-p.headline
-  color: $blind-content-headline-color
-  padding: ($margin / 2) ($margin * 4)
-  text-align: justify
-  font-size: 1.25em
-  line-height: 1.35em
-
-  +breakpoint('narrow')
-    padding: ($margin / 2) ($margin * 2)
-
-  +breakpoint('tiny')
-    padding: 0
-
-em
-  font-style: italic
-
-
-
 .infographic-device-market-share
   +position(relative)
   +sprite('infographic-device-market-share', 275px, 275px)
@@ -167,21 +176,23 @@ em
     +position(absolute, auto, 65px, 65px, 65px)
 
     li
-      height: $page-line-height
       margin: 0 0 5px 0
       clear: both
+      height: $page-font-size
+      vertical-align: middle
+      line-height: 1
 
       .key
         margin: 0 5px 0 0
         float: left
-        height: $page-line-height
-        width: $page-line-height
+        height: $page-font-size
+        width: $page-font-size
 
       .description
         float: left
-        height: $page-line-height
-        line-height: $page-line-height
+        height: $page-font-size
         vertical-align: middle
+
 
     .smartphone .key
       background-color: $infographic-key-purple-light
