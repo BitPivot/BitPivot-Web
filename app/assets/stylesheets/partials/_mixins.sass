@@ -82,13 +82,24 @@
   @if not $end
     $end: darken($start, 5%)
 
-  background: $start
+  background-image: $start
   background-image: -ms-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
   background-image: -moz-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
   background-image: -o-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
   background-image: -webkit-gradient(radial, center center, 0, center center, 497, color-stop(0, $start), color-stop(1, $end))
   background-image: -webkit-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
   background-image: radial-gradient(circle farthest-corner at center, $start 0%, $end 100%)
+
+=gradient-vertical($start, $end: false)
+  @if not $end
+    $end: darken($start, 5%)
+
+  background-image: $start
+  background-image: -moz-linear-gradient(top,  $start 0%, $end 100%)
+  background-image: -webkit-linear-gradient(top,  $start 0%, $end 100%)
+  background-image: -o-linear-gradient(top,  $start 0%, $end 100%)
+  background-image: -ms-linear-gradient(top,  $start 0%, $end 100%)
+  background-image: linear-gradient(to bottom,  $start 0%, $end 100%)
 
 
 
