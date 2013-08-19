@@ -80,6 +80,7 @@ BitPivot::Application.configure do
 
 
   # SMTP configuration (SendGrid)
+  config.action_mailer.raise_delivery_errors = false
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
