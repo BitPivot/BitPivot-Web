@@ -88,16 +88,12 @@ class BlogController < ApplicationController
     end
     post.blog_post_comments << comment
     post.save
-    begin
-      CommentMailer.new_comment_notification(comment).deliver
-    rescue
-    ensure
-      render template: 'blog/comment_confirmation', locals: {
-        post: unescape_post(post),
-        comment: comment,
-        respond_to_id: nil
-      }
-    end
+    CommentMailer.new_comment_notification(comment).deliver
+    render template: 'blog/comment_confirmation', locals: {
+      post: unescape_post(post),
+      comment: comment,
+      respond_to_id: nil
+    }
   end
 
   def respond_to_comment
