@@ -7,10 +7,11 @@ html lang='en'
     = stylesheet_link_tag 'blog', media: 'all'
 
     /[if IE 6]
-      = stylesheet_link_tag 'blog-fallback-ie6', media: 'all'
+      = stylesheet_link_tag 'blog_fallback_ie6', media: 'all'
 
     /[if lt IE 10]
-      = javascript_include_tag 'blog-fallback-ie'
+      = javascript_include_tag 'blog_fallback_ie'
+      = stylesheet_link_tag 'blog_fallback', media: 'all'
 
   body
 
