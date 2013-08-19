@@ -4,19 +4,22 @@
     = f.hidden_field :respond_to_id, value: respond_to_id
 
     .create-comment-author-email
+      label.fallback for='comment_author' Your Name:
       = f.text_field :author,
-        placeholder: flash[:author_placeholder] || 'Your name',
+        placeholder: flash[:author_placeholder] || 'Your Name',
         class: "input-text #{flash[:author_class]}",
         value: flash[:author]
 
+      label.fallback for='comment_email' Your Email:
       = f.text_field :email,
-        placeholder: flash[:email_placeholder] || 'Your email',
+        placeholder: flash[:email_placeholder] || 'Your Email',
         class: "input-text #{flash[:email_class]}",
         value: flash[:email]
 
     .create-comment-content
+      label.fallback for='comment_content' Your Contribution:
       = f.text_area :content,
-        placeholder: flash[:content_placeholder] || (respond_to_id ? 'Your reply...' : 'Your contribution...'),
+        placeholder: flash[:content_placeholder] || (respond_to_id ? 'Your reply...' : 'Your Contribution...'),
         class: 'create-comment-body input-text #{flash[:content_class]}',
         value: flash[:content]
 
