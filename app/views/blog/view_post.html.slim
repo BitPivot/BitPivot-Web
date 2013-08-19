@@ -21,7 +21,7 @@ article.post
           li = link_to "#{post.blog_post_comments.length} Comment(s)", post.post_url + '#comments'
 
     .post-body
-      = render inline: post.body
+      == render inline: post.body
 
   - unless hide_comments
     section#comments.comments
@@ -31,12 +31,12 @@ article.post
         span.no-comments There are currently no comments.
 
       - for comment in post.top_level_comments
-        = render template: 'blog/comment',
+        = render partial: 'comment',
           locals: { depth: 1, post: post, comment: comment, respond_to_id: defined?(respond_to_id) ? respond_to_id : nil }
 
     section.create-comment
       h1 Contribute to this Article
-      = render template: 'blog/create_comment', locals: {post: post, respond_to_id: nil}
+      = render partial: 'create_comment', locals: {post: post, respond_to_id: nil}
 
   - else
     section.comments.view-comments

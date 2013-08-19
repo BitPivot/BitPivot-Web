@@ -1,4 +1,7 @@
 class HomeController < ApplicationController
+
+  layout 'home'
+
   def index
     @blinds = []
     paths = Dir['app/views/home/blinds/*.slim']

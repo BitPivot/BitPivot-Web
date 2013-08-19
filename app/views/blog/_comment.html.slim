@@ -7,7 +7,7 @@
 
     - if respond_to_id == comment.id
       #respond.respond-to-comment
-        = render template: 'blog/create_comment', locals: { post: post, respond_to_id: respond_to_id }
+        = render partial: 'create_comment', locals: { post: post, respond_to_id: respond_to_id }
 
     - elsif depth < @max_comment_depth
       .respond-to-link
@@ -16,4 +16,4 @@
     - if comment.has_responses
       .responses
         - for response in comment.blog_post_comments
-          = render template: 'blog/comment', locals: { depth: depth + 1, post: post, comment: response, respond_to_id: defined?(respond_to_id) ? respond_to_id : nil }
+          = render partial: 'comment', locals: { depth: depth + 1, post: post, comment: response, respond_to_id: defined?(respond_to_id) ? respond_to_id : nil }

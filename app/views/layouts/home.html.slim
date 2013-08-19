@@ -1,0 +1,25 @@
+doctype html
+html lang='en'
+
+  head
+    = render 'partials/head_common'
+    = javascript_include_tag 'home'
+    = stylesheet_link_tag 'home', media: 'all'
+
+    /[if lt IE 10]
+      = javascript_include_tag 'home_fallback_ie'
+      = stylesheet_link_tag 'home_fallback', media: 'all'
+
+    /[if IE 6]
+      = stylesheet_link_tag 'home_fallback_ie6', media: 'all'
+
+    noscript
+      = stylesheet_link_tag 'home_fallback', media: 'all'
+
+  body.transition-preload
+
+    #js-loading-overlay.loading-overlay
+
+    = render 'partials/header'
+
+    == yield
