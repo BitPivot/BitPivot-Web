@@ -1,3 +1,7 @@
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
 *.orig
 public/assets
 .vagrant/
