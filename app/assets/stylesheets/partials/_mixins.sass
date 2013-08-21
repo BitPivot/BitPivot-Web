@@ -5,19 +5,15 @@
 // Breakpoints
 =breakpoint($media)
   @if $media == "tiny"
-    @media (max-width: $breakpoint-tiny)
+    @media (max-width: 760px)
       @content
 
   @if $media == "narrow"
-    @media (max-width: $breakpoint-narrow)
+    @media (max-width: 900px)
       @content
 
   @if $media == "wide"
-    @media (min-width: $breakpoint-narrow + 1)
-      @content
-
-  @if $media == "landscape"
-    @media screen and (orientation: landscape)
+    @media (min-width: 901px)
       @content
 
   @if $media == 'non-retina'
@@ -31,6 +27,12 @@
 
 
 // Retina capable sprites
+=retina-background($image, $width, $height, $background-color: transparent, $position: center center, $type: 'png')
+  background: $background-color asset-url("#{$image}.#{$type}") $position no-repeat
+  background-size: $width $height
+  +breakpoint(retina)
+    background-image: asset-url("#{$image}@2x.#{$type}")
+
 =sprite($image, $width, $height, $type: 'png', $retina: true)
   display: block
   float: left
@@ -70,29 +72,22 @@
 
 
 
-// RGBA with fallback
-=background-rgba-fallback($rgba)
-  background: rgb(red($rgba), green($rgba), blue($rgba))
-  background: $rgba
-
-
-
 // Gradients
-=gradient-radial($start, $end: false)
+=gradient-radial($start, $end: false, $position: center center)
   @if not $end
     $end: darken($start, 5%)
 
   background-image: $start
-  background-image: -ms-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
-  background-image: -moz-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
-  background-image: -o-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
-  background-image: -webkit-gradient(radial, center center, 0, center center, 497, color-stop(0, $start), color-stop(1, $end))
-  background-image: -webkit-radial-gradient(center, circle farthest-corner, $start 0%, $end 100%)
-  background-image: radial-gradient(circle farthest-corner at center, $start 0%, $end 100%)
+  background-image: -ms-radial-gradient($position, circle farthest-corner, $start 0%, $end 100%)
+  background-image: -moz-radial-gradient($position, circle farthest-corner, $start 0%, $end 100%)
+  background-image: -o-radial-gradient($position, circle farthest-corner, $start 0%, $end 100%)
+  background-image: -webkit-gradient(radial, $position, 0, center center, 497, color-stop(0, $start), color-stop(1, $end))
+  background-image: -webkit-radial-gradient($position, circle farthest-corner, $start 0%, $end 100%)
+  background-image: radial-gradient($position farthest-corner at center, $start 0%, $end 100%)
 
 =gradient-vertical($start, $end: false)
   @if not $end
-    $end: darken($start, 5%)
+    $end: darken($start, 10%)
 
   background-image: $start
   background-image: -moz-linear-gradient(top,  $start 0%, $end 100%)
@@ -132,6 +127,10 @@
   -webkit-box-sizing: border-box
   -moz-box-sizing: border-box
   box-sizing: border-box
+
+=background-rgba-fallback($rgba)
+  background: rgb(red($rgba), green($rgba), blue($rgba))
+  background: $rgba
 
 
 
@@ -175,13 +174,13 @@
 
 
 // Font size and REM helper
-@function calculate-rem($size)
+@function to-rem($size)
   $rem-size: $size / 16px
   @return #{$rem-size}rem
 
 =font-size($size)
   font-size: $size // Fallback in px
-  font-size: calculate-rem($size)
+  font-size: to-rem($size)
 
 
 
@@ -190,7 +189,14 @@
   padding-bottom: $margin / 4
   border-bottom: $blind-content-header-border-width solid $blind-content-header-border-color
 
-=type-pad-bottom
+=hr($color)
+  height: 1px
+  margin: 0 $margin $margin $margin
+  border: none
+  border-bottom: 1px solid $color
+  clear: both
+
+=type-pad-bottom($margin: $margin)
   margin-bottom: $margin
 
   &:last-child
@@ -234,30 +240,18 @@
     &:last-child
       margin: 0
 
-=blind($class, $index, $header-color, $banner-image, $image-position)
-  .blind#{$class}
-    top: percentage((1 / $total-blinds) * $index)
-    z-index: 100 + ($total-blinds - $index)
+=table-inner-padding($margin, $background: transparent)
+  td
+    border: $margin solid $background
 
-  .blind#{$class} header
-    +gradient-radial($header-color)
+  tr:first-child td
+    border-top: 0
 
-    &:hover
-      +gradient-radial(lighten($header-color, 1%))
-      font-size: $blind-header-font-size * 1.1
+  tr:last-child td
+    border-bottom: 0
 
-      +breakpoint('tiny')
-        font-size: $blind-header-font-size-tiny * 1.1
+  td:first-child
+    border-left: 0
 
-  .blind#{$class}.expanded header
-    &:hover
-      +gradient-radial($header-color)
-      font-size: $blind-header-font-size
-
-      +breakpoint('tiny')
-        font-size: $blind-header-font-size-tiny
-
-  .blind#{$class} .blind-banner
-    @if $banner-image
-      background-image: image-url($banner-image)
-      background-position: $image-position
+  td:last-child
+    border-right: 0

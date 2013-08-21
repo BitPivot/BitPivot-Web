@@ -1,44 +1,16 @@
-// Breakpoints
-$breakpoint-tiny: 640px
-$breakpoint-narrow: 900px
-
-
-
 // Page Metrics
 $margin: 20px
 
-$page-header-height: 48px
-$page-header-height-tiny: 32px
 
-$blind-collapsed-height: 48px
-$blind-collapsed-height-tiny: 32px
-
-$blind-banner-height: 450px
-$blind-banner-height-narrow: 350px
-$blind-banner-height-tiny: 150px
-
-$blind-content-header-border-width: 1px
 
 $blog-post-max-width: 1000px
 
 
 
-// Page settings from config
-$total-blinds: <%= APP_CONFIG.total_blinds %>
-
-
-
 // Font metrics
-$header-font-size: 16px
-
-$page-font-size: 16px
-$page-line-height: 1.3
-$page-header-font-size: 22px
-
-$blind-header-font-size: $blind-collapsed-height * 0.45
-$blind-header-font-size-tiny: $blind-collapsed-height-tiny  * 0.55
-
-$call-to-action-button-font-size: 22px
+$base-font-size: 16px
+$base-font-size-tiny: 13px
+$base-line-height: 1.4
 
 $blog-font-size: 16px
 $blog-line-height: 1.3
@@ -47,15 +19,6 @@ $blog-header-font-size: 22px
 $blog-metadata-font-size: 13px
 
 // Font faces
-$header-font: 'helvetica'
-
-$blind-header-font: 'helvetica-light'
-$blind-banner-font: 'helvetica-light'
-$blind-content-font: 'helvetica'
-$blind-content-header-font: 'helvetica-light'
-
-$call-to-action-button-font: 'helvetica-light'
-
 $blog-font: 'helvetica'
 $blog-header-font: 'helvetica-light'
 $blog-code-font: 'andale-mono'
@@ -67,62 +30,33 @@ $blog-button-font: 'helvetica-light'
 // Palette
 $white: #fff
 $black: #000
-$gray-light: #ddd
+$gray-light: #bbb
 $gray-medium: #888
 $gray-dark: #444
+$gray-darker: #333
 $gray-text: #222
 $purple-light: #a600a6
 $purple-dark: #590059
-$red-dark: #b00
-$red-light: #f88
+$red-dark: #590059
+$red-light: #a60000
 $blue-dark: #248
-$green-dark: #284
-$green-light: #4a6
+$green-darker: #002200
+$green-dark: #005900
+$green-light: #00a600
+$green-lighter: #00cc00
+$yellow-dark: #a6a600
+$yellow-light: #ffff00
 $orange: #f80
 
 
-
-// Page
-$page-background-color: $black
-
-// Header
-$header-background-color: $black
-$header-link-color: $gray-dark
-$header-link-color-hover: $purple-light
-$header-text-color: $gray-dark
-
-// Blind headers
-$blind-header-background-color-1: $purple-dark
-$blind-header-background-color-2: darken($purple-dark, 3%)
-$blind-header-background-color-3: darken($purple-dark, 6%)
-$blind-header-background-color-4: darken($purple-dark, 9%)
-$blind-header-text-color: $white
-$blind-header-text-shadow-color: rgba($black, 0.75)
-
-// Blind banners
-$blind-banner-text-color: $white
-$blind-banner-text-background-color: rgba($black, 0.7)
-
-// Blind content
-$blind-content-text-color: $gray-medium
-$blind-content-headline-color: $white
-$blind-content-header-text-color: $gray-light
-$blind-content-header-border-color: $purple-dark
-
-// Call to action button
-$call-to-action-button-background: $purple-dark
-$call-to-action-button-text-color: $white
-
-// Infographics
-$infographic-caption-text-color: $gray-light
-$infographic-key-purple-light: $purple-light
-$infographic-key-purple-dark: $purple-dark
-$infographic-key-gray-dark: $gray-dark
 
 // Blog page
 $blog-page-background: $gray-medium
 $blog-post-background: $white
 $blog-post-border-color: $gray-light
+
+$blind-header-text-shadow-color: $purple-dark
+$header-font-size: 26px
 
 // Blog text
 $blog-link-text-color: $purple-light

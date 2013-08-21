@@ -2,26 +2,26 @@
 
 
 
-header
-  position: relative
-  height: $page-header-height
-  line-height: $page-header-height
-  background: $header-background-color
-  +font($header-font-size, $header-text-color, $header-font)
+.header
+  height: 48px
+  line-height: 48px
+  background: $black
+  border-bottom: 10px solid $purple-dark
+  +font(16px, $gray-dark, 'helvetica')
   vertical-align: middle
   z-index: 1000
-  +drop-shadow(10px)
 
   +breakpoint('tiny')
-    height: $page-header-height-tiny
-    line-height: $page-header-height-tiny
+    height: 32px
+    line-height: 32px
+    border-bottom-width: 6px
 
   a
-    color: $header-link-color
+    color: $gray-dark
     text-decoration: none
 
     &:hover, &:active
-      color: $header-link-color-hover
+      color: $purple-light
       text-decoration: none
       +transition(all 0.5s ease)
 
@@ -49,7 +49,7 @@ header
     position: relative
     display: inline
     text-decoration: none
-    +font-size(30px)
+    font-size: 30px
     top: 2px
     vertical-align: middle
 
@@ -60,7 +60,7 @@ header
     .description
       position: relative
       top: -9px
-      +font-size($header-font-size)
+      +font-size(16px)
       margin: 0 ($margin / 2)
 
       &.short

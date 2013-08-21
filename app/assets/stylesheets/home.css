@@ -2,6 +2,5 @@
  *= require partials/_reset
  *= require ss-social-regular
  *= require partials/_header
- *= require partials/_blinds
- *= require partials/_full
+ *= require partials/_splash
  */
