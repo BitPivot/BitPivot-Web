@@ -8,8 +8,6 @@ html
 
 
 body
-  max-width: $blog-post-max-width
-  margin: $margin * 2 auto
   background: $blog-page-background
   +font($blog-font-size, $blog-text-color, $blog-font)
   line-height: $blog-line-height
@@ -25,7 +23,8 @@ header
 
 
 .post
-  margin: $margin * 2
+  margin: $margin * 2 auto
+  max-width: $blog-post-max-width
   background: $blog-post-background
   +drop-shadow($margin, rgba(0, 0, 0, 0.45))
 
