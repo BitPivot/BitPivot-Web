@@ -18,7 +18,7 @@ article.post
 
         - if post.approved_comments.length > 0
           li |
-          li = link_to "#{post.blog_post_comments.length} Comment(s)", post.post_url + '#comments'
+          li = link_to "#{post.approved_comments.length} Comment(s)", post.post_url + '#comments'
 
     .post-body
       == render inline: post.body
