@@ -16,14 +16,7 @@
     line-height: 32px
     border-bottom-width: 6px
 
-  a
-    color: lighten($gray-dark, 10%)
-    text-decoration: none
-
-    &:hover, &:active
-      color: $purple-light
-      text-decoration: none
-      +transition(all 0.5s ease)
+  +link-hover(lighten($gray-dark, 10%), $purple-light)
 
 
 
