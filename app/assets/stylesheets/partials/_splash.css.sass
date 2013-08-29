@@ -161,7 +161,6 @@ strong
   +breakpoint('tiny')
 
     h2
-      +font-size(15px)
       margin-bottom: $margin
 
 
@@ -227,3 +226,61 @@ strong
 
 .software-development
   +gradient-vertical($blue)
+
+
+
+.team
+  background: $black
+
+  .member
+    padding: 0 $margin
+    width: 33.33333%
+    display: inline-block
+    text-align: center
+    vertical-align: top
+    +box-sizing-border-box
+
+    +breakpoint('tiny')
+      width: 100%
+      float: none
+      margin: 0 0 ($margin * 2) 0
+
+  .portrait
+    max-width: 100%
+    margin: 0 0 $margin 0
+    border: 10px solid $purple-dark
+    border-radius: 50%
+    +box-sizing-border-box
+
+    +breakpoint('tiny')
+      border-width: 6px
+
+    img
+      margin: 0
+      max-width: 100%
+      border-radius: 50%
+      vertical-align: middle
+
+  .name
+    +font(22px, $white, 'helvetica-light')
+
+  .title
+    +font(16px, $gray-medium, 'helvetica-light')
+
+  hr
+    +hr($purple-dark)
+    margin: ($margin / 2) 0
+
+  .contact-information
+    display: inline-block
+    color: $gray-dark
+    text-align: left
+
+    .ss-icon
+      +position(relative, 4px, auto, auto, auto)
+      +font-size(18px)
+
+
+    +link-hover($gray-medium, $purple-light)
+      margin: 0 0 0 ($margin / 2)
+      +font(18px, $gray-medium, 'helvetica-light')
