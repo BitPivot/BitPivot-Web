@@ -2,50 +2,6 @@
 
 
 
-html, body
-  font-size: $base-font-size
-  line-height: $base-line-height
-  background: $black
-
-  +breakpoint('tiny')
-    font-size: $base-font-size-tiny
-
-
-
-h1
-  text-align: center
-  +font(26px, $white, 'helvetica-light')
-  +type-pad-bottom($margin * 2)
-
-h2
-  text-align: center
-  +font(22px, $gray-light, 'helvetica-light')
-  +type-pad-bottom($margin * 2)
-
-p
-  text-align: justify
-  +type-pad-bottom
-
-em
-  font-style: italic
-
-strong
-  font-weight: bold
-
-.clear
-  clear: both
-
-.left
-  text-align: left
-
-.right
-  text-align: right
-
-.justify
-  text-align: justify
-
-
-
 .wrapper
   +position(relative)
   max-width: 900px
@@ -56,96 +12,90 @@ strong
 
 .banner
   background: $white
-  +font(28px, $gray-medium, 'helvetica')
-  font-weight: bold
-  text-align: center
 
-  +breakpoint('narrow')
-    +font-size(22px)
+  h1
+    color: $gray-medium
 
 
 
 .philosophy
   +gradient-vertical($sky-dark, $sky-light)
 
-  .beanstalk
-    +position(relative)
-    height: 760px
-    +retina-background('beanstalk', 607px, 760px, transparent, bottom center)
+  .clouds
+    height: 60px
+    +retina-background('clouds', 1605px, 60px, top center, repeat-x)
 
     +breakpoint('tiny')
+      height: 30px
+      +retina-background('clouds', 803px, 30px, top center, repeat-x)
+
+  .beanstalk
+    +position(relative)
+    margin: 0 0 -60px 0
+    padding: ($margin * 2) 0 0 0
+    height: 760px
+    +retina-background('beanstalk', 607px, 760px, bottom center)
+
+    +breakpoint('tiny')
+      margin: 0 0 -30px 0
       height: 401px
-      +retina-background('beanstalk_tiny', 320px, 401px, transparent, bottom center)
+      +retina-background('beanstalk_tiny', 320px, 401px, bottom center)
 
     .wrapper
-      padding: ($margin * 2)
-      +position(absolute, auto, 0, $margin, 0)
+      +position(absolute, auto, 0, 60px, 0)
 
       +breakpoint('tiny')
-        padding: $margin
+        bottom: 30px
 
     .text-area
       padding: $margin
-      margin: 0 auto
       +background-rgba-fallback(rgba(0, 0, 0, 0.65))
       +font(26px, $white, 'helvetica-light')
 
       +breakpoint('tiny')
         padding: $margin / 2
-        +font-size(20px)
 
       strong
         color: $green-lighter
 
-  .clouds
-    height: 60px
-    margin: 0 0 ($margin * 2) 0
-    +retina-background('clouds', 1605px, 60px)
-    background-repeat: repeat-x
-
-    +breakpoint('tiny')
-      height: 30px
-      +retina-background('clouds', 803px, 30px)
-      background-repeat: repeat-x
-
   .grass
-    +position(absolute, auto, 0, 0, 0)
+    +position(relative)
     height: 60px
-    +retina-background('grass', 840px, 60px, transparent, bottom center)
-    background-repeat: repeat-x
+    z-index: 200
+    +retina-background('grass', 840px, 60px, bottom center, repeat-x)
 
     +breakpoint('tiny')
       height: 30px
-      +retina-background('grass_tiny', 420px, 30px, transparent, bottom center)
-      background-repeat: repeat-x
+      +retina-background('grass_tiny', 420px, 30px, bottom center, repeat-x)
 
   .ground
     background: $green-dark
-    +gradient-vertical($green-dark, darken($green-dark, 3%))
+    +gradient-vertical($green-dark, darken($green-dark, 5%))
 
-  li
-    width: 50%
-    float: left
-    +font(22px, $green-lighter, 'helvetica-light')
-    +retina-background('asterisk', 16px, 16px, transparent, 0px 8px)
-    +box-sizing-border-box
+    li
+      width: 50%
+      display: inline-block
+      vertical-align: top
+      +font(22px, $green-lighter, 'helvetica-light')
+      +retina-background('asterisk', 16px, 16px, 0px 8px)
+      +box-sizing-border-box
 
-    &:nth-child(odd)
-      padding: 0 $margin $margin ($margin + 5px)
+      &:nth-child(odd)
+        padding: 0 $margin $margin ($margin + 5px)
 
-    &:nth-child(even)
-      padding: 0 0 $margin ($margin + 5px)
-
-    +breakpoint('tiny')
-      width: 100%
-      display: block
-      background-position: 0px 5px
-
-      &:nth-child(odd), &:nth-child(even)
+      &:nth-child(even)
         padding: 0 0 $margin ($margin + 5px)
 
-      &:last-child
-        padding: 0 0 0 ($margin + 5px)
+      +breakpoint('tiny')
+        width: 100%
+        display: block
+        background-position: 0px 5px
+
+        &:nth-child(odd), &:nth-child(even)
+          padding: 0 0 $margin ($margin + 5px)
+
+        &:last-child
+          padding: 0 0 0 ($margin + 5px)
 
 
 
@@ -182,7 +132,7 @@ strong
   width: 800px
   height: 600px
   +retina-background('chrome_window', 800px, 600px)
-  +drop-shadow(50px, rgba(0, 0, 0, 0.5))
+  +drop-shadow(50px, rgba(0, 0, 0, 0.35))
 
   +breakpoint('narrow')
     width: 650px
@@ -220,7 +170,7 @@ strong
     width: 180px
     height: 400px
     z-index: 199
-    +drop-shadow(40px)
+    +drop-shadow(60px)
 
 
 
@@ -242,7 +192,6 @@ strong
 
     +breakpoint('tiny')
       width: 100%
-      float: none
       margin: 0 0 ($margin * 2) 0
 
   .portrait
@@ -271,7 +220,7 @@ strong
     +hr($purple-dark)
     margin: ($margin / 2) 0
 
-  .contact-information
+  ul
     display: inline-block
     color: $gray-dark
     text-align: left
@@ -279,7 +228,6 @@ strong
     .ss-icon
       +position(relative, 4px, auto, auto, auto)
       +font-size(18px)
-
 
     +link-hover($gray-medium, $purple-light)
       margin: 0 0 0 ($margin / 2)

@@ -40,8 +40,8 @@
 
 
 // Retina capable sprites
-=retina-background($image, $width, $height, $background-color: transparent, $position: center center, $type: 'png')
-  background: $background-color asset-url("#{$image}.#{$type}") $position no-repeat
+=retina-background($image, $width, $height, $position: center center, $repeat: no-repeat, $type: 'png')
+  background: asset-url("#{$image}.#{$type}") $position $repeat
   background-size: $width $height
   +breakpoint(retina)
     background-image: asset-url("#{$image}@2x.#{$type}")
@@ -237,19 +237,3 @@
   text-shadow: 0px 3px 5px $blind-header-text-shadow-color
   line-height: $header-font-size
   +type-pad-bottom
-
-=table-inner-padding($margin, $background: transparent)
-  td
-    border: $margin solid $background
-
-  tr:first-child td
-    border-top: 0
-
-  tr:last-child td
-    border-bottom: 0
-
-  td:first-child
-    border-left: 0
-
-  td:last-child
-    border-right: 0

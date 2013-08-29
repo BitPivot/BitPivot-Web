@@ -1,0 +1,46 @@
+@import mixins
+
+
+
+html, body
+  font-size: 16px
+  line-height: 1.4
+  background: $black
+  +font(16px, $white, 'helvetica')
+
+  +breakpoint('tiny')
+    font-size: 14px
+
+
+
+h1
+  text-align: center
+  +font(26px, $white, 'helvetica-light')
+  +type-pad-bottom($margin * 2)
+
+h2
+  text-align: center
+  +font(22px, $gray-light, 'helvetica-light')
+  +type-pad-bottom($margin * 2)
+
+p
+  text-align: justify
+  +type-pad-bottom
+
+em
+  font-style: italic
+
+strong
+  font-weight: bold
+
+.clear
+  clear: both
+
+.left
+  text-align: left
+
+.right
+  text-align: right
+
+.justify
+  text-align: justify
