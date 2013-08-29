@@ -104,4 +104,7 @@ BitPivot::Application.configure do
 
   # Add top-level JS manifests
   config.assets.precompile += Dir.glob(Rails.root.join('app', 'assets', 'javascripts', '*.js'))
+
+  # Add top-level static pages
+  config.assets.precompile += Dir.glob(Rails.root.join('app', 'assets', 'pages', '*.html*'))
 end
