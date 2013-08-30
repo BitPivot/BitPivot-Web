@@ -141,14 +141,22 @@
       height: 488px
       +retina-background('chrome_window_narrow', 700px, 488px)
 
+    +breakpoint('tiny')
+      width: 100%
+      height: 488px
+      margin-right: -$margin
+      background-position: top left
+
     .container
       +position(absolute, 43px, 0, 0, 0)
-      padding: $margin $margin $margin 200px
+      padding: $margin
       border-bottom-right-radius: 7px
       border-bottom-left-radius: 7px
 
       +breakpoint('narrow')
         top: 34px
+
+      +breakpoint('tiny')
 
       h1
         text-align: right
@@ -167,6 +175,9 @@
       width: 150px
       height: 315px
       +retina-background('iphone_narrow', 150px, 315px)
+
+    +breakpoint('tiny')
+      +position(absolute, auto, 0, $margin, -50px)
 
     .container
       +position(absolute, 71px, 14px, 58px, 16px)
