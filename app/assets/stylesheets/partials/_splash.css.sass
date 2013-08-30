@@ -46,10 +46,10 @@
       +retina-background('beanstalk_tiny', 320px, 401px, bottom center)
 
     .wrapper
-      +position(absolute, auto, 0, 60px, 0)
+      +position(absolute, auto, 0, 30px, 0)
 
       +breakpoint('tiny')
-        bottom: 30px
+        bottom: 0px
 
     .text-area
       padding: $margin
@@ -121,6 +121,7 @@
 
 .web-development
   +gradient-vertical($gray-light)
+  text-align: right
 
   h1
     color: $gray-dark
@@ -129,23 +130,25 @@
   .chrome-window
     +position(relative)
     margin: $margin 0 0 0
-    float: right
+    display: inline-block
     z-index: 100
     width: 800px
-    height: 600px
-    +retina-background('chrome_window', 800px, 600px)
-    +drop-shadow(50px, rgba(0, 0, 0, 0.35))
+    height: 558px
+    +retina-background('chrome_window', 800px, 558px)
 
     +breakpoint('narrow')
       width: 650px
-      height: 600px
-      +retina-background('chrome_window_narrow', 650px, 600px)
+      height: 453px
+      +retina-background('chrome_window_narrow', 650px, 453px)
 
     .container
-      +position(absolute, 71px, 0, 0, 0)
+      +position(absolute, 43px, 0, 0, 0)
       padding: $margin $margin $margin 200px
-      border-bottom-right-radius: 3px
-      border-bottom-left-radius: 3px
+      border-bottom-right-radius: 7px
+      border-bottom-left-radius: 7px
+
+      +breakpoint('narrow')
+        top: 34px
 
       h1
         text-align: right
@@ -161,16 +164,8 @@
     +retina-background('iphone', 200px, 420px)
 
     .container
-      +position(absolute, 104px, 15px, 82px, 17px)
+      +position(absolute, 71px, 14px, 58px, 16px)
       padding: $margin / 4
-
-    &.shadow
-      +position(absolute, auto, auto, 70px, $margin + 10px)
-      background: none
-      width: 180px
-      height: 400px
-      z-index: 199
-      +drop-shadow(60px)
 
 
 
