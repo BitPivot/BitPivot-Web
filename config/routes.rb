@@ -2,6 +2,8 @@ BitPivot::Application.routes.draw do
 
   get '/', to: 'home#index'
 
+  match '/send_inquiry', to: 'home#send_inquiry', via: 'post'
+
   get 'blog', to: 'blog#index', page: 1                                           # get most recent blog posts
   get 'blog/respond_to_comment/:post_id/:respond_to_id', to: 'blog#respond_to_comment' # respond to a post comment
   get 'blog/page/:page', to: 'blog#index'                                         # pages > 1 get earlier blog posts, 5 posts per page

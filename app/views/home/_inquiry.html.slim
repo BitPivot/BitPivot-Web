@@ -1,0 +1,32 @@
+#inquiry.inquiry-area
+  = form_for :inquiry, url: '/send_inquiry', method: 'post' do |f|
+
+    .inquiry-author
+      label.fallback for='inquiry_author' Your Name:
+      = f.text_field :author,
+        placeholder: flash[:author_placeholder] || 'Your Name',
+        class: "input-text #{flash[:author_class]}",
+        value: flash[:author]
+
+    .inquiry-email
+      label.fallback for='inquiry_email' Your Email:
+      = f.text_field :email,
+        placeholder: flash[:email_placeholder] || 'Your Email',
+        class: "input-text #{flash[:email_class]}",
+        value: flash[:email]
+
+    .inquiry-phone
+      label.fallback for='inquiry_phone' Your Phone #:
+      = f.text_field :phone,
+        placeholder: flash[:phone_placeholder] || 'Your Phone #',
+        class: "input-text #{flash[:phone_class]}",
+        value: flash[:phone]
+
+    .inquiry-content
+      label.fallback for='inquiry_content' What can we do for you?
+      = f.text_area :content,
+        placeholder: flash[:content_placeholder] || 'Your needs...',
+        class: 'inquiry-body input-text #{flash[:content_class]}',
+        value: flash[:content]
+
+    = f.submit 'Send', class: 'button'
