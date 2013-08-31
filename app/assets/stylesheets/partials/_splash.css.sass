@@ -2,104 +2,57 @@
 
 
 
-.wrapper
+.content
   +position(relative)
   max-width: 900px
   padding: ($margin * 2) $margin
   margin: 0 auto
 
+  +breakpoint('tiny')
+    padding: $margin
+
 
 
 .banner
-  margin: 48px 0 0 0
-  background: $white
-
-  +breakpoint('tiny')
-    margin: 32px 0 0 0
+  margin-top: 48px
+  padding: ($margin * 2) 0
+  height: 350px
+  +retina-background('home_banner', 900px, 350px)
+  background-color: $purple-dark
 
   h1
-    color: $gray-medium
+    +position(relative, 50%, auto, auto, auto)
+    margin: -18px auto 0 auto
+    max-width: 900px
+    height: 32px
+    line-height: 32px
+    vertical-align: middle
+    +font-size(26px)
+
+  +breakpoint('tiny')
+    margin-top: 32px
+    height: 210px
+    +retina-background('home_banner_tiny', 540px, 210px)
+    background-color: $purple-dark
+
+    h1
+      height: 64px
+      margin-top: -32px
 
 
 
 .philosophy
-  +gradient-vertical($sky-dark, $sky-light)
+  background: #222
 
-  .clouds
-    height: 60px
-    +retina-background('clouds', 1605px, 60px, top center, repeat-x)
+  hgroup
+    margin: 0 0 $margin 0
 
-    +breakpoint('tiny')
-      height: 30px
-      +retina-background('clouds', 803px, 30px, top center, repeat-x)
+    h1
+      margin: 0 0 ($margin / 2) 0
 
-  .beanstalk
-    +position(relative)
-    margin: 0 0 -60px 0
-    padding: ($margin * 2) 0 0 0
-    height: 760px
-    +retina-background('beanstalk', 607px, 760px, bottom center)
-
-    +breakpoint('tiny')
-      margin: 0 0 -30px 0
-      height: 401px
-      +retina-background('beanstalk_tiny', 320px, 401px, bottom center)
-
-    .wrapper
-      +position(absolute, auto, 0, 30px, 0)
-
-      +breakpoint('tiny')
-        bottom: 0px
-
-    .text-area
-      padding: $margin
-      +background-rgba-fallback(rgba(0, 0, 0, 0.65))
-      +font(26px, $white, 'helvetica-light')
-
-      +breakpoint('tiny')
-        padding: $margin / 2
-
-      strong
-        color: $green-lighter
-
-  .grass
-    +position(relative)
-    height: 60px
-    z-index: 200
-    +retina-background('grass', 840px, 60px, bottom center, repeat-x)
-
-    +breakpoint('tiny')
-      height: 30px
-      +retina-background('grass_tiny', 420px, 30px, bottom center, repeat-x)
-
-  .ground
-    background: $green-dark
-    +gradient-vertical($green-dark, darken($green-dark, 5%))
-
-    li
-      width: 50%
-      display: inline-block
-      vertical-align: top
-      +font(22px, $green-lighter, 'helvetica-light')
-      +retina-background('asterisk', 16px, 16px, 0px 8px)
-      +box-sizing-border-box
-
-      &:nth-child(odd)
-        padding: 0 $margin $margin ($margin + 5px)
-
-      &:nth-child(even)
-        padding: 0 0 $margin ($margin + 5px)
-
-      +breakpoint('tiny')
-        width: 100%
-        display: block
-        background-position: 0px 5px
-
-        &:nth-child(odd), &:nth-child(even)
-          padding: 0 0 $margin ($margin + 5px)
-
-        &:last-child
-          padding: 0 0 0 ($margin + 5px)
+  hr
+    +hr($gray-dark)
+    margin: 0 0 $margin 0
 
 
 
@@ -120,7 +73,7 @@
 
 
 .web-development
-  +gradient-vertical($gray-light)
+  background: #222
   text-align: right
 
   h1
@@ -186,7 +139,7 @@
 
 
 .consulting
-  +gradient-vertical($blue)
+  background: #222
 
 
 
@@ -247,6 +200,7 @@
 
 
 .footer
-  margin: ($margin * 2) 0
+  background: $black
+  padding: ($margin * 2) 0
   text-align: center
   +font(16px, $gray-dark, 'helvetica-light')
