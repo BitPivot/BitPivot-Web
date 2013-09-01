@@ -14,8 +14,8 @@ class HomeController < ApplicationController
   end
 
   def send_inquiry
-    inquiry = OpenStruct.new(params[:inquiry])
-    puts inquiry
+    inquiry = Inquiry.new(params[:inquiry])
+    debugger
     InquiryMailer.new_inquiry_notification(inquiry).deliver
     redirect_to '/'
   end
