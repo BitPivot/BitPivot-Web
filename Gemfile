@@ -28,5 +28,5 @@ group :development, :test do
   gem 'mailtrap'
   gem 'debugger', github: 'windwiny/debugger', branch: 'rb200p0compatible-patch'
   gem 'ZenTest'
-  gem 'autotest-rails'
+  gem 'autotest-rails-fix'
 end

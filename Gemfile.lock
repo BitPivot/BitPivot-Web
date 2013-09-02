@@ -41,8 +41,7 @@ GEM
       activemodel
       fog (>= 1.8.0)
     atomic (1.1.13)
-    autotest-rails (4.1.2)
-      ZenTest (~> 4.5)
+    autotest-rails-fix (0.0.0)
     bcrypt-ruby (3.0.1)
     builder (3.1.4)
     coffee-rails (4.0.0)
@@ -166,7 +165,7 @@ PLATFORMS
 DEPENDENCIES
   ZenTest
   asset_sync
-  autotest-rails
+  autotest-rails-fix
   bcrypt-ruby (~> 3.0.0)
   coffee-rails (~> 4.0.0)
   debugger!
