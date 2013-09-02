@@ -32,18 +32,18 @@ class BlogPost < ActiveRecord::Base
   end
 
   def md5
-    require 'digest/md5'
-    Digest::MD5.hexdigest("
-      #{self.file_name}\
-      #{self.title}\
-      #{self.subtitle}\
-      #{self.author}\
-      #{self.year}\
-      #{self.month}\
-      #{self.day}\
-      #{self.categories}\
-      #{self.body}\
-      #{self.banner_image}"
+    require 'digest/md5' 
+    Digest::MD5.hexdigest(
+"#{self.file_name}\
+#{self.title}\
+#{self.subtitle}\
+#{self.author}\
+#{self.year}\
+#{self.month}\
+#{self.day}\
+#{self.categories}\
+#{self.body}\
+#{self.banner_image}"
     )
   end
 end
