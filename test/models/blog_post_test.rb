@@ -2,14 +2,20 @@ require 'digest/md5'
 require 'test_helper'
 
 class BlogPostTest < ActiveSupport::TestCase
+  include ActionView::Helpers::UrlHelper
+
   def setup
     @test_post = BlogPost.new({
       id: 1,
       file_name: 'blog/live/TestFileName.html.erb',
-      email: 'test@test.com',
-      password: @test_password,
-      password_confirmation: @test_password,
-      role: 0
+      title: 'TestTitle',
+      subtitle: 'TestSubtitle',
+      author: 'Test Author',
+      year: 2013,
+      month: 6,
+      day: 1,
+      categories: ['things','stuff'],
+      body: 'Awesome blog content for the masses'
     })
   end
 
@@ -43,12 +49,12 @@ class BlogPostTest < ActiveSupport::TestCase
   end
 
   test 'date formatted correctly' do    
-    year_link = "/blog/#{self.year}"
-    month_link = "#{year_link}/#{self.month}"
-    day_link = "#{month_link}/#{self.day}"
-    expected = " #{link_to Date::MONTHNAMES[self.month], month_link} "
-    expected << "#{link_to self.day, day_link}, "
-    expected << "#{link_to self.year, year_link}"
+    year_link = "/blog/#{@test_post.year}"
+    month_link = "#{year_link}/#{@test_post.month}"
+    day_link = "#{month_link}/#{@test_post.day}"
+    expected = " #{link_to Date::MONTHNAMES[@test_post.month], month_link} "
+    expected << "#{link_to @test_post.day, day_link}, "
+    expected << "#{link_to @test_post.year, year_link}"
 
     assert_equal expected, @test_post.formatted_date, 'date not formatted correctly'
   end

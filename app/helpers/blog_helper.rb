@@ -19,7 +19,6 @@ module BlogHelper
     post.file_name = file_name
     post.body = html_escape(html)
     post.categories = post.categories.join(',')
-    post.md5_hash = post.md5()
     post
   end
 

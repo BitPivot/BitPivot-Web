@@ -33,7 +33,7 @@ class BlogPostComment < ActiveRecord::Base
   end
 
   def has_responses
-      self.blog_post_comments.length > 0 ? true: false
+    self.blog_post_comments.length > 0 ? true: false
   end
 
   def respond_to_comment_url(post_id)

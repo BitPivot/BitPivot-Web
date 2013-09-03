@@ -6,6 +6,8 @@ class BlogPost < ActiveRecord::Base
 
   has_many :blog_post_comments
 
+  before_save { self.md5_hash = self.md5() }
+
   def post_url
     "/blog/posts/#{self.id}-#{self.file_name.slice(0..(self.file_name.index('.')-1))}"
   end
