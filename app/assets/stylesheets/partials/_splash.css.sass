@@ -135,8 +135,8 @@
   background: $gray-darkest
   text-align: right
 
-  +breakpoint('tiny')
-    .content
+  .content
+    +breakpoint('tiny')
       padding-right: 0
 
   .content > h1
@@ -164,50 +164,36 @@
 
     +breakpoint('tiny')
       width: 100%
-      height: 488px
+      height: auto
       background-position: top left
 
     .container
-      +position(absolute, 43px, 0, 0, 0)
+      +position(relative, 43px, 0, 0, 0)
       text-align: left
-      padding: $margin
+      padding: 140px 150px
       border-bottom-right-radius: 3px
       border-bottom-left-radius: 3px
-      background: $gray-dark
 
       +breakpoint('narrow')
         max-width: 660px
         border-radius: 0px
         top: 38px
+        padding: 65px 150px
 
-      .buffer
-        float: left
-        margin: 0
-        left: -20px
-        width: 140px
-        height: 390px
+      +breakpoint('tiny')
+        padding: 20px 20px 165px 20px
 
-        +breakpoint('narrow')
-          width: 130px
-          height: 350px
+      hr
+        +hr(lighten($gray-dark, 10%))
 
-        +breakpoint('tiny')
-          width: 110px
-          height: 370px
-
-      h1
-        text-align: left
+      .callout
+        color: $white
 
       h2
-        text-align: right
-
-      p
-        +font-size(18px)
-        text-align: justify
-        color: $gray-medium
+        margin-bottom: $margin
 
   .iphone
-    +position(absolute, auto, auto, 60px, $margin)
+    +position(absolute, auto, auto, 40px, $margin)
     z-index: 200
     width: 200px
     height: 420px
@@ -219,14 +205,18 @@
       +retina-background('iphone_narrow', 150px, 315px)
 
     +breakpoint('tiny')
-      +position(absolute, auto, 0, $margin, -20px)
+      width: 315px
+      height: 150px
+      +retina-background('iphone_tiny', 315px, 150px)
+      +position(absolute, auto, 0, 20px, -20px)
 
     .container
       +position(absolute, 71px, 14px, 58px, 16px)
       padding: 70px $margin / 2
 
       +breakpoint('narrow')
-        padding-top: 20px
+        +position(absolute, 53px, 11px, 44px, 13px)
+        padding-top: 35px
 
         h1
           +font-size(20px)
@@ -235,6 +225,7 @@
           +font-size(18px)
 
       +breakpoint('tiny')
+        +position(absolute, 11px, 44px, 13px, 53px)
         padding-top: 20px
 
         h1
@@ -242,6 +233,7 @@
 
         h2
           +font-size(24px)
+          margin-bottom: $margin / 2
 
 
 
