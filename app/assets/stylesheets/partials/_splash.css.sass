@@ -77,43 +77,40 @@
       h1
         margin: 0 0 ($margin / 2) 0
 
-  .values
-    text-align: center
+  ul.values
+    display: inline-block
+    padding: 75px 75px 75px 95px
+    width: 450px
+    height: 450px
+    +retina-background('values_background', 450px, 450px)
+    +font(18px, $white, 'helvetica-light')
+    text-align: left
+    list-style-type: square
+    list-style-position: outside
+    +box-sizing-border-box
 
-    ul
-      display: inline-block
-      padding: 75px 75px 75px 95px
-      width: 450px
-      height: 450px
-      +retina-background('values_background', 450px, 450px)
-      +font(18px, $white, 'helvetica-light')
-      text-align: left
-      list-style-type: square
-      list-style-position: outside
-      +box-sizing-border-box
+    li
+      margin-bottom: 24px
+
+    +breakpoint('narrow')
+      padding: 60px 60px 60px 80px
+      width: 350px
+      height: 350px
+      +font-size(15px)
+      +retina-background('values_background_narrow', 350px, 350px)
 
       li
-        margin-bottom: 24px
+        margin-bottom: 9px
 
-      +breakpoint('narrow')
-        padding: 60px 60px 60px 80px
-        width: 350px
-        height: 350px
-        +font-size(15px)
-        +retina-background('values_background_narrow', 350px, 350px)
+    +breakpoint('tiny')
+      padding: 50px 50px 50px 65px
+      width: 280px
+      height: 280px
+      +font-size(19px)
+      +retina-background('values_background_tiny', 280px, 280px)
 
-        li
-          margin-bottom: 9px
-
-      +breakpoint('tiny')
-        padding: 50px 50px 50px 65px
-        width: 280px
-        height: 280px
-        +font-size(19px)
-        +retina-background('values_background_tiny', 280px, 280px)
-
-        li
-          margin-bottom: 5px
+      li
+        margin-bottom: 5px
 
 
 
@@ -206,6 +203,18 @@
     color: $gray-medium
     margin-bottom: $margin
 
+  hr
+    +hr($gray-dark)
+
+  .text
+    padding-right: $margin * 2
+
+    h1
+      color: $white
+
+    h2
+      margin-bottom: $margin
+
   .whiteboard
     margin: $margin 0 0 0
     +sprite('whiteboard', 450px, 379px)
@@ -215,6 +224,7 @@
 
     +breakpoint('tiny')
       +sprite('whiteboard_tiny', 280px, 236px)
+
 
 
 .team
