@@ -17,7 +17,7 @@ article.post
           = render inline: post.formatted_date
 
         - if post.approved_comments.length > 0
-          li |
+          li.separator |
           li = link_to "#{post.approved_comments.length} Comment(s)", post.post_url + '#comments'
 
     .post-body
@@ -41,7 +41,7 @@ article.post
   - else
     section.comments.view-comments
       - if post.approved_comments.length > 0
-        = link_to "View Comments (#{post.blog_post_comments.length}) or Contribute to this Article \u2192", post.post_url + '#comments'
+        = link_to "View Comments (#{post.blog_post_comments.length}) or Contribute \u2192", post.post_url + '#comments'
 
       - else
         = link_to "Contribute to this Article \u2192", post.post_url + '#comments'

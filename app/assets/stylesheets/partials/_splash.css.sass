@@ -134,6 +134,10 @@
   background: $gray-darkest
   text-align: right
 
+  +breakpoint('tiny')
+    .content
+      padding-right: 0
+
   h1
     color: $gray-medium
     margin-bottom: $margin
@@ -155,7 +159,6 @@
     +breakpoint('tiny')
       width: 100%
       height: 488px
-      margin-right: -$margin
       background-position: top left
 
     .container
@@ -188,7 +191,7 @@
       +retina-background('iphone_narrow', 150px, 315px)
 
     +breakpoint('tiny')
-      +position(absolute, auto, 0, $margin, -50px)
+      +position(absolute, auto, 0, $margin, -20px)
 
     .container
       +position(absolute, 71px, 14px, 58px, 16px)
