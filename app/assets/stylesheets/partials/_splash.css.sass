@@ -5,11 +5,33 @@
 .content
   +position(relative)
   max-width: 900px
-  padding: ($margin * 2) $margin
+  padding: ($margin * 4) $margin
   margin: 0 auto
 
+  .grid
+    display: table
+
+    +breakpoint('tiny')
+      display: block
+
+    .row
+      display: table-row
+
+
+      +breakpoint('tiny')
+        display: block
+
+      .column
+        display: table-cell
+        vertical-align: middle
+
+        +breakpoint('tiny')
+          padding: 0
+          margin-bottom: $margin * 2
+          display: block
+
   +breakpoint('tiny')
-    padding: $margin
+    padding: ($margin * 2) $margin
 
 
 
@@ -44,15 +66,57 @@
 .philosophy
   background: #222
 
-  hgroup
-    margin: 0 0 $margin 0
-
-    h1
-      margin: 0 0 ($margin / 2) 0
-
   hr
     +hr($gray-dark)
-    margin: 0 0 $margin 0
+
+
+
+  .text
+    padding-right: $margin * 2
+
+    hgroup
+      margin: 0 0 $margin 0
+
+      h1
+        margin: 0 0 ($margin / 2) 0
+
+  .values
+    text-align: center
+
+    ul
+      display: inline-block
+      padding: 75px 75px 75px 95px
+      width: 450px
+      height: 450px
+      +retina-background('values_background', 450px, 450px)
+      +font(18px, $white, 'helvetica-light')
+      text-align: left
+      list-style-type: square
+      list-style-position: outside
+      +box-sizing-border-box
+
+      li
+        margin-bottom: 24px
+
+      +breakpoint('narrow')
+        padding: 60px 60px 60px 80px
+        width: 350px
+        height: 350px
+        +font-size(15px)
+        +retina-background('values_background_narrow', 350px, 350px)
+
+        li
+          margin-bottom: 9px
+
+      +breakpoint('tiny')
+        padding: 50px 50px 50px 65px
+        width: 280px
+        height: 280px
+        +font-size(19px)
+        +retina-background('values_background_tiny', 280px, 280px)
+
+        li
+          margin-bottom: 5px
 
 
 
