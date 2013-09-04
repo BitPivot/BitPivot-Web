@@ -18,7 +18,7 @@ categories:
 
 <p>On our recent project, we decided to go with PostgreSQL over the default  installation that comes with Rails 4.  I'll be using the Rails project resulting from <a href="http://todo">Rails 4: From Zero to Hello World on OSX Lion</a>. I'll cover installation, setup, and some basic actions for those new to Postgres.</p>
 
-<h3>Step 1: Swapping Out The Sqlite3 and Postgres Gems</h3>
+<h1>Step 1: Swapping Out The Sqlite3 and Postgres Gems</h1>
 
 <p>By default, a new Rails 4 project uses the <a href="http://rubygems.org/gems/sqlite3">sqlite3</a> gem, so at this point we should see the following in our gemfile.</p>
 
@@ -38,7 +38,7 @@ gem 'sqlite3'
 
 <p>In the output, you should see <code>using pg (some.ver.num)</code>, and you should <em>not</em> see <code>using sqlite3 (some.ver.num)</code>.</p>
 
-<h3>Step 2: Replace Database Adapter Definitions</h3>
+<h1>Step 2: Replace Database Adapter Definitions</h1>
 
 <p>Sqlite3 is also defined as our database adapter in database.yml.</p>
 
@@ -93,7 +93,7 @@ production:
 
 <p>This new database configuration will tell ActiveRecord to use the PostgreSQL database adapter with unicode encoding.  I've also defined some dummy usernames and passwords.</p>
 
-<h3>Step 3: Installing Postgres for OSX</h3>
+<h1>Step 3: Installing Postgres for OSX</h1>
 
 <p>At this point, restarting your rails server and navigating to <code>localhost:3000</code> should result in an error like the following.</p>
 
@@ -114,7 +114,7 @@ host "localhost" (fe80::1) and accepting TCP/IP connections on port 5432?
 FATAL: database "testdrive_development" does not exist
 </code></pre>
 
-<h3>Step 4: Creating The Database Using Rake</h3>
+<h1>Step 4: Creating The Database Using Rake</h1>
 
 <p>Our Rails project has the correct Postgres gem, the correct database adapters defined, and we have a Postgres database server running locally.  We can now use predefined rake tasks to create our database.</p>
 

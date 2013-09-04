@@ -18,7 +18,7 @@ categories:
 
 <p>Hard coded values such as database credentials and other common values duplicated between files can become messy and hard to maintain, but given a few minutes of work you can have a clean, dynamic configuration file that is easy to work with.</p>
 
-<h3>Rails Global Variables</h3>
+<h1>Rails Global Variables</h1>
 
 <p>The first and probably least desirable way to use global variables in Rails is to define them in your environment configuration file, like so.</p>
 
@@ -39,7 +39,7 @@ end
 
 <p>Not only is this ugly and verbose but it will become quite messy after you begin to add more configuration variables, or if you'd like to make them environment specific.</p>
 
-<h3>The YAML Configuration File</h3>
+<h1>The YAML Configuration File</h1>
 
 <p>Declaring all your configuration variables in a YAML file is much better solution.  Start by creating your YAML configuration file.</p>
 
@@ -60,7 +60,7 @@ APP_CONFIG = YAML.load_file("#{Rails.root}/config/config.yml")
 <pre><code class='erb'>&lt;%= APP_CONFIG['api_key'] %&gt;
 </code></pre>
 
-<h3>Environment Awareness</h3>
+<h1>Environment Awareness</h1>
 
 <p>We can go a step further and define configuration variables specific to which environment we are in.</p>
 
@@ -109,7 +109,7 @@ production:
   db_password: production_pass
 </code></pre>
 
-<h3>Using YAML and ERB</h3>
+<h1>Using YAML and ERB</h1>
 
 <p>In order to use Ruby code in your YAML file in the same way you would in a View, we'll manually parse the contents of the config using ERB, and load the result with YAML.</p>
 
@@ -132,7 +132,7 @@ common: &amp;common
 ...
 </code></pre>
 
-<h3>OpenStruct</h3>
+<h1>OpenStruct</h1>
 
 <p>Even with the above, we are still accessing our config variables like so.</p>
 
