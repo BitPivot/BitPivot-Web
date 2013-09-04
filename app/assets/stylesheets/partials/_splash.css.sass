@@ -17,6 +17,7 @@
     .row
       display: table-row
 
+
       +breakpoint('tiny')
         display: block
 
@@ -138,9 +139,14 @@
     .content
       padding-right: 0
 
-  h1
+  .content > h1
     color: $gray-medium
     margin-bottom: $margin
+    padding-bottom: $margin
+    border-bottom: 1px solid $gray-dark
+
+    +breakpoint('tiny')
+      margin-right: $margin
 
   .chrome-window
     +position(relative)
@@ -163,20 +169,42 @@
 
     .container
       +position(absolute, 43px, 0, 0, 0)
+      text-align: left
       padding: $margin
-      border-bottom-right-radius: 7px
-      border-bottom-left-radius: 7px
+      border-bottom-right-radius: 3px
+      border-bottom-left-radius: 3px
+      background: $gray-dark
 
       +breakpoint('narrow')
-        top: 34px
+        max-width: 660px
+        border-radius: 0px
+        top: 38px
 
-      +breakpoint('tiny')
+      .buffer
+        float: left
+        margin: 0
+        left: -20px
+        width: 140px
+        height: 390px
+
+        +breakpoint('narrow')
+          width: 130px
+          height: 350px
+
+        +breakpoint('tiny')
+          width: 110px
+          height: 370px
 
       h1
+        text-align: left
+
+      h2
         text-align: right
 
       p
-        text-align: right
+        +font-size(18px)
+        text-align: justify
+        color: $gray-medium
 
   .iphone
     +position(absolute, auto, auto, 60px, $margin)
@@ -195,16 +223,36 @@
 
     .container
       +position(absolute, 71px, 14px, 58px, 16px)
-      padding: $margin / 4
+      padding: 70px $margin / 2
+
+      +breakpoint('narrow')
+        padding-top: 20px
+
+        h1
+          +font-size(20px)
+
+        h2
+          +font-size(18px)
+
+      +breakpoint('tiny')
+        padding-top: 20px
+
+        h1
+          +font-size(28px)
+
+        h2
+          +font-size(24px)
 
 
 
 .consulting
   background: $gray-darkest
 
-  h1
+  .content > h1
     color: $gray-medium
     margin-bottom: $margin
+    padding-bottom: $margin
+    border-bottom: 1px solid $gray-dark
 
   hr
     +hr($gray-dark)
