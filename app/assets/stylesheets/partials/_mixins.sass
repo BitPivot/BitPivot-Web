@@ -84,57 +84,7 @@
 
 
 
-// Gradients
-=gradient-radial($start, $end: false, $position: center center)
-  @if not $end
-    $end: darken($start, 5%)
-
-  background-image: $start
-  background-image: -ms-radial-gradient($position, circle farthest-corner, $start 0%, $end 100%)
-  background-image: -moz-radial-gradient($position, circle farthest-corner, $start 0%, $end 100%)
-  background-image: -o-radial-gradient($position, circle farthest-corner, $start 0%, $end 100%)
-  background-image: -webkit-gradient(radial, $position, 0, center center, 497, color-stop(0, $start), color-stop(1, $end))
-  background-image: -webkit-radial-gradient($position, circle farthest-corner, $start 0%, $end 100%)
-  background-image: radial-gradient($position farthest-corner at center, $start 0%, $end 100%)
-
-=gradient-vertical($start, $end: false)
-  @if not $end
-    $end: darken($start, 10%)
-
-  background-image: $start
-  background-image: -moz-linear-gradient(top,  $start 0%, $end 100%)
-  background-image: -webkit-linear-gradient(top,  $start 0%, $end 100%)
-  background-image: -o-linear-gradient(top,  $start 0%, $end 100%)
-  background-image: -ms-linear-gradient(top,  $start 0%, $end 100%)
-  background-image: linear-gradient(to bottom,  $start 0%, $end 100%)
-
-
-
-// Drop shadows
-=no-drop-shadow()
-  -webkit-box-shadow: none
-  -moz-box-shadow: none
-  box-shadow: none
-
-=drop-shadow($size, $color: rgba(0, 0, 0, 1))
-  -webkit-box-shadow: 0px 0px $size $color
-  -moz-box-shadow: 0px 0px $size $color
-  box-shadow: 0px 0px $size $color
-
-=inner-shadow($size, $color: rgba(0, 0, 0, 1))
-  -webkit-box-shadow: inset 0px 0px $size $color
-  -moz-box-shadow: inset 0px 0px $size $color
-  box-shadow: inset 0px 0px $size $color
-
-
-
-// Vendor polyfills
-=background-size-cover
-  -webkit-background-size: cover
-  -moz-background-size: cover
-  -o-background-size: cover
-  background-size: cover
-
+// Polyfills and Fallbacks
 =box-sizing-border-box
   -webkit-box-sizing: border-box
   -moz-box-sizing: border-box
@@ -143,18 +93,6 @@
 =background-rgba-fallback($rgba)
   background: rgb(red($rgba), green($rgba), blue($rgba))
   background: $rgba
-
-
-
-// Transitions
-=transition($transition)
-  -webkit-backface-visibility: hidden
-  -webkit-perspective: 1000
-  -moz-transition: $transition
-  -webkit-transition: $transition
-  -ms-transition: $transition
-  -o-transition: $transition
-  transition: $transition
 
 
 
@@ -197,10 +135,6 @@
 
 
 // Reusable typography / components
-=h-border
-  padding-bottom: $margin / 4
-  border-bottom: $blind-content-header-border-width solid $blind-content-header-border-color
-
 =hr($color)
   height: 1px
   margin: 0 0 $margin 0
@@ -226,13 +160,3 @@
 
   &:-ms-input-placeholder
     color: $color
-
-=blog-post-header($font-size-modifier)
-  padding: $margin / 2
-  margin: ($margin * 2) 0
-  +gradient-radial($blog-header-background)
-  font-size: $blog-header-font-size * $font-size-modifier
-  color: $blog-header-text-color
-  text-shadow: 0px 3px 5px $blind-header-text-shadow-color
-  line-height: $header-font-size
-  +type-pad-bottom
