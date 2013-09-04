@@ -27,9 +27,8 @@ namespace :blog do
       end
 
       existing = BlogPost.find_by(file_name: post.file_name)
-
-      next if existing.md5_hash == post.md5_hash
-      existing.update_attributes(post.attributes)
+      next if existing.md5_hash == post.md5()
+      existing.update_attributes(post.attributes.delete_if { |k, v| v.nil? })
       existing.save
       changes[:updated] << existing.file_name
     end
