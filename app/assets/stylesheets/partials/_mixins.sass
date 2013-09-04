@@ -47,8 +47,7 @@
     background-image: asset-url("#{$image}@2x.#{$type}")
 
 =sprite($image, $width, $height, $type: 'png', $retina: true)
-  display: block
-  float: left
+  display: inline-block
   width: $width
   height: $height
   background: asset-url("#{$image}.#{$type}") top left no-repeat

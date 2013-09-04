@@ -17,7 +17,6 @@
     .row
       display: table-row
 
-
       +breakpoint('tiny')
         display: block
 
@@ -64,12 +63,10 @@
 
 
 .philosophy
-  background: #222
+  background: $gray-darkest
 
   hr
     +hr($gray-dark)
-
-
 
   .text
     padding-right: $margin * 2
@@ -121,7 +118,7 @@
 
 
 .services
-  background: $purple-dark
+  background: $gray-darker
 
   h1
     +font-size(32px)
@@ -137,11 +134,11 @@
 
 
 .web-development
-  background: #222
+  background: $gray-darkest
   text-align: right
 
   h1
-    color: $gray-dark
+    color: $gray-medium
     margin-bottom: $margin
 
   .chrome-window
@@ -203,8 +200,21 @@
 
 
 .consulting
-  background: #222
+  background: $gray-darkest
 
+  h1
+    color: $gray-medium
+    margin-bottom: $margin
+
+  .whiteboard
+    margin: $margin 0 0 0
+    +sprite('whiteboard', 450px, 379px)
+
+    +breakpoint('narrow')
+      +sprite('whiteboard_narrow', 350px, 295px)
+
+    +breakpoint('tiny')
+      +sprite('whiteboard_tiny', 280px, 236px)
 
 
 .team
