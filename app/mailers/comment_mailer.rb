@@ -1,5 +1,5 @@
 class CommentMailer < ActionMailer::Base
-  default from: 'info@bitpivot.com'
+  default from: 'noreply@bitpivot.com'
 
   def new_comment_notification(comment)
     to = 'info@bitpivot.com'
