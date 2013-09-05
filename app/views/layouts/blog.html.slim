@@ -2,19 +2,12 @@ doctype html
 html lang='en'
 
   head
-    = render 'partials/head_common'
+    = render partial: 'partials/head_common'
     = javascript_include_tag 'blog'
     = stylesheet_link_tag 'blog', media: 'all'
 
-    /[if IE 6]
-      = stylesheet_link_tag 'blog_fallback_ie6', media: 'all'
-
-    /[if lt IE 10]
-      = javascript_include_tag 'blog_fallback_ie'
-      = stylesheet_link_tag 'blog_fallback', media: 'all'
-
   body
 
-    = render 'partials/header'
+    = render partial: 'partials/header'
 
     == yield

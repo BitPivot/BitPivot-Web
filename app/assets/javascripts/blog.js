@@ -1,2 +1,7 @@
 //
-//= require head.core.0.99.min
+//= require jquery
+//= require jquery-placeholder
+
+$(function(){
+	$('input, textarea').placeholder();
+});

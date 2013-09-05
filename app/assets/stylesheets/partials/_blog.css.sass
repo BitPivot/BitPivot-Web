@@ -194,9 +194,6 @@ em
     +breakpoint('tiny')
       margin-bottom: $margin
 
-  label.fallback
-    display: none
-
 .respond-to-comment
   padding: ($margin / 2) 0 0 ($margin / 2)
   margin-left: $margin
@@ -207,7 +204,7 @@ em
   .input-text
     margin: 0 ($margin / 2) ($margin / 2) 0
     padding: $margin / 4
-    +font-size(16px)
+    +font(16px, $gray-dark, 'helvetica')
     color: $gray-dark
     background: $white
     border: 1px solid darken($white, 18%)

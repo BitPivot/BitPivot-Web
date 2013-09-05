@@ -2,12 +2,12 @@ doctype html
 html lang='en'
 
   head
-    = render 'partials/head_common'
+    = render partial: 'partials/head_common'
     = javascript_include_tag 'admin'
     = stylesheet_link_tag 'admin', media: 'all'
 
   body
 
-    = render 'partials/header'
+    = render partial: 'partials/header'
 
     == yield

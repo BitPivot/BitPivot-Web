@@ -1,6 +1,5 @@
-article.post
-
-  section.post-area
+.post
+  .post-area
 
     .post-header
       - if post.banner_image
@@ -24,7 +23,7 @@ article.post
       == render inline: post.body
 
   - unless hide_comments
-    section#comments.comments
+    #comments.comments
       h1 Discussion
 
       - if post.approved_comments.length == 0
@@ -34,12 +33,12 @@ article.post
         = render partial: 'comment',
           locals: { depth: 1, post: post, comment: comment, respond_to_id: defined?(respond_to_id) ? respond_to_id : nil }
 
-    section.create-comment
+    .create-comment
       h1 Contribute to this Article
       = render partial: 'create_comment', locals: {post: post, respond_to_id: nil}
 
   - else
-    section.comments.view-comments
+    .comments.view-comments
       - if post.approved_comments.length > 0
         = link_to "View Comments (#{post.blog_post_comments.length}) or Contribute \u2192", post.post_url + '#comments'
 

@@ -1,4 +1,5 @@
 //= require jquery
+//= require jquery-placeholder
 //= require maskedinput
 
 jQuery(function($){
