@@ -1,5 +1,5 @@
 class InquiryMailer < ActionMailer::Base
-  default from: 'noreply@bitpivot.com'
+  default from: 'whatever@stuff.com'
 
   def new_inquiry_notification(inquiry)
     to = 'info@bitpivot.com'
