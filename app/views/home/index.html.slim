@@ -3,6 +3,11 @@
 
 
 
+.contact-divider
+  .contact-button Contact us now!
+
+
+
 .philosophy
   .content
     .grid
@@ -46,6 +51,11 @@
       .container
         h2 Your customers are mobile.
         h1 Are you?
+
+
+
+.contact-divider
+  .contact-button We'd love to build something for you.
 
 
 
@@ -116,6 +126,22 @@
         li
           span.ss-icon GitHub
           = link_to '@csphere', 'https://github.com/csphere'
+
+
+
+.contact-us
+  .content
+    .grid
+      .row
+
+        .column.text
+          h1.justify Tell us about your project's needs, and we'll tell you how we can help.
+          hr
+          h2.justify We're ready to help make your project the best it can be.  Contact us today.
+          h2.justify Or if you prefer, give us a call directly at <strong>855-55PIVOT</strong>.
+
+        .column
+          = render partial: 'inquiry'
 
 
 

@@ -31,13 +31,37 @@
           display: block
 
   +breakpoint('tiny')
-    padding: ($margin * 2) $margin
+
+
+
+.contact-divider
+  height: 0
+
+  .contact-button
+    +position(relative, -(($margin * 2) + 20) / 2, auto, auto, auto)
+    margin: 0 auto
+    padding: $margin
+    width: 340px
+    text-align: center
+    +font(20px, $white, 'helvetica-light')
+    line-height: 20px
+    cursor: pointer
+    z-index: 500
+    background: lighten($purple-dark, 5%)
+
+    &:hover
+      background: lighten($purple-dark, 7%)
+
+    +breakpoint('tiny')
+      top: -(($margin) + 20) / 2
+      padding: $margin / 2
+      width: 240px
 
 
 
 .banner
   margin-top: 48px
-  padding: ($margin * 2) 0
+  padding: ($margin * 4) 0
   height: 350px
   +retina-background('home_banner', 900px, 350px)
   background-color: $purple-dark
@@ -83,7 +107,7 @@
     padding: 75px 75px 75px 95px
     width: 450px
     height: 450px
-    +retina-background('values_background', 450px, 450px)
+    +retina-background('logo_background', 450px, 450px)
     +font(18px, $white, 'helvetica-light')
     text-align: left
     list-style-type: square
@@ -98,7 +122,7 @@
       width: 350px
       height: 350px
       +font-size(15px)
-      +retina-background('values_background_narrow', 350px, 350px)
+      +retina-background('logo_background_narrow', 350px, 350px)
 
       li
         margin-bottom: 9px
@@ -108,7 +132,7 @@
       width: 280px
       height: 280px
       +font-size(19px)
-      +retina-background('values_background_tiny', 280px, 280px)
+      +retina-background('logo_background_tiny', 280px, 280px)
 
       li
         margin-bottom: 5px
@@ -136,6 +160,8 @@
   text-align: right
 
   .content
+    padding-bottom: $margin * 6
+
     +breakpoint('tiny')
       padding-right: 0
 
@@ -238,7 +264,7 @@
 
 
 .consulting
-  background: $gray-darkest
+  background: darken($gray-darkest, 3%)
 
   .content > h1
     color: $gray-medium
@@ -272,6 +298,9 @@
 
 .team
   background: $black
+
+  .content
+    padding-bottom: 0
 
   .member
     padding: 0 $margin
@@ -323,6 +352,85 @@
     +link-hover($gray-medium, $purple-light)
       margin: 0 0 0 ($margin / 2)
       +font(18px, $gray-medium, 'helvetica-light')
+
+
+
+.contact-us
+  background: $black
+
+  hr
+    +hr($gray-darkest)
+
+  h1, h2
+    margin-bottom: $margin
+
+  .text
+    padding-right: $margin * 2
+
+  .inquiry-area
+    display: inline-block
+    padding: 75px
+    width: 450px
+    height: 450px
+    +retina-background('logo_background', 450px, 450px)
+    +font(18px, $white, 'helvetica-light')
+    +box-sizing-border-box
+
+    .input-text
+      margin: 0 ($margin / 2) ($margin / 2) 0
+      padding: $margin / 4
+      +font(16px, $gray-dark, 'helvetica')
+      color: $gray-dark
+      background: $white
+      border: 1px solid darken($white, 18%)
+      resize: none
+      &.error
+        +placeholder-text($red-light)
+
+    .button
+      margin: 0
+      padding: $margin / 2
+      +font(16px, $white, 'helvetica-light')
+      background: lighten($purple-dark, 5%)
+      border: none
+      cursor: pointer
+
+      &:hover
+        background: lighten($purple-dark, 7%)
+
+    input
+      width: 100%
+      +box-sizing-border-box
+
+    textarea
+      width: 100%
+      height: 125px
+      +box-sizing-border-box
+
+      &.error
+        +placeholder-text($red-light)
+
+    +breakpoint('narrow')
+      padding: 60px
+      width: 350px
+      height: 350px
+      +font-size(15px)
+      +retina-background('logo_background_narrow', 350px, 350px)
+
+      textarea
+        height: 60px
+
+    +breakpoint('tiny')
+      padding: 50px
+      width: 280px
+      height: 280px
+      +font-size(19px)
+      +retina-background('logo_background_tiny', 280px, 280px)
+
+      textarea
+        height: 35px
+
+
 
 
 
