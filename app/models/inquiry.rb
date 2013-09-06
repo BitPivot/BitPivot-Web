@@ -18,4 +18,8 @@ class Inquiry < ActiveRecord::Base
   def email_present?
     email.length != 0
   end
+
+  def formatted_date
+    self.created_at.to_formatted_s(:long_ordinal)
+  end
 end

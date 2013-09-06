@@ -1,0 +1,11 @@
+.inquiry-confirmation
+
+  h1 Thanks!
+  p Your inquiry is on it's way to us.
+
+  .inquiry
+    .inquiry-header Written by <em>#{if inquiry.email.to_s != '' then inquiry.email else inquiry.author end}</em> on #{inquiry.formatted_date}
+    .inquiry-content = simple_format(inquiry.content)
+
+
+  = link_to 'Return to BitPivot', '/'

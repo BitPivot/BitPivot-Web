@@ -1,3 +1,4 @@
+require 'cgi'
 require 'ostruct'
 
 class HomeController < ApplicationController
@@ -28,6 +29,13 @@ class HomeController < ApplicationController
     end
     inquiry.save
     InquiryMailer.new_inquiry_notification(inquiry).deliver
-    redirect_to '/'
+    render template: 'home/inquiry_confirmation', locals: {
+      inquiry: unescape_inquiry(inquiry)
+    }
+  end
+
+  def unescape_inquiry(inquiry)
+    inquiry.content = CGI.unescapeHTML(inquiry.content)
+    inquiry
   end
 end
