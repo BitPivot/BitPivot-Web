@@ -82,11 +82,19 @@ class BlogController < ApplicationController
     )
     comment.respond_to_id ||= params[:comment][:respond_to_id]
     unless comment.valid?
-      flash_error_placeholders(comment, [:author, :email, :content])
-
-      # jump to create comment to show errors
-      redirect_to "#{post.post_url}#create-comment"
-      return
+      if comment.respond_to_id
+        flash_error_placeholders(comment, [:author, :email, :content], 'response_')
+        respond_to_comment = BlogPostComment.find(comment.respond_to_id)
+        redirect_to respond_to_comment.respond_to_comment_url(post.id), locals: {
+          post: unescape_post(post),
+          respond_to_id: comment.respond_to_id
+        }
+        return
+      else
+        flash_error_placeholders(comment, [:author, :email, :content])
+        redirect_to "#{post.post_url}#create-comment"
+        return
+      end
     end
     post.blog_post_comments << comment
     post.save

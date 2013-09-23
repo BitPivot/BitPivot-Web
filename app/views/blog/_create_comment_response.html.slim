@@ -1,0 +1,23 @@
+#create-comment.create-comment-area
+  = form_for :comment, url: '/blog/create_comment', method: 'post' do |f|
+    = f.hidden_field :post_id, value: post.id
+    = f.hidden_field :respond_to_id, value: respond_to_id
+
+    .create-comment-author-email
+      = f.text_field :author,
+        placeholder: flash[:response_author_placeholder] || 'Your Name',
+        class: "input-text #{flash[:response_author_class]}",
+        value: flash[:author]
+
+      = f.text_field :email,
+        placeholder: flash[:response_email_placeholder] || 'Your Email',
+        class: "input-text #{flash[:response_email_class]}",
+        value: flash[:response_email]
+
+    .create-comment-content
+      = f.text_area :content,
+        placeholder: flash[:response_content_placeholder] || 'Your reply...',
+        class: "create-comment-body input-text #{flash[:response_content_class]}",
+        value: flash[:content]
+
+    = f.submit 'Post a Reply', class: 'button'

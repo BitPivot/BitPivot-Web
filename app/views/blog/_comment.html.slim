@@ -7,7 +7,7 @@
 
     - if respond_to_id == comment.id
       #respond.respond-to-comment
-        = render partial: 'create_comment', locals: { post: post, respond_to_id: respond_to_id }
+        = render partial: 'create_comment_response', locals: { post: post, respond_to_id: respond_to_id }
 
     - elsif depth < @max_comment_depth
       .respond-to-link

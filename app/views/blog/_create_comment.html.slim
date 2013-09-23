@@ -1,7 +1,6 @@
 #create-comment.create-comment-area
   = form_for :comment, url: '/blog/create_comment', method: 'post' do |f|
     = f.hidden_field :post_id, value: post.id
-    = f.hidden_field :respond_to_id, value: respond_to_id
 
     .create-comment-author-email
       = f.text_field :author,
@@ -16,8 +15,8 @@
 
     .create-comment-content
       = f.text_area :content,
-        placeholder: flash[:content_placeholder] || (respond_to_id ? 'Your reply...' : 'Your Contribution...'),
+        placeholder: flash[:content_placeholder] || 'Your Contribution...',
         class: "create-comment-body input-text #{flash[:content_class]}",
         value: flash[:content]
 
-    = f.submit respond_to_id ? 'Post a Reply' : 'Post a New Comment', class: 'button'
+    = f.submit 'Post a New Comment', class: 'button'

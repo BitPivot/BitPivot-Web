@@ -35,7 +35,7 @@
 
     .create-comment
       h1 Contribute to this Article
-      = render partial: 'create_comment', locals: {post: post, respond_to_id: nil}
+      = render partial: 'create_comment', locals: {post: post}
 
   - else
     .comments.view-comments
