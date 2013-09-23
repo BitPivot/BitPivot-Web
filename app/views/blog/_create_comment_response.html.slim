@@ -7,7 +7,7 @@
       = f.text_field :author,
         placeholder: flash[:response_author_placeholder] || 'Your Name',
         class: "input-text #{flash[:response_author_class]}",
-        value: flash[:author]
+        value: flash[:response_author]
 
       = f.text_field :email,
         placeholder: flash[:response_email_placeholder] || 'Your Email',
@@ -18,6 +18,6 @@
       = f.text_area :content,
         placeholder: flash[:response_content_placeholder] || 'Your reply...',
         class: "create-comment-body input-text #{flash[:response_content_class]}",
-        value: flash[:content]
+        value: flash[:response_content]
 
     = f.submit 'Post a Reply', class: 'button'

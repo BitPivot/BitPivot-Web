@@ -5,8 +5,9 @@ module ErrorsHelper
       if errors[attr_name]
         flash["#{prefix}#{attr_name}_placeholder".to_sym] = errors[attr_name][0]
         flash["#{prefix}#{attr_name}_class".to_sym] = 'error'
+      else
+        flash["#{prefix}#{attr_name}".to_sym] = activeRecord.attributes[attr_name.to_s]
       end
-      flash["#{prefix}#{attr_name}".to_sym] = activeRecord.attributes[attr_name]
     end
   end
 end
