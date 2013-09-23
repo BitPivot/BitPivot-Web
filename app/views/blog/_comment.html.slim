@@ -15,5 +15,5 @@
 
     - if comment.has_responses
       .responses
-        - for response in comment.blog_post_comments
+        - for response in comment.blog_post_comments.where(approved: true)
           = render partial: 'comment', locals: { depth: depth + 1, post: post, comment: response, respond_to_id: defined?(respond_to_id) ? respond_to_id : nil }
