@@ -75,13 +75,15 @@ class BlogController < ApplicationController
     id = Integer(params[:comment][:post_id])
     post = BlogPost.find(id)
 
-    # TODO: don't use mass assignment
-    comment = BlogPostComment.new(params[:comment])
+    comment = BlogPostComment.new(
+      author: params[:comment][:author],
+      email: params[:comment][:email],
+      content: params[:comment][:content]
+    )
+    comment.respond_to_id ||= params[:comment][:respond_to_id]
     unless comment.valid?
-      # get hash with full error messages
-      flash_error_placeholders(comment, [:author, :email, :content]).each do |k,v|
-        flash[k] = v
-      end
+      flash_error_placeholders(comment, [:author, :email, :content])
+
       # jump to create comment to show errors
       redirect_to "#{post.post_url}#create-comment"
       return
