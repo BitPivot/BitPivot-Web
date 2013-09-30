@@ -18,11 +18,11 @@ namespace :deploy do
 
   task :before_deploy, :env, :branch do |t, args|
     puts "Deploying #{args[:branch]} to #{args[:env]}"
-    Rake::Task['blog:compile'].invoke
   end
 
   task :after_deploy, :env, :branch do |t, args|
     puts 'Deployment Complete'
+    `heroku run rake blog:compile`
   end
 
   task :update_code, :env, :branch do |t, args|
