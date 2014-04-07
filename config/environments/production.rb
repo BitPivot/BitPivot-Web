@@ -95,6 +95,11 @@ BitPivot::Application.configure do
   config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
   config.assets.enabled = true
 
+  # Ignore certain image folders
+  config.assets.precompile = []
+  config.assets.precompile += Dir.glob(Rails.root.join('app', 'assets', 'images', '*.png'))
+  config.assets.precompile += Dir.glob(Rails.root.join('app', 'assets', 'images', '*.jpg'))
+
   # Add Symbolsets to asset pipeline
   config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
   config.assets.precompile += ['*.svg', '*.eot', '*.woff', '*.ttf']
