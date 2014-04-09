@@ -22,25 +22,25 @@
     .post-body
       == render inline: post.body
 
-  - unless hide_comments
-    #comments.comments
-      h1 Discussion
+  / - unless hide_comments
+  /   #comments.comments
+  /     h1 Discussion
 
-      - if post.approved_comments.length == 0
-        span.no-comments There are currently no comments.
+  /     - if post.approved_comments.length == 0
+  /       span.no-comments There are currently no comments.
 
-      - for comment in post.top_level_comments
-        = render partial: 'comment',
-          locals: { depth: 1, post: post, comment: comment, respond_to_id: defined?(respond_to_id) ? respond_to_id : nil }
+  /     - for comment in post.top_level_comments
+  /       = render partial: 'comment',
+  /         locals: { depth: 1, post: post, comment: comment, respond_to_id: defined?(respond_to_id) ? respond_to_id : nil }
 
-    .create-comment
-      h1 Contribute to this Article
-      = render partial: 'create_comment', locals: {post: post}
+  /   .create-comment
+  /     h1 Contribute to this Article
+  /     = render partial: 'create_comment', locals: {post: post}
 
-  - else
-    .comments.view-comments
-      - if post.approved_comments.length > 0
-        = link_to "View Comments (#{post.blog_post_comments.length}) or Contribute \u2192", post.post_url + '#comments'
+  / - else
+  /   .comments.view-comments
+  /     - if post.approved_comments.length > 0
+  /       = link_to "View Comments (#{post.blog_post_comments.length}) or Contribute \u2192", post.post_url + '#comments'
 
-      - else
-        = link_to "Contribute to this Article \u2192", post.post_url + '#comments'
+  /     - else
+  /       = link_to "Contribute to this Article \u2192", post.post_url + '#comments'
