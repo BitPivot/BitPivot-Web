@@ -92,7 +92,7 @@ BitPivot::Application.configure do
   }
 
   # Set Amazon S3 as asset host
-  config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+  #config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
   config.assets.enabled = true
 
   # Ignore certain image folders
